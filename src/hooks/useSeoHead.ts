@@ -1,9 +1,19 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { PageRoute } from '../types';
 import { SEO_ROUTE_DATA } from '../data/seoRouteData';
 
 export function useSeoHead(currentRoute: PageRoute) {
+  const prevRouteRef = useRef<PageRoute | null>(null);
+
   useEffect(() => {
+    // Skip initial mount if server already generated static meta tags for this route
+    if (prevRouteRef.current === null) {
+      prevRouteRef.current = currentRoute;
+      return;
+    }
+    if (prevRouteRef.current === currentRoute) return;
+    prevRouteRef.current = currentRoute;
+
     const routeData = SEO_ROUTE_DATA[currentRoute] || SEO_ROUTE_DATA.inicio;
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://conversordeletrasbonitas.net';
     const canonicalUrl = routeData.canonical.startsWith('http') ? routeData.canonical : `${origin}${routeData.canonical}`;

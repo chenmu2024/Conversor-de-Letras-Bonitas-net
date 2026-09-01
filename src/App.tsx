@@ -1,21 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { PageRoute, FontGenerator, FavoriteItem } from './types';
 import { ROUTE_CONFIGS } from './data/routeConfigs';
 import { useSeoHead } from './hooks/useSeoHead';
 import { Header } from './components/Header';
 import { FontConverter } from './components/FontConverter';
 import { SubStudioRouter } from './components/SubStudioRouter';
-import { AuxiliarySections } from './components/AuxiliarySections';
-import { FavoritesModal } from './components/FavoritesModal';
-import { CopyHistoryDrawer } from './components/CopyHistoryDrawer';
-import { PwaInstallPrompt } from './components/PwaInstallPrompt';
-import { PwaInstallModal } from './components/PwaInstallModal';
-import { ToastNotification } from './components/ToastNotification';
 import { Breadcrumbs } from './components/Breadcrumbs';
 import { StickyMobileInputBar } from './components/StickyMobileInputBar';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { Footer } from './components/Footer';
 import { ArrowUp, Star } from 'lucide-react';
+
+// Lazy load below-the-fold auxiliary sections and interactive drawer modals
+const AuxiliarySections = lazy(() => import('./components/AuxiliarySections'));
+const FavoritesModal = lazy(() => import('./components/FavoritesModal').then(m => ({ default: m.FavoritesModal })));
+const CopyHistoryDrawer = lazy(() => import('./components/CopyHistoryDrawer').then(m => ({ default: m.CopyHistoryDrawer })));
+const PwaInstallModal = lazy(() => import('./components/PwaInstallModal').then(m => ({ default: m.PwaInstallModal })));
+const ToastNotification = lazy(() => import('./components/ToastNotification').then(m => ({ default: m.ToastNotification })));
+const PwaInstallPrompt = lazy(() => import('./components/PwaInstallPrompt').then(m => ({ default: m.PwaInstallPrompt })));
 
 interface AppProps {
   initialRoute?: PageRoute;
@@ -245,14 +247,16 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
         )}
 
         {/* Auxiliary Content, Alphabet Tables, Guides, Infographics & SEO */}
-        <AuxiliarySections
-          currentRoute={currentRoute}
-          globalText={globalText}
-          previewText={previewText}
-          previewFontName={previewFontName}
-          onApplyText={(t) => setGlobalText(t)}
-          onRouteChange={handleRouteChange}
-        />
+        <Suspense fallback={<div className="h-20 animate-pulse bg-slate-100 dark:bg-slate-800/40 rounded-2xl my-8" />}>
+          <AuxiliarySections
+            currentRoute={currentRoute}
+            globalText={globalText}
+            previewText={previewText}
+            previewFontName={previewFontName}
+            onApplyText={(t) => setGlobalText(t)}
+            onRouteChange={handleRouteChange}
+          />
+        </Suspense>
       </main>
 
       {/* 3. Floating Actions (Back to Top & Sticky Favorites Quick Button) */}
@@ -283,27 +287,33 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
         )}
       </div>
 
-      {/* 4. Favorites Drawer/Modal */}
-      <FavoritesModal
-        isOpen={isFavoritesOpen}
-        onClose={() => setIsFavoritesOpen(false)}
-        favorites={favorites}
-        onRemoveFavorite={handleRemoveFavorite}
-        onClearAllFavorites={handleClearAllFavorites}
-      />
+      <Suspense fallback={null}>
+        {/* 4. Favorites Drawer/Modal */}
+        {isFavoritesOpen && (
+          <FavoritesModal
+            isOpen={isFavoritesOpen}
+            onClose={() => setIsFavoritesOpen(false)}
+            favorites={favorites}
+            onRemoveFavorite={handleRemoveFavorite}
+            onClearAllFavorites={handleClearAllFavorites}
+          />
+        )}
 
-      {/* 5. Copy History Drawer (Floating) */}
-      <CopyHistoryDrawer />
+        {/* 5. Copy History Drawer (Floating) */}
+        <CopyHistoryDrawer />
 
-      {/* 6. PWA Install Floating Banner & Detailed Modal */}
-      <PwaInstallPrompt />
-      <PwaInstallModal
-        isOpen={isPwaModalOpen}
-        onClose={() => setIsPwaModalOpen(false)}
-      />
+        {/* 6. PWA Install Floating Banner & Detailed Modal */}
+        <PwaInstallPrompt />
+        {isPwaModalOpen && (
+          <PwaInstallModal
+            isOpen={isPwaModalOpen}
+            onClose={() => setIsPwaModalOpen(false)}
+          />
+        )}
 
-      {/* Global Instant Copy Toast Notification */}
-      <ToastNotification />
+        {/* Global Instant Copy Toast Notification */}
+        <ToastNotification />
+      </Suspense>
 
       {/* GDPR / CCPA Cookie Consent Banner */}
       <CookieConsentBanner onRouteChange={handleRouteChange} />
