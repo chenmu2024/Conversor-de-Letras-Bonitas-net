@@ -36,12 +36,23 @@ export const CompactFontRow: React.FC<CompactFontRowProps> = React.memo(({
     xl: 'text-xl sm:text-2xl font-bold',
   };
 
-  const convertedText = inputText
+  const isDefaultPlaceholder = !inputText.trim();
+  const convertedText = !isDefaultPlaceholder
     ? generator.transform(inputText)
     : generator.transform('Letras Bonitas');
 
   const handleCopy = async (e: React.MouseEvent) => {
     e.stopPropagation();
+
+    // If input is empty, focus the main input box to guide user to type
+    if (isDefaultPlaceholder) {
+      const inputEl = document.getElementById('main-text-input');
+      if (inputEl) {
+        inputEl.focus();
+        inputEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
     try {
       await navigator.clipboard.writeText(convertedText);
       setCopied(true);

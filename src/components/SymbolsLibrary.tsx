@@ -15,8 +15,12 @@ import {
   Crown,
   Tag,
   ArrowRight,
-  Plus
+  Plus,
+  Zap,
+  MousePointerClick,
+  FileEdit
 } from 'lucide-react';
+import { copyToClipboard } from '../utils/clipboard';
 
 interface SymbolsLibraryProps {
   onApplyText?: (text: string) => void;
@@ -24,6 +28,7 @@ interface SymbolsLibraryProps {
 
 export const SymbolsLibrary: React.FC<SymbolsLibraryProps> = ({ onApplyText }) => {
   const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [clickMode, setClickMode] = useState<'copy' | 'insert' | 'scratchpad'>('copy');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [scratchpad, setScratchpad] = useState<string>('');
   const [copiedChar, setCopiedChar] = useState<string | null>(null);
@@ -31,13 +36,25 @@ export const SymbolsLibrary: React.FC<SymbolsLibraryProps> = ({ onApplyText }) =
   const [copiedCombo, setCopiedCombo] = useState<string | null>(null);
   const [quickCopiedSpace, setQuickCopiedSpace] = useState(false);
 
-  const handleCopySingle = async (char: string) => {
-    try {
-      await navigator.clipboard.writeText(char);
+  const handleCopySingle = async (char: string, name?: string) => {
+    const success = await copyToClipboard(char, name || 'Símbolo Especial');
+    if (success) {
       setCopiedChar(char);
       setTimeout(() => setCopiedChar(null), 1500);
-    } catch (e) {
-      console.error('Error copying symbol', e);
+    }
+  };
+
+  const handleSymbolClick = (char: string, name: string) => {
+    if (clickMode === 'copy') {
+      handleCopySingle(char, name);
+    } else if (clickMode === 'insert') {
+      if (onApplyText) {
+        onApplyText(char);
+      }
+      setCopiedChar(char);
+      setTimeout(() => setCopiedChar(null), 1000);
+    } else {
+      handleAddToPad(char);
     }
   };
 
@@ -47,34 +64,28 @@ export const SymbolsLibrary: React.FC<SymbolsLibraryProps> = ({ onApplyText }) =
 
   const handleCopyPad = async () => {
     if (!scratchpad) return;
-    try {
-      await navigator.clipboard.writeText(scratchpad);
+    const success = await copyToClipboard(scratchpad, 'Combinación de Símbolos');
+    if (success) {
       setCopiedPad(true);
       setTimeout(() => setCopiedPad(false), 2000);
       if (onApplyText) onApplyText(scratchpad);
-    } catch (e) {
-      console.error('Error copying pad', e);
     }
   };
 
   const handleCopyCombo = async (text: string, name: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
+    const success = await copyToClipboard(text, name);
+    if (success) {
       setCopiedCombo(name);
       setTimeout(() => setCopiedCombo(null), 1800);
       if (onApplyText) onApplyText(text);
-    } catch (e) {
-      console.error('Error copying combo', e);
     }
   };
 
   const handleCopySpace = async () => {
-    try {
-      await navigator.clipboard.writeText(INVISIBLE_SPACE);
+    const success = await copyToClipboard(INVISIBLE_SPACE, 'Espacio Invisible U+3164');
+    if (success) {
       setQuickCopiedSpace(true);
-      setTimeout(() => setQuickCopiedSpace(null as any), 1800);
-    } catch (e) {
-      console.error('Error copying space', e);
+      setTimeout(() => setQuickCopiedSpace(false), 1800);
     }
   };
 
@@ -222,6 +233,62 @@ export const SymbolsLibrary: React.FC<SymbolsLibraryProps> = ({ onApplyText }) =
           </div>
         </div>
 
+        {/* Click Action Mode Selector & Quick Switcher */}
+        <div className="mb-6 p-3 bg-indigo-50/70 dark:bg-slate-800/60 rounded-2xl border border-indigo-100 dark:border-slate-700/60 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <span className="p-1.5 rounded-lg bg-indigo-600 text-white shadow-xs">
+              <MousePointerClick className="w-4 h-4" />
+            </span>
+            <div>
+              <span className="text-xs font-black text-slate-800 dark:text-slate-200">
+                Al tocar un símbolo:
+              </span>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                Elige qué sucede al hacer clic sobre cualquier icono de la lista.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-1.5 bg-white dark:bg-slate-900 p-1 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs w-full sm:w-auto justify-center">
+            <button
+              type="button"
+              onClick={() => setClickMode('copy')}
+              className={`flex-1 sm:flex-none px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                clickMode === 'copy'
+                  ? 'bg-indigo-600 text-white shadow-xs'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white'
+              }`}
+            >
+              <Zap className="w-3.5 h-3.5" />
+              <span>Copiar Directo</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setClickMode('insert')}
+              className={`flex-1 sm:flex-none px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                clickMode === 'insert'
+                  ? 'bg-indigo-600 text-white shadow-xs'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white'
+              }`}
+            >
+              <Plus className="w-3.5 h-3.5" />
+              <span>Insertar en Texto</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setClickMode('scratchpad')}
+              className={`flex-1 sm:flex-none px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                clickMode === 'scratchpad'
+                  ? 'bg-indigo-600 text-white shadow-xs'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white'
+              }`}
+            >
+              <FileEdit className="w-3.5 h-3.5" />
+              <span>Al Combinador</span>
+            </button>
+          </div>
+        </div>
+
         {/* Filter and Search Bar */}
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3.5 mb-8">
           {/* Search */}
@@ -295,11 +362,11 @@ export const SymbolsLibrary: React.FC<SymbolsLibraryProps> = ({ onApplyText }) =
                         key={idx}
                         className="group relative flex flex-col items-center justify-between p-2.5 rounded-2xl bg-white border border-slate-200/80 hover:border-indigo-400 hover:shadow-md transition-all shadow-2xs"
                       >
-                        {/* Add to scratchpad on click */}
+                        {/* Action on click based on selected clickMode */}
                         <button
                           type="button"
-                          onClick={() => handleAddToPad(sym.char)}
-                          title={`Tocar para agregar '${sym.name}' al combinador`}
+                          onClick={() => handleSymbolClick(sym.char, sym.name)}
+                          title={`Tocar para ${clickMode === 'copy' ? 'copiar' : clickMode === 'insert' ? 'insertar' : 'combinar'} '${sym.name}'`}
                           className="text-lg sm:text-2xl font-normal text-slate-800 group-hover:scale-115 active:scale-90 transition-transform min-h-[36px] flex items-center justify-center w-full"
                         >
                           {sym.char}

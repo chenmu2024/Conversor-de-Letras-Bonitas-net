@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FontGenerator } from '../types';
 import { Copy, Check, Sparkles, X, ChevronRight } from 'lucide-react';
+import { copyToClipboard } from '../utils/clipboard';
+import { useModalBackdrop } from '../hooks/useModalBackdrop';
 
 interface BatchCopyModalProps {
   isOpen: boolean;
@@ -19,6 +21,8 @@ export const BatchCopyModal: React.FC<BatchCopyModalProps> = ({
     generators.slice(0, 10).map((g) => g.id)
   );
   const [copiedBatch, setCopiedBatch] = useState(false);
+
+  useModalBackdrop(isOpen, onClose, 'batch-copy');
 
   if (!isOpen) return null;
 
@@ -50,12 +54,10 @@ export const BatchCopyModal: React.FC<BatchCopyModalProps> = ({
       .map((g) => `[${g.name}]\n${g.transform(inputText || 'Letras Bonitas')}`)
       .join('\n\n');
 
-    try {
-      await navigator.clipboard.writeText(combinedText);
+    const success = await copyToClipboard(combinedText, `Lote de ${selectedGens.length} fuentes`);
+    if (success) {
       setCopiedBatch(true);
       setTimeout(() => setCopiedBatch(false), 2500);
-    } catch (e) {
-      console.warn(e);
     }
   };
 

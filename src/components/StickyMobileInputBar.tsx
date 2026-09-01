@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Type, ArrowUp, Copy, Check, Sparkles } from 'lucide-react';
+import { copyToClipboard } from '../utils/clipboard';
 
 interface StickyMobileInputBarProps {
   currentText: string;
@@ -31,16 +32,13 @@ export const StickyMobileInputBar: React.FC<StickyMobileInputBarProps> = ({
 
   if (!isVisible) return null;
 
-  const handleCopyCurrent = () => {
+  const handleCopyCurrent = async () => {
     if (!currentText) return;
-    navigator.clipboard.writeText(currentText);
-    if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
-      try {
-        navigator.vibrate(35);
-      } catch {}
+    const success = await copyToClipboard(currentText, 'Texto Rápido');
+    if (success) {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1600);
     }
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1600);
   };
 
   return (
@@ -61,6 +59,19 @@ export const StickyMobileInputBar: React.FC<StickyMobileInputBarProps> = ({
         {/* Action: Copy or Jump to Top */}
         <div className="flex items-center gap-1">
           <button
+            type="button"
+            onClick={handleCopyCurrent}
+            className={`p-1.5 rounded-xl transition-all ${
+              copied
+                ? 'bg-emerald-600 text-white shadow-xs'
+                : 'bg-indigo-600 hover:bg-indigo-500 text-white'
+            }`}
+            title="Copiar texto actual"
+          >
+            {copied ? <Check className="w-4 h-4 stroke-[3]" /> : <Copy className="w-4 h-4" />}
+          </button>
+          <button
+            type="button"
             onClick={onScrollToTop}
             className="p-1.5 bg-slate-800 hover:bg-slate-700 rounded-xl text-slate-300 hover:text-white transition-colors"
             title="Subir al conversor"

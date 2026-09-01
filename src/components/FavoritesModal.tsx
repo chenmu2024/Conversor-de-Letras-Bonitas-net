@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FavoriteItem } from '../types';
 import { X, Copy, Check, Trash2, Star, Sparkles } from 'lucide-react';
+import { copyToClipboard } from '../utils/clipboard';
+import { useModalBackdrop } from '../hooks/useModalBackdrop';
 
 interface FavoritesModalProps {
   isOpen: boolean;
@@ -19,17 +21,18 @@ export const FavoritesModal: React.FC<FavoritesModalProps> = ({
 }) => {
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
+  useModalBackdrop(isOpen, onClose, 'favorites');
+
   if (!isOpen) return null;
 
-  const handleCopy = async (id: string, text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
+  const handleCopy = async (id: string, text: string, fontName: string) => {
+    const success = await copyToClipboard(text, fontName);
+    if (success) {
       setCopiedId(id);
       setTimeout(() => setCopiedId(null), 1500);
-    } catch (e) {
-      console.error('Failed to copy', e);
     }
   };
+
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-150">
@@ -90,7 +93,7 @@ export const FavoritesModal: React.FC<FavoritesModalProps> = ({
 
                   <div className="flex justify-end">
                     <button
-                      onClick={() => handleCopy(item.id, item.result)}
+                      onClick={() => handleCopy(item.id, item.result, item.fontName)}
                       className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all shadow-xs ${
                         isCopied
                           ? 'bg-emerald-600 text-white'

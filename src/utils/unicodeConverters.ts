@@ -5,10 +5,20 @@ const ALPHABET_LOWER = 'abcdefghijklmnopqrstuvwxyz';
 const ALPHABET_UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const NUMBERS = '0123456789';
 
-// Map utility
+// Map utility for Spanish and European accents & special characters
 const SPANISH_ACCENT_FALLBACK: Record<string, string> = {
-  'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u', 'ñ': 'n', 'ü': 'u',
-  'Á': 'A', 'É': 'E', 'Í': 'I', 'Ó': 'O', 'Ú': 'U', 'Ñ': 'N', 'Ü': 'U',
+  'á': 'a', 'à': 'a', 'ä': 'a', 'â': 'a', 'ã': 'a', 'å': 'a',
+  'é': 'e', 'è': 'e', 'ë': 'e', 'ê': 'e',
+  'í': 'i', 'ì': 'i', 'ï': 'i', 'î': 'i',
+  'ó': 'o', 'ò': 'o', 'ö': 'o', 'ô': 'o', 'õ': 'o',
+  'ú': 'u', 'ù': 'u', 'ü': 'u', 'û': 'u',
+  'ñ': 'n', 'ç': 'c', 'ý': 'y', 'ÿ': 'y',
+  'Á': 'A', 'À': 'A', 'Ä': 'A', 'Â': 'A', 'Ã': 'A', 'Å': 'A',
+  'É': 'E', 'È': 'E', 'Ë': 'E', 'Ê': 'E',
+  'Í': 'I', 'Ì': 'I', 'Ï': 'I', 'Î': 'I',
+  'Ó': 'O', 'Ò': 'O', 'Ö': 'O', 'Ô': 'O', 'Õ': 'O',
+  'Ú': 'U', 'Ù': 'U', 'Ü': 'U', 'Û': 'U',
+  'Ñ': 'N', 'Ç': 'C', 'Ý': 'Y',
 };
 
 function createCharMap(

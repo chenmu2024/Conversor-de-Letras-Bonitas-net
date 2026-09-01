@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { copyToClipboard } from '../utils/clipboard';
 import { PageRoute } from '../types';
 import { 
   Instagram, 
@@ -40,26 +41,31 @@ export const PlatformPreview: React.FC<PlatformPreviewProps> = ({
     if (currentRoute === 'instagram') setActivePlatform('instagram');
     else if (currentRoute === 'tiktok') setActivePlatform('tiktok');
     else if (currentRoute === 'whatsapp') setActivePlatform('whatsapp');
-    else if (currentRoute === 'free-fire') setActivePlatform('freefire');
+    else if (currentRoute === 'free-fire' || currentRoute === 'nicks-free-fire') setActivePlatform('freefire');
     else if (currentRoute === 'facebook') setActivePlatform('facebook');
   }, [currentRoute]);
 
   const displayText = text || 'Tu Texto Bonito Aquí ✨';
 
+  const PLATFORM_CONFIGS = {
+    instagram: { name: 'Instagram Bio', limit: 150, tip: 'Límite oficial de biografía en Instagram: 150 caracteres.' },
+    tiktok: { name: 'TikTok Bio', limit: 80, tip: 'Límite oficial de biografía en TikTok: 80 caracteres.' },
+    whatsapp: { name: 'WhatsApp Info', limit: 139, tip: 'Límite oficial de estado/info en WhatsApp: 139 caracteres.' },
+    freefire: { name: 'Free Fire Nick', limit: 12, tip: 'Garena Free Fire corta nombres de más de 12 caracteres.' },
+    facebook: { name: 'Facebook Post', limit: 500, tip: 'Recomendado hasta 500 caracteres para publicaciones legibles.' },
+  };
+
   const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(displayText);
+    const success = await copyToClipboard(displayText, `${PLATFORM_CONFIGS[activePlatform].name} (${fontName})`);
+    if (success) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch (e) {
-      console.error('Failed to copy', e);
     }
   };
 
-  // Instagram bio character limit tracker (150 chars max)
-  const igCharLimit = 150;
-  const charsUsed = displayText.length;
-  const isOverLimit = charsUsed > igCharLimit;
+  const currentConfig = PLATFORM_CONFIGS[activePlatform];
+  const charsCount = Array.from(displayText).length;
+  const isExceeded = charsCount > currentConfig.limit;
 
   return (
     <div className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-8 shadow-xs mb-12">
@@ -162,6 +168,34 @@ export const PlatformPreview: React.FC<PlatformPreviewProps> = ({
         </button>
       </div>
 
+      {/* Character Limit & Compatibility Banner */}
+      <div className={`mb-6 p-3.5 rounded-2xl border transition-all flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 ${
+        isExceeded
+          ? 'bg-rose-50 border-rose-200 text-rose-800'
+          : 'bg-slate-50 border-slate-200 text-slate-700'
+      }`}>
+        <div className="flex items-center gap-2.5">
+          <span className={`p-1.5 rounded-lg text-xs font-black ${
+            isExceeded ? 'bg-rose-600 text-white' : 'bg-indigo-600 text-white'
+          }`}>
+            {isExceeded ? '⚠️ Límite Excedido' : '✓ Longitud Compatible'}
+          </span>
+          <span className="text-xs font-medium">
+            {currentConfig.tip}
+          </span>
+        </div>
+
+        <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
+          <span className={`text-xs font-black px-2.5 py-1 rounded-lg ${
+            isExceeded
+              ? 'bg-rose-200 text-rose-900'
+              : 'bg-white text-slate-800 border border-slate-200 shadow-2xs'
+          }`}>
+            {charsCount} / {currentConfig.limit} caracteres
+          </span>
+        </div>
+      </div>
+
       {/* Simulator Frame Container */}
       <div className="flex justify-center">
         {/* ================= 1. INSTAGRAM SIMULATOR ================= */}
@@ -216,8 +250,8 @@ export const PlatformPreview: React.FC<PlatformPreviewProps> = ({
               {/* Bio Character Limit Indicator */}
               <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px]">
                 <span className="text-slate-400">Límite de Bio de Instagram:</span>
-                <span className={`font-bold ${isOverLimit ? 'text-rose-600' : 'text-emerald-600'}`}>
-                  {charsUsed} / 150 caracteres {isOverLimit && '(¡Excede el límite!)'}
+                <span className={`font-bold ${isExceeded ? 'text-rose-600' : 'text-emerald-600'}`}>
+                  {charsCount} / 150 caracteres {isExceeded && '(¡Excede el límite!)'}
                 </span>
               </div>
 

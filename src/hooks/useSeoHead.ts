@@ -106,7 +106,7 @@ export function useSeoHead(currentRoute: PageRoute) {
           '@id': `${origin}/#organization`,
           name: 'Conversor de Letras Bonitas',
           url: origin,
-          logo: `${origin}/icon-512.png`,
+          logo: `${origin}/favicon.svg`,
           image: `${origin}/og-image.svg`,
           description: 'Plataforma líder en español de conversión de fuentes y estilos tipográficos Unicode para redes sociales.',
         },

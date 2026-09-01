@@ -12,8 +12,10 @@ import {
   Layers,
   Smartphone,
   Square,
-  Monitor
+  Monitor,
+  Eye
 } from 'lucide-react';
+import { useModalBackdrop } from '../hooks/useModalBackdrop';
 
 interface TextImageExportModalProps {
   isOpen: boolean;
@@ -114,6 +116,9 @@ export const TextImageExportModal: React.FC<TextImageExportModalProps> = ({
   const [includeBorder, setIncludeBorder] = useState(true);
   const [isExporting, setIsExporting] = useState(false);
   const [copiedImage, setCopiedImage] = useState(false);
+  const [generatedImgUrl, setGeneratedImgUrl] = useState<string | null>(null);
+
+  useModalBackdrop(isOpen, onClose, 'text-image-export');
 
   if (!isOpen) return null;
 

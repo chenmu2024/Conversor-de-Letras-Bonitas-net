@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Download, Sparkles, X, Check, Smartphone, Monitor } from 'lucide-react';
+import { useModalBackdrop } from '../hooks/useModalBackdrop';
 
 interface PwaInstallModalProps {
   isOpen: boolean;
@@ -10,6 +11,8 @@ export const PwaInstallModal: React.FC<PwaInstallModalProps> = ({ isOpen, onClos
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isInstalled, setIsInstalled] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<'android' | 'ios' | 'pc'>('android');
+
+  useModalBackdrop(isOpen, onClose, 'pwa-install');
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e: any) => {

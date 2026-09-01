@@ -16,8 +16,8 @@ export interface RouteSeoData {
 
 export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   inicio: {
-    title: 'Conversor de Letras Bonitas (2026) ➜ +80 Fuentes para Copiar y Pegar 𝓬𝓸𝓹𝓲𝓪𝓻',
-    metaDescription: 'Conversor de Letras Bonitas: convierte texto en letras bonitas, cursivas, góticas y aesthetic gratis. Más de 80 fuentes para Instagram, Free Fire, TikTok y WhatsApp.',
+    title: 'Conversor de Letras Bonitas - Fuentes para Copiar y Pegar',
+    metaDescription: 'Conversor de letras bonitas online gratis. +80 tipografías cursivas, góticas y aesthetic para copiar y pegar en Instagram, TikTok, Free Fire y WhatsApp.',
     h1: 'Conversor de Letras Bonitas (Copiar y Pegar)',
     h2Secondary: 'Fuentes, Tipografías y Nicks Aesthetic en el Conversor de Letras Bonitas',
     keywords: [
@@ -71,8 +71,8 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   instagram: {
-    title: 'Letras para Instagram (2026) ➜ Fuentes Bio y Stories Copiar y Pegar 𝓪𝓮𝓼𝓽𝓱𝓮𝓽𝓲𝓬',
-    metaDescription: 'Fuentes y letras bonitas para Instagram. Crea biografías aesthetic, historias con tipografías cursivas y nombres destacados en negrita listos para copiar y pegar.',
+    title: 'Letras para Instagram ➜ Fuentes Bio para Copiar y Pegar',
+    metaDescription: 'Letras bonitas para Instagram. Crea biografías aesthetic, stories y nombres en negrita o cursiva. +80 fuentes gratis para copiar y pegar en tu perfil.',
     h1: 'Letras para Instagram (Bio, Stories y Perfil)',
     h2Secondary: 'Tipografías Aesthetic, Cursivas Elegantes y Negritas para Biografías',
     keywords: [
@@ -108,7 +108,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   'free-fire': {
-    title: 'Letras para Free Fire - Nicks Insanos con Alas, Símbolos 亗 y Espacio Invisible',
+    title: 'Letras para Free Fire - Nicks Insanos con Alas y Símbolos',
     metaDescription: 'Generador de nombres y letras para Free Fire. Nicks con alas ꧁༺ ༻꧂, símbolos V de verificado, coronas 亗 y espacio invisible [ㅤ] copiar y pegar.',
     h1: 'Letras para Free Fire (Nicks Insanos y Símbolos)',
     h2Secondary: 'Alas ꧁༺ ༻꧂, Coronas 亗, V de Verificado y Espacio Invisible U+3164',
@@ -145,8 +145,8 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   tiktok: {
-    title: 'Letras para TikTok - Nombres Aesthetic, Emojis Secretos y Hooks Virales',
-    metaDescription: 'Fuentes y tipografías para TikTok. Genera nombres de usuario aesthetic, letras para biografía y comentarios que destacan en el algoritmo. Copiar y pegar gratis.',
+    title: 'Letras para TikTok ➜ Nombres Aesthetic para Copiar y Pegar',
+    metaDescription: 'Fuentes y letras para TikTok. Genera nombres aesthetic, tipografías para biografía y comentarios virales. Copia y pega gratis en tu perfil de TikTok.',
     h1: 'Letras para TikTok (Nombres Aesthetic y Hooks)',
     h2Secondary: 'Tipografías Virales, Emojis Secretos y Letras para Biografía de TikTok',
     keywords: [
@@ -178,7 +178,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   whatsapp: {
-    title: 'Letras para WhatsApp - Negrita, Cursiva, Tachado y Estados Aesthetic',
+    title: 'Letras para WhatsApp - Negrita, Cursiva y Estados Bonitos',
     metaDescription: 'Conversor de letras para WhatsApp. Letras en negrita, cursivas, tachadas y estilos aesthetic para tus estados, nombres de contacto e información de perfil.',
     h1: 'Letras para WhatsApp (Estados, Chats y Perfil)',
     h2Secondary: 'Fuentes Unicode, Negrita *texto*, Cursiva _texto_ y Estilos para Estados',
@@ -211,7 +211,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   facebook: {
-    title: 'Letras para Facebook (2026) ➜ Negrita para Publicaciones y Precios Tachados 𝗕𝗼𝗹𝗱',
+    title: 'Letras para Facebook - Negrita y Precios Tachados 𝗕𝗼𝗹𝗱',
     metaDescription: 'Conversor de letras para Facebook. Escribe en negrita en publicaciones, grupos y biografías. Precios tachados para Marketplace y tipografías destacadas.',
     h1: 'Letras para Facebook (Posts, Grupos y Marketplace)',
     h2Secondary: 'Letras Negritas para Publicaciones, Cursivas y Precios Tachados',
@@ -243,8 +243,8 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   'letras-chidas': {
-    title: 'Letras Chidas (2026) ➜ +80 Fuentes Chidas para Copiar y Pegar 𝓬𝓱𝓲𝓭𝓪𝓼',
-    metaDescription: 'Generador de letras chidas para copiar y pegar gratis. Fuentes aesthetic, nicks con alas, letras perronas para Free Fire, TikTok, Instagram y WhatsApp. ¡Copiar en 1 Clic!',
+    title: 'Letras Chidas (2026) ➜ +80 Fuentes para Copiar y Pegar',
+    metaDescription: 'Generador de letras chidas gratis para copiar y pegar. Fuentes aesthetic, nicks con alas y letras perronas para Free Fire, TikTok, Instagram y WhatsApp.',
     h1: 'Letras Chidas para Copiar y Pegar (Fuentes y Nicks 2026)',
     h2Secondary: 'Fuentes Chidas, Nicks Insanos y Letras Bonitas para Redes y Videojuegos',
     keywords: [
@@ -287,8 +287,8 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   'letras-elegantes': {
-    title: 'Letras Elegantes (2026) ➜ Tipografías Finas para Copiar y Pegar 𝓔𝓵𝓮𝓰𝓪𝓷𝓽𝓮',
-    metaDescription: 'Conversor de letras elegantes para copiar y pegar. Fuentes cursivas finas, caligrafía inglesa, firmas estéticas y tipografías de lujo para biografías y títulos.',
+    title: 'Letras Elegantes ➜ Tipografías Finas para Copiar y Pegar',
+    metaDescription: 'Conversor de letras elegantes para copiar y pegar. Fuentes cursivas finas, caligrafía inglesa y tipografías de lujo para biografías, firmas y títulos.',
     h1: 'Letras Elegantes para Copiar y Pegar (Caligrafía y Cursiva)',
     h2Secondary: 'Tipografías Finas, Script de Lujo y Firmas Digitales para Redes Sociales',
     keywords: [
@@ -326,8 +326,8 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   'letras-raras': {
-    title: 'Letras Raras y Símbolos Extraños (2026) ➜ Copiar y Pegar 尺卂尺卂丂',
-    metaDescription: 'Conversor de letras raras, caracteres ocultos y símbolos extraños para copiar y pegar. Alfabetos extraños, glitch zalgo, texto al revés y símbolos para nicks.',
+    title: 'Letras Raras y Símbolos Extraños ➜ Copiar y Pegar 尺卂尺卂丂',
+    metaDescription: 'Conversor de letras raras y símbolos extraños para copiar y pegar. Alfabetos exóticos, glitch zalgo, texto al revés y caracteres ocultos para nicks.',
     h1: 'Letras Raras y Símbolos Extraños (Copiar y Pegar)',
     h2Secondary: 'Caracteres Unicode Ocultos, Alfabetos Exóticos y Nicks con Símbolos Raros',
     keywords: [
@@ -365,8 +365,8 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   'letras-tatuajes': {
-    title: 'Letras para Tatuajes (2026) ➜ Fuentes Góticas, Cursivas & Números Romanos 𝕿𝖆𝖙𝖙𝖔𝖔',
-    metaDescription: 'Conversor de letras para tatuajes online y gratis. Tipografías góticas Old English, caligrafía fina script, lettering para antebrazo y números romanos para fechas.',
+    title: 'Letras para Tatuajes ➜ Fuentes Góticas y Cursivas 𝕿𝖆𝖙𝖙𝖔𝖔',
+    metaDescription: 'Conversor de letras para tatuajes online. Tipografías góticas Old English, caligrafía cursiva, lettering y números romanos para fechas y diseños de piel.',
     h1: 'Letras para Tatuajes y Lettering (Copiar y Pegar)',
     h2Secondary: 'Tipografías Góticas, Caligrafía Fina y Números Romanos para Diseños de Piel',
     keywords: [
@@ -404,7 +404,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   'nicks-free-fire': {
-    title: 'Generador de Nicks para Free Fire (2026) ➜ Alas, ⓥ Verificado & Insanos 亗',
+    title: 'Nicks para Free Fire ➜ Alas, ⓥ Verificado & Insanos 亗',
     metaDescription: 'Crea los mejores nicks para Free Fire con alas ꧁༺ ༻꧂, V de verificado ⓥ, coronas 亗, armas MP40 y espacio invisible [ㅤ]. ¡Copiar en 1 Clic!',
     h1: 'Generador de Nicks para Free Fire (Alas, Insanos & ⓥ)',
     h2Secondary: 'Nombres con Alas, Símbolos de Clan, Dúos Tóxicos y Espacio Invisible',
@@ -443,8 +443,8 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   'letras-chinas': {
-    title: 'Letras Chinas y Japonesas Kanji (2026) ➜ Copiar y Pegar 尺卂尺ㄖ 漢字',
-    metaDescription: 'Generador de letras chinas y japonesas simuladas para copiar y pegar. Transforma texto a caracteres kanji simulados, katakana anime, dragones 🐉 y símbolos samurai ⚔️.',
+    title: 'Letras Chinas y Japonesas Kanji ➜ Copiar y Pegar 尺卂尺ㄖ',
+    metaDescription: 'Letras chinas y japonesas simuladas para copiar y pegar. Convierte texto a kanji simulado, katakana anime, dragones 🐉 y símbolos para nicks y bios.',
     h1: 'Letras Chinas y Japonesas Simuladas (Kanji & Katakana)',
     h2Secondary: 'Alfabetos Orientales Simulados, Símbolos Kanji Auténticos y Nicks Anime',
     keywords: [
@@ -482,7 +482,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   'espacio-invisible': {
-    title: 'Espacio Invisible [ㅤ] y Letra Invisible (2026) ➜ Copiar y Pegar 1 Clic',
+    title: 'Espacio Invisible [ㅤ] y Letra Invisible ➜ Copiar y Pegar',
     metaDescription: 'Copia el espacio invisible [ㅤ] (Hangul Filler U+3164) y letra invisible para Free Fire, WhatsApp, Instagram y TikTok. Compatible con nombres transparentes.',
     h1: 'Espacio Invisible y Letra Invisible [ㅤ] (Copiar y Pegar)',
     h2Secondary: 'Generador de Caracteres Invisibles, Nombres Transparentes y Espacios Vacíos',
@@ -521,7 +521,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   'nombres-parejas': {
-    title: 'Nombres para Parejas Free Fire y Dúos (2026) ➜ Nicks Matching ♡ 亗',
+    title: 'Nombres para Parejas Free Fire y Dúos ➜ Nicks Matching ♡',
     metaDescription: 'Los mejores nombres para parejas en Free Fire, TikTok y videojuegos. Nicks que combinan, dúos tóxicos, coronas de reyes y símbolos de amor listos para copiar.',
     h1: 'Nombres para Parejas y Dúos (Matching Nicks)',
     h2Secondary: 'Nicks Combinados para Novios, Dúos Tóxicos en Free Fire y Perfiles Matching',
@@ -534,7 +534,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
       'duos toxicos free fire',
       'nombres combinados para parejas'
     ],
-    canonical: 'https://conversordeletrasbonitas.net/nombres-para-parejas/',
+    canonical: 'https://conversordeletrasbonitas.net/nombres-parejas/',
     badge: '💑 Especial Dúos y Parejas Goals',
     guideTitle: '¿Cómo Crear Nombres Combinados Perfectos para Parejas?',
     guideSteps: [
@@ -559,7 +559,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   'abecedario': {
-    title: 'Abecedario de Letras Bonitas (A-Z) ➜ Todas las Tipografías para Copiar',
+    title: 'Abecedario de Letras Bonitas (A-Z) ➜ Fuentes para Copiar',
     metaDescription: 'Catálogo completo del abecedario de letras bonitas de la A a la Z. Letras mayúsculas y minúsculas en cursiva, gótica, círculos, doble trazo y símbolos.',
     h1: 'Abecedario Completo de Letras Bonitas (A a la Z)',
     h2Secondary: 'Directorio de Todas las Letras Mayúsculas y Minúsculas en Fuentes Unicode',
@@ -597,8 +597,8 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   cursiva: {
-    title: 'Traductor a Cursiva - Letras Cursivas para Copiar y Pegar Online',
-    metaDescription: 'Traductor de letras a cursiva online. Convierte cualquier frase en letra manuscrita, script elegante, caligrafía inglesa y cursiva negrita. ¡Copiar en 1 Clic!',
+    title: 'Traductor a Cursiva - Letras Cursivas para Copiar y Pegar',
+    metaDescription: 'Traductor de letras a cursiva online. Convierte tu texto en letra manuscrita, script elegante, caligrafía inglesa y cursiva negrita para copiar y pegar.',
     h1: 'Traductor a Cursiva (Letras Cursivas y Manuscritas)',
     h2Secondary: '𝓒𝓾𝓻𝓼𝓲𝓿𝓪 𝓑𝓸𝓵𝓭, 𝒮𝒸𝓇𝒾𝓅𝓉 ℰ𝓁ℯℊ𝒶𝓃𝓉ℯ y Caligrafía para Copiar y Pegar',
     keywords: [
@@ -629,7 +629,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   goticas: {
-    title: 'Letras Góticas para Copiar y Pegar - Tipografías Medievales y Dark',
+    title: 'Letras Góticas para Copiar y Pegar - Fuentes Medievales',
     metaDescription: 'Conversor de letras góticas online. Tipografías Old English, Fraktur medieval, gótico oscuro (Dark Aesthetic) y letras góticas en negrita. Copiar y pegar.',
     h1: 'Letras Góticas (Old English, Fraktur y Medieval)',
     h2Secondary: '𝔊ó𝔱𝔦𝔠𝔞 ℭ𝓁á𝔰𝔦𝔠𝔞, 𝕲ó𝖙𝖎𝖈𝖆 𝕭𝖔𝖑𝖉 y Tipografías Medievales para Copiar',
@@ -661,7 +661,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   simbolos: {
-    title: 'Símbolos para Copiar y Pegar - Alas, Coronas, Estrellas y Caras',
+    title: 'Símbolos para Copiar y Pegar - Alas, Coronas y Estrellas',
     metaDescription: 'Catálogo de más de 200 símbolos bonitos para copiar y pegar. Alas para Free Fire ꧁༺ ༻꧂, coronas 亗, corazones ♥, estrellas ★ y kaomojis aesthetic.',
     h1: 'Símbolos y Adornos para Copiar y Pegar',
     h2Secondary: 'Alas Gamer ꧁༺ ༻꧂, Coronas 亗, Corazones Aesthetic y Kaomojis',
@@ -693,7 +693,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   decorador: {
-    title: 'Decorador de Nicks y Nombres - Marcos con Alas y Estilos Gamer',
+    title: 'Decorador de Nicks y Nombres - Marcos con Alas Gamer',
     metaDescription: 'Decorador de nicks automático. Transforma tu nombre con marcos estéticos, alas gamer, coronas, estrellas y separadores listos para copiar y pegar.',
     h1: 'Decorador de Nicks y Nombres (Marcos y Alas)',
     h2Secondary: 'Generador de Apodos con Adornos Frontales y Posteriores Automáticos',
@@ -725,7 +725,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   invertidas: {
-    title: 'Letras Tachadas e Invertidas - Inversor de Texto y Letras al Revés',
+    title: 'Letras Tachadas e Invertidas - Texto al Revés para Copiar',
     metaDescription: 'Conversor de letras tachadas, subrayadas y texto al revés (texto volteado de cabeza ǝnb uǝ ɐʇsɐɥ). Copiar y pegar para bromas y ofertas de Marketplace.',
     h1: 'Letras Tachadas, Subrayadas e Invertidas',
     h2Secondary: 'Texto al Revés (ǝp ɐzǝqɐɔ) y Tachado para Ofertas de Precios',
@@ -757,7 +757,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   circulos: {
-    title: 'Letras en Círculos y Cuadros - Letras en Burbujas Negras y Blancas',
+    title: 'Letras en Círculos y Cuadros - Burbujas Negras y Blancas',
     metaDescription: 'Conversor de letras en círculos y cuadros. Escribe en burbujas blancas Ⓑⓤⓡⓑⓤⓙⓐ y círculos negros 🅝🅔🅖🅡🅞🅢. Ideal para numerar listas y títulos.',
     h1: 'Letras en Círculos, Cuadros y Burbujas',
     h2Secondary: 'ⓑⓤⓡⓑⓤⓙⓐⓢ ⓣⓔⓧⓣⓞ, 🅒🅘🅡🅒🅤🅛🅞🅢 🅝🅔🅖🅡🅞🅢 y Cuadros',
@@ -821,7 +821,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   'contador-bio': {
-    title: 'Contador de Caracteres para Biografía de Instagram, TikTok y Twitter/X',
+    title: 'Contador de Caracteres para Biografía de Instagram y TikTok',
     metaDescription: 'Contador de caracteres y palabras online en tiempo real con límites para biografías de Instagram (150), TikTok (80), Twitter (280) y apodos de Free Fire (12).',
     h1: 'Contador de Caracteres y Palabras para Redes Sociales',
     h2Secondary: 'Límites de Bio para Instagram (150), TikTok (80), WhatsApp y Free Fire',
@@ -858,7 +858,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   'sobre-nosotros': {
-    title: 'Sobre Nosotros - Conversor de Letras Bonitas & Laboratorio Unicode E-E-A-T',
+    title: 'Sobre Nosotros - Conversor de Letras Bonitas Unicode',
     metaDescription: 'Conoce al equipo detrás de Conversor de Letras Bonitas. Nuestra metodología, estándares de compatibilidad Unicode y compromiso con la privacidad del usuario.',
     h1: 'Sobre Nosotros y Nuestro Laboratorio Tipográfico',
     h2Secondary: 'Compromiso E-E-A-T, Compatibilidad Unicode y Privacidad del Usuario',
@@ -888,7 +888,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   'politica-de-privacidad': {
-    title: 'Política de Privacidad y Cookies - Conversor de Letras Bonitas',
+    title: 'Política de Privacidad - Conversor de Letras Bonitas',
     metaDescription: 'Consulta nuestra política de privacidad, uso de cookies conforme a GDPR y CCPA, y declaración de publicidad de terceros.',
     h1: 'Política de Privacidad y Protección de Datos',
     h2Secondary: 'Garantía de Procesamiento Local en el Dispositivo (Zero Server Logging) y Transparencia',
@@ -923,7 +923,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   'politica-de-cookies': {
-    title: 'Política de Cookies - Conversor de Letras Bonitas (RGPD & AdSense)',
+    title: 'Política de Cookies - Conversor de Letras Bonitas (RGPD)',
     metaDescription: 'Información detallada sobre el uso de cookies técnicas, analíticas y publicitarias de Google AdSense, DoubleClick y cómo configurar sus preferencias.',
     h1: 'Política de Cookies y Consentimiento de Privacidad',
     h2Secondary: 'Transparencia en el Uso de Cookies Propias y de Terceros Conforme a la Directiva ePrivacy',

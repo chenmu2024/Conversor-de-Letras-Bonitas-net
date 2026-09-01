@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Download, Sparkles, Image as ImageIcon, Check, Copy, Palette, Type, RefreshCw, Smartphone } from 'lucide-react';
+import { useModalBackdrop } from '../hooks/useModalBackdrop';
 
 interface PosterGeneratorModalProps {
   initialText?: string;
@@ -32,6 +33,8 @@ export const PosterGeneratorModal: React.FC<PosterGeneratorModalProps> = ({
   const [copiedStatus, setCopiedStatus] = useState(false);
   const [downloading, setDownloading] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  useModalBackdrop(isOpen, onClose, 'poster-generator');
 
   if (!isOpen) return null;
 
