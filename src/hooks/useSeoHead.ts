@@ -8,18 +8,22 @@ export function useSeoHead(currentRoute: PageRoute) {
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://conversordeletrasbonitas.net';
     const canonicalUrl = routeData.canonical.startsWith('http') ? routeData.canonical : `${origin}${routeData.canonical}`;
 
-    // 1. Update Title
-    document.title = routeData.title;
+    // 1. Update Title only if changed
+    if (document.title !== routeData.title) {
+      document.title = routeData.title;
+    }
 
-    // 2. Helper to set/update meta tags safely
+    // 2. Helper to set/update meta tags safely without redundant reflows
     const setMetaTag = (attr: 'name' | 'property', key: string, content: string) => {
       let element = document.querySelector(`meta[${attr}="${key}"]`) as HTMLMetaElement | null;
       if (!element) {
         element = document.createElement('meta');
         element.setAttribute(attr, key);
+        element.setAttribute('content', content);
         document.head.appendChild(element);
+      } else if (element.getAttribute('content') !== content) {
+        element.setAttribute('content', content);
       }
-      element.setAttribute('content', content);
     };
 
     // 3. Helper to set/update link tags
@@ -32,9 +36,11 @@ export function useSeoHead(currentRoute: PageRoute) {
         element = document.createElement('link');
         element.setAttribute('rel', rel);
         if (hreflang) element.setAttribute('hreflang', hreflang);
+        element.setAttribute('href', href);
         document.head.appendChild(element);
+      } else if (element.getAttribute('href') !== href) {
+        element.setAttribute('href', href);
       }
-      element.setAttribute('href', href);
     };
 
     // Standard SEO Meta Tags

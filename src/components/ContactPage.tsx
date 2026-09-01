@@ -203,7 +203,7 @@ export const ContactPage: React.FC = () => {
       {/* Direct Contact Info */}
       <div className="text-center text-xs text-slate-500 space-y-1">
         <p>También puedes contactar directamente a nuestro laboratorio tipográfico en:</p>
-        <p className="font-mono font-bold text-indigo-600">soporte@conversordeletrasbonitas.net</p>
+        <p className="font-mono font-bold text-indigo-600" dangerouslySetInnerHTML={{ __html: '<!--email_off-->soporte@conversordeletrasbonitas.net<!--/email_off-->' }} />
       </div>
     </div>
   );

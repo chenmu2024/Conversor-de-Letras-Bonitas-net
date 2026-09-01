@@ -70,7 +70,7 @@ export const PrivacyPolicyPage: React.FC = () => {
             Responsable del Tratamiento de Datos
           </h2>
           <p>
-            El sitio web <strong>conversordeletrasbonitas.net</strong> opera como una plataforma gratuita de utilidades tipográficas y procesamiento de glifos Unicode. Actuamos bajo el principio de minimización de datos estipulado en el Artículo 5(1)(c) del Reglamento General de Protección de Datos de la Unión Europea (RGPD / GDPR). Para cualquier asunto relacionado con la privacidad, puede comunicarse a: <span className="font-mono font-bold text-indigo-600">privacidad@conversordeletrasbonitas.net</span>.
+            El sitio web <strong>conversordeletrasbonitas.net</strong> opera como una plataforma gratuita de utilidades tipográficas y procesamiento de glifos Unicode. Actuamos bajo el principio de minimización de datos estipulado en el Artículo 5(1)(c) del Reglamento General de Protección de Datos de la Unión Europea (RGPD / GDPR). Para cualquier asunto relacionado con la privacidad, puede comunicarse a: <span className="font-mono font-bold text-indigo-600" dangerouslySetInnerHTML={{ __html: '<!--email_off-->privacidad@conversordeletrasbonitas.net<!--/email_off-->' }} />.
           </p>
         </section>
 

@@ -9,7 +9,7 @@
   }
   
   h1, h2, h3, h4, .font-heading {
-    font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     letter-spacing: -0.025em;
   }
 }
@@ -21,7 +21,7 @@
 }
 
 .font-mono-code {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "JetBrains Mono", monospace;
 }
 
 /* Background grid pattern */

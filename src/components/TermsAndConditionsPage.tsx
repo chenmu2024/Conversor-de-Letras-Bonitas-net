@@ -127,7 +127,7 @@ export const TermsAndConditionsPage: React.FC = () => {
             Contacto Legal
           </h2>
           <p>
-            Para cualquier consulta, aclaración o notificación legal relacionada con estos Términos de Uso, puede dirigirse por escrito a: <span className="font-mono font-bold text-indigo-600">legal@conversordeletrasbonitas.net</span>.
+            Para cualquier consulta, aclaración o notificación legal relacionada con estos Términos de Uso, puede dirigirse por escrito a: <span className="font-mono font-bold text-indigo-600" dangerouslySetInnerHTML={{ __html: '<!--email_off-->legal@conversordeletrasbonitas.net<!--/email_off-->' }} />.
           </p>
         </section>
       </div>

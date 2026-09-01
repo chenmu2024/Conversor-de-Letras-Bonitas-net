@@ -108,13 +108,16 @@ export const FontConverter: React.FC<FontConverterProps> = ({
     return /[áéíóúÁÉÍÓÚñÑüÜ¿¡]/.test(inputText);
   }, [inputText]);
 
-  // Scroll listener for sticky floating input bar
+  // Scroll listener for sticky floating input bar with requestAnimationFrame
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      if (window.scrollY > 380) {
-        setShowStickyBar(true);
-      } else {
-        setShowStickyBar(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setShowStickyBar(window.scrollY > 380);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -204,7 +207,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
         const inputEl = document.getElementById('main-font-input');
         if (inputEl) {
           inputEl.focus();
-          window.scrollTo({ top: inputEl.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' });
+          inputEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       }
     };

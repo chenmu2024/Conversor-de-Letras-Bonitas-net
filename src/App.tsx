@@ -162,13 +162,16 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
     }
   }, []);
 
-  // Listen to scroll for back to top button
+  // Listen to scroll for back to top button with requestAnimationFrame
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      if (window.scrollY > 400) {
-        setShowScrollTop(true);
-      } else {
-        setShowScrollTop(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setShowScrollTop(window.scrollY > 400);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });

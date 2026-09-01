@@ -17,12 +17,14 @@ export const StickyMobileInputBar: React.FC<StickyMobileInputBarProps> = ({
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      // Show sticky bar when scrolled past the main converter input (around 380px)
-      if (window.scrollY > 400) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsVisible(window.scrollY > 400);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
