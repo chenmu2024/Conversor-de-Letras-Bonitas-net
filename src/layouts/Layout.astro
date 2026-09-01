@@ -1,0 +1,103 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+}
+
+const {
+  title = "Conversor de Letras Bonitas (Copiar y Pegar) - Fuentes y Tipos de Letras Online",
+  description = "Convierte texto normal en letras bonitas y elegantes con nuestro conversor online. Más de 80 fuentes para Instagram, TikTok, Free Fire y WhatsApp. ¡100% Gratis, solo copiar y pegar!",
+  canonical = "https://conversordeletrasbonitas.net/"
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="conversor de letras bonitas, letras para copiar y pegar, letras para instagram, letras para free fire, traductor a cursiva, letras goticas, letras bonitas online, espacio invisible" />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="Conversor de Letras Bonitas" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="theme-color" content="#4f46e5" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://conversordeletrasbonitas.net/#webapp",
+          "name": "Conversor de Letras Bonitas",
+          "url": "https://conversordeletrasbonitas.net/",
+          "applicationCategory": "UtilitiesApplication",
+          "operatingSystem": "All",
+          "browserRequirements": "Requires JavaScript. Requires HTML5.",
+          "inLanguage": "es",
+          "description": "Herramienta online gratuita para convertir texto normal en más de 80 fuentes de letras bonitas, cursivas, góticas y nicks con alas para Instagram, TikTok, WhatsApp y Free Fire.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://conversordeletrasbonitas.net/#website",
+          "url": "https://conversordeletrasbonitas.net/",
+          "name": "Conversor de Letras Bonitas",
+          "description": "Fuentes y tipografías bonitas para copiar y pegar",
+          "inLanguage": "es"
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://conversordeletrasbonitas.net/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿El conversor de letras bonitas es 100% gratis?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí, todas las fuentes, símbolos, letras cursivas y decoraciones de conversordeletrasbonitas.net son completamente gratis e ilimitadas sin necesidad de registro ni descargas."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cómo poner letras en cursiva o negrita en la biografía de Instagram?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Escribe tu frase en la caja de texto superior, elige el estilo Cursiva Bold o Negrita Sans, haz clic en el botón Copiar y pégalo directamente en la biografía de tu perfil de Instagram."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cómo tener un nombre invisible en Free Fire o WhatsApp?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Haz clic en el botón 'Copiar Espacio Invisible [ㅤ]' en la parte superior. Este carácter especial (Hangul Filler U+3164) es validado por el juego como texto real pero aparece totalmente invisible."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-900 antialiased selection:bg-indigo-500 selection:text-white">
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,253 @@
+import { NickDecoration } from '../types';
+
+export const NICK_DECORATIONS: NickDecoration[] = [
+  // ================= FREE FIRE & GAMING =================
+  {
+    id: 'dec-alas-1',
+    name: 'Alas Divinas ꧁༺ ༻꧂',
+    category: 'free-fire',
+    left: '꧁༺ ',
+    right: ' ༻꧂',
+  },
+  {
+    id: 'dec-alas-2',
+    name: 'Alas Góticas ꧁༒☬ ☬༒꧂',
+    category: 'free-fire',
+    left: '꧁༒☬ ',
+    right: ' ☬༒꧂',
+  },
+  {
+    id: 'dec-insano-1',
+    name: 'Corona Insana 亗 亗',
+    category: 'free-fire',
+    left: '亗『 ',
+    right: ' 』亗',
+  },
+  {
+    id: 'dec-verificado',
+    name: 'Verificado V 🅥',
+    category: 'free-fire',
+    left: '🅥 ',
+    right: ' 亗',
+  },
+  {
+    id: 'dec-rayo-1',
+    name: 'Rayo Eléctrico ⚡ ⚡',
+    category: 'free-fire',
+    left: '⚡┊ ',
+    right: ' ┊⚡',
+  },
+  {
+    id: 'dec-cruz-dark',
+    name: 'Cruz Dark ✞ ✞',
+    category: 'free-fire',
+    left: '✞ 𓊈 ',
+    right: ' 𓊉 ✞',
+  },
+  {
+    id: 'dec-diablo',
+    name: 'Diablo Tóxico ╰‿╯',
+    category: 'free-fire',
+    left: '╰‿╯ ☠️ ',
+    right: ' ☠️ ╰‿╯',
+  },
+  {
+    id: 'dec-dead-smile',
+    name: 'Dead Smile ×͜×',
+    category: 'free-fire',
+    left: '×͜× ',
+    right: ' ×͜×',
+  },
+  {
+    id: 'dec-sniper-awm',
+    name: 'Sniper AWM ︻╦̵̵͇̿̿̿̿══╤─',
+    category: 'free-fire',
+    left: '︻╦̵̵͇̿̿̿̿══╤─ ',
+    right: ' 🎯',
+  },
+  {
+    id: 'dec-escudos-warrior',
+    name: 'Escudos de Guerra ⫷ ⫸',
+    category: 'free-fire',
+    left: '⫷ 𝕲𝖚𝖊𝖗𝖗𝖊𝖗𝖔 ⫸',
+    right: '',
+  },
+
+  // ================= CLANES & COMPETITIVO =================
+  {
+    id: 'dec-ninja-1',
+    name: 'Ninja PvP 乂 ⚔️',
+    category: 'clan',
+    left: '乂 ⚔️ ',
+    right: ' ⚔️ 乂',
+  },
+  {
+    id: 'dec-boss-1',
+    name: 'Líder ᴮᴼˢˢ ★',
+    category: 'clan',
+    left: 'ᴮᴼˢˢ★ ',
+    right: ' ★',
+  },
+  {
+    id: 'dec-clan-xiang',
+    name: 'Clan Xiang 乡 乡',
+    category: 'clan',
+    left: '乡 ',
+    right: ' 乡',
+  },
+  {
+    id: 'dec-ff-clan',
+    name: 'Clan Oficial 𝕱𝕱',
+    category: 'clan',
+    left: '𝕱𝕱 〖 ',
+    right: ' 〗',
+  },
+  {
+    id: 'dec-marcos-japon',
+    name: 'Marco Tradicional 『 』',
+    category: 'clan',
+    left: '『 ',
+    right: ' 』',
+  },
+  {
+    id: 'dec-corchete-clan',
+    name: 'Corchete Doble 〖 〗',
+    category: 'clan',
+    left: '〖 ',
+    right: ' 〗',
+  },
+
+  // ================= AESTHETIC & COQUETTE =================
+  {
+    id: 'dec-coquette',
+    name: 'Coquette Moño 🎀 🎀',
+    category: 'aesthetic',
+    left: '🎀 ִֶָ ',
+    right: ' ִֶָ 🎀',
+  },
+  {
+    id: 'dec-sparkle-stars',
+    name: 'Destello Estelar ✦✧',
+    category: 'aesthetic',
+    left: '✦✧ ',
+    right: ' ✧✦',
+  },
+  {
+    id: 'dec-nube',
+    name: 'Nube Aesthetic ☁️ ˚ ༘♡',
+    category: 'aesthetic',
+    left: '☁️ ˚ ༘♡ ·˚ ',
+    right: ' ₊˚ˑ༄ؘ',
+  },
+  {
+    id: 'dec-sakura-flower',
+    name: 'Flor Sakura 🌸 ✧',
+    category: 'aesthetic',
+    left: '🌸 ✧ ',
+    right: ' ✧ 🌸',
+  },
+  {
+    id: 'dec-luna',
+    name: 'Luna Mística ☾ ☽',
+    category: 'aesthetic',
+    left: '‧͙⁺˚*･༓☾ ',
+    right: ' ☽༓･*˚⁺‧͙',
+  },
+  {
+    id: 'dec-citas',
+    name: 'Citas y Notas ✎ ❝ ❞',
+    category: 'aesthetic',
+    left: '✎... ❝ ',
+    right: ' ❞',
+  },
+  {
+    id: 'dec-ondas',
+    name: 'Ondas Japonesas ˜”*°•',
+    category: 'aesthetic',
+    left: '˜”*°•. ',
+    right: ' .•°*”˜',
+  },
+
+  // ================= AMOR & PAREJAS =================
+  {
+    id: 'dec-hearts-1',
+    name: 'Abrazo de Amor (っ◔◡◔)っ ♥',
+    category: 'hearts',
+    left: '(っ◔◡◔)っ ♥ ',
+    right: ' ♥',
+  },
+  {
+    id: 'dec-hearts-2',
+    name: 'Corazón Dulce ʚ♡⃛ɞ',
+    category: 'hearts',
+    left: 'ʚ♡⃛ɞ ',
+    right: ' ʚ♡⃛ɞ',
+  },
+  {
+    id: 'dec-alas-corazon',
+    name: 'Alas con Corazón 𓆩♡𓆪',
+    category: 'hearts',
+    left: '𓆩♡𓆪 ',
+    right: ' 𓆩♡𓆪',
+  },
+  {
+    id: 'dec-corazon-arabe',
+    name: 'Corazón Árabe Estético ᥫ᭡',
+    category: 'hearts',
+    left: 'ᥫ᭡ ',
+    right: ' ᥫ᭡',
+  },
+  {
+    id: 'dec-oso',
+    name: 'Osito Cariñoso ʕ•́ᴥ•̀ʔっ',
+    category: 'hearts',
+    left: 'ʕ•́ᴥ•̀ʔっ♡ ',
+    right: ' ♡',
+  },
+
+  // ================= ESTRELLAS & MAGIA =================
+  {
+    id: 'dec-stars-1',
+    name: 'Estrellas Mágicas ★彡 彡★',
+    category: 'stars',
+    left: '★彡 ',
+    right: ' 彡★',
+  },
+  {
+    id: 'dec-stars-2',
+    name: 'Noche Brillante ｡･:*:･ﾟ★',
+    category: 'stars',
+    left: '｡･:*:･ﾟ★ ',
+    right: ' ★ﾟ･:*:･｡',
+  },
+  {
+    id: 'dec-corona-stars',
+    name: 'Reina Mágica ♕ ★',
+    category: 'stars',
+    left: '♕ ⋆ ',
+    right: ' ⋆ ♕',
+  },
+
+  // ================= CARITAS & KAOMOJI =================
+  {
+    id: 'dec-kaomoji-hug',
+    name: 'Abrazo Feliz (づ｡◕‿‿◕｡)づ',
+    category: 'faces',
+    left: '(づ｡◕‿‿◕｡)づ ',
+    right: '',
+  },
+  {
+    id: 'dec-kaomoji-shrug',
+    name: 'Encogimiento ¯\\_(ツ)_/¯',
+    category: 'faces',
+    left: '¯\\_(ツ)_/¯ ',
+    right: '',
+  },
+  {
+    id: 'dec-kaomoji-fight',
+    name: 'Listo para Pelear (ง •̀_•́)ง',
+    category: 'faces',
+    left: '(ง •̀_•́)ง ',
+    right: '',
+  },
+];

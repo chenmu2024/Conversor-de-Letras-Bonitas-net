@@ -1,0 +1,4 @@
+# Google AdSense Authorized Digital Sellers (ads.txt)
+# https://conversordeletrasbonitas.net/ads.txt
+# Reemplace pub-XXXXXXXXXXXXXXXX con su ID de Editor de Google AdSense una vez aprobado
+google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
