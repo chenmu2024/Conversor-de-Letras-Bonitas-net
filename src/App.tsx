@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import { PageRoute, FontGenerator, FavoriteItem } from './types';
 import { ROUTE_CONFIGS } from './data/routeConfigs';
 import { useSeoHead } from './hooks/useSeoHead';
@@ -8,6 +8,7 @@ import { SubStudioRouter } from './components/SubStudioRouter';
 import { Breadcrumbs } from './components/Breadcrumbs';
 import { StickyMobileInputBar } from './components/StickyMobileInputBar';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
+import { ToastNotification } from './components/ToastNotification';
 import { Footer } from './components/Footer';
 import { ArrowUp, Star } from 'lucide-react';
 
@@ -16,8 +17,107 @@ const AuxiliarySections = lazy(() => import('./components/AuxiliarySections'));
 const FavoritesModal = lazy(() => import('./components/FavoritesModal').then(m => ({ default: m.FavoritesModal })));
 const CopyHistoryDrawer = lazy(() => import('./components/CopyHistoryDrawer').then(m => ({ default: m.CopyHistoryDrawer })));
 const PwaInstallModal = lazy(() => import('./components/PwaInstallModal').then(m => ({ default: m.PwaInstallModal })));
-const ToastNotification = lazy(() => import('./components/ToastNotification').then(m => ({ default: m.ToastNotification })));
 const PwaInstallPrompt = lazy(() => import('./components/PwaInstallPrompt').then(m => ({ default: m.PwaInstallPrompt })));
+
+// Defer below-the-fold auxiliary sections until scrolled into view or idle
+interface DeferredAuxiliaryProps {
+  currentRoute: PageRoute;
+  globalText: string;
+  previewText: string;
+  previewFontName: string;
+  onApplyText: (text: string) => void;
+  onRouteChange: (route: PageRoute) => void;
+}
+
+const DeferredAuxiliarySections: React.FC<DeferredAuxiliaryProps> = (props) => {
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    // Intersection observer to load when user approaches the section
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '350px' }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    // Safety timeout after initial render idle
+    const timer = setTimeout(() => {
+      setShouldLoad(true);
+    }, 3500);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(timer);
+    };
+  }, []);
+
+  return (
+    <div ref={containerRef}>
+      {shouldLoad ? (
+        <Suspense fallback={<div className="h-20 animate-pulse bg-slate-100 dark:bg-slate-800/40 rounded-2xl my-8" />}>
+          <AuxiliarySections {...props} />
+        </Suspense>
+      ) : (
+        <div className="h-24 my-8" />
+      )}
+    </div>
+  );
+};
+
+// Defer secondary floating widgets until idle or user interaction
+const DeferredInteractiveTools: React.FC<{
+  isFavoritesOpen: boolean;
+  isPwaModalOpen: boolean;
+  favorites: FavoriteItem[];
+  onCloseFavorites: () => void;
+  onRemoveFavorite: (id: string) => void;
+  onClearAllFavorites: () => void;
+  onClosePwaModal: () => void;
+}> = (props) => {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setReady(true), 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!ready && !props.isFavoritesOpen && !props.isPwaModalOpen) {
+    return null;
+  }
+
+  return (
+    <Suspense fallback={null}>
+      {props.isFavoritesOpen && (
+        <FavoritesModal
+          isOpen={props.isFavoritesOpen}
+          onClose={props.onCloseFavorites}
+          favorites={props.favorites}
+          onRemoveFavorite={props.onRemoveFavorite}
+          onClearAllFavorites={props.onClearAllFavorites}
+        />
+      )}
+      <CopyHistoryDrawer />
+      <PwaInstallPrompt />
+      {props.isPwaModalOpen && (
+        <PwaInstallModal
+          isOpen={props.isPwaModalOpen}
+          onClose={props.onClosePwaModal}
+        />
+      )}
+    </Suspense>
+  );
+};
 
 interface AppProps {
   initialRoute?: PageRoute;
@@ -246,17 +346,15 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
           />
         )}
 
-        {/* Auxiliary Content, Alphabet Tables, Guides, Infographics & SEO */}
-        <Suspense fallback={<div className="h-20 animate-pulse bg-slate-100 dark:bg-slate-800/40 rounded-2xl my-8" />}>
-          <AuxiliarySections
-            currentRoute={currentRoute}
-            globalText={globalText}
-            previewText={previewText}
-            previewFontName={previewFontName}
-            onApplyText={(t) => setGlobalText(t)}
-            onRouteChange={handleRouteChange}
-          />
-        </Suspense>
+        {/* Auxiliary Content, Alphabet Tables, Guides, Infographics & SEO (Deferred to eliminate LCP delay) */}
+        <DeferredAuxiliarySections
+          currentRoute={currentRoute}
+          globalText={globalText}
+          previewText={previewText}
+          previewFontName={previewFontName}
+          onApplyText={(t) => setGlobalText(t)}
+          onRouteChange={handleRouteChange}
+        />
       </main>
 
       {/* 3. Floating Actions (Back to Top & Sticky Favorites Quick Button) */}
@@ -287,33 +385,19 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
         )}
       </div>
 
-      <Suspense fallback={null}>
-        {/* 4. Favorites Drawer/Modal */}
-        {isFavoritesOpen && (
-          <FavoritesModal
-            isOpen={isFavoritesOpen}
-            onClose={() => setIsFavoritesOpen(false)}
-            favorites={favorites}
-            onRemoveFavorite={handleRemoveFavorite}
-            onClearAllFavorites={handleClearAllFavorites}
-          />
-        )}
+      {/* 4. Deferred Floating Drawers & Secondary Modals */}
+      <DeferredInteractiveTools
+        isFavoritesOpen={isFavoritesOpen}
+        isPwaModalOpen={isPwaModalOpen}
+        favorites={favorites}
+        onCloseFavorites={() => setIsFavoritesOpen(false)}
+        onRemoveFavorite={handleRemoveFavorite}
+        onClearAllFavorites={handleClearAllFavorites}
+        onClosePwaModal={() => setIsPwaModalOpen(false)}
+      />
 
-        {/* 5. Copy History Drawer (Floating) */}
-        <CopyHistoryDrawer />
-
-        {/* 6. PWA Install Floating Banner & Detailed Modal */}
-        <PwaInstallPrompt />
-        {isPwaModalOpen && (
-          <PwaInstallModal
-            isOpen={isPwaModalOpen}
-            onClose={() => setIsPwaModalOpen(false)}
-          />
-        )}
-
-        {/* Global Instant Copy Toast Notification */}
-        <ToastNotification />
-      </Suspense>
+      {/* Global Instant Copy Toast Notification */}
+      <ToastNotification />
 
       {/* GDPR / CCPA Cookie Consent Banner */}
       <CookieConsentBanner onRouteChange={handleRouteChange} />

@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import App from '../App';
+import '../index.css';
+---
+
+<Layout
+  title="Contador de Caracteres para Biografía de Instagram y TikTok"
+  description="Calcula caracteres y palabras en tiempo real verificando los límites exactos de biografía de Instagram (150) y TikTok (80)."
+  canonical="https://conversordeletrasbonitas.net/contador-bio"
+>
+  <App client:idle initialRoute="contador-bio" />
+</Layout>

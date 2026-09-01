@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import App from '../App';
+import '../index.css';
+---
+
+<Layout
+  title="404 - Página No Encontrada"
+  description="La página que buscas no existe o ha sido movida."
+  canonical="https://conversordeletrasbonitas.net/404"
+>
+  <App client:idle initialRoute="404" />
+</Layout>

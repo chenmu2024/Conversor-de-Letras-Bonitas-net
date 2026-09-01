@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import App from '../App';
+import '../index.css';
+---
+
+<Layout
+  title="Contacto y Soporte Técnico"
+  description="Envíanos tus dudas, solicitudes de nuevos estilos de letras o reporte de problemas en tu dispositivo."
+  canonical="https://conversordeletrasbonitas.net/contacto"
+>
+  <App client:idle initialRoute="contacto" />
+</Layout>
