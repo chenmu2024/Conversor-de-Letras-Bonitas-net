@@ -365,7 +365,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   'letras-tatuajes': {
-    title: 'Letras para Tatuajes ➜ Fuentes Góticas y Cursivas 𝕿𝖆𝖙𝖙𝖔𝖔',
+    title: 'Letras para Tatuajes - Fuentes Góticas y Cursivas Tattoo',
     metaDescription: 'Conversor de letras para tatuajes online. Tipografías góticas Old English, caligrafía cursiva, lettering y números romanos para fechas y diseños de piel.',
     h1: 'Letras para Tatuajes y Lettering (Copiar y Pegar)',
     h2Secondary: 'Tipografías Góticas, Caligrafía Fina y Números Romanos para Diseños de Piel',

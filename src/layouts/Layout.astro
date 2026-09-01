@@ -6,8 +6,8 @@ interface Props {
 }
 
 const {
-  title = "Conversor de Letras Bonitas (Copiar y Pegar) - Fuentes y Tipos de Letras Online",
-  description = "Convierte texto normal en letras bonitas y elegantes con nuestro conversor online. Más de 80 fuentes para Instagram, TikTok, Free Fire y WhatsApp. ¡100% Gratis, solo copiar y pegar!",
+  title = "Conversor de Letras Bonitas - Fuentes para Copiar y Pegar",
+  description = "Conversor de letras bonitas online gratis. +80 tipografías cursivas, góticas y aesthetic para copiar y pegar en Instagram, TikTok, Free Fire y WhatsApp.",
   canonical = "https://conversordeletrasbonitas.net/"
 } = Astro.props;
 ---
@@ -32,6 +32,16 @@ const {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="theme-color" content="#4f46e5" />
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/favicon.svg" color="#4f46e5" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
