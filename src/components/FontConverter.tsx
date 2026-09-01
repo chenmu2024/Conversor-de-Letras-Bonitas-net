@@ -15,15 +15,9 @@ import { QuickDecoratorPicker } from './QuickDecoratorPicker';
 import { FavoritesSection } from './FavoritesSection';
 import { Eye, CheckSquare, Square, Download, AlertTriangle, RefreshCw, Volume2 } from 'lucide-react';
 import { PlatformLimits } from './PlatformLimits';
-import { BatchCopyModal } from './BatchCopyModal';
-import { VisualComparator } from './VisualComparator';
-import { TextImageExportModal } from './TextImageExportModal';
-import { PosterGeneratorModal } from './PosterGeneratorModal';
-import { StyleMixerModal } from './StyleMixerModal';
-import { UnicodeFixerModal } from './UnicodeFixerModal';
-import { ShareModal } from './ShareModal';
 import { AlphabetReferenceTable } from './AlphabetReferenceTable';
 import { MagicNickGenerator } from './MagicNickGenerator';
+import { FontConverterModals } from './FontConverterModals';
 import { 
   Search, 
   Sparkles, 
@@ -85,7 +79,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
   const deferredInputText = useDeferredValue(inputText);
   const [activeCategory, setActiveCategory] = useState<TabCategory>('todas');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [visibleCount, setVisibleCount] = useState<number>(24);
+  const [visibleCount, setVisibleCount] = useState<number>(16);
   const [fontSize, setFontSize] = useState<'sm' | 'md' | 'lg' | 'xl'>('md');
   const [viewMode, setViewMode] = useState<'compact' | 'grid'>('grid');
   const [showStickyBar, setShowStickyBar] = useState<boolean>(false);
@@ -1307,70 +1301,29 @@ export const FontConverter: React.FC<FontConverterProps> = ({
         </div>
       )}
 
-      {/* Batch Copy Modal */}
-      <BatchCopyModal
-        isOpen={batchModalOpen}
-        onClose={() => setBatchModalOpen(false)}
+      {/* Modals via Lazy Loaded Container */}
+      <FontConverterModals
+        batchModalOpen={batchModalOpen}
+        onCloseBatchModal={() => setBatchModalOpen(false)}
+        comparatorOpen={comparatorOpen}
+        onCloseComparator={() => setComparatorOpen(false)}
+        mixerOpen={mixerOpen}
+        onCloseMixer={() => setMixerOpen(false)}
+        simulatorModalOpen={simulatorModalOpen}
+        onCloseSimulatorModal={() => setSimulatorModalOpen(false)}
+        fixerModalOpen={fixerModalOpen}
+        onCloseFixerModal={() => setFixerModalOpen(false)}
+        posterModalOpen={posterModalOpen}
+        onClosePosterModal={() => setPosterModalOpen(false)}
+        imageExportData={imageExportData}
+        onCloseImageExport={() => setImageExportData(null)}
+        shareModalData={shareModalData}
+        onCloseShareModal={() => setShareModalData(null)}
         inputText={inputText}
-        generators={filteredFonts}
+        filteredFonts={filteredFonts}
+        allFonts={FONT_GENERATORS}
+        onApplyText={(t) => handleTextChange(t)}
       />
-
-      {/* Visual Comparator Modal */}
-      <VisualComparator
-        isOpen={comparatorOpen}
-        onClose={() => setComparatorOpen(false)}
-        inputText={inputText}
-        generators={FONT_GENERATORS}
-      />
-
-      {/* Style Mixer Modal */}
-      <StyleMixerModal
-        isOpen={mixerOpen}
-        onClose={() => setMixerOpen(false)}
-        inputText={inputText}
-      />
-
-      {/* Live Profile Real-Time Simulator Modal */}
-      <LivePreviewSimulator
-        isOpen={simulatorModalOpen}
-        onClose={() => setSimulatorModalOpen(false)}
-        inputText={inputText}
-      />
-
-      {/* Unicode Compatibility & Broken Diamond Fixer Modal */}
-      <UnicodeFixerModal
-        isOpen={fixerModalOpen}
-        onClose={() => setFixerModalOpen(false)}
-        text={inputText}
-        onRepair={(fixedText) => handleTextChange(fixedText)}
-      />
-
-      {/* Social Card / Poster Generator Modal (PNG HD) */}
-      <PosterGeneratorModal
-        isOpen={posterModalOpen}
-        onClose={() => setPosterModalOpen(false)}
-        initialText={inputText || '𝓥𝓲𝓿𝓮, 𝓼𝓾𝓮ñ𝓪, 𝓿𝓲𝓪𝓳𝓪 ✨'}
-      />
-
-      {/* Text to Image PNG Export Modal */}
-      {imageExportData && (
-        <TextImageExportModal
-          isOpen={!!imageExportData}
-          onClose={() => setImageExportData(null)}
-          text={imageExportData.text}
-          fontName={imageExportData.fontName}
-        />
-      )}
-
-      {/* Direct Viral Share Modal */}
-      {shareModalData && (
-        <ShareModal
-          isOpen={!!shareModalData}
-          onClose={() => setShareModalData(null)}
-          text={shareModalData.text}
-          fontName={shareModalData.fontName}
-        />
-      )}
 
       {/* Floating Sticky Input Bar on Scroll */}
       {showStickyBar && selectedFontIds.length === 0 && (
