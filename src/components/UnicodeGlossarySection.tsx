@@ -102,53 +102,54 @@ export const UnicodeGlossarySection: React.FC = () => {
       </div>
 
       {isExpanded && (
-        <dl className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        <ul role="list" className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
           {glossaryTerms.map((item, idx) => (
-            <div
+            <li
               key={item.term}
-              className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/60 flex flex-col justify-between hover:border-rose-300 dark:hover:border-rose-700 transition-colors"
+              className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/60 flex flex-col justify-between hover:border-rose-300 dark:hover:border-rose-700 transition-colors list-none"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <dt className="text-base font-bold text-slate-900 dark:text-white">
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white">
                     {idx + 1}. {item.term}
-                  </dt>
-                  <span className="text-[11px] font-mono font-semibold px-2 py-0.5 rounded-md bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 shrink-0">
+                  </h3>
+                  <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-md bg-rose-100 dark:bg-rose-950 text-rose-900 dark:text-rose-200 shrink-0">
                     {item.unicodeRange}
                   </span>
                 </div>
 
-                <dd className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mt-2">
+                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed mt-2">
                   {item.definition}
-                </dd>
+                </p>
               </div>
 
               <div className="mt-4 pt-3 border-t border-slate-200/80 dark:border-slate-700/80 space-y-2">
                 <div className="flex items-center justify-between text-xs bg-white dark:bg-slate-800 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700">
                   <div className="truncate mr-2">
-                    <span className="text-[11px] text-slate-400 font-medium block">Ejemplo Convertido:</span>
-                    <span className="font-semibold text-slate-800 dark:text-slate-100">{item.exampleTransformed}</span>
+                    <span className="text-[11px] text-slate-600 dark:text-slate-400 font-semibold block">Ejemplo Convertido:</span>
+                    <span className="font-semibold text-slate-900 dark:text-slate-100">{item.exampleTransformed}</span>
                   </div>
                   <button
                     type="button"
                     onClick={() => handleCopy(item.exampleTransformed)}
-                    className="p-1.5 rounded-lg text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/60 transition-colors shrink-0"
+                    className="p-1.5 rounded-lg text-slate-600 hover:text-rose-700 dark:text-slate-300 dark:hover:text-rose-300 hover:bg-rose-50 dark:hover:bg-rose-950/60 transition-colors shrink-0"
                     title="Copiar ejemplo"
+                    aria-label={`Copiar ejemplo de ${item.term}`}
                   >
                     {copiedCode === item.exampleTransformed ? (
-                      <Check className="w-4 h-4 text-emerald-500" />
+                      <Check className="w-4 h-4 text-emerald-600" />
                     ) : (
                       <Copy className="w-4 h-4" />
                     )}
                   </button>
                 </div>
-                <div className="text-[11px] text-slate-500 dark:text-slate-400">
-                  <span className="font-semibold text-slate-700 dark:text-slate-300">Uso principal:</span> {item.useCase}
+                <div className="text-[11px] text-slate-600 dark:text-slate-300">
+                  <span className="font-bold text-slate-800 dark:text-slate-200">Uso principal:</span> {item.useCase}
                 </div>
               </div>
-            </div>
+            </li>
           ))}
-        </dl>
+        </ul>
       )}
     </section>
   );

@@ -27,7 +27,7 @@ export const PlatformLimits: React.FC<PlatformLimitsProps> = ({ text }) => {
   return (
     <div className="mt-3 pt-3 border-t border-slate-100/90">
       <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-        <div className="flex items-center gap-1.5 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">
+        <div className="flex items-center gap-1.5 text-[11px] font-extrabold text-slate-700 uppercase tracking-wider">
           <span>Límites de Redes y Compatibilidad:</span>
         </div>
         <div className="flex items-center gap-2">
@@ -66,7 +66,7 @@ export const PlatformLimits: React.FC<PlatformLimitsProps> = ({ text }) => {
             >
               <div className="flex items-center justify-between text-[11px] font-bold mb-1">
                 <span className="truncate">{platform.name}</span>
-                <span className={`font-mono text-[10px] ${isOver ? 'text-rose-600 font-extrabold' : ''}`}>
+                <span className={`font-mono text-[10px] ${isOver ? 'text-rose-700 font-extrabold' : 'text-slate-700 font-semibold'}`}>
                   {charCount}/{platform.max}
                 </span>
               </div>

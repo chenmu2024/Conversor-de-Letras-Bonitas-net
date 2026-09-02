@@ -669,26 +669,26 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
 
         <div className="space-y-3">
           <div className="flex items-start gap-3.5 bg-white p-4.5 rounded-2xl border border-slate-200/80 shadow-2xs">
-            <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+            <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
             <div>
-              <h4 className="text-xs font-bold text-slate-900">Conversor de Letras Bonitas Multiplataforma</h4>
-              <p className="text-[11px] text-slate-500 mt-0.5">El Conversor de Letras Bonitas funciona perfectamente en iPhone, iPad, Android, Windows, Mac y Linux.</p>
+              <h3 className="text-xs font-bold text-slate-900">Conversor de Letras Bonitas Multiplataforma</h3>
+              <p className="text-[11px] text-slate-600 mt-0.5">El Conversor de Letras Bonitas funciona perfectamente en iPhone, iPad, Android, Windows, Mac y Linux.</p>
             </div>
           </div>
 
           <div className="flex items-start gap-3.5 bg-white p-4.5 rounded-2xl border border-slate-200/80 shadow-2xs">
-            <ShieldCheck className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" />
+            <ShieldCheck className="w-5 h-5 text-indigo-600 shrink-0 mt-0.5" />
             <div>
-              <h4 className="text-xs font-bold text-slate-900">Conversor de Letras Bonitas Seguro y Privado</h4>
-              <p className="text-[11px] text-slate-500 mt-0.5">En el Conversor de Letras Bonitas la conversión se ejecuta 100% en tu navegador sin almacenar tus textos en servidores.</p>
+              <h3 className="text-xs font-bold text-slate-900">Conversor de Letras Bonitas Seguro y Privado</h3>
+              <p className="text-[11px] text-slate-600 mt-0.5">En el Conversor de Letras Bonitas la conversión se ejecuta 100% en tu navegador sin almacenar tus textos en servidores.</p>
             </div>
           </div>
 
           <div className="flex items-start gap-3.5 bg-white p-4.5 rounded-2xl border border-slate-200/80 shadow-2xs">
-            <Smartphone className="w-5 h-5 text-purple-500 shrink-0 mt-0.5" />
+            <Smartphone className="w-5 h-5 text-purple-600 shrink-0 mt-0.5" />
             <div>
-              <h4 className="text-xs font-bold text-slate-900">Conversor de Letras Bonitas para Redes Sociales</h4>
-              <p className="text-[11px] text-slate-500 mt-0.5">El Conversor de Letras Bonitas está optimizado para los límites exactos de Instagram, Free Fire y WhatsApp.</p>
+              <h3 className="text-xs font-bold text-slate-900">Conversor de Letras Bonitas para Redes Sociales</h3>
+              <p className="text-[11px] text-slate-600 mt-0.5">El Conversor de Letras Bonitas está optimizado para los límites exactos de Instagram, Free Fire y WhatsApp.</p>
             </div>
           </div>
         </div>

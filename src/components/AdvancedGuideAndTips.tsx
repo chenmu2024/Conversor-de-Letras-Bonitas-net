@@ -175,9 +175,9 @@ export const AdvancedGuideAndTips: React.FC = () => {
               <Globe className="w-4 h-4" />
               ¿Cómo Funciona la Tecnología?
             </span>
-            <h4 className="font-heading font-extrabold text-lg text-slate-900">
+            <h3 className="font-heading font-extrabold text-lg text-slate-900">
               ¿Por qué funcionan estas letras en cualquier app?
-            </h4>
+            </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
               No estás instalando archivos de fuentes (.ttf o .otf) en tu teléfono. El conversor sustituye los caracteres alfanuméricos ASCII estándar por <strong>símbolos Unicode universales</strong> (como los bloques matemáticos alfanuméricos).
             </p>
@@ -191,8 +191,8 @@ export const AdvancedGuideAndTips: React.FC = () => {
               <div className="w-7 h-7 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-black text-xs">
                 ✓
               </div>
-              <h5 className="text-xs font-extrabold text-slate-900">100% Compatible con Redes</h5>
-              <p className="text-[11px] text-slate-500 leading-relaxed">
+              <div className="text-xs font-extrabold text-slate-900">100% Compatible con Redes</div>
+              <p className="text-[11px] text-slate-600 leading-relaxed">
                 Pega sin errores en Instagram Bio, Historias, TikTok, WhatsApp, Facebook, Discord, Twitter / X y Telegram.
               </p>
             </div>
@@ -201,8 +201,8 @@ export const AdvancedGuideAndTips: React.FC = () => {
               <div className="w-7 h-7 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-black text-xs">
                 ⚡
               </div>
-              <h5 className="text-xs font-extrabold text-slate-900">Sin Registro ni Descargas</h5>
-              <p className="text-[11px] text-slate-500 leading-relaxed">
+              <div className="text-xs font-extrabold text-slate-900">Sin Registro ni Descargas</div>
+              <p className="text-[11px] text-slate-600 leading-relaxed">
                 Herramienta instantánea 100% gratuita para navegador móvil y de escritorio. Sin publicidad intrusiva.
               </p>
             </div>
@@ -211,8 +211,8 @@ export const AdvancedGuideAndTips: React.FC = () => {
               <div className="w-7 h-7 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-black text-xs">
                 🛡️
               </div>
-              <h5 className="text-xs font-extrabold text-slate-900">Seguro para Cuentas & Juegos</h5>
-              <p className="text-[11px] text-slate-500 leading-relaxed">
+              <div className="text-xs font-extrabold text-slate-900">Seguro para Cuentas & Juegos</div>
+              <p className="text-[11px] text-slate-600 leading-relaxed">
                 Totalmente permitido en Garena Free Fire, Roblox, Brawl Stars y PUBG. No genera riesgo de baneo ni sanciones.
               </p>
             </div>
@@ -221,8 +221,8 @@ export const AdvancedGuideAndTips: React.FC = () => {
               <div className="w-7 h-7 rounded-xl bg-pink-100 text-pink-700 flex items-center justify-center font-black text-xs">
                 ♥
               </div>
-              <h5 className="text-xs font-extrabold text-slate-900">Decoraciones & Símbolos VIP</h5>
-              <p className="text-[11px] text-slate-500 leading-relaxed">
+              <div className="text-xs font-extrabold text-slate-900">Decoraciones & Símbolos VIP</div>
+              <p className="text-[11px] text-slate-600 leading-relaxed">
                 Incluye alas ꧁ ꧂, coronas 亗, moños 🎀, espadas ⚔️ y el espacio invisible [ㅤ] listo para usar.
               </p>
             </div>

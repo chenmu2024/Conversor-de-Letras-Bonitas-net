@@ -36,9 +36,9 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
 
           {/* Col 2: Redes Sociales Silos */}
           <div>
-            <h4 className="text-xs font-black text-slate-200 uppercase tracking-widest mb-4">
+            <h3 className="text-xs font-black text-slate-200 uppercase tracking-widest mb-4">
               Por Red Social
-            </h4>
+            </h3>
             <ul className="space-y-2.5 text-xs font-medium">
               <li>
                 <button
@@ -85,9 +85,9 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
 
           {/* Col 3: Estilos de Letras */}
           <div>
-            <h4 className="text-xs font-black text-slate-200 uppercase tracking-widest mb-4">
+            <h3 className="text-xs font-black text-slate-200 uppercase tracking-widest mb-4">
               Estilos de Tipografías
-            </h4>
+            </h3>
             <ul className="space-y-2.5 text-xs font-medium">
               <li>
                 <button
@@ -206,9 +206,9 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
 
           {/* Col 4: Recursos y E-E-A-T */}
           <div>
-            <h4 className="text-xs font-black text-slate-200 uppercase tracking-widest mb-4">
+            <h3 className="text-xs font-black text-slate-200 uppercase tracking-widest mb-4">
               Recursos & E-E-A-T
-            </h4>
+            </h3>
             <ul className="space-y-2.5 text-xs font-medium">
               <li>
                 <button

@@ -30,7 +30,7 @@ export const CookiePolicyPage: React.FC = () => {
         <div className="flex items-center gap-3">
           <Sliders className="w-6 h-6 text-indigo-600 shrink-0" />
           <div>
-            <h3 className="font-bold text-sm text-slate-900">Panel de Control y Preferencias de Cookies</h3>
+            <div className="font-bold text-sm text-slate-900">Panel de Control y Preferencias de Cookies</div>
             <p className="text-xs text-slate-600">Puedes activar o desactivar las cookies analíticas y publicitarias cuando lo desees.</p>
           </div>
         </div>

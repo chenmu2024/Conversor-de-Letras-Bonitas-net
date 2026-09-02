@@ -362,9 +362,9 @@ export const FacebookStudio: React.FC<FacebookStudioProps> = ({
                     </div>
                     <div>
                       <div className="flex items-center gap-1.5">
-                        <h4 className="font-extrabold text-xs text-slate-900 leading-none">
+                        <div className="font-extrabold text-xs text-slate-900 leading-none">
                           {authorName}
-                        </h4>
+                        </div>
                         {postContext === 'page' && (
                           <span title="Página Verificada">
                             <BadgeCheck className="w-3.5 h-3.5 text-blue-600 inline" />
@@ -560,9 +560,9 @@ export const FacebookStudio: React.FC<FacebookStudioProps> = ({
 
             {/* Bullets and Symbols for Bullet Lists */}
             <div className="border-t border-slate-200 pt-5">
-              <h4 className="font-extrabold text-sm text-slate-900 mb-2">
+              <h3 className="font-extrabold text-sm text-slate-900 mb-2">
                 Viñetas y Símbolos de Énfasis para Listas de Facebook
-              </h4>
+              </h3>
               <div className="grid grid-cols-4 sm:grid-cols-8 gap-2">
                 {['👉', '✔️', '✨', '🔥', '📍', '📦', '🏷️', '💰', '📌', '💡', '🌟', '✦', '★', '◆', '❶', '❷'].map((symbol, i) => (
                   <button
