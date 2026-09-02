@@ -17,19 +17,19 @@ export const StickyMobileInputBar: React.FC<StickyMobileInputBarProps> = ({
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    let ticking = false;
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setIsVisible(window.scrollY > 400);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
+    if (typeof window === 'undefined') return;
+    const sentinel = document.getElementById('scroll-sentinel') || document.getElementById('main-font-input');
+    if (!sentinel) return;
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(!entry.isIntersecting && entry.boundingClientRect.top < 0);
+      },
+      { threshold: 0 }
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
   }, []);
 
   if (!isVisible) return null;

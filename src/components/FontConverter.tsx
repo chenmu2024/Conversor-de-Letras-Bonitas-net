@@ -102,20 +102,21 @@ export const FontConverter: React.FC<FontConverterProps> = ({
     return /[áéíóúÁÉÍÓÚñÑüÜ¿¡]/.test(inputText);
   }, [inputText]);
 
-  // Scroll listener for sticky floating input bar with requestAnimationFrame
+  // Passive IntersectionObserver for sticky floating input bar (eliminates forced reflow)
   useEffect(() => {
-    let ticking = false;
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setShowStickyBar(window.scrollY > 380);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    if (typeof window === 'undefined') return;
+    const sentinel = document.getElementById('scroll-sentinel') || document.getElementById('main-font-input');
+    if (!sentinel) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowStickyBar(!entry.isIntersecting && entry.boundingClientRect.top < 0);
+      },
+      { threshold: 0 }
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
   }, []);
 
   // Sync initialText if parent changes it

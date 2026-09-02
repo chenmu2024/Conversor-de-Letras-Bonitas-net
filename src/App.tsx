@@ -310,6 +310,9 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
     <div className={`min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white relative transition-colors duration-200 ${
       isDarkMode ? 'dark bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'
     }`}>
+      {/* Non-blocking IntersectionObserver Sentinel for scroll detection */}
+      <div id="scroll-sentinel" className="absolute top-[380px] left-0 w-full h-1 pointer-events-none opacity-0" aria-hidden="true" />
+
       {/* 1. Header & Navigation */}
       <Header
         currentRoute={currentRoute}

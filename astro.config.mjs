@@ -6,17 +6,21 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://conversordeletrasbonitas.net',
   integrations: [react()],
+  build: {
+    inlineStylesheets: 'always',
+  },
   vite: {
     plugins: [tailwindcss()],
     build: {
+      cssMinify: true,
       rollupOptions: {
         output: {
           manualChunks(id) {
             if (id.includes('node_modules/lucide-react')) {
-              return 'lucide-icons';
+              return 'vendor-ui';
             }
             if (id.includes('node_modules/react') || id.includes('node_modules/react-dom') || id.includes('node_modules/scheduler')) {
-              return 'react-vendor';
+              return 'vendor-ui';
             }
           },
         },
