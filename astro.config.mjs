@@ -13,11 +13,18 @@ export default defineConfig({
     plugins: [tailwindcss()],
     build: {
       cssMinify: true,
+      modulePreload: {
+        polyfill: false,
+        resolveDependencies: () => [],
+      },
       rollupOptions: {
         output: {
           manualChunks(id) {
             if (id.includes('node_modules/react') || id.includes('node_modules/react-dom') || id.includes('node_modules/scheduler')) {
               return 'react-core';
+            }
+            if (id.includes('node_modules/lucide-react')) {
+              return 'lucide-icons';
             }
           },
         },

@@ -13,9 +13,10 @@ import { QuickDecoratorPicker } from './QuickDecoratorPicker';
 import { FavoritesSection } from './FavoritesSection';
 import { Eye, CheckSquare, Square, Download, AlertTriangle, RefreshCw, Volume2 } from 'lucide-react';
 
+import { PlatformLimits } from './PlatformLimits';
+
 // Defer non-critical below-the-fold components and on-demand modal bundles
 const FaqSection = lazy(() => import('./FaqSection').then(m => ({ default: m.FaqSection })));
-const PlatformLimits = lazy(() => import('./PlatformLimits').then(m => ({ default: m.PlatformLimits })));
 const AlphabetReferenceTable = lazy(() => import('./AlphabetReferenceTable').then(m => ({ default: m.AlphabetReferenceTable })));
 const MagicNickGenerator = lazy(() => import('./MagicNickGenerator').then(m => ({ default: m.MagicNickGenerator })));
 const FontConverterModals = lazy(() => import('./FontConverterModals').then(m => ({ default: m.FontConverterModals })));
@@ -103,21 +104,27 @@ export const FontConverter: React.FC<FontConverterProps> = ({
     return /[áéíóúÁÉÍÓÚñÑüÜ¿¡]/.test(inputText);
   }, [inputText]);
 
-  // Passive IntersectionObserver for sticky floating input bar (eliminates forced reflow)
+  // Passive IntersectionObserver for sticky floating input bar (zero forced reflow)
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const sentinel = document.getElementById('scroll-sentinel') || document.getElementById('main-font-input');
     if (!sentinel) return;
 
+    let rafId: number;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setShowStickyBar(!entry.isIntersecting && entry.boundingClientRect.top < 0);
+        rafId = requestAnimationFrame(() => {
+          setShowStickyBar(!entry.isIntersecting);
+        });
       },
       { threshold: 0 }
     );
 
     observer.observe(sentinel);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   // Sync initialText if parent changes it
@@ -914,18 +921,8 @@ export const FontConverter: React.FC<FontConverterProps> = ({
         </div>
 
         {/* Platform Character Limits Bar */}
-        <Suspense fallback={null}>
-          <PlatformLimits text={inputText} />
-        </Suspense>
+        <PlatformLimits text={inputText} />
       </section>
-
-      {/* 2.5 1-CLIC MAGIC NICK GENERATOR & VIRAL WRAPPERS */}
-      <Suspense fallback={null}>
-        <MagicNickGenerator
-          currentText={inputText}
-          onApplyText={handleTextChange}
-        />
-      </Suspense>
 
       {/* 3. FILTER TABS & SEARCH BAR & CONTROLS STRIP */}
       <section className="mb-6 space-y-3.5">
@@ -1292,6 +1289,14 @@ export const FontConverter: React.FC<FontConverterProps> = ({
           </div>
         )}
       </section>
+
+      {/* 2.5 1-CLIC MAGIC NICK GENERATOR & VIRAL WRAPPERS */}
+      <Suspense fallback={<div className="min-h-[160px] my-6" />}>
+        <MagicNickGenerator
+          currentText={inputText}
+          onApplyText={handleTextChange}
+        />
+      </Suspense>
 
       {/* 7. ALPHABET REFERENCE UNICODE TABLE (A-Z) */}
       <Suspense fallback={<div className="h-16" />}>

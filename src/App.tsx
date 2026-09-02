@@ -6,7 +6,6 @@ import { Header } from './components/Header';
 import { FontConverter } from './components/FontConverter';
 import { SubStudioRouter } from './components/SubStudioRouter';
 import { Breadcrumbs } from './components/Breadcrumbs';
-import { StickyMobileInputBar } from './components/StickyMobileInputBar';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { ToastNotification } from './components/ToastNotification';
 import { Footer } from './components/Footer';
@@ -51,14 +50,8 @@ const DeferredAuxiliarySections: React.FC<DeferredAuxiliaryProps> = (props) => {
       observer.observe(containerRef.current);
     }
 
-    // Safety timeout after initial render idle
-    const timer = setTimeout(() => {
-      setShouldLoad(true);
-    }, 3500);
-
     return () => {
       observer.disconnect();
-      clearTimeout(timer);
     };
   }, []);
 
@@ -88,9 +81,24 @@ const DeferredInteractiveTools: React.FC<{
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setReady(true), 2500);
-    return () => clearTimeout(timer);
-  }, []);
+    if (props.isFavoritesOpen || props.isPwaModalOpen) {
+      setReady(true);
+      return;
+    }
+    const trigger = () => {
+      setReady(true);
+      cleanup();
+    };
+    const cleanup = () => {
+      window.removeEventListener('pointerdown', trigger);
+      window.removeEventListener('keydown', trigger);
+      window.removeEventListener('scroll', trigger);
+    };
+    window.addEventListener('pointerdown', trigger, { passive: true, once: true });
+    window.addEventListener('keydown', trigger, { passive: true, once: true });
+    window.addEventListener('scroll', trigger, { passive: true, once: true });
+    return cleanup;
+  }, [props.isFavoritesOpen, props.isPwaModalOpen]);
 
   if (!ready && !props.isFavoritesOpen && !props.isPwaModalOpen) {
     return null;
@@ -424,13 +432,6 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
 
       {/* GDPR / CCPA Cookie Consent Banner */}
       <CookieConsentBanner onRouteChange={handleRouteChange} />
-
-      {/* 8. Sticky Mobile Input Bar for Fast Mid-Page Input & Copy */}
-      <StickyMobileInputBar
-        currentText={globalText}
-        onTextChange={(t) => setGlobalText(t)}
-        onScrollToTop={scrollToTop}
-      />
 
       {/* 7. Footer */}
       <Footer onRouteChange={handleRouteChange} />
