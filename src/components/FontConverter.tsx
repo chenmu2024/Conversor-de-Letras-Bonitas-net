@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useDeferredValue } from 'react';
+import React, { useState, useMemo, useEffect, useDeferredValue, Suspense, lazy } from 'react';
 import { PageRoute, TabCategory, FontGenerator, FavoriteItem } from '../types';
 import { ROUTE_CONFIGS } from '../data/routeConfigs';
 import { FONT_GENERATORS } from '../utils/unicodeConverters';
@@ -9,15 +9,16 @@ import { QuickPresets } from './QuickPresets';
 import { SymbolQuickRibbon } from './SymbolQuickRibbon';
 import { ScenarioShortcutGrid } from './ScenarioShortcutGrid';
 import { TrendingFontsBanner } from './TrendingFontsBanner';
-import { FaqSection } from './FaqSection';
-import { LivePreviewSimulator } from './LivePreviewSimulator';
 import { QuickDecoratorPicker } from './QuickDecoratorPicker';
 import { FavoritesSection } from './FavoritesSection';
 import { Eye, CheckSquare, Square, Download, AlertTriangle, RefreshCw, Volume2 } from 'lucide-react';
-import { PlatformLimits } from './PlatformLimits';
-import { AlphabetReferenceTable } from './AlphabetReferenceTable';
-import { MagicNickGenerator } from './MagicNickGenerator';
-import { FontConverterModals } from './FontConverterModals';
+
+// Defer non-critical below-the-fold components and on-demand modal bundles
+const FaqSection = lazy(() => import('./FaqSection').then(m => ({ default: m.FaqSection })));
+const PlatformLimits = lazy(() => import('./PlatformLimits').then(m => ({ default: m.PlatformLimits })));
+const AlphabetReferenceTable = lazy(() => import('./AlphabetReferenceTable').then(m => ({ default: m.AlphabetReferenceTable })));
+const MagicNickGenerator = lazy(() => import('./MagicNickGenerator').then(m => ({ default: m.MagicNickGenerator })));
+const FontConverterModals = lazy(() => import('./FontConverterModals').then(m => ({ default: m.FontConverterModals })));
 import { 
   Search, 
   Sparkles, 
@@ -913,14 +914,18 @@ export const FontConverter: React.FC<FontConverterProps> = ({
         </div>
 
         {/* Platform Character Limits Bar */}
-        <PlatformLimits text={inputText} />
+        <Suspense fallback={null}>
+          <PlatformLimits text={inputText} />
+        </Suspense>
       </section>
 
       {/* 2.5 1-CLIC MAGIC NICK GENERATOR & VIRAL WRAPPERS */}
-      <MagicNickGenerator
-        currentText={inputText}
-        onApplyText={handleTextChange}
-      />
+      <Suspense fallback={null}>
+        <MagicNickGenerator
+          currentText={inputText}
+          onApplyText={handleTextChange}
+        />
+      </Suspense>
 
       {/* 3. FILTER TABS & SEARCH BAR & CONTROLS STRIP */}
       <section className="mb-6 space-y-3.5">
@@ -1289,10 +1294,14 @@ export const FontConverter: React.FC<FontConverterProps> = ({
       </section>
 
       {/* 7. ALPHABET REFERENCE UNICODE TABLE (A-Z) */}
-      <AlphabetReferenceTable />
+      <Suspense fallback={<div className="h-16" />}>
+        <AlphabetReferenceTable />
+      </Suspense>
 
       {/* 8. FAQ & SEO GUIDE SECTION */}
-      <FaqSection currentRoute={currentRoute} />
+      <Suspense fallback={<div className="h-16" />}>
+        <FaqSection currentRoute={currentRoute} />
+      </Suspense>
 
       {/* Floating Multi-Select Batch Action Drawer */}
       {selectedFontIds.length > 0 && (
@@ -1356,29 +1365,33 @@ export const FontConverter: React.FC<FontConverterProps> = ({
         </div>
       )}
 
-      {/* Modals via Lazy Loaded Container */}
-      <FontConverterModals
-        batchModalOpen={batchModalOpen}
-        onCloseBatchModal={() => setBatchModalOpen(false)}
-        comparatorOpen={comparatorOpen}
-        onCloseComparator={() => setComparatorOpen(false)}
-        mixerOpen={mixerOpen}
-        onCloseMixer={() => setMixerOpen(false)}
-        simulatorModalOpen={simulatorModalOpen}
-        onCloseSimulatorModal={() => setSimulatorModalOpen(false)}
-        fixerModalOpen={fixerModalOpen}
-        onCloseFixerModal={() => setFixerModalOpen(false)}
-        posterModalOpen={posterModalOpen}
-        onClosePosterModal={() => setPosterModalOpen(false)}
-        imageExportData={imageExportData}
-        onCloseImageExport={() => setImageExportData(null)}
-        shareModalData={shareModalData}
-        onCloseShareModal={() => setShareModalData(null)}
-        inputText={inputText}
-        filteredFonts={filteredFonts}
-        allFonts={FONT_GENERATORS}
-        onApplyText={(t) => handleTextChange(t)}
-      />
+      {/* Modals via Lazy Loaded Container (only rendered when needed) */}
+      {(batchModalOpen || comparatorOpen || mixerOpen || simulatorModalOpen || fixerModalOpen || posterModalOpen || !!imageExportData || !!shareModalData) && (
+        <Suspense fallback={null}>
+          <FontConverterModals
+            batchModalOpen={batchModalOpen}
+            onCloseBatchModal={() => setBatchModalOpen(false)}
+            comparatorOpen={comparatorOpen}
+            onCloseComparator={() => setComparatorOpen(false)}
+            mixerOpen={mixerOpen}
+            onCloseMixer={() => setMixerOpen(false)}
+            simulatorModalOpen={simulatorModalOpen}
+            onCloseSimulatorModal={() => setSimulatorModalOpen(false)}
+            fixerModalOpen={fixerModalOpen}
+            onCloseFixerModal={() => setFixerModalOpen(false)}
+            posterModalOpen={posterModalOpen}
+            onClosePosterModal={() => setPosterModalOpen(false)}
+            imageExportData={imageExportData}
+            onCloseImageExport={() => setImageExportData(null)}
+            shareModalData={shareModalData}
+            onCloseShareModal={() => setShareModalData(null)}
+            inputText={inputText}
+            filteredFonts={filteredFonts}
+            allFonts={FONT_GENERATORS}
+            onApplyText={(t) => handleTextChange(t)}
+          />
+        </Suspense>
+      )}
 
       {/* Floating Sticky Input Bar on Scroll */}
       {showStickyBar && selectedFontIds.length === 0 && (
