@@ -244,6 +244,24 @@ export const BioCharacterCounter: React.FC<BioCharacterCounterProps> = ({
           })}
         </div>
       </div>
+
+      {/* Banner to stylize bio text */}
+      <div className="bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 rounded-3xl border border-indigo-200/80 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <h3 className="font-bold text-slate-900 text-sm">¿Quieres estilizar tu texto para tu biografía?</h3>
+          <p className="text-xs text-slate-600 mt-0.5">Aplica más de 80 fuentes Unicode bonitas, símbolos y espaciado invisible con 1 clic.</p>
+        </div>
+        <button
+          type="button"
+          onClick={() => {
+            if (onApplyText && text) onApplyText(text);
+            window.location.hash = '#/instagram';
+          }}
+          className="shrink-0 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-xs active:scale-95 transition-all"
+        >
+          Ver Fuentes para Biografía →
+        </button>
+      </div>
     </div>
   );
 };

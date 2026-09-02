@@ -113,6 +113,7 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Espacio Invisible Quick Tool Button */}
             <button
               id="header-invisible-space-btn"
+              aria-label="Copiar espacio invisible para Free Fire, WhatsApp e Instagram"
               onClick={handleCopyInvisibleSpace}
               title="Copiar espacio invisible para Free Fire, WhatsApp e Instagram"
               className={`group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all shadow-xs active:scale-95 ${
@@ -140,6 +141,7 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 type="button"
                 id="header-install-pwa-btn"
+                aria-label="Instalar como App en tu teléfono o PC"
                 onClick={onOpenPwaInstall}
                 className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold text-xs bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200/80 transition-all active:scale-95 shadow-2xs"
                 title="Instalar como App en tu teléfono o PC"
@@ -154,6 +156,7 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 type="button"
                 id="header-theme-toggle-btn"
+                aria-label={isDarkMode ? 'Cambiar a Modo Claro' : 'Cambiar a Modo Oscuro'}
                 onClick={onToggleDarkMode}
                 className="p-2 rounded-xl text-slate-700 hover:text-indigo-600 bg-slate-100/80 hover:bg-indigo-50 border border-slate-200/80 hover:border-indigo-200 transition-all active:scale-95"
                 title={isDarkMode ? 'Cambiar a Modo Claro' : 'Cambiar a Modo Oscuro'}
@@ -169,6 +172,7 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Favorites Button with Counter */}
             <button
               id="header-favorites-btn"
+              aria-label="Ver fuentes favoritas guardadas"
               onClick={onOpenFavorites}
               className="relative p-2 rounded-xl text-slate-700 hover:text-amber-600 bg-slate-100/80 hover:bg-amber-50 border border-slate-200/80 hover:border-amber-200 transition-all active:scale-95"
               title="Ver fuentes favoritas guardadas"

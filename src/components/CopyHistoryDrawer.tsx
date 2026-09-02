@@ -113,6 +113,7 @@ export const CopyHistoryDrawer: React.FC = () => {
       <button
         id="btn-open-copy-history"
         type="button"
+        aria-label="Abrir historial de fuentes copiadas"
         onClick={() => {
           loadHistory();
           setIsOpen(true);

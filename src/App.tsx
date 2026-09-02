@@ -306,6 +306,16 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const isStandalonePage = [
+    'sobre-nosotros',
+    'politica-de-privacidad',
+    'politica-de-cookies',
+    'terminos-y-condiciones',
+    'contacto',
+    'contador-bio',
+    '404',
+  ].includes(currentRoute);
+
   return (
     <div className={`min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white relative transition-colors duration-200 ${
       isDarkMode ? 'dark bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'
@@ -329,35 +339,45 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
         {/* Visual Breadcrumb Navigation for Google Crawlers & Users */}
         <Breadcrumbs currentRoute={currentRoute} onRouteChange={handleRouteChange} />
 
-        {/* Dedicated Views for Tools, Studios & Legal Pages (Lazy Loaded) */}
-        <SubStudioRouter
-          currentRoute={currentRoute}
-          globalText={globalText}
-          onApplyText={(t) => setGlobalText(t)}
-          onRouteChange={handleRouteChange}
-        />
-
-        {/* Core Instant Unicode Font Converter (Unified Clean Engine for Home & All Subpages) */}
-        {currentRoute !== '404' && (
-          <FontConverter
+        {isStandalonePage ? (
+          /* Standalone Information & Legal Pages (Own H1, Clean Single-View Layout) */
+          <SubStudioRouter
             currentRoute={currentRoute}
-            favorites={favorites}
-            onToggleFavorite={handleToggleFavorite}
-            onPreview={handleOpenPreview}
-            initialText={globalText}
-            onTextChange={(t) => setGlobalText(t)}
+            globalText={globalText}
+            onApplyText={(t) => setGlobalText(t)}
+            onRouteChange={handleRouteChange}
           />
-        )}
+        ) : (
+          <>
+            {/* 1. Primary Unicode Font Converter (Top H1 Title, Input Workbench & Real-time Fonts) */}
+            <FontConverter
+              currentRoute={currentRoute}
+              favorites={favorites}
+              onToggleFavorite={handleToggleFavorite}
+              onPreview={handleOpenPreview}
+              initialText={globalText}
+              onTextChange={(t) => setGlobalText(t)}
+            />
 
-        {/* Auxiliary Content, Alphabet Tables, Guides, Infographics & SEO (Deferred to eliminate LCP delay) */}
-        <DeferredAuxiliarySections
-          currentRoute={currentRoute}
-          globalText={globalText}
-          previewText={previewText}
-          previewFontName={previewFontName}
-          onApplyText={(t) => setGlobalText(t)}
-          onRouteChange={handleRouteChange}
-        />
+            {/* 2. Dedicated Interactive Studio / Platform Toolkit (Sub-studios for Instagram, Free Fire, etc.) */}
+            <SubStudioRouter
+              currentRoute={currentRoute}
+              globalText={globalText}
+              onApplyText={(t) => setGlobalText(t)}
+              onRouteChange={handleRouteChange}
+            />
+
+            {/* 3. Auxiliary Content, Alphabet Tables, Guides, Infographics & SEO (Deferred to eliminate LCP delay) */}
+            <DeferredAuxiliarySections
+              currentRoute={currentRoute}
+              globalText={globalText}
+              previewText={previewText}
+              previewFontName={previewFontName}
+              onApplyText={(t) => setGlobalText(t)}
+              onRouteChange={handleRouteChange}
+            />
+          </>
+        )}
       </main>
 
       {/* 3. Floating Actions (Back to Top & Sticky Favorites Quick Button) */}

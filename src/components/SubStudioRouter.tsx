@@ -41,162 +41,161 @@ export const SubStudioRouter: React.FC<SubStudioRouterProps> = ({
   onApplyText,
   onRouteChange,
 }) => {
+  const isInteractiveStudio = [
+    'instagram',
+    'free-fire',
+    'whatsapp',
+    'tiktok',
+    'facebook',
+    'letras-chidas',
+    'letras-elegantes',
+    'letras-raras',
+    'letras-tatuajes',
+    'nicks-free-fire',
+    'letras-chinas',
+    'espacio-invisible',
+    'nombres-parejas',
+    'cursiva',
+    'goticas',
+    'invertidas',
+    'circulos',
+    'glitch',
+  ].includes(currentRoute);
+
+  const renderContent = () => {
+    return (
+      <>
+        {currentRoute === 'contador-bio' && (
+          <div className="mb-8">
+            <BioCharacterCounter onApplyText={onApplyText} />
+          </div>
+        )}
+
+        {currentRoute === 'sobre-nosotros' && (
+          <div className="mb-8">
+            <AboutUsPage />
+          </div>
+        )}
+
+        {currentRoute === 'politica-de-privacidad' && (
+          <div className="mb-8">
+            <PrivacyPolicyPage />
+          </div>
+        )}
+
+        {currentRoute === 'politica-de-cookies' && (
+          <div className="mb-8">
+            <CookiePolicyPage />
+          </div>
+        )}
+
+        {currentRoute === 'terminos-y-condiciones' && (
+          <div className="mb-8">
+            <TermsAndConditionsPage />
+          </div>
+        )}
+
+        {currentRoute === 'contacto' && (
+          <div className="mb-8">
+            <ContactPage />
+          </div>
+        )}
+
+        {currentRoute === '404' && (
+          <div className="mb-8">
+            <NotFoundPage
+              onRouteChange={onRouteChange}
+              onSearchRedirect={(q) => {
+                onApplyText(q);
+                onRouteChange('inicio');
+              }}
+            />
+          </div>
+        )}
+
+        {currentRoute === 'instagram' && (
+          <InstagramTools onApplyText={onApplyText} />
+        )}
+
+        {currentRoute === 'free-fire' && (
+          <FreeFireStudio onApplyText={onApplyText} />
+        )}
+
+        {currentRoute === 'whatsapp' && (
+          <WhatsAppStudio onApplyText={onApplyText} />
+        )}
+
+        {currentRoute === 'tiktok' && (
+          <TikTokStudio onApplyText={onApplyText} />
+        )}
+
+        {currentRoute === 'facebook' && (
+          <FacebookStudio onApplyText={onApplyText} initialText={globalText} />
+        )}
+
+        {currentRoute === 'letras-chidas' && (
+          <LetrasChidasStudio onApplyText={onApplyText} initialText={globalText} />
+        )}
+
+        {currentRoute === 'letras-elegantes' && (
+          <LetrasElegantesStudio onApplyText={onApplyText} initialText={globalText} />
+        )}
+
+        {currentRoute === 'letras-raras' && (
+          <LetrasRarasStudio onApplyText={onApplyText} initialText={globalText} />
+        )}
+
+        {currentRoute === 'letras-tatuajes' && (
+          <LetrasTatuajesStudio onApplyText={onApplyText} initialText={globalText} />
+        )}
+
+        {currentRoute === 'nicks-free-fire' && (
+          <NicksFreeFireStudio onApplyText={onApplyText} initialText={globalText} />
+        )}
+
+        {currentRoute === 'letras-chinas' && (
+          <LetrasChinasStudio onApplyText={onApplyText} initialText={globalText} />
+        )}
+
+        {currentRoute === 'espacio-invisible' && (
+          <InvisibleSpaceStudio onApplyText={onApplyText} initialText={globalText} />
+        )}
+
+        {currentRoute === 'nombres-parejas' && (
+          <CoupleNicksStudio onApplyText={onApplyText} initialText={globalText} />
+        )}
+
+        {currentRoute === 'cursiva' && (
+          <CursiveStudio onApplyText={onApplyText} initialText={globalText} />
+        )}
+
+        {currentRoute === 'goticas' && (
+          <GothicStudio onApplyText={onApplyText} initialText={globalText} />
+        )}
+
+        {currentRoute === 'invertidas' && (
+          <InvertedStudio onApplyText={onApplyText} initialText={globalText} />
+        )}
+
+        {currentRoute === 'circulos' && (
+          <CirclesStudio onApplyText={onApplyText} initialText={globalText} />
+        )}
+
+        {currentRoute === 'glitch' && (
+          <GlitchStudio onApplyText={onApplyText} initialText={globalText} />
+        )}
+      </>
+    );
+  };
+
   return (
     <Suspense fallback={<div className="h-16" />}>
-      {currentRoute === 'contador-bio' && (
-        <div className="mb-8">
-          <BioCharacterCounter onApplyText={onApplyText} />
+      {isInteractiveStudio ? (
+        <div id="sub-studio-section" className="mb-10 scroll-mt-20">
+          {renderContent()}
         </div>
-      )}
-
-      {currentRoute === 'sobre-nosotros' && (
-        <div className="mb-8">
-          <AboutUsPage />
-        </div>
-      )}
-
-      {currentRoute === 'politica-de-privacidad' && (
-        <div className="mb-8">
-          <PrivacyPolicyPage />
-        </div>
-      )}
-
-      {currentRoute === 'politica-de-cookies' && (
-        <div className="mb-8">
-          <CookiePolicyPage />
-        </div>
-      )}
-
-      {currentRoute === 'terminos-y-condiciones' && (
-        <div className="mb-8">
-          <TermsAndConditionsPage />
-        </div>
-      )}
-
-      {currentRoute === 'contacto' && (
-        <div className="mb-8">
-          <ContactPage />
-        </div>
-      )}
-
-      {currentRoute === '404' && (
-        <div className="mb-8">
-          <NotFoundPage
-            onRouteChange={onRouteChange}
-            onSearchRedirect={(q) => {
-              onApplyText(q);
-              onRouteChange('inicio');
-            }}
-          />
-        </div>
-      )}
-
-      {currentRoute === 'instagram' && (
-        <div className="mb-8">
-          <InstagramTools onApplyText={onApplyText} />
-        </div>
-      )}
-
-      {currentRoute === 'free-fire' && (
-        <div className="mb-8">
-          <FreeFireStudio onApplyText={onApplyText} />
-        </div>
-      )}
-
-      {currentRoute === 'whatsapp' && (
-        <div className="mb-8">
-          <WhatsAppStudio onApplyText={onApplyText} />
-        </div>
-      )}
-
-      {currentRoute === 'tiktok' && (
-        <div className="mb-8">
-          <TikTokStudio onApplyText={onApplyText} />
-        </div>
-      )}
-
-      {currentRoute === 'facebook' && (
-        <div className="mb-8">
-          <FacebookStudio onApplyText={onApplyText} initialText={globalText} />
-        </div>
-      )}
-
-      {currentRoute === 'letras-chidas' && (
-        <div className="mb-8">
-          <LetrasChidasStudio onApplyText={onApplyText} initialText={globalText} />
-        </div>
-      )}
-
-      {currentRoute === 'letras-elegantes' && (
-        <div className="mb-8">
-          <LetrasElegantesStudio onApplyText={onApplyText} initialText={globalText} />
-        </div>
-      )}
-
-      {currentRoute === 'letras-raras' && (
-        <div className="mb-8">
-          <LetrasRarasStudio onApplyText={onApplyText} initialText={globalText} />
-        </div>
-      )}
-
-      {currentRoute === 'letras-tatuajes' && (
-        <div className="mb-8">
-          <LetrasTatuajesStudio onApplyText={onApplyText} initialText={globalText} />
-        </div>
-      )}
-
-      {currentRoute === 'nicks-free-fire' && (
-        <div className="mb-8">
-          <NicksFreeFireStudio onApplyText={onApplyText} initialText={globalText} />
-        </div>
-      )}
-
-      {currentRoute === 'letras-chinas' && (
-        <div className="mb-8">
-          <LetrasChinasStudio onApplyText={onApplyText} initialText={globalText} />
-        </div>
-      )}
-
-      {currentRoute === 'espacio-invisible' && (
-        <div className="mb-8">
-          <InvisibleSpaceStudio onApplyText={onApplyText} initialText={globalText} />
-        </div>
-      )}
-
-      {currentRoute === 'nombres-parejas' && (
-        <div className="mb-8">
-          <CoupleNicksStudio onApplyText={onApplyText} initialText={globalText} />
-        </div>
-      )}
-
-      {currentRoute === 'cursiva' && (
-        <div className="mb-8">
-          <CursiveStudio onApplyText={onApplyText} initialText={globalText} />
-        </div>
-      )}
-
-      {currentRoute === 'goticas' && (
-        <div className="mb-8">
-          <GothicStudio onApplyText={onApplyText} initialText={globalText} />
-        </div>
-      )}
-
-      {currentRoute === 'invertidas' && (
-        <div className="mb-8">
-          <InvertedStudio onApplyText={onApplyText} initialText={globalText} />
-        </div>
-      )}
-
-      {currentRoute === 'circulos' && (
-        <div className="mb-8">
-          <CirclesStudio onApplyText={onApplyText} initialText={globalText} />
-        </div>
-      )}
-
-      {currentRoute === 'glitch' && (
-        <div className="mb-8">
-          <GlitchStudio onApplyText={onApplyText} initialText={globalText} />
-        </div>
+      ) : (
+        renderContent()
       )}
     </Suspense>
   );

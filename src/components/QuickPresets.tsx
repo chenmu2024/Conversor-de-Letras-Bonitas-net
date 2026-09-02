@@ -207,11 +207,11 @@ export const QuickPresets: React.FC<QuickPresetsProps> = ({
   return (
     <div className="mb-3.5">
       <div className="flex items-center gap-1.5 mb-2">
-        <span className="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+        <span className="text-[11px] font-extrabold text-slate-600 uppercase tracking-wider flex items-center gap-1">
           <TrendingUp className="w-3 h-3 text-indigo-500" />
           <span>Ideas para {currentRoute === 'inicio' ? 'Empezar' : currentRoute.toUpperCase()}:</span>
         </span>
-        <span className="text-[10px] text-slate-400 font-medium hidden sm:inline">
+        <span className="text-[10px] text-slate-500 font-semibold hidden sm:inline">
           (Toca una para probar al instante)
         </span>
       </div>

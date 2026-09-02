@@ -139,15 +139,15 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
       {/* Broken characters detector alert */}
       {hasBrokenChars && (
         <div className="p-3 bg-amber-50 border border-amber-200/80 rounded-2xl flex items-center justify-between gap-3 text-xs animate-in fade-in duration-200">
-          <div className="flex items-center gap-2 text-amber-900 font-bold">
-            <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
+          <div className="flex items-center gap-2 text-amber-950 font-bold">
+            <AlertTriangle className="w-4 h-4 text-amber-700 shrink-0" />
             <span>Detectamos signos de rombo negro () en tu texto.</span>
           </div>
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={cleanBrokenChars}
-              className="px-3 py-1 bg-amber-600 hover:bg-amber-700 text-white font-extrabold rounded-xl text-xs transition-colors flex items-center gap-1 shadow-2xs"
+              className="px-3 py-1 bg-amber-800 hover:bg-amber-900 text-white font-extrabold rounded-xl text-xs transition-colors flex items-center gap-1 shadow-2xs"
             >
               <Wrench className="w-3 h-3" />
               <span>Reparar</span>
@@ -156,7 +156,7 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
               <button
                 type="button"
                 onClick={onOpenFixerModal}
-                className="px-2 py-1 text-amber-800 hover:bg-amber-100 rounded-lg text-xs font-semibold"
+                className="px-2 py-1 text-amber-950 hover:bg-amber-100 rounded-lg text-xs font-bold"
               >
                 ¿Por qué pasa?
               </button>
@@ -168,7 +168,7 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
       {/* Upper row: Case formatting & transformations */}
       <div className="flex items-center justify-between flex-wrap gap-2">
         <div className="flex items-center flex-wrap gap-1.5">
-          <span className="text-[11px] font-extrabold text-slate-400 mr-1 hidden sm:inline uppercase tracking-wider">
+          <span className="text-[11px] font-extrabold text-slate-700 mr-1 hidden sm:inline uppercase tracking-wider">
             Formato:
           </span>
           

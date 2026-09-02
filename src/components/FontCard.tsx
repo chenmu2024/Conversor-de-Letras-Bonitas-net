@@ -135,6 +135,7 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
             <button
               type="button"
               id={`btn-select-${generator.id}`}
+              aria-label={isSelected ? 'Deseleccionar fuente' : 'Seleccionar fuente para copiar en lote'}
               onClick={(e) => {
                 e.stopPropagation();
                 onToggleSelect(generator.id, convertedText);
@@ -143,7 +144,7 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
               className={`p-1 rounded-lg transition-colors ${
                 isSelected
                   ? 'text-indigo-600 bg-indigo-100'
-                  : 'text-slate-300 hover:text-slate-600 hover:bg-slate-100'
+                  : 'text-slate-400 hover:text-slate-600 hover:bg-slate-100'
               }`}
             >
               {isSelected ? (
@@ -154,7 +155,7 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
             </button>
           )}
 
-          <span className="text-xs font-bold text-slate-500 uppercase tracking-wider truncate">
+          <span className="text-xs font-bold text-slate-600 uppercase tracking-wider truncate">
             {generator.name}
           </span>
           {generator.isPopular && (
@@ -170,13 +171,14 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
           <button
             type="button"
             id={`btn-share-${generator.id}`}
+            aria-label="Enviar directamente por WhatsApp"
             onClick={(e) => {
               e.stopPropagation();
               const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(convertedText)}`;
               window.open(url, '_blank');
             }}
             title="Enviar directamente por WhatsApp"
-            className="p-1.5 rounded-xl text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+            className="p-1.5 rounded-xl text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
           >
             <Send className="w-4 h-4 text-emerald-600" />
           </button>
@@ -186,12 +188,13 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
             <button
               type="button"
               id={`btn-img-${generator.id}`}
+              aria-label="Descargar diseño como imagen"
               onClick={(e) => {
                 e.stopPropagation();
                 onExportImage(convertedText, generator.name);
               }}
               title="Descargar como imagen para Instagram Story / Post"
-              className="p-1.5 rounded-xl text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
+              className="p-1.5 rounded-xl text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
             >
               <ImageIcon className="w-4 h-4" />
             </button>
@@ -201,12 +204,13 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
           <button
             type="button"
             id={`btn-preview-${generator.id}`}
+            aria-label="Previsualizar en redes sociales"
             onClick={(e) => {
               e.stopPropagation();
               onPreview(convertedText, generator.name);
             }}
             title="Previsualizar en Instagram / TikTok / WhatsApp"
-            className="p-1.5 rounded-xl text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
+            className="p-1.5 rounded-xl text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
           >
             <Eye className="w-4 h-4" />
           </button>
@@ -215,6 +219,7 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
           <button
             type="button"
             id={`btn-speak-${generator.id}`}
+            aria-label="Escuchar pronunciación por voz"
             onClick={(e) => {
               e.stopPropagation();
               if ('speechSynthesis' in window) {
@@ -225,7 +230,7 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
               }
             }}
             title="Escuchar pronunciación por voz"
-            className="p-1.5 rounded-xl text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
+            className="p-1.5 rounded-xl text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
           >
             <Volume2 className="w-4 h-4" />
           </button>
@@ -234,16 +239,17 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
           <button
             type="button"
             id={`btn-fav-${generator.id}`}
+            aria-label={isFavorite ? 'Quitar de favoritos' : 'Guardar en favoritos'}
             onClick={(e) => {
               e.stopPropagation();
               onToggleFavorite(generator, convertedText);
             }}
             title={isFavorite ? 'Quitar de favoritos' : 'Guardar en favoritos'}
-            className="p-1.5 rounded-xl text-slate-400 hover:text-amber-500 hover:bg-amber-50 transition-colors"
+            className="p-1.5 rounded-xl text-slate-500 hover:text-amber-500 hover:bg-amber-50 transition-colors"
           >
             <Star
               className={`w-4 h-4 transition-transform group-hover/star:scale-110 ${
-                isFavorite ? 'fill-amber-400 text-amber-500' : 'text-slate-300'
+                isFavorite ? 'fill-amber-400 text-amber-500' : 'text-slate-400'
               }`}
             />
           </button>

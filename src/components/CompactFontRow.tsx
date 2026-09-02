@@ -123,7 +123,7 @@ export const CompactFontRow: React.FC<CompactFontRowProps> = React.memo(({
       {/* Left: Font Name & Transformed Text */}
       <div className="flex-1 min-w-0 pr-2 pl-1">
         <div className="flex items-center gap-2 mb-1">
-          <span className="text-[11px] font-extrabold text-slate-400 group-hover:text-indigo-600 uppercase tracking-wider truncate transition-colors">
+          <span className="text-[11px] font-extrabold text-slate-600 group-hover:text-indigo-600 uppercase tracking-wider truncate transition-colors">
             {generator.name}
           </span>
           {generator.isPopular && (
@@ -140,16 +140,17 @@ export const CompactFontRow: React.FC<CompactFontRowProps> = React.memo(({
       {/* Right: Quick Action Buttons & 1-Click Copy Badge */}
       <div className="flex items-center gap-1.5 shrink-0">
         {/* Subtle quick tools (hidden on extra small, visible on hover or tablet) */}
-        <div className="hidden sm:flex items-center gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
+        <div className="hidden sm:flex items-center gap-1 opacity-70 group-hover:opacity-100 transition-opacity">
           {onExportImage && (
             <button
               type="button"
+              aria-label="Descargar texto como imagen"
               onClick={(e) => {
                 e.stopPropagation();
                 onExportImage(convertedText, generator.name);
               }}
               title="Descargar imagen"
-              className="p-1.5 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
+              className="p-1.5 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
             >
               <ImageIcon className="w-3.5 h-3.5" />
             </button>
@@ -158,12 +159,13 @@ export const CompactFontRow: React.FC<CompactFontRowProps> = React.memo(({
           {onShareText && (
             <button
               type="button"
+              aria-label="Compartir texto estilizado"
               onClick={(e) => {
                 e.stopPropagation();
                 onShareText(convertedText, generator.name);
               }}
               title="Compartir texto estilizado"
-              className="p-1.5 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
+              className="p-1.5 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
             >
               <Share2 className="w-3.5 h-3.5" />
             </button>
@@ -171,28 +173,30 @@ export const CompactFontRow: React.FC<CompactFontRowProps> = React.memo(({
 
           <button
             type="button"
+            aria-label="Previsualizar texto"
             onClick={(e) => {
               e.stopPropagation();
               onPreview(convertedText, generator.name);
             }}
             title="Previsualizar"
-            className="p-1.5 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
+            className="p-1.5 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
           >
             <Eye className="w-3.5 h-3.5" />
           </button>
 
           <button
             type="button"
+            aria-label={isFavorite ? 'Quitar de favoritos' : 'Guardar en favoritos'}
             onClick={(e) => {
               e.stopPropagation();
               onToggleFavorite(generator, convertedText);
             }}
-            title="Favorito"
-            className="p-1.5 rounded-lg text-slate-400 hover:text-amber-500 hover:bg-amber-50 transition-colors"
+            title={isFavorite ? 'Quitar de favoritos' : 'Guardar en favoritos'}
+            className="p-1.5 rounded-lg text-slate-500 hover:text-amber-500 hover:bg-amber-50 transition-colors"
           >
             <Star
               className={`w-3.5 h-3.5 ${
-                isFavorite ? 'fill-amber-400 text-amber-500' : 'text-slate-300'
+                isFavorite ? 'fill-amber-400 text-amber-500' : 'text-slate-400'
               }`}
             />
           </button>

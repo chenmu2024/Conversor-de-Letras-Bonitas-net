@@ -644,6 +644,27 @@ export const FontConverter: React.FC<FontConverterProps> = ({
     { id: 'glitch', label: 'Glitch / Zalgo', sample: '̵Z̴a̶l̶g̷o' },
   ];
 
+  const hasSubStudio = [
+    'instagram',
+    'free-fire',
+    'whatsapp',
+    'tiktok',
+    'facebook',
+    'letras-chidas',
+    'letras-elegantes',
+    'letras-raras',
+    'letras-tatuajes',
+    'nicks-free-fire',
+    'letras-chinas',
+    'espacio-invisible',
+    'nombres-parejas',
+    'cursiva',
+    'goticas',
+    'invertidas',
+    'circulos',
+    'glitch',
+  ].includes(currentRoute);
+
   return (
     <div id="conversor-principal">
       {/* 1. HERO SECTION */}
@@ -673,7 +694,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
 
         {/* Quick Testing Viral Word Pills */}
         <div className="flex items-center justify-center gap-1.5 flex-wrap mt-5 max-w-3xl mx-auto">
-          <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mr-1">
+          <span className="text-[11px] font-extrabold text-slate-600 uppercase tracking-wider mr-1">
             Prueba rápida:
           </span>
           {POPULAR_WORD_PILLS.map((pill) => (
@@ -687,6 +708,21 @@ export const FontConverter: React.FC<FontConverterProps> = ({
             </button>
           ))}
         </div>
+
+        {hasSubStudio && (
+          <div className="mt-3.5 flex justify-center">
+            <button
+              type="button"
+              onClick={() => {
+                document.getElementById('sub-studio-section')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold text-indigo-700 bg-indigo-50 hover:bg-indigo-100/90 border border-indigo-200/80 transition-all shadow-2xs active:scale-95"
+            >
+              <span>⚡ Suite especializada de {headerInfo.badge} disponible</span>
+              <span className="text-indigo-500 font-extrabold">↓ Ver estudio</span>
+            </button>
+          </div>
+        )}
       </section>
 
       {/* 2. SCENARIO SHORTCUT GRID */}
@@ -721,6 +757,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
               <button
                 type="button"
                 id="btn-speak-main-text"
+                aria-label="Escuchar texto por voz (Pronunciación en Español)"
                 onClick={() => {
                   if ('speechSynthesis' in window) {
                     window.speechSynthesis.cancel();
@@ -737,11 +774,11 @@ export const FontConverter: React.FC<FontConverterProps> = ({
               </button>
             )}
 
-            <div className="flex items-center gap-2 text-xs font-bold text-slate-500 bg-slate-100/80 px-3 py-1 rounded-full border border-slate-200/60">
+            <div className="flex items-center gap-2 text-xs font-bold text-slate-700 bg-slate-100 px-3 py-1 rounded-full border border-slate-200/80">
               <span>
                 <strong className="text-slate-900 font-extrabold">{Array.from(inputText).length}</strong> {Array.from(inputText).length === 1 ? 'letra' : 'letras'}
               </span>
-              <span className="text-slate-300">•</span>
+              <span className="text-slate-400">•</span>
               <span>
                 <strong className="text-slate-900 font-extrabold">{inputText.trim() ? inputText.trim().split(/\s+/).length : 0}</strong> palabras
               </span>
@@ -861,6 +898,17 @@ export const FontConverter: React.FC<FontConverterProps> = ({
               <Eye className="w-4 h-4 animate-pulse" />
               <span>👁️ Ver Vista Previa Real (IG / FF)</span>
             </button>
+
+            {hasSubStudio && (
+              <button
+                type="button"
+                onClick={() => document.getElementById('sub-studio-section')?.scrollIntoView({ behavior: 'smooth' })}
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs border border-indigo-200 transition-all active:scale-95 shadow-2xs"
+                title={`Ir a la suite y simuladores especializados de ${headerInfo.badge}`}
+              >
+                <span>🛠️ Estudio {headerInfo.badge} ↓</span>
+              </button>
+            )}
           </div>
         </div>
 
@@ -1046,7 +1094,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
 
             {/* Font size zoom controls */}
             <div className="flex items-center gap-1 bg-slate-100/80 p-1 rounded-xl border border-slate-200/70">
-              <span className="text-[10px] font-bold text-slate-400 px-1 uppercase tracking-wider hidden sm:inline">
+              <span className="text-[10px] font-extrabold text-slate-600 px-1 uppercase tracking-wider hidden sm:inline">
                 Zoom:
               </span>
               {(['sm', 'md', 'lg', 'xl'] as const).map((size) => (
@@ -1054,11 +1102,12 @@ export const FontConverter: React.FC<FontConverterProps> = ({
                   key={size}
                   type="button"
                   id={`btn-fontsize-${size}`}
+                  aria-label={`Ajustar tamaño de fuente a ${size}`}
                   onClick={() => setFontSize(size)}
                   className={`px-2 py-1 text-xs font-black rounded-lg transition-all ${
                     fontSize === size
                       ? 'bg-white text-indigo-600 shadow-2xs'
-                      : 'text-slate-500 hover:text-slate-800'
+                      : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
                   {size === 'sm' && 'A-'}
@@ -1075,6 +1124,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
             <button
               type="button"
               id="btn-open-mixer"
+              aria-label="Mezclador de estilos de fuentes aleatorios"
               onClick={() => setMixerOpen(true)}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100/80 text-amber-800 font-extrabold text-xs border border-amber-200/80 transition-all active:scale-95 shadow-2xs"
             >
@@ -1085,6 +1135,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
             <button
               type="button"
               id="btn-open-batch-copy"
+              aria-label="Copiar múltiples fuentes en lote"
               onClick={() => setBatchModalOpen(true)}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100/80 text-indigo-700 font-extrabold text-xs border border-indigo-200/80 transition-all active:scale-95 shadow-2xs"
             >
@@ -1095,8 +1146,10 @@ export const FontConverter: React.FC<FontConverterProps> = ({
             <button
               type="button"
               id="btn-open-comparator"
+              aria-label="Comparar estilos de fuentes lado a lado"
               onClick={() => setComparatorOpen(true)}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 text-slate-700 font-extrabold text-xs border border-slate-200 transition-all active:scale-95 shadow-2xs"
+              title="Comparar estilos de fuentes lado a lado"
             >
               <Columns2 className="w-3.5 h-3.5 text-slate-600" />
               <span className="hidden sm:inline">Comparar</span>
@@ -1105,6 +1158,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
             <button
               type="button"
               id="btn-open-history-drawer"
+              aria-label="Ver historial de fuentes que has copiado recientemente"
               onClick={() => window.dispatchEvent(new CustomEvent('open-copy-history'))}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 text-slate-700 font-extrabold text-xs border border-slate-200 transition-all active:scale-95 shadow-2xs"
               title="Ver historial de fuentes que has copiado recientemente"
