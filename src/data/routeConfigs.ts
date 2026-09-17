@@ -191,7 +191,7 @@ const BASE_ROUTE_CONFIGS: Record<PageRoute, Omit<RouteMeta, 'title' | 'descripti
     path: '/sobre-nosotros/',
     category: 'general',
     label: 'Sobre Nosotros',
-    seoKeyword: 'Sobre Nosotros & Metodología Unicode E-E-A-T',
+    seoKeyword: 'Sobre Nosotros & Metodología Unicode',
     defaultText: 'Sobre Nosotros',
   },
   'politica-de-privacidad': {

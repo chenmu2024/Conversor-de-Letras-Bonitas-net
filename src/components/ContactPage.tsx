@@ -6,6 +6,7 @@ export const ContactPage: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [website, setWebsite] = useState(''); // Honeypot field for spam prevention
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [ticketId, setTicketId] = useState<string | null>(null);
@@ -14,6 +15,13 @@ export const ContactPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!message.trim()) return;
+
+    // Honeypot check - silent discard for bots
+    if (website.trim() !== '') {
+      setIsSubmitting(false);
+      setSubmitted(true);
+      return;
+    }
 
     setIsSubmitting(true);
     setErrorMessage(null);
@@ -26,9 +34,10 @@ export const ContactPage: React.FC = () => {
         },
         body: JSON.stringify({
           topic,
-          name: name.trim(),
-          email: email.trim(),
-          message: message.trim(),
+          name: name.trim().slice(0, 100),
+          email: email.trim().slice(0, 254),
+          message: message.trim().slice(0, 5000),
+          website: website.trim(),
         }),
       });
 
@@ -62,13 +71,13 @@ export const ContactPage: React.FC = () => {
       <div className="text-center space-y-3">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-black shadow-xs">
           <Mail className="w-4 h-4" />
-          <span>Atención al Usuario & Soporte Técnico Oficial</span>
+          <span>Contacto y soporte</span>
         </div>
         <h1 className="font-heading text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-          Centro de Contacto y Soporte de Caracteres
+          Centro de Contacto y Sugerencias de Caracteres
         </h1>
         <p className="text-sm sm:text-base text-slate-600 max-w-xl mx-auto">
-          ¿Encontraste una letra que no se ve en tu dispositivo o quieres sugerir un nuevo estilo para Free Fire, Instagram o WhatsApp? Nuestro equipo editorial revisa cada mensaje.
+          ¿Encontraste una letra que no se ve en tu dispositivo o quieres sugerir un nuevo estilo para Free Fire, Instagram o WhatsApp? Revisamos los mensajes enviados para detectar errores y nuevas sugerencias.
         </p>
       </div>
 
@@ -84,7 +93,7 @@ export const ContactPage: React.FC = () => {
             )}
           </div>
           <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-            Muchas gracias por tu contribución. Hemos registrado tu consulta en nuestra cola de revisión técnica. Responderemos al correo proporcionado en un plazo habitual de 24 a 48 horas hábiles.
+            Muchas gracias por tu mensaje. Si has proporcionado un correo electrónico válido, podremos utilizarlo para responder a tu consulta cuando sea necesario.
           </p>
           
           <div className="pt-2 flex justify-center">
@@ -95,10 +104,11 @@ export const ContactPage: React.FC = () => {
                 setMessage('');
                 setName('');
                 setEmail('');
+                setWebsite('');
                 setTicketId(null);
                 setErrorMessage(null);
               }}
-              className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs transition-all shadow-sm active:scale-95"
+              className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs transition-all shadow-sm active:scale-95 cursor-pointer"
             >
               Enviar otro mensaje
             </button>
@@ -116,6 +126,20 @@ export const ContactPage: React.FC = () => {
             </div>
           )}
 
+          {/* Honeypot field hidden from legitimate users */}
+          <div className="hidden" aria-hidden="true">
+            <label htmlFor="website">Website</label>
+            <input
+              id="website"
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+            />
+          </div>
+
           {/* Topic Selection */}
           <div className="space-y-2">
             <label className="block text-xs font-black uppercase text-slate-500 tracking-wider">
@@ -125,7 +149,7 @@ export const ContactPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setTopic('sugerencia')}
-                className={`flex items-center gap-2.5 p-3 rounded-2xl border text-xs font-bold transition-all text-left ${
+                className={`flex items-center gap-2.5 p-3 rounded-2xl border text-xs font-bold transition-all text-left cursor-pointer ${
                   topic === 'sugerencia'
                     ? 'border-indigo-600 bg-indigo-50/70 text-indigo-900 shadow-xs'
                     : 'border-slate-200 hover:border-slate-300 text-slate-700 bg-slate-50/50'
@@ -138,7 +162,7 @@ export const ContactPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setTopic('error')}
-                className={`flex items-center gap-2.5 p-3 rounded-2xl border text-xs font-bold transition-all text-left ${
+                className={`flex items-center gap-2.5 p-3 rounded-2xl border text-xs font-bold transition-all text-left cursor-pointer ${
                   topic === 'error'
                     ? 'border-rose-600 bg-rose-50/70 text-rose-900 shadow-xs'
                     : 'border-slate-200 hover:border-slate-300 text-slate-700 bg-slate-50/50'
@@ -151,7 +175,7 @@ export const ContactPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setTopic('duda')}
-                className={`flex items-center gap-2.5 p-3 rounded-2xl border text-xs font-bold transition-all text-left ${
+                className={`flex items-center gap-2.5 p-3 rounded-2xl border text-xs font-bold transition-all text-left cursor-pointer ${
                   topic === 'duda'
                     ? 'border-amber-600 bg-amber-50/70 text-amber-900 shadow-xs'
                     : 'border-slate-200 hover:border-slate-300 text-slate-700 bg-slate-50/50'
@@ -172,6 +196,7 @@ export const ContactPage: React.FC = () => {
               <input
                 id="contact-name"
                 type="text"
+                maxLength={100}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Ej. Alex / ProGamer"
@@ -186,6 +211,7 @@ export const ContactPage: React.FC = () => {
               <input
                 id="contact-email"
                 type="email"
+                maxLength={254}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="nombre@ejemplo.com"
@@ -203,6 +229,7 @@ export const ContactPage: React.FC = () => {
               id="contact-message"
               required
               rows={4}
+              maxLength={5000}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder={
@@ -216,10 +243,12 @@ export const ContactPage: React.FC = () => {
             ></textarea>
           </div>
 
-          {/* Security note */}
-          <div className="flex items-center gap-2 text-[11px] text-slate-500 bg-slate-50 p-3 rounded-xl border border-slate-100">
-            <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-            <span>Tus datos de contacto son estrictamente confidenciales y nunca se comparten con terceros ni se usan para fines publicitarios.</span>
+          {/* Privacy note */}
+          <div className="flex items-start gap-2 text-[11px] text-slate-500 bg-slate-50 p-3 rounded-xl border border-slate-100">
+            <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+            <span>
+              Los datos enviados mediante este formulario se utilizan para gestionar tu consulta y pueden ser procesados por los proveedores técnicos necesarios para prestar el servicio de correo. Consulta nuestra <a href="/politica-de-privacidad/" className="text-indigo-600 hover:underline font-semibold">Política de Privacidad</a> para más información.
+            </span>
           </div>
 
           {/* Submit Button */}
@@ -246,7 +275,7 @@ export const ContactPage: React.FC = () => {
 
       {/* Direct Contact Info */}
       <div className="text-center text-xs text-slate-500 space-y-1">
-        <p>También puedes contactar directamente a nuestro equipo técnico en:</p>
+        <p>También puedes contactar por correo electrónico en:</p>
         <p className="font-mono font-bold text-indigo-600" dangerouslySetInnerHTML={{ __html: '<!--email_off-->soporte@conversordeletrasbonitas.net<!--/email_off-->' }} />
       </div>
     </div>

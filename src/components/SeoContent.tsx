@@ -57,40 +57,40 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
       examples: ['𝓘𝓷𝓼𝓽𝓪𝓰𝓻𝓪𝓶 𝓑𝓲𝓸 ✨', '𝒞𝓇𝑒𝒶𝓉𝑜𝓇 · 𝒱𝒾𝒹𝑒𝑜𝓈 🎬', '𝗕𝘂𝘀𝗶𝗻𝗲𝘀𝘀 𝗢𝗳𝗳𝗶𝗰𝗶𝗮𝗹 💼'],
     },
     tiktok: {
-      title: 'Letras para TikTok - Nombres Aesthetic, Emojis Secretos y Biografías Virales',
-      subtitle: 'Aumenta el engagement y visualizaciones con nombres de perfil llamativos y textos de video en TikTok.',
+      title: 'Letras para TikTok - Nombres Aesthetic, Emojis Secretos y Biografías',
+      subtitle: 'Personaliza tu perfil con nombres llamativos, emojis ocultos y textos de video en TikTok.',
       description:
-        'En TikTok, tener un nombre de perfil con estilo, una biografía organizada dentro del límite de 80 caracteres y textos de video (CapCut) con tipografías virales aumenta la retención y los seguidores. Usa letras aesthetic con moños 🎀, estrellas ★, minúsculas estilizadas (Small Caps) y los códigos de emojis secretos oficiales [código].',
+        'En TikTok, tener un nombre de perfil con estilo, una biografía organizada dentro del límite de 80 caracteres y textos claros para videos ayuda a destacar tu contenido. Usa letras aesthetic con moños 🎀, estrellas ★, minúsculas estilizadas (Small Caps) y los códigos de emojis ocultos [código].',
       tips: [
         'En TikTok, usa las letras bonitas en tu "Nombre de Perfil" (permite Unicode) y mantén tu @usuario alfanumérico limpio.',
         'La biografía de TikTok tiene un límite estricto de 80 caracteres: usa nuestro contador en tiempo real para no sobrepasarlo.',
-        'Aprovecha los Emojis Secretos oficiales escribiendo códigos como [wicked], [yummy], [loveface] o [cry] en tus comentarios.',
-        'Formatea los textos en pantalla de tus videos y portadas de CapCut con Negrita Sans o Small Caps para triplicar la retención en los primeros 3 segundos.',
+        'Aprovecha los Emojis Ocultos escribiendo códigos como [wicked], [yummy], [loveface] o [cry] en tus comentarios.',
+        'Formatea los textos en pantalla de tus videos y portadas de CapCut con Negrita Sans o Small Caps para mejorar la legibilidad en los primeros segundos.',
       ],
-      examples: ['₊˚⊹ 𝒯𝒾𝓀𝒯𝑜𝓀 𝒱𝒾𝒷𝑒𝓈 ⊹˚₊', '🎀 𝒜𝑒𝓈𝓉𝒽𝑒𝓉𝒾𝒸 𝒢𝒾𝓇𝓁 🎀', 'ᴠɪʀᴀʟ ᴄᴏɴᴛᴇɴᴛ 🔥', '[wicked] 😈', 'POV: 𝘕𝘶𝘦𝘷𝘰 𝘛𝘳𝘦𝘯𝘥 ✨'],
+      examples: ['₊˚⊹ 𝒯𝒾𝓀𝒯𝑜𝓀 𝒱𝒾𝒷𝑒𝓈 ⊹˚₊', '🎀 𝒜𝑒𝓈𝓉𝒽𝑒𝓉𝒾𝒸 𝒢𝒾𝓇𝓁 🎀', 'ᴠɪʀᴀʟ ᴄᴏɴᴛᴇɴᴛ 🔥', '[wicked] 😈', 'POV: 𝘕𝘶𝘦𝘷𝘰 𝘛𝘳ེ𝘯𝘥 ✨'],
     },
     whatsapp: {
       title: 'Letras para WhatsApp - Fuentes, Estados, Mensajes Pro y Chat Directo',
-      subtitle: 'Sorprende a tus contactos con letras cursivas, negritas oficiales, plantillas de negocios y formatos sin rombos en WhatsApp.',
+      subtitle: 'Personaliza tus mensajes y perfil con letras cursivas, negritas nativas y enlaces de contacto directo.',
       description:
         'WhatsApp admite de forma nativa formatos mediante símbolos (*negrita*, _cursiva_, ~tachado~, ```monospaciado```, > cita y listas). Además, con nuestro generador de fuentes seguras Unicode puedes escribir en tu Info / Acerca de (límite de 139 caracteres), diseñar nombres de grupos llamativos y crear enlaces wa.me directos sin necesidad de guardar el contacto en la agenda.',
       tips: [
-        'Aprovecha el código monospaciado (```código```) para enviar números de cuenta, IBAN o claves bancarias y que tus clientes los copien con 1 toque.',
+        'Aprovecha el código monospaciado (```código```) para enviar números de cuenta o referencias y que tus contactos los copien con 1 toque.',
         'La sección "Info / Acerca de" de WhatsApp tiene un límite estricto de 139 caracteres: usa nuestro diseñador en tiempo real con vista previa.',
-        'Envía mensajes a números desconocidos usando enlaces oficiales wa.me sin tener que agregarlos a tu lista de contactos de teléfono.',
+        'Envía mensajes a números sin registrar usando enlaces wa.me sin tener que agregarlos a tu lista de contactos de teléfono.',
         'Usa el espacio invisible [ㅤ] (Hangul Filler) para enviar mensajes en blanco en chats o publicar un Estado sin texto.',
       ],
-      examples: ['*¡Pedido Confirmado!* 📦', '```TIENDA.PAGO.OFICIAL``` 💳', '𝓔𝓼𝓽𝓪𝓭𝓸 𝓭𝓮 𝓦𝓱𝓪𝓽𝓼𝓐𝓹𝓹 💬', '> Cita Importante 📌', '• Lista de Precios 🔥'],
+      examples: ['*¡Pedido Confirmado!* 📦', '```TIENDA.PAGO``` 💳', '𝓔𝓼𝓽𝓪𝓭𝓸 𝓭𝓮 𝓦𝓱𝓪𝓽𝓼𝓐𝓹𝓹 💬', '> Cita Importante 📌', '• Lista de Precios 🔥'],
     },
     'free-fire': {
       title: 'Letras para Free Fire - Nicks con Alas, Coronas 亗, Dúos y Espacio Invisible',
-      subtitle: 'Crea nombres insanos para Free Fire, Dúo Dinámico, Banderas de Países, Clanes PvP y Códigos de Color.',
+      subtitle: 'Crea nombres para Free Fire, Dúo Dinámico, Banderas de Países, Clanes PvP y Códigos de Color.',
       description:
-        'El generador de letras para Free Fire te permite crear nicks personalizados con alas ꧁༺ ༻꧂, símbolos de rey 亗, rayos ⚡, nicks de parejas para Dúos Dinámicos, banderas de países con bloques de colores [███] y los 3 tamaños de espacios invisibles (Grande, Mediano y Pequeño) ampliamente compatibles con el límite de 12 caracteres de Garena.',
+        'El generador de letras para Free Fire te permite crear nicks personalizados con alas ꧁༺ ༻꧂, símbolos de rey 亗, rayos ⚡, nicks de parejas para Dúos Dinámicos, banderas de países con bloques de colores [███] y los 3 tamaños de espacios invisibles (Grande, Mediano y Pequeño) compatibles con el límite de 12 caracteres de Garena.',
       tips: [
         'Free Fire impone un límite estricto de 12 caracteres: nuestro contador te alerta en tiempo real si tu combinación supera el límite del juego.',
         'Para nicks de Dúo Dinámico (parejas), usa marcos simétricos como (꧁ঔৣ☬ KING ☬ঔৣ꧂ / ꧁ঔৣ☬ QUEEN ☬ঔৣ꧂ o 亗 BONNIE 亗 / 亗 CLYDE 亗).',
-        'Usa el código oficial [008000]█[FFFFFF]█[FF0000]█ en tu firma para lucir la bandera de tu país con bloques de colores.',
+        'Usa el formato [008000]█[FFFFFF]█[FF0000]█ en tu firma para lucir la bandera de tu país con bloques de colores.',
         'Si tu nick con clan tag está muy ajustado a las 12 letras, usa el "Espacio Invisible Mediano" o "Pequeño" para que quepa todo.',
       ],
       examples: ['꧁༺ 𝕯𝕰𝕾𝕿𝕽𝖀𝖄𝕰 ༻꧂', '亗 ＢＯＮＮＩＥ 亗', 'ᴮᴼˢˢ★ 𝕹𝕴𝕮𝕶 ⚔️', '[b][c][ffd319]Ⓥ JUGADOR', '亗ㅤɪɴsᴀɴᴏ'],
@@ -110,9 +110,9 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     'letras-chidas': {
       title: 'Letras Chidas - Fuentes Aesthetic, Nicks Insanos y Frases Perronas',
-      subtitle: 'El repertorio número 1 de letras chidas, nicks con alas y fuentes virales para México y toda Latinoamérica.',
+      subtitle: 'Repertorio completo de letras chidas, nicks con alas y fuentes para redes sociales.',
       description:
-        'Encuentra las letras más chidas para personalizar tu perfil en Free Fire, TikTok, Instagram y WhatsApp. Contamos con combinaciones exclusivas de alas ꧁༺ ༻꧂, coronas de rey 亗, tipografías insanas, estilo bélico y espacio invisible oficial para que tu nombre resalte al instante.',
+        'Encuentra letras chidas para personalizar tu perfil en Free Fire, TikTok, Instagram y WhatsApp. Contamos con combinaciones de alas ꧁༺ ༻꧂, coronas 亗, tipografías gamer y espacio invisible para que tu nombre resalte al instante.',
       tips: [
         'En Free Fire, añade las alas ꧁ ꧂ alrededor de tu nombre en letras góticas o cursivas.',
         'Copia nuestro botón de Espacio Invisible [ㅤ] para ocultar tu nombre o separar palabras en juegos móviles.',
@@ -315,27 +315,27 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     'sobre-nosotros': {
       title: 'Sobre Nosotros - Conversor de Letras Bonitas',
-      subtitle: 'Nuestra misión, estándares de ingeniería tipográfica y compromiso con la compatibilidad Unicode.',
+      subtitle: 'Nuestra metodología, funcionamiento técnico y compatibilidad Unicode.',
       description:
-        'Somos un equipo dedicado a la investigación de tipografías web y la democratización del diseño textual en español, garantizando que cada símbolo y fuente funcione en todos los dispositivos modernos.',
+        'Somos un proyecto enfocado en la investigación tipográfica digital y la difusión de fuentes Unicode en español, procurando que cada símbolo y estilo funcione correctamente en dispositivos modernos.',
       tips: [
-        'Estándar Unicode internacional garantizado.',
-        'Procesamiento 100% en el navegador sin cookies invasivas.',
+        'Basado en el estándar Unicode internacional.',
+        'Procesamiento en el navegador sin almacenamiento de textos.',
         'Diseño responsive optimizado para teléfonos móviles.',
       ],
-      examples: ['E-E-A-T Calidad', 'Unicode 15.1', 'Compatibilidad Universal'],
+      examples: ['Calidad Tipográfica', 'Unicode 15.1', 'Compatibilidad Universal'],
     },
     'politica-de-privacidad': {
       title: 'Política de Privacidad y Protección de Datos',
-      subtitle: 'Transparencia total y procesamiento en el lado del cliente (Client-Side Privacy).',
+      subtitle: 'Transparencia y procesamiento en el lado del cliente (Client-Side Privacy).',
       description:
-        'Respetamos profundamente tu privacidad. Todo el procesamiento de conversión tipográfica se realiza localmente en tu propio dispositivo utilizando JavaScript. Ningún texto que ingresas es enviado a servidores.',
+        'Respetamos tu privacidad. Todo el procesamiento de conversión tipográfica se realiza localmente en tu propio dispositivo utilizando JavaScript. Ningún texto que ingresas es enviado a servidores.',
       tips: [
         'Cero almacenamiento de textos personales en servidores.',
         'Almacenamiento local (localStorage) únicamente para tus favoritos guardados.',
         'Conformidad con estándares RGPD, CCPA y buenas prácticas web.',
       ],
-      examples: ['100% Seguro', 'Sin Registro', 'Privacidad Total'],
+      examples: ['Seguro y Directo', 'Sin Registro', 'Privacidad en Navegador'],
     },
     'politica-de-cookies': {
       title: 'Política de Cookies y Consentimiento Informado',
@@ -363,11 +363,11 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     contacto: {
       title: 'Centro de Contacto y Soporte al Usuario',
-      subtitle: 'Comunícate con nuestro equipo para sugerir fuentes, reportar errores o solicitar colaboraciones.',
+      subtitle: 'Comunícate con nosotros para sugerir fuentes, reportar errores o solicitar colaboraciones.',
       description:
-        'Estamos comprometidos a mantener la mejor herramienta de letras bonitas en internet. Si encuentras un símbolo que no se muestra correctamente en tu dispositivo o deseas una nueva fuente, contáctanos.',
+        'Si encuentras un símbolo que no se muestra correctamente en tu dispositivo o deseas sugerir una nueva fuente, contáctanos.',
       tips: [
-        'Respuesta habitual en menos de 24 a 48 horas hábiles.',
+        'Revisión periódica de mensajes recibidos.',
         'Abiertos a sugerencias de nuevos alfabetos y símbolos gamer.',
         'Soporte técnico para problemas de visualización en Android e iOS.',
       ],
@@ -391,7 +391,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
 
   const faqs = [
     {
-      q: '¿El Conversor de Letras Bonitas es 100% gratis?',
+      q: '¿El Conversor de Letras Bonitas es gratis?',
       a: 'Sí, todas las fuentes, símbolos, letras cursivas y decoraciones del Conversor de Letras Bonitas son completamente gratis e ilimitadas. No necesitas registrarte ni descargar ningún programa o aplicación.',
     },
     {
@@ -464,7 +464,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     {
       q: '¿Por qué algunas letras en círculos negros se ven como emojis o cuadrados en ciertos móviles?',
-      a: 'Las letras en círculos blancos (Ⓒⓘⓡⓒⓤⓛⓞⓢ) y negros (🅒🅘🅡🅒🅤🅛🅞🅢) forman parte oficial del estándar Unicode. La inmensa mayoría de dispositivos modernos (iOS 12+, Android 9+, Windows 10/11) los soportan nativamente. Si deseas máxima compatibilidad visual en cualquier pantalla, los círculos blancos (Ⓐ-Ⓩ, ⓐ-ⓩ) y los números encerrados (①-⑳) ofrecen un soporte muy extendido.',
+      a: 'Las letras en círculos blancos (Ⓒⓘⓡⓒⓤⓛⓞⓢ) y negros (🅒🅘🅡🅒🅤🅛🅞🅢) forman parte del estándar Unicode. La inmensa mayoría de dispositivos modernos (iOS 12+, Android 9+, Windows 10/11) los soportan nativamente. Si deseas máxima compatibilidad visual en cualquier pantalla, los círculos blancos (Ⓐ-Ⓩ, ⓐ-ⓩ) y los números encerrados (①-⑳) ofrecen un soporte muy extendido.',
     },
     {
       q: '¿Qué es el texto Zalgo (Texto Maldito / Cursed Text) y cómo se genera?',
@@ -472,7 +472,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     {
       q: '¿Cómo limpiar o eliminar el texto Zalgo de un mensaje distorsionado?',
-      a: 'En nuestro Laboratorio Glitch incluimos una herramienta gratuita de "Sanitizador & Limpiador de Zalgo". Al pegar cualquier texto corrupto o indescifrable, el sanitizador remueve automáticamente todos los diacríticos superpuestos (Unicode U+0300 a U+036F) y te devuelve el texto original 100% legible y limpio.',
+      a: 'En nuestro Laboratorio Glitch incluimos una herramienta gratuita de "Sanitizador & Limpiador de Zalgo". Al pegar cualquier texto corrupto o indescifrable, el sanitizador remueve automáticamente todos los diacríticos superpuestos (Unicode U+0300 a U+036F) y te devuelve el texto legible y limpio.',
     },
     {
       q: '¿Puedo usar letras Glitch en nombres de Free Fire, Discord y TikTok?',
@@ -488,7 +488,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     {
       q: '¿Cómo se usa el carácter de Espacio Invisible (ㅤ)?',
-      a: 'El espacio invisible oficial (Hangul Filler Unicode U+3164) es un carácter en blanco transparente que los juegos y redes sociales reconocen como texto válido. Puedes copiarlo con 1 clic desde el botón superior de nuestra biblioteca para crear nombres invisibles en Free Fire, saltos de línea perfectos en biografías de Instagram o enviar mensajes vacíos en WhatsApp.',
+      a: 'El espacio invisible (Hangul Filler Unicode U+3164) es un carácter en blanco transparente que los juegos y redes sociales reconocen como texto válido. Puedes copiarlo con 1 clic desde el botón superior de nuestra biblioteca para crear nombres invisibles en Free Fire, saltos de línea en biografías de Instagram o enviar mensajes vacíos en WhatsApp.',
     },
     {
       q: '¿Cómo decorar un nombre para Free Fire con alas y símbolos insanos?',
@@ -500,7 +500,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     {
       q: '¿Cómo activar los emojis secretos y ocultos de TikTok con códigos entre corchetes ([código])?',
-      a: 'TikTok cuenta con más de 46 emojis animados en 3D ocultos. Para usarlos, solo escribe el código oficial con corchetes en tus comentarios o descripción (por ejemplo: [wicked] para el diablillo, [yummy] para el emoji con lengua afuera, [loveface] para el beso enamorado o [cry] para lágrimas). Al publicar, TikTok lo convierte inmediatamente en el emoji exclusivo oficial.',
+      a: 'TikTok cuenta con emojis animados con códigos especiales entre corchetes. Para usarlos, solo escribe el código con corchetes en tus comentarios o descripción (por ejemplo: [wicked] para el diablillo, [yummy] para el emoji con lengua afuera, [loveface] para el beso enamorado o [cry] para lágrimas). Al publicar, TikTok lo convierte en el emoji correspondiente.',
     },
     {
       q: '¿Cuántos caracteres permite la biografía de TikTok y cómo poner letras bonitas en el Nombre Visible?',
@@ -520,7 +520,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     {
       q: '¿Cómo enviar un mensaje por WhatsApp sin guardar el número en la agenda?',
-      a: 'Usa nuestra herramienta de "Chat Directo (wa.me)": selecciona el país (ej: +34 España, +52 México, +54 Argentina), ingresa el número de teléfono y tu mensaje. Se generará un enlace oficial https://wa.me/ que abrirá la conversación directamente en la aplicación.',
+      a: 'Usa nuestra herramienta de "Chat Directo (wa.me)": selecciona el país (ej: +34 España, +52 México, +54 Argentina), ingresa el número de teléfono y tu mensaje. Se generará un enlace https://wa.me/ que abrirá la conversación directamente en la aplicación.',
     },
     {
       q: '¿Cómo enviar un mensaje invisible o transparente en blanco por WhatsApp?',
@@ -680,7 +680,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
             <ShieldCheck className="w-5 h-5 text-indigo-600 shrink-0 mt-0.5" />
             <div>
               <h3 className="text-xs font-bold text-slate-900">Conversor de Letras Bonitas Seguro y Privado</h3>
-              <p className="text-[11px] text-slate-600 mt-0.5">En el Conversor de Letras Bonitas la conversión se ejecuta 100% en tu navegador sin almacenar tus textos en servidores.</p>
+              <p className="text-[11px] text-slate-600 mt-0.5">En el Conversor de Letras Bonitas la conversión se ejecuta localmente en tu navegador sin almacenar tus textos en servidores.</p>
             </div>
           </div>
 

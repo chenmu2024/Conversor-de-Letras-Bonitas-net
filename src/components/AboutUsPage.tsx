@@ -1,7 +1,12 @@
 import React from 'react';
 import { ShieldCheck, Cpu, Globe, HeartHandshake, FileCode2, CheckCircle2, Layers } from 'lucide-react';
+import { PageRoute } from '../types';
 
-export const AboutUsPage: React.FC = () => {
+interface AboutUsPageProps {
+  onRouteChange?: (route: PageRoute) => void;
+}
+
+export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onRouteChange }) => {
   return (
     <div className="max-w-4xl mx-auto py-8 sm:py-12 space-y-12">
       {/* Header Banner */}
@@ -14,7 +19,7 @@ export const AboutUsPage: React.FC = () => {
           Sobre Nosotros & Conversor de Letras Bonitas
         </h1>
         <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-          Nuestra misión es facilitar la personalización tipográfica en español a través del estándar internacional Unicode de forma accesible, rápida y gratuita.
+          Nuestra misión es facilitar el uso de caracteres Unicode y estilos tipográficos en español de forma accesible, rápida y gratuita.
         </p>
       </div>
 
@@ -43,7 +48,7 @@ export const AboutUsPage: React.FC = () => {
             </div>
             <h2 className="font-bold text-lg text-slate-900 mb-2">Privacidad en el Navegador</h2>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              El texto introducido directamente en el conversor se procesa localmente en tu navegador y no se envía automáticamente a nuestro servidor.
+              El texto introducido normalmente en el conversor se procesa localmente en el navegador y no se envía automáticamente a nuestro servidor.
             </p>
           </div>
           <div className="mt-4 pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-bold text-emerald-600">
@@ -59,7 +64,7 @@ export const AboutUsPage: React.FC = () => {
             </div>
             <h2 className="font-bold text-lg text-slate-900 mb-2">Comunidad en Español</h2>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Desarrollado y optimizado específicamente para el idioma español (soporte para acentos, virgulilla de la ñ y signos dobles de interrogación/exclamación).
+              Desarrollado y optimizado para el idioma español (soporte para acentos, virgulilla de la ñ y signos dobles de interrogación/exclamación).
             </p>
           </div>
           <div className="mt-4 pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-bold text-amber-600">
@@ -87,7 +92,7 @@ export const AboutUsPage: React.FC = () => {
           </div>
           <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
             <div className="font-black text-white mb-1">🤖 Android</div>
-            <div className="text-slate-400">Compatibilidad con navegadores basados en Blink y Gecko.</div>
+            <div className="text-slate-400">Compatibilidad con navegadores modernos.</div>
           </div>
           <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
             <div className="font-black text-white mb-1">🎮 Free Fire</div>
@@ -112,8 +117,10 @@ export const AboutUsPage: React.FC = () => {
         <a
           href="/contacto/"
           onClick={(e) => {
-            e.preventDefault();
-            window.location.hash = '#/contacto';
+            if (onRouteChange) {
+              e.preventDefault();
+              onRouteChange('contacto');
+            }
           }}
           className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-sm transition-all"
         >

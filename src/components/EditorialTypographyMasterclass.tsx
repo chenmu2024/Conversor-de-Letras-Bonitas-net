@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Award, CheckCircle, Sparkles, HelpCircle, Layers, Lightbulb, Compass } from 'lucide-react';
+import { BookOpen, Layers, Lightbulb, Compass, Sparkles, CheckCircle } from 'lucide-react';
 import { AuthorEditorialBox } from './AuthorEditorialBox';
 import { ArticleHelpfulFeedback } from './ArticleHelpfulFeedback';
 import { PageRoute } from '../types';
@@ -23,7 +23,7 @@ export const EditorialTypographyMasterclass: React.FC<EditorialTypographyMasterc
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-indigo-100/80 text-indigo-800 border border-indigo-200">
-                  📚 Academia Editorial del Conversor de Letras Bonitas
+                  📖 Recursos sobre tipografía digital y Unicode
                 </span>
               </div>
               <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
@@ -33,8 +33,8 @@ export const EditorialTypographyMasterclass: React.FC<EditorialTypographyMasterc
           </div>
 
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700">
-            <Award className="w-4 h-4 text-indigo-600" />
-            <span>Conversor de Letras Bonitas E-E-A-T Verificado</span>
+            <BookOpen className="w-4 h-4 text-indigo-600" />
+            <span>Guía técnica de tipografía y Unicode</span>
           </div>
         </div>
 
@@ -71,16 +71,16 @@ export const EditorialTypographyMasterclass: React.FC<EditorialTypographyMasterc
                 2. Psicología Tipográfica en Redes Sociales (Instagram & TikTok)
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                El estilo de letra que utilizas en tu biografía transmite un mensaje subconsciente inmediato antes de que el usuario lea las palabras:
+                El estilo de letra que utilizas en tu biografía transmite un mensaje visual inmediato antes de que el usuario lea las palabras:
               </p>
               <ul className="list-disc pl-4 space-y-1 text-xs text-slate-600">
-                <li><strong className="text-slate-800">Cursiva / Script:</strong> Proyecta delicadeza, estética (aesthetic), exclusividad y moda.</li>
-                <li><strong className="text-slate-800">Small Caps (ᴀʙᴄ):</strong> Aporta sofisticación minimalista y sobriedad ejecutiva.</li>
-                <li><strong className="text-slate-800">Gótica / Fraktur:</strong> Comunica poder, autoridad, estilo dark, anime o competitivo gamer.</li>
+                <li><strong className="text-slate-800">Cursiva / Script:</strong> Proyecta delicadeza, estética (aesthetic), exclusividad y estilo.</li>
+                <li><strong className="text-slate-800">Small Caps (ᴀʙᴄ):</strong> Aporta sofisticación minimalista y sobriedad.</li>
+                <li><strong className="text-slate-800">Gótica / Fraktur:</strong> Comunica presencia, estilo dark, anime o competitivo gamer.</li>
               </ul>
             </div>
             <div className="pt-3 border-t border-slate-200/60 text-[11px] text-slate-500 font-medium flex items-center justify-between">
-              <span>Impacto en CTR de Perfil: +34%</span>
+              <span>Uso visual en perfiles y biografías</span>
               <span className="text-pink-600 font-bold">Diseño Aesthetic</span>
             </div>
           </article>
@@ -116,7 +116,7 @@ export const EditorialTypographyMasterclass: React.FC<EditorialTypographyMasterc
                 4. Codificación UTF-8, Puntos de Código y Normalización
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Mientras que el alfabeto tradicional latino ocupa 1 byte por carácter en codificación UTF-8, los caracteres Unicode avanzados emplean secuencias de 2 a 4 bytes. Nuestro motor de conversión gestiona automáticamente los pares subrogados (<em className="text-slate-700">surrogate pairs</em>) de JavaScript para evitar cortes a mitad de carácter y garantizar que el botón de copiado entregue un texto íntegro en cualquier portapapeles.
+                Mientras que el alfabeto tradicional latino ocupa 1 byte por carácter en codificación UTF-8, los caracteres Unicode avanzados emplean secuencias de 2 a 4 bytes. Nuestro motor de conversión gestiona automáticamente los pares subrogados (<em className="text-slate-700">surrogate pairs</em>) de JavaScript para evitar cortes a mitad de carácter y permitir que el botón de copiado entregue un texto íntegro en el portapapeles.
               </p>
             </div>
             <div className="pt-3 border-t border-slate-200/60 text-[11px] text-slate-500 font-medium flex items-center justify-between">
@@ -130,12 +130,12 @@ export const EditorialTypographyMasterclass: React.FC<EditorialTypographyMasterc
         <div className="p-4 rounded-2xl bg-indigo-50/50 border border-indigo-100 text-xs text-indigo-900/90 flex items-center gap-3">
           <CheckCircle className="w-5 h-5 text-indigo-600 shrink-0" />
           <p>
-            <strong>Compromiso con la Calidad:</strong> En Conversor de Letras Bonitas actualizamos periódicamente nuestra base de datos según las nuevas versiones publicadas por el <em>Unicode Consortium</em> para asegurar la compatibilidad con iOS 18+, Android 15+ y los últimos parches de videojuegos.
+            <strong>Actualización técnica:</strong> En Conversor de Letras Bonitas revisamos periódicamente nuestras tablas según los lanzamientos y revisiones publicadas por el <em>Unicode Consortium</em> para mejorar la compatibilidad en navegadores y sistemas operativos recientes.
           </p>
         </div>
 
         {/* User Helpful Feedback Widget */}
-        <ArticleHelpfulFeedback articleTitle="Guía Editorial de Tipografía Digital y Accesibilidad Unicode" />
+        <ArticleHelpfulFeedback articleTitle="Guía de Tipografía Digital y Accesibilidad Unicode" />
       </section>
 
       {/* Author & Editorial Board Box */}

@@ -102,7 +102,7 @@ export const AlphabetReferenceTable: React.FC = () => {
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200/80 text-indigo-700 text-xs font-bold mb-3 shadow-2xs">
             <Table className="w-3.5 h-3.5" />
-            <span>Guía E-E-A-T & Tabla de Caracteres Unicode</span>
+            <span>Guía Técnica & Tabla de Caracteres Unicode</span>
           </div>
           <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
             Abecedario de Letras Bonitas (A-Z) para Copiar y Pegar

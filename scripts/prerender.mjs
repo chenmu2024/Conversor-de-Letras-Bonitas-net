@@ -207,11 +207,9 @@ async function runPrerender() {
       `<script type="application/ld+json">\n${JSON.stringify(structuredData, null, 2)}\n    </script>`
     );
 
-    // Replace root element content with SSR rendered React markup
-    const rootStart = pageHtml.indexOf('<div id="root">');
-    const bodyEnd = pageHtml.indexOf('</body>');
-    if (rootStart !== -1 && bodyEnd !== -1) {
-      pageHtml = pageHtml.slice(0, rootStart) + `<div id="root">${appHtml}</div>` + pageHtml.slice(bodyEnd);
+    // Replace root element content with SSR rendered React markup safely
+    if (pageHtml.includes('<div id="root"></div>')) {
+      pageHtml = pageHtml.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
     } else {
       pageHtml = pageHtml.replace(
         /<div\s+id=["']root["']>[\s\S]*?<\/div>/i,

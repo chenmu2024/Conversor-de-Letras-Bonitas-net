@@ -499,7 +499,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
       title: 'Generador de Nicks para Free Fire (Alas, Insanos & ⓥ)',
       subtitle: 'Crea nombres con alas ꧁༺ ༻꧂, coronas de rey 亗, V de verificado ⓥ y el espacio invisible [ㅤ] para Free Fire.',
       icon: <Flame className="w-4 h-4 text-red-500" />,
-      badge: '🔥 Top 1 Nicks Gamer',
+      badge: '🎮 Nicks Gamer',
       gradient: 'from-red-600 via-orange-600 to-amber-600',
     },
     'letras-chinas': {
@@ -594,17 +594,17 @@ export const FontConverter: React.FC<FontConverterProps> = ({
       gradient: 'from-indigo-600 to-pink-600',
     },
     'sobre-nosotros': {
-      title: 'Sobre Nosotros - Conversor de Letras Bonitas E-E-A-T',
-      subtitle: 'Conoce nuestro equipo, metodología de compatibilidad Unicode y estándares de desarrollo de tipografías.',
+      title: 'Sobre Nosotros - Conversor de Letras Bonitas',
+      subtitle: 'Conoce la metodología de compatibilidad Unicode y estándares de desarrollo del conversor.',
       icon: <Sparkles className="w-4 h-4 text-indigo-600" />,
       badge: 'Sobre Nosotros',
       gradient: 'from-indigo-600 to-slate-900',
     },
     'politica-de-privacidad': {
       title: 'Política de Privacidad y Procesamiento Seguro',
-      subtitle: 'Garantía de procesamiento 100% en cliente. Cero almacenamiento o recolección de tus textos en servidores.',
+      subtitle: 'El texto introducido se procesa localmente en el navegador, sin almacenar tus frases en servidores.',
       icon: <Sparkles className="w-4 h-4 text-emerald-600" />,
-      badge: 'Privacidad Garantizada',
+      badge: 'Privacidad y Seguridad',
       gradient: 'from-emerald-600 to-slate-900',
     },
     'politica-de-cookies': {

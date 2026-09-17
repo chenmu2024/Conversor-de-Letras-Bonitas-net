@@ -1,291 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <!-- Homepage -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://conversordeletrasbonitas.net/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://conversordeletrasbonitas.net/" />
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://conversordeletrasbonitas.net/" />
-    <xhtml:link rel="alternate" hreflang="es-AR" href="https://conversordeletrasbonitas.net/" />
-    <xhtml:link rel="alternate" hreflang="es-PE" href="https://conversordeletrasbonitas.net/" />
-    <xhtml:link rel="alternate" hreflang="es-CL" href="https://conversordeletrasbonitas.net/" />
-    <xhtml:link rel="alternate" hreflang="es-US" href="https://conversordeletrasbonitas.net/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/" />
   </url>
-
-  <!-- Platform Silos -->
   <url>
     <loc>https://conversordeletrasbonitas.net/letras-para-instagram/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/letras-para-instagram/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/letras-para-instagram/" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://conversordeletrasbonitas.net/letras-para-instagram/" />
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://conversordeletrasbonitas.net/letras-para-instagram/" />
-    <xhtml:link rel="alternate" hreflang="es-AR" href="https://conversordeletrasbonitas.net/letras-para-instagram/" />
-    <xhtml:link rel="alternate" hreflang="es-PE" href="https://conversordeletrasbonitas.net/letras-para-instagram/" />
-    <xhtml:link rel="alternate" hreflang="es-CL" href="https://conversordeletrasbonitas.net/letras-para-instagram/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/letras-para-instagram/" />
-  </url>
-  <url>
-    <loc>https://conversordeletrasbonitas.net/letras-para-free-fire/</loc>
-    <lastmod>2026-08-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/letras-para-free-fire/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/letras-para-free-fire/" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://conversordeletrasbonitas.net/letras-para-free-fire/" />
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://conversordeletrasbonitas.net/letras-para-free-fire/" />
-    <xhtml:link rel="alternate" hreflang="es-AR" href="https://conversordeletrasbonitas.net/letras-para-free-fire/" />
-    <xhtml:link rel="alternate" hreflang="es-PE" href="https://conversordeletrasbonitas.net/letras-para-free-fire/" />
-    <xhtml:link rel="alternate" hreflang="es-CL" href="https://conversordeletrasbonitas.net/letras-para-free-fire/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/letras-para-free-fire/" />
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://conversordeletrasbonitas.net/letras-para-tiktok/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/letras-para-tiktok/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/letras-para-tiktok/" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://conversordeletrasbonitas.net/letras-para-tiktok/" />
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://conversordeletrasbonitas.net/letras-para-tiktok/" />
-    <xhtml:link rel="alternate" hreflang="es-AR" href="https://conversordeletrasbonitas.net/letras-para-tiktok/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/letras-para-tiktok/" />
   </url>
   <url>
     <loc>https://conversordeletrasbonitas.net/letras-para-whatsapp/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/letras-para-whatsapp/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/letras-para-whatsapp/" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://conversordeletrasbonitas.net/letras-para-whatsapp/" />
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://conversordeletrasbonitas.net/letras-para-whatsapp/" />
-    <xhtml:link rel="alternate" hreflang="es-AR" href="https://conversordeletrasbonitas.net/letras-para-whatsapp/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/letras-para-whatsapp/" />
+  </url>
+  <url>
+    <loc>https://conversordeletrasbonitas.net/letras-para-free-fire/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://conversordeletrasbonitas.net/letras-para-facebook/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/letras-para-facebook/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/letras-para-facebook/" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://conversordeletrasbonitas.net/letras-para-facebook/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/letras-para-facebook/" />
+    <priority>0.8</priority>
   </url>
-
-  <!-- Typography Style Silos -->
   <url>
     <loc>https://conversordeletrasbonitas.net/letras-chidas/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.98</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/letras-chidas/" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://conversordeletrasbonitas.net/letras-chidas/" />
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://conversordeletrasbonitas.net/letras-chidas/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/letras-chidas/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/letras-chidas/" />
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://conversordeletrasbonitas.net/letras-elegantes/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/letras-elegantes/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/letras-elegantes/" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://conversordeletrasbonitas.net/letras-elegantes/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/letras-elegantes/" />
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://conversordeletrasbonitas.net/letras-raras/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.92</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/letras-raras/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/letras-raras/" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://conversordeletrasbonitas.net/letras-raras/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/letras-raras/" />
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://conversordeletrasbonitas.net/letras-para-tatuajes/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/letras-para-tatuajes/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/letras-para-tatuajes/" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://conversordeletrasbonitas.net/letras-para-tatuajes/" />
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://conversordeletrasbonitas.net/letras-para-tatuajes/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/letras-para-tatuajes/" />
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://conversordeletrasbonitas.net/generador-de-nicks-free-fire/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.97</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/generador-de-nicks-free-fire/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/generador-de-nicks-free-fire/" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://conversordeletrasbonitas.net/generador-de-nicks-free-fire/" />
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://conversordeletrasbonitas.net/generador-de-nicks-free-fire/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/generador-de-nicks-free-fire/" />
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://conversordeletrasbonitas.net/letras-chinas/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.93</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/letras-chinas/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/letras-chinas/" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://conversordeletrasbonitas.net/letras-chinas/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/letras-chinas/" />
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://conversordeletrasbonitas.net/espacio-invisible/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.96</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/espacio-invisible/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/espacio-invisible/" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://conversordeletrasbonitas.net/espacio-invisible/" />
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://conversordeletrasbonitas.net/espacio-invisible/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/espacio-invisible/" />
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://conversordeletrasbonitas.net/nombres-para-parejas/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <loc>https://conversordeletrasbonitas.net/nombres-parejas/</loc>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.94</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/nombres-para-parejas/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/nombres-para-parejas/" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://conversordeletrasbonitas.net/nombres-para-parejas/" />
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://conversordeletrasbonitas.net/nombres-para-parejas/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/nombres-para-parejas/" />
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://conversordeletrasbonitas.net/abecedario-letras-bonitas/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.92</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/abecedario-letras-bonitas/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/abecedario-letras-bonitas/" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://conversordeletrasbonitas.net/abecedario-letras-bonitas/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/abecedario-letras-bonitas/" />
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://conversordeletrasbonitas.net/traductor-cursiva/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/traductor-cursiva/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/traductor-cursiva/" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://conversordeletrasbonitas.net/traductor-cursiva/" />
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://conversordeletrasbonitas.net/traductor-cursiva/" />
-    <xhtml:link rel="alternate" hreflang="es-AR" href="https://conversordeletrasbonitas.net/traductor-cursiva/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/traductor-cursiva/" />
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://conversordeletrasbonitas.net/letras-goticas/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/letras-goticas/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/letras-goticas/" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://conversordeletrasbonitas.net/letras-goticas/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/letras-goticas/" />
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://conversordeletrasbonitas.net/letras-tachadas-e-invertidas/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/letras-tachadas-e-invertidas/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/letras-tachadas-e-invertidas/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/letras-tachadas-e-invertidas/" />
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://conversordeletrasbonitas.net/letras-en-circulos-y-cuadros/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/letras-en-circulos-y-cuadros/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/letras-en-circulos-y-cuadros/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/letras-en-circulos-y-cuadros/" />
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://conversordeletrasbonitas.net/letras-glitch-zalgo/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/letras-glitch-zalgo/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/letras-glitch-zalgo/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/letras-glitch-zalgo/" />
+    <priority>0.8</priority>
   </url>
-
-  <!-- Tools & Utilities -->
   <url>
     <loc>https://conversordeletrasbonitas.net/simbolos-y-emojis/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/simbolos-y-emojis/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/simbolos-y-emojis/" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://conversordeletrasbonitas.net/simbolos-y-emojis/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/simbolos-y-emojis/" />
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://conversordeletrasbonitas.net/decorador-de-nicks/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/decorador-de-nicks/" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/decorador-de-nicks/" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://conversordeletrasbonitas.net/decorador-de-nicks/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/decorador-de-nicks/" />
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://conversordeletrasbonitas.net/contador-de-caracteres-bio/</loc>
-    <lastmod>2026-08-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/contador-de-caracteres-bio/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/contador-de-caracteres-bio/" />
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
-
-  <!-- Institutional / E-E-A-T Pages -->
   <url>
     <loc>https://conversordeletrasbonitas.net/sobre-nosotros/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://conversordeletrasbonitas.net/politica-de-privacidad/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://conversordeletrasbonitas.net/politica-de-cookies/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://conversordeletrasbonitas.net/terminos-y-condiciones/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://conversordeletrasbonitas.net/contacto/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

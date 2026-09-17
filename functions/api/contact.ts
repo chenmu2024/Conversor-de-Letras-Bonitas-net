@@ -12,24 +12,52 @@ type PagesFunction<T = unknown> = (context: {
   waitUntil: (promise: Promise<unknown>) => void;
 }) => Response | Promise<Response>;
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const ALLOWED_TOPICS = new Set(['sugerencia', 'error', 'duda']);
+
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const { request, env } = context;
 
-  // Handle CORS headers if needed
   const corsHeaders = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
   };
 
   try {
+    // 1. Origin / Referer check if present
+    const origin = request.headers.get('origin');
+    const referer = request.headers.get('referer');
+    if (origin && !origin.includes('conversordeletrasbonitas.net') && !origin.includes('localhost') && !origin.includes('127.0.0.1') && !origin.includes('.run.app')) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'Origen de petición no autorizado.' }),
+        { status: 403, headers: corsHeaders }
+      );
+    }
+
     const data = await request.json().catch(() => null) as {
       name?: string;
       email?: string;
       topic?: string;
       message?: string;
+      website?: string; // Honeypot field
     } | null;
 
-    if (!data || !data.message || typeof data.message !== 'string' || !data.message.trim()) {
+    if (!data) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'Datos no válidos.' }),
+        { status: 400, headers: corsHeaders }
+      );
+    }
+
+    // 2. Honeypot check - if filled, silently succeed
+    if (data.website && typeof data.website === 'string' && data.website.trim() !== '') {
+      return new Response(
+        JSON.stringify({ success: true, message: 'Mensaje enviado correctamente.' }),
+        { status: 200, headers: corsHeaders }
+      );
+    }
+
+    if (!data.message || typeof data.message !== 'string' || !data.message.trim()) {
       return new Response(
         JSON.stringify({
           success: false,
@@ -39,9 +67,11 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       );
     }
 
-    const name = (data.name || 'Anónimo').trim().slice(0, 100);
-    const email = (data.email || 'No proporcionado').trim().slice(0, 120);
-    const topic = (data.topic || 'general').trim().slice(0, 50);
+    const name = (typeof data.name === 'string' ? data.name : 'Anónimo').trim().slice(0, 100);
+    const rawEmail = (typeof data.email === 'string' ? data.email : '').trim().slice(0, 254);
+    const isValidEmail = rawEmail.length > 0 && EMAIL_REGEX.test(rawEmail);
+    const rawTopic = typeof data.topic === 'string' ? data.topic.trim().toLowerCase() : 'sugerencia';
+    const topic = ALLOWED_TOPICS.has(rawTopic) ? rawTopic : 'sugerencia';
     const message = data.message.trim().slice(0, 5000);
 
     const recipientEmail = env.CONTACT_EMAIL || 'soporte@conversordeletrasbonitas.net';
@@ -57,9 +87,9 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         body: JSON.stringify({
           from: 'Conversor de Letras Bonitas <contacto@conversordeletrasbonitas.net>',
           to: recipientEmail,
-          reply_to: email.includes('@') ? email : undefined,
-          subject: `[Contacto - ${topic}] Nuevo mensaje de ${name}`,
-          text: `Nuevo mensaje recibido a través del formulario de contacto:\n\nNombre: ${name}\nEmail: ${email}\nMotivo: ${topic}\n\nMensaje:\n${message}\n\nFecha: ${new Date().toISOString()}`,
+          reply_to: isValidEmail ? rawEmail : undefined,
+          subject: `[Contacto - ${topic}] Nuevo mensaje de ${name || 'Usuario'}`,
+          text: `Nuevo mensaje recibido a través del formulario de contacto:\n\nNombre: ${name}\nEmail: ${rawEmail || 'No proporcionado'}\nMotivo: ${topic}\n\nMensaje:\n${message}\n\nFecha: ${new Date().toISOString()}`,
         }),
       });
 
@@ -86,7 +116,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       );
     }
 
-    // If Resend API Key is not configured, do not pretend to succeed
+    // If Resend API Key is not configured
     console.warn('RESEND_API_KEY no configurado en Cloudflare Pages / entorno.');
     return new Response(
       JSON.stringify({

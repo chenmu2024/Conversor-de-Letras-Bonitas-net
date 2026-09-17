@@ -73,7 +73,7 @@ export const SubStudioRouter: React.FC<SubStudioRouterProps> = ({
 
         {currentRoute === 'sobre-nosotros' && (
           <div className="mb-8">
-            <AboutUsPage />
+            <AboutUsPage onRouteChange={onRouteChange} />
           </div>
         )}
 

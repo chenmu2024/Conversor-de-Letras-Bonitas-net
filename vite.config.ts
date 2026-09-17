@@ -17,7 +17,15 @@ function contactApiDevPlugin(): Plugin {
             res.setHeader('Content-Type', 'application/json');
             try {
               const data = JSON.parse(body || '{}');
-              if (!data.message || !data.message.trim()) {
+
+              // Honeypot check
+              if (data.website && typeof data.website === 'string' && data.website.trim() !== '') {
+                res.statusCode = 200;
+                res.end(JSON.stringify({ success: true, message: 'Mensaje enviado correctamente.' }));
+                return;
+              }
+
+              if (!data.message || typeof data.message !== 'string' || !data.message.trim()) {
                 res.statusCode = 400;
                 res.end(JSON.stringify({
                   success: false,
@@ -25,6 +33,14 @@ function contactApiDevPlugin(): Plugin {
                 }));
                 return;
               }
+
+              const name = (typeof data.name === 'string' ? data.name : 'Anónimo').trim().slice(0, 100);
+              const email = (typeof data.email === 'string' ? data.email : '').trim().slice(0, 254);
+              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              const isValidEmail = email.length > 0 && emailRegex.test(email);
+              const allowedTopics = new Set(['sugerencia', 'error', 'duda']);
+              const topic = allowedTopics.has(data.topic) ? data.topic : 'sugerencia';
+              const message = data.message.trim().slice(0, 5000);
 
               const resendApiKey = process.env.RESEND_API_KEY;
               if (resendApiKey) {
@@ -37,9 +53,9 @@ function contactApiDevPlugin(): Plugin {
                   body: JSON.stringify({
                     from: 'Conversor de Letras Bonitas <contacto@conversordeletrasbonitas.net>',
                     to: process.env.CONTACT_EMAIL || 'soporte@conversordeletrasbonitas.net',
-                    reply_to: data.email && data.email.includes('@') ? data.email : undefined,
-                    subject: `[Contacto - ${data.topic || 'general'}] Nuevo mensaje de ${data.name || 'Anónimo'}`,
-                    text: `Nuevo mensaje recibido:\n\nNombre: ${data.name}\nEmail: ${data.email}\nMotivo: ${data.topic}\nMensaje:\n${data.message}`,
+                    reply_to: isValidEmail ? email : undefined,
+                    subject: `[Contacto - ${topic}] Nuevo mensaje de ${name}`,
+                    text: `Nuevo mensaje recibido:\n\nNombre: ${name}\nEmail: ${email || 'No proporcionado'}\nMotivo: ${topic}\nMensaje:\n${message}`,
                   }),
                 })
                   .then(async (resp) => {
@@ -67,7 +83,7 @@ function contactApiDevPlugin(): Plugin {
                     }));
                   });
               } else {
-                // Without RESEND_API_KEY, return clear failure without faking success
+                // Without RESEND_API_KEY, return clear 503 without faking success
                 res.statusCode = 503;
                 res.end(JSON.stringify({
                   success: false,

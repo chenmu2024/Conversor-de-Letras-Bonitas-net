@@ -89,10 +89,10 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
             </ul>
           </div>
 
-          {/* Col 4: Recursos y E-E-A-T */}
+          {/* Col 4: Recursos */}
           <div>
             <h3 className="text-xs font-black text-slate-200 uppercase tracking-widest mb-4">
-              Recursos & E-E-A-T
+              Recursos
             </h3>
             <ul className="space-y-2.5 text-xs font-medium">
               <li>{renderLink('contador-bio', 'Contador Caracteres Bio (/contador-de-caracteres-bio/)', 'hover:text-amber-400 transition-colors text-left text-amber-300/90 font-bold block')}</li>
@@ -130,7 +130,7 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
             <strong>Aviso Legal y Exención de Responsabilidad de Marcas (Fair Use):</strong> Instagram™, TikTok™, WhatsApp™, Free Fire™ (Garena), Facebook™ y Twitter/X™ son marcas comerciales registradas propiedad de sus respectivas compañías. <span className="text-slate-400">Conversor de Letras Bonitas</span> es una herramienta de utilidad tipográfica independiente basada en los estándares abiertos del <em>Consorcio Unicode (ISO/IEC 10646)</em> y no mantiene relación comercial, patrocinio ni respaldo oficial por parte de dichas corporaciones.
           </p>
           <p className="text-[10px] text-slate-600">
-            Cumplimiento regulatorio internacional: RGPD (UE 2016/679), CCPA/CPRA (California), LGPD (Brasil), Ley 25.326 (Argentina), Ley Federal de Protección de Datos Personales (México INAI) y Ley 1581 (Colombia SIC).
+            Consulta nuestra Política de Privacidad para conocer cómo tratamos los datos técnicos y las tecnologías utilizadas en el sitio.
           </p>
         </div>
 

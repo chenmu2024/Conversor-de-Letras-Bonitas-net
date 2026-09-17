@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { ShieldCheck, Lock, AlertTriangle, CheckCircle, Info, Sparkles, HelpCircle, Terminal, RefreshCw } from 'lucide-react';
+import { ShieldCheck, Lock, AlertTriangle, CheckCircle, Info, Sparkles, Terminal } from 'lucide-react';
 
 export const SafetyAndUnicodeGuide: React.FC = () => {
-  const [deviceCharTest, setDeviceCharTest] = useState<'testing' | 'supported' | 'partial'>('supported');
-
   const testSamples = [
     { label: 'Cursiva Script', char: '𝓐' },
     { label: 'Gótica Fraktur', char: '𝕲' },
@@ -24,39 +22,39 @@ export const SafetyAndUnicodeGuide: React.FC = () => {
           <div>
             <div className="flex items-center gap-2">
               <span className="text-[11px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-100/80 text-emerald-800 border border-emerald-200">
-                🔒 Guía Oficial del Conversor de Letras Bonitas
+                Guía de seguridad y compatibilidad Unicode
               </span>
             </div>
             <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-              Seguridad y Legalidad del Conversor de Letras Bonitas
+              Seguridad y Funcionamiento Técnico de las Fuentes Unicode
             </h2>
           </div>
         </div>
 
         <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-700">
           <CheckCircle className="w-4 h-4 text-emerald-600" />
-          <span>Conversor de Letras Bonitas 100% Legal · Sin Riesgo</span>
+          <span>Caracteres Unicode estándar · Sin instalación</span>
         </div>
       </div>
 
       {/* Main Grid: Security FAQ & Technical Unicode Explanation */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-6">
-        {/* Card 1: Anti-ban Guarantee */}
+        {/* Card 1: Technical nature & Platform rules */}
         <div className="p-5 rounded-xl bg-gradient-to-b from-slate-50 to-white border border-slate-200/80 flex flex-col justify-between">
           <div>
             <div className="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center mb-3">
               <Lock className="w-4 h-4" />
             </div>
             <h3 className="text-sm font-bold text-slate-900 mb-2">
-              ¿Es seguro el Conversor de Letras Bonitas para Free Fire e Instagram?
+              ¿Cómo funciona el conversor respecto a juegos y redes sociales?
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              <strong className="text-slate-800">Sí, el Conversor de Letras Bonitas es totalmente seguro.</strong> Todas las fuentes y símbolos del Conversor de Letras Bonitas pertenecen a la tabla estándar del <strong className="text-indigo-600">Consorcio Unicode Oficial</strong>. No modifican los archivos del juego, no son programas de terceros (hacks) ni inyectan código ejecutable.
+              El conversor genera caracteres Unicode y no modifica archivos de juegos, no instala software y no inyecta código. La aceptación de nombres, símbolos o caracteres especiales depende de las reglas actuales de cada plataforma. Recomendamos revisar las políticas del servicio antes de utilizar caracteres especiales en nombres de usuario o competiciones.
             </p>
           </div>
-          <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] text-emerald-700 font-semibold">
-            <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Permitido en Torneos Oficiales y Redes Sociales</span>
+          <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] text-slate-600 font-semibold">
+            <Info className="w-3.5 h-3.5 text-slate-500" />
+            <span>Sujeto a las normas de cada plataforma</span>
           </div>
         </div>
 
@@ -70,12 +68,12 @@ export const SafetyAndUnicodeGuide: React.FC = () => {
               ¿Por qué el Conversor de Letras Bonitas funciona sin instalar fuentes?
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              En el Conversor de Letras Bonitas no instalas archivos <code className="px-1 py-0.5 bg-slate-100 rounded text-[11px] text-indigo-700">.ttf</code>. El motor del Conversor de Letras Bonitas traduce tus letras a glifos matemáticos universales (rango <strong className="text-slate-800">U+1D400..1D7FF</strong>) ya preinstalados en todos los dispositivos modernos.
+              En el Conversor de Letras Bonitas no instalas archivos <code className="px-1 py-0.5 bg-slate-100 rounded text-[11px] text-indigo-700">.ttf</code> ni aplicaciones adicionales. El motor traduce tus letras a glifos matemáticos universales (rango <strong className="text-slate-800">U+1D400..1D7FF</strong>) definidos en el estándar internacional Unicode.
             </p>
           </div>
           <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] text-indigo-700 font-semibold">
             <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
-            <span>Conversor de Letras Bonitas con Soporte Universal</span>
+            <span>Estándar Unicode Internacional</span>
           </div>
         </div>
 
@@ -86,15 +84,15 @@ export const SafetyAndUnicodeGuide: React.FC = () => {
               <AlertTriangle className="w-4 h-4" />
             </div>
             <h3 className="text-sm font-bold text-slate-900 mb-2">
-              ¿Por qué algunas fuentes del Conversor de Letras Bonitas muestran cuadros (□)?
+              ¿Por qué algunas fuentes pueden mostrar cuadros vacíos (□)?
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Este fenómeno se conoce como <strong className="text-slate-800">"Tofu"</strong>. Ocurre únicamente en dispositivos antiguos (Android 7 o inferior). En el Conversor de Letras Bonitas más del 99% de las tipografías son compatibles con las versiones modernas de iOS y Android.
+              Este fenómeno se conoce como <strong className="text-slate-800">"Tofu"</strong>. Ocurre si el sistema operativo o navegador carece del mapa tipográfico para ese glifo específico. La amplia mayoría de dispositivos actualizados incluyen soporte para estos bloques de símbolos.
             </p>
           </div>
           <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] text-amber-700 font-semibold">
             <Info className="w-3.5 h-3.5 text-amber-600" />
-            <span>Compatibilidad verificada en el Conversor de Letras Bonitas</span>
+            <span>Comprobación de visualización</span>
           </div>
         </div>
       </div>
@@ -105,11 +103,11 @@ export const SafetyAndUnicodeGuide: React.FC = () => {
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
             <span className="text-xs font-bold text-slate-800">
-              Inspector de Compatibilidad del Conversor de Letras Bonitas en tu Dispositivo:
+              Comprobación de visualización en tu dispositivo:
             </span>
           </div>
           <span className="text-[11px] text-slate-500">
-            Si puedes ver los símbolos abajo con claridad, tu pantalla es 100% compatible
+            Si puedes ver correctamente los símbolos siguientes, tu dispositivo admite estos caracteres concretos.
           </span>
         </div>
 
@@ -122,7 +120,7 @@ export const SafetyAndUnicodeGuide: React.FC = () => {
               <span className="text-[10px] text-slate-400 font-medium mb-0.5">{sample.label}</span>
               <span className="text-lg font-bold text-slate-800 my-0.5">{sample.visual || sample.char}</span>
               <span className="text-[9px] font-bold text-emerald-600 flex items-center gap-0.5">
-                <CheckCircle className="w-2.5 h-2.5" /> Compatible
+                <CheckCircle className="w-2.5 h-2.5" /> Visible
               </span>
             </div>
           ))}

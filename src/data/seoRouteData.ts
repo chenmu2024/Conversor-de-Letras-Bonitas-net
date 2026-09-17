@@ -31,7 +31,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
       'letras bonitas para copiar'
     ],
     canonical: 'https://conversordeletrasbonitas.net/',
-    badge: '🔥 Top 1 Conversor de Letras Bonitas',
+    badge: '✨ Conversor de Letras Bonitas',
     guideTitle: '¿Cómo Usar el Conversor de Letras Bonitas?',
     guideSteps: [
       { step: '1', title: 'Escribe tu Frase en el Conversor de Letras Bonitas', text: 'Introduce cualquier texto o apodo en el cuadro del Conversor de Letras Bonitas. La transformación ocurrirá en tiempo real sin demoras.' },
@@ -40,8 +40,8 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     ],
     faqs: [
       {
-        question: '¿Es 100% gratis este Conversor de Letras Bonitas?',
-        answer: 'Sí, el Conversor de Letras Bonitas ofrece todas sus fuentes, símbolos, letras cursivas y decoradores de manera 100% gratuita, sin registro ni descargas.'
+        question: '¿Es gratis este Conversor de Letras Bonitas?',
+        answer: 'Sí, el Conversor de Letras Bonitas ofrece todas sus fuentes, símbolos, letras cursivas y decoradores de manera gratuita, sin registro ni descargas.'
       },
       {
         question: '¿Por qué las fuentes del Conversor de Letras Bonitas se pueden copiar y pegar?',
@@ -53,7 +53,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
       },
       {
         question: '¿Las tipografías del Conversor de Letras Bonitas funcionan en WhatsApp e Instagram?',
-        answer: 'Sí, todas las combinaciones del Conversor de Letras Bonitas son 100% compatibles con Instagram Bio, TikTok, estados de WhatsApp, Facebook y Free Fire.'
+        answer: 'Sí, las combinaciones de caracteres Unicode funcionan en la biografía de Instagram, TikTok, estados de WhatsApp, Facebook y Free Fire en dispositivos actualizados.'
       },
       {
         question: '¿Cómo escribir con letras al revés en el Conversor de Letras Bonitas?',
@@ -94,15 +94,15 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     faqs: [
       {
         question: '¿Instagram penaliza o bloquea el uso de letras bonitas?',
-        answer: 'No, Instagram no bloquea ni penaliza el uso de estas fuentes porque son caracteres Unicode estándar, equivalentes a cualquier emoji o símbolo común.'
+        answer: 'El uso de caracteres Unicode en biografías y textos públicos está generalmente permitido en Instagram, de manera similar a los emojis y símbolos estándar.'
       },
       {
         question: '¿Cuántos caracteres puedo usar en la biografía de Instagram?',
-        answer: 'El límite máximo de la biografía de Instagram es de 150 caracteres. Ten en cuenta que algunas letras compuestas pueden contar como 2 caracteres Unicode.'
+        answer: 'El límite de la biografía de Instagram es normalmente de 150 caracteres. Ten en cuenta que algunas letras compuestas pueden contar como 2 caracteres Unicode.'
       }
     ],
     proTips: [
-      'Combina una primera línea en Negrita Serif con subtítulos en Cursiva Script para un perfil profesional y aesthetic.',
+      'Combina una primera línea en Negrita Serif con subtítulos en Cursiva Script para un perfil ordenado y aesthetic.',
       'Agrega saltos de línea limpios para que tu presentación sea fácil de leer.'
     ]
   },
@@ -121,7 +121,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
       'letras con alas free fire'
     ],
     canonical: 'https://conversordeletrasbonitas.net/letras-para-free-fire/',
-    badge: '🔥 Top 1 Gaming & Nicks Insanos',
+    badge: '🎮 Gaming & Nicks Insanos',
     guideTitle: '¿Cómo Crear el Mejor Nick para Free Fire con Alas y Espacio?',
     guideSteps: [
       { step: '1', title: 'Escribe tu Nickname', text: 'Escribe el nombre de tu clan o apodo en el conversor de letras.' },
@@ -167,13 +167,13 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     ],
     faqs: [
       {
-        question: '¿Las letras bonitas ayudan a tener más vistas en TikTok?',
-        answer: 'Sí, los textos destacados en negrita o tipografías aesthetic aumentan el CTR (porcentaje de clics) en las portadas y retienen la atención en los comentarios.'
+        question: '¿Las letras bonitas ayudan a destacar en TikTok?',
+        answer: 'Los textos destacados en negrita o tipografías aesthetic ayudan a estructurar el contenido visual y llamar la atención en biografías y descripciones.'
       }
     ],
     proTips: [
       'Usa letras en burbujas o círculos (🅣🅘🅚🅣🅞🅚) para títulos de series o playlists.',
-      'Combina emojis aesthetic (ʚɞ, ✦, ｡･:*) para darle un toque cute a tu descripción.'
+      'Combina emojis aesthetic (ʚɞ, ✦, ｡･:*) para darle un toque visual a tu descripción.'
     ]
   },
 
@@ -191,7 +191,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
       'letras para nombres whatsapp'
     ],
     canonical: 'https://conversordeletrasbonitas.net/letras-para-whatsapp/',
-    badge: '💬 100% Compatible con WhatsApp y WA Business',
+    badge: '💬 Fuentes para WhatsApp y WA Business',
     guideTitle: '¿Cómo Poner Letras Especiales en WhatsApp?',
     guideSteps: [
       { step: '1', title: 'Selecciona el Tipo de Letra', text: 'Escribe tu mensaje en el conversor para obtener decenas de fuentes visuales.' },
@@ -419,7 +419,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
       'nombres para clan free fire'
     ],
     canonical: 'https://conversordeletrasbonitas.net/generador-de-nicks-free-fire/',
-    badge: '🔥 Top 1 Nicks Gamer 2026',
+    badge: '🎮 Nicks Gamer 2026',
     guideTitle: '¿Cómo Crear y Copiar un Nick Insano para Free Fire?',
     guideSteps: [
       { step: '1', title: 'Escribe tu Apodo o Nombre', text: 'Escribe tu nombre de jugador en el generador gamer.' },
@@ -433,7 +433,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
       },
       {
         question: '¿Estos nicks con alas y símbolos son compatibles con el juego?',
-        answer: 'Sí, todos los símbolos e iconos están verificados y son 100% compatibles con el motor de Garena Free Fire en Android e iOS.'
+        answer: 'Los símbolos y caracteres de esta sección han sido seleccionados tras verificar su visualización en Free Fire para Android e iOS.'
       }
     ],
     proTips: [
@@ -549,7 +549,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
       },
       {
         question: '¿Se pueden usar estos nicks en Instagram y WhatsApp?',
-        answer: 'Sí, todos los caracteres y fuentes son 100% compatibles con biografías compartidas de Instagram, descripciones de TikTok y nombres de contacto en WhatsApp.'
+        answer: 'Sí, los caracteres y fuentes son compatibles con biografías compartidas de Instagram, descripciones de TikTok y nombres de contacto en WhatsApp.'
       }
     ],
     proTips: [
@@ -859,27 +859,27 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
 
   'sobre-nosotros': {
     title: 'Sobre Nosotros - Conversor de Letras Bonitas Unicode',
-    metaDescription: 'Conoce al equipo detrás de Conversor de Letras Bonitas. Nuestra metodología, estándares de compatibilidad Unicode y compromiso con la privacidad del usuario.',
-    h1: 'Sobre Nosotros y Nuestro Laboratorio Tipográfico',
-    h2Secondary: 'Compromiso E-E-A-T, Compatibilidad Unicode y Privacidad del Usuario',
+    metaDescription: 'Conoce la metodología, estándares de compatibilidad Unicode y funcionamiento del Conversor de Letras Bonitas.',
+    h1: 'Sobre Nosotros y Metodología Tipográfica',
+    h2Secondary: 'Compatibilidad Unicode, Metodología y Privacidad del Usuario',
     keywords: [
       'sobre nosotros letras bonitas',
-      'laboratorio unicode',
-      'equipo conversor de letras',
+      'metodologia unicode',
+      'conversor de letras',
       'compatibilidad tipografica'
     ],
     canonical: 'https://conversordeletrasbonitas.net/sobre-nosotros/',
-    badge: '🛡️ Autoridad y Transparencia E-E-A-T',
+    badge: '🛡️ Metodología y Transparencia',
     guideTitle: 'Nuestros Pilares de Calidad y Desarrollo',
     guideSteps: [
-      { step: '1', title: 'Estándar Unicode ISO/IEC 10646', text: 'Mapeamos más de 80 alfabetos matemáticos y glifos especiales garantizando compatibilidad en iOS, Android y Windows.' },
-      { step: '2', title: 'Procesamiento 100% en Cliente', text: 'Ningún texto introducido se almacena en servidores externos; la transformación se ejecuta de forma local en tu navegador.' },
-      { step: '3', title: 'Actualizaciones Constantes', text: 'Revisamos continuamente las actualizaciones de plataformas como Free Fire, Instagram y TikTok para evitar baneos o fallos de renderizado.' }
+      { step: '1', title: 'Estándar Unicode ISO/IEC 10646', text: 'Mapeamos alfabetos matemáticos y glifos especiales procurando compatibilidad en iOS, Android y Windows.' },
+      { step: '2', title: 'Procesamiento en el Navegador', text: 'El texto introducido en el conversor no se almacena en servidores; la transformación se ejecuta de forma local en tu navegador.' },
+      { step: '3', title: 'Actualizaciones Constantes', text: 'Revisamos periódicamente la visualización de glifos en plataformas como Free Fire, Instagram y TikTok para detectar caracteres no soportados o fallos de renderizado.' }
     ],
     faqs: [
       {
         question: '¿Quién mantiene esta herramienta?',
-        answer: 'Un equipo especializado en desarrollo web, accesibilidad digital y tipografía Unicode enfocado en la comunidad hispanohablante.'
+        answer: 'Un proyecto especializado en herramientas web y estándares de tipografía Unicode para la comunidad hispanohablante.'
       }
     ],
     proTips: [
@@ -891,7 +891,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     title: 'Política de Privacidad - Conversor de Letras Bonitas',
     metaDescription: 'Consulta nuestra política de privacidad, uso de cookies conforme a GDPR y CCPA, y declaración de publicidad de terceros.',
     h1: 'Política de Privacidad y Protección de Datos',
-    h2Secondary: 'Garantía de Procesamiento Local en el Dispositivo (Zero Server Logging) y Transparencia',
+    h2Secondary: 'Procesamiento Local en el Dispositivo y Transparencia',
     keywords: [
       'politica de privacidad letras bonitas',
       'terminos de uso conversor',
@@ -900,17 +900,17 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
       'gdpr ccpa letras bonitas'
     ],
     canonical: 'https://conversordeletrasbonitas.net/politica-de-privacidad/',
-    badge: '🔒 Privacidad Garantizada GDPR / CCPA',
+    badge: '🔒 Privacidad y Cumplimiento',
     guideTitle: 'Compromiso de Privacidad y Seguridad',
     guideSteps: [
-      { step: '1', title: 'Sin Registro Requerido', text: 'No solicitamos contraseñas, correos electrónicos ni datos de tarjetas.' },
-      { step: '2', title: 'Ejecución Local', text: 'Todos los algoritmos de conversión ocurren en la memoria RAM de tu navegador web.' },
-      { step: '3', title: 'Transparencia Total', text: 'Cumplimos con las regulaciones de protección de datos más estrictas a nivel global.' }
+      { step: '1', title: 'Sin Registro Requerido', text: 'No solicitamos contraseñas, correos electrónicos ni datos de tarjetas para usar el conversor.' },
+      { step: '2', title: 'Ejecución Local', text: 'Los algoritmos de conversión ocurren en el navegador de tu propio dispositivo.' },
+      { step: '3', title: 'Transparencia', text: 'Cumplimos con las normativas aplicables de protección de datos.' }
     ],
     faqs: [
       {
         question: '¿Se guardan mis textos en alguna base de datos?',
-        answer: 'No. El conversor funciona de manera 100% estática en el cliente (lado del navegador). El servidor jamás recibe ni almacena el contenido de tus textos.'
+        answer: 'No. El conversor funciona de manera local en el cliente (lado del navegador). El servidor no almacena el contenido de los textos que conviertes.'
       },
       {
         question: '¿Cómo gestiona este sitio las cookies publicitarias de Google AdSense?',
@@ -938,8 +938,8 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     guideTitle: 'Cómo Gestionamos las Cookies en este Sitio Web',
     guideSteps: [
       { step: '1', title: 'Cookies Técnicas Esenciales', text: 'Permiten la funcionalidad básica del conversor y almacenar localmente tus preferencias.' },
-      { step: '2', title: 'Publicidad de Google AdSense', text: 'Financian los servidores para ofrecer un servicio 100% gratuito y seguro.' },
-      { step: '3', title: 'Control Total del Usuario', text: 'Puedes modificar o retirar tu consentimiento en cualquier momento desde el panel inferior.' }
+      { step: '2', title: 'Publicidad de Google AdSense', text: 'Ayudan a mantener la infraestructura para ofrecer un servicio gratuito.' },
+      { step: '3', title: 'Control del Usuario', text: 'Puedes modificar o retirar tu consentimiento en cualquier momento desde el panel inferior.' }
     ],
     faqs: [
       {
