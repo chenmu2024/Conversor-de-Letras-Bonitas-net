@@ -48,10 +48,10 @@ export const PlatformPreview: React.FC<PlatformPreviewProps> = ({
   const displayText = text || 'Tu Texto Bonito Aquí ✨';
 
   const PLATFORM_CONFIGS = {
-    instagram: { name: 'Instagram Bio', limit: 150, tip: 'Límite oficial de biografía en Instagram: 150 caracteres.' },
-    tiktok: { name: 'TikTok Bio', limit: 80, tip: 'Límite oficial de biografía en TikTok: 80 caracteres.' },
-    whatsapp: { name: 'WhatsApp Info', limit: 139, tip: 'Límite oficial de estado/info en WhatsApp: 139 caracteres.' },
-    freefire: { name: 'Free Fire Nick', limit: 12, tip: 'Garena Free Fire corta nombres de más de 12 caracteres.' },
+    instagram: { name: 'Instagram Bio', limit: 150, tip: 'Límite habitual de biografía en Instagram: 150 caracteres.' },
+    tiktok: { name: 'TikTok Bio', limit: 80, tip: 'Límite habitual de biografía en TikTok: 80 caracteres.' },
+    whatsapp: { name: 'WhatsApp Info', limit: 139, tip: 'Límite habitual de estado/info en WhatsApp: 139 caracteres.' },
+    freefire: { name: 'Free Fire Nick', limit: 12, tip: 'Longitud habitual de 12 caracteres para nombres en Free Fire.' },
     facebook: { name: 'Facebook Post', limit: 500, tip: 'Recomendado hasta 500 caracteres para publicaciones legibles.' },
   };
 

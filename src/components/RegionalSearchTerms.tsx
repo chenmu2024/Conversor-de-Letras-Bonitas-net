@@ -188,7 +188,7 @@ export const RegionalSearchTerms: React.FC<RegionalSearchTermsProps> = ({ onAppl
         <div className="flex items-center gap-2">
           <Sparkles className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0" />
           <span>
-            <strong>Consejo SEO & Usabilidad:</strong> Todas las variaciones regionales son procesadas mediante el mismo algoritmo universal Unicode, garantizando compatibilidad en cualquier país.
+            <strong>Consejo SEO & Usabilidad:</strong> Todas las variaciones regionales son procesadas mediante el mismo algoritmo universal Unicode para favorecer la compatibilidad en cualquier país.
           </span>
         </div>
       </div>

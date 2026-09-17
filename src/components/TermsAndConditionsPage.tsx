@@ -104,10 +104,10 @@ export const TermsAndConditionsPage: React.FC = () => {
         <section className="space-y-2.5">
           <h2 className="font-bold text-base text-slate-900 flex items-center gap-2">
             <span className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-black">5</span>
-            Disponibilidad del Servicio y Garantías
+            Disponibilidad del Servicio y Exención de Responsabilidad
           </h2>
           <p>
-            El servicio se suministra «tal cual» (<em>as is</em>) y «según disponibilidad». Aunque nos esforzamos por garantizar una operatividad del 99.9% y compatibilidad universal en dispositivos móviles y de escritorio, no garantizamos que el servicio sea ininterrumpido o esté completamente libre de errores tipográficos en dispositivos heredados o desactualizados.
+            El servicio se suministra «tal cual» (<em>as is</em>) y «según disponibilidad». Aunque procuramos mantener una alta disponibilidad y amplia compatibilidad en dispositivos móviles y de escritorio, no se asegura que el servicio sea ininterrumpido o esté completamente libre de errores tipográficos en dispositivos heredados o desactualizados.
           </p>
         </section>
 

@@ -445,7 +445,7 @@ export const FacebookStudio: React.FC<FacebookStudioProps> = ({
             <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4 flex items-start gap-3">
               <AlertCircle className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
               <div className="text-xs text-blue-900 leading-relaxed">
-                <strong>Información oficial de Facebook:</strong> La sección "Presentación / Información personal" de Facebook admite hasta <strong>101 caracteres exactos</strong>. Si excedes este límite, el texto se cortará en los perfiles móviles.
+                <strong>Referencia de Facebook:</strong> La sección "Presentación / Información personal" de Facebook admite comúnmente hasta <strong>101 caracteres aproximados</strong>. Si excedes esta longitud, el texto puede cortarse en las vistas móviles.
               </div>
             </div>
 

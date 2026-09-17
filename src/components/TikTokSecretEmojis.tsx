@@ -86,7 +86,7 @@ export const TikTokSecretEmojis: React.FC = () => {
             Exclusivo de TikTok
           </span>
           <span className="text-[11px] text-slate-500 font-bold">
-            46 Códigos Oficiales
+            46 Códigos Compatibles
           </span>
         </div>
         <h3 className="font-extrabold text-lg text-slate-900 flex items-center gap-2 mt-1">
@@ -94,7 +94,7 @@ export const TikTokSecretEmojis: React.FC = () => {
           <span>Emojis Secretos y Ocultos de TikTok (Códigos entre Corchetes)</span>
         </h3>
         <p className="text-xs text-slate-500 mt-1">
-          TikTok cuenta con emojis secretos oficiales en 3D que solo aparecen cuando escribes el código exacto entre corchetes <code>[código]</code> en comentarios, videos y biografías. ¡Toca cualquier código para copiarlo al portapapeles!
+          TikTok reconoce una serie de emojis en 3D que aparecen cuando escribes el código correspondiente entre corchetes <code>[código]</code> en comentarios, videos y biografías. ¡Toca cualquier código para copiarlo al portapapeles!
         </p>
       </div>
 
@@ -186,7 +186,7 @@ export const TikTokSecretEmojis: React.FC = () => {
         <div>
           <strong className="text-slate-900">¿Cómo usar los emojis secretos en TikTok?</strong>
           <p className="mt-0.5 text-slate-600 leading-relaxed">
-            Solo copia el código con corchetes (por ejemplo <code>[wicked]</code> o <code>[yummy]</code>) y pégalo en un comentario o en la descripción de tu video de TikTok. En cuanto se publique, la app de TikTok lo transformará automáticamente en el sticker exclusivo oficial.
+            Solo copia el código con corchetes (por ejemplo <code>[wicked]</code> o <code>[yummy]</code>) y pégalo en un comentario o en la descripción de tu video de TikTok. En cuanto se publique, la app de TikTok lo transformará automáticamente en el sticker correspondiente.
           </p>
         </div>
       </div>

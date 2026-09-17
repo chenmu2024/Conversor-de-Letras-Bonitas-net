@@ -31,5 +31,4 @@ Allow: /
 User-agent: Applebot
 Allow: /
 
-Host: https://conversordeletrasbonitas.net
 Sitemap: https://conversordeletrasbonitas.net/sitemap.xml

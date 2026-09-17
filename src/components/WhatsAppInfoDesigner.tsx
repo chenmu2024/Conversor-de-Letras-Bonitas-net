@@ -57,7 +57,7 @@ export const WhatsAppInfoDesigner: React.FC = () => {
       <div>
         <div className="flex items-center gap-2">
           <span className="text-[10px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md uppercase tracking-wider">
-            Límite Oficial de 139 Caracteres
+            Referencia de 139 Caracteres
           </span>
           <span className="text-[11px] text-slate-500 font-bold">
             Acerca de / Info & Nombre de Perfil
@@ -68,7 +68,7 @@ export const WhatsAppInfoDesigner: React.FC = () => {
           <span>Diseñador de Info / Estado y Nombre de Perfil de WhatsApp</span>
         </h3>
         <p className="text-xs text-slate-500 mt-1">
-          Personaliza tu frase de "Info / Acerca de" con el contador oficial de 139 caracteres y estiliza tu Nombre Visible de WhatsApp con letras elegantes.
+          Personaliza tu frase de "Info / Acerca de" con el contador de 139 caracteres y estiliza tu Nombre Visible de WhatsApp con letras elegantes.
         </p>
       </div>
 

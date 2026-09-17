@@ -53,13 +53,29 @@ async function validateBuild() {
     }
 
     // Verify canonical
+    const expectedCanonical = seo.canonical.startsWith('http')
+      ? seo.canonical
+      : `https://conversordeletrasbonitas.net${seo.canonical}`;
     if (!html.includes('rel="canonical"')) {
       errors.push(`[${routeKey}] Missing canonical tag`);
+    } else if (!html.includes(`href="${expectedCanonical}"`)) {
+      errors.push(`[${routeKey}] Canonical URL mismatch: expected ${expectedCanonical}`);
     }
 
     // Verify robots
-    if (!html.includes('name="robots"')) {
-      errors.push(`[${routeKey}] Missing robots tag`);
+    if (routeKey === '404') {
+      if (!html.includes('content="noindex')) {
+        errors.push(`[${routeKey}] 404 page must have noindex in robots meta tag`);
+      }
+    } else {
+      if (!html.includes('name="robots"')) {
+        errors.push(`[${routeKey}] Missing robots tag`);
+      }
+    }
+
+    // Verify H1 tag exists
+    if (!html.includes('<h1') || !html.includes('</h1>')) {
+      errors.push(`[${routeKey}] Missing <h1> tag`);
     }
 
     // Verify OpenGraph
@@ -84,9 +100,60 @@ async function validateBuild() {
     errors.push('dist/sitemap.xml is missing');
   } else {
     const sitemapContent = fs.readFileSync(sitemapPath, 'utf8');
-    const sitemapUrlCount = (sitemapContent.match(/<loc>/g) || []).length;
+    const locMatches = [...sitemapContent.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]);
+    const sitemapUrlCount = locMatches.length;
+
     if (sitemapUrlCount !== 28) {
       errors.push(`dist/sitemap.xml has ${sitemapUrlCount} URLs instead of 28`);
+    }
+
+    // Check no duplicate URLs
+    const uniqueUrls = new Set(locMatches);
+    if (uniqueUrls.size !== sitemapUrlCount) {
+      errors.push(`dist/sitemap.xml contains duplicate URLs`);
+    }
+
+    // Check no 404 URL
+    if (sitemapContent.includes('404')) {
+      errors.push('dist/sitemap.xml must not contain 404 page');
+    }
+
+    // Check no regional hreflang links
+    if (sitemapContent.includes('hreflang') || sitemapContent.includes('xhtml:link')) {
+      errors.push('dist/sitemap.xml must not contain xhtml:link hreflang tags');
+    }
+
+    // Check no legacy alias URLs in sitemap
+    const legacyAliases = ['/instagram/', '/tiktok/', '/whatsapp/', '/free-fire/', '/facebook/', '/nicks-free-fire/'];
+    for (const alias of legacyAliases) {
+      if (sitemapContent.includes(`conversordeletrasbonitas.net${alias}`)) {
+        errors.push(`dist/sitemap.xml must not contain legacy alias URL: ${alias}`);
+      }
+    }
+  }
+
+  // Check _redirects
+  const redirectsPath = path.join(distDir, '_redirects');
+  if (!fs.existsSync(redirectsPath)) {
+    errors.push('dist/_redirects is missing');
+  } else {
+    const redirectsContent = fs.readFileSync(redirectsPath, 'utf8');
+    if (!redirectsContent.includes('/instagram/ /letras-para-instagram/ 301')) {
+      errors.push('dist/_redirects is missing key 301 redirect rules');
+    }
+  }
+
+  // Check robots.txt
+  const robotsPath = path.join(distDir, 'robots.txt');
+  if (!fs.existsSync(robotsPath)) {
+    errors.push('dist/robots.txt is missing');
+  } else {
+    const robotsContent = fs.readFileSync(robotsPath, 'utf8');
+    if (robotsContent.includes('Host:')) {
+      errors.push('dist/robots.txt should not contain non-standard Host: directive');
+    }
+    if (!robotsContent.includes('Sitemap: https://conversordeletrasbonitas.net/sitemap.xml')) {
+      errors.push('dist/robots.txt missing valid Sitemap directive');
     }
   }
 

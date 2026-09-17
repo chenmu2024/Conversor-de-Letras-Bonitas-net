@@ -33,7 +33,7 @@ export const NicksFreeFireStudio: React.FC<NicksFreeFireStudioProps> = ({
 
   const heroicoPresets = [
     { title: 'El Patrón Heroico', nick: '꧁༺ 𝕰𝖑 𝕻𝖆𝖙𝖗ó𝖓 ༻꧂', desc: 'Alas Simétricas' },
-    { title: 'V de Verificado Oficial', nick: 'ⓥ 𝕴𝕹𝕾𝕬𝕹𝕺 ⁹⁹⁹', desc: 'Insignia Verificado' },
+    { title: 'V de Verificado', nick: 'ⓥ 𝕴𝕹𝕾𝕬𝕹𝕺 ⁹⁹⁹', desc: 'Símbolo Verificado' },
     { title: 'Rey Tóxico', nick: '亗 𝑻𝑶𝑿𝑰𝑪𝑶 亗', desc: 'Corona de Rey' },
     { title: 'Bélico Pesado PvP', nick: '︻╦╤─ 𝕭𝖊𝖑𝖎𝖈𝖔 亗', desc: 'Arma MP40 / Francotirador' },
     { title: 'Ghost Clan Leader', nick: 'ᴮᴼˢˢ★ 𝕲𝖍𝖔𝖘𝖙 亗', desc: 'Clan Tag Boss' },

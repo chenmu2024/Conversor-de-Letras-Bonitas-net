@@ -97,7 +97,7 @@ export const WhatsAppStudio: React.FC<WhatsAppStudioProps> = ({
                   WhatsApp Suite Pro
                 </span>
                 <span className="text-xs text-white/80 font-bold hidden sm:inline">
-                  Formato Oficial · Negocios · Info 139 Chars · wa.me
+                  Formato Nativo · Negocios · Info 139 Chars · wa.me
                 </span>
               </div>
               <h2 className="text-xl sm:text-2xl font-black font-heading tracking-tight mt-0.5">
@@ -177,7 +177,7 @@ export const WhatsAppStudio: React.FC<WhatsAppStudioProps> = ({
               {/* WhatsApp Markdown Quick Formats */}
               <div>
                 <label className="text-xs font-extrabold text-slate-800 uppercase tracking-wider block mb-2">
-                  Formato Nativo Oficial de WhatsApp (Toca para aplicar):
+                  Formato Nativo de WhatsApp (Toca para aplicar):
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   <button

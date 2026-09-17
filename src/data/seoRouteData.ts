@@ -134,13 +134,13 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
         answer: 'El sistema del juego bloquea la barra espaciadora ordinaria (ASCII 32). La solución es usar el carácter especial Hangul Filler (U+3164), que el juego acepta como letra pero visualmente es invisible.'
       },
       {
-        question: '¿Cuál es el límite de letras para un nombre en Free Fire?',
-        answer: 'Free Fire permite un máximo de 12 caracteres para el Nick. Asegúrate de que los símbolos de alas no sobrepasen este límite.'
+        question: '¿Cuál es el límite habitual de letras para un nombre en Free Fire?',
+        answer: 'Free Fire suele aplicar como referencia un límite de hasta 12 caracteres para el apodo. Asegúrate de que los símbolos de alas no sobrepasen esta longitud.'
       }
     ],
     proTips: [
-      'El espacio invisible pequeño (U+FEFF) es perfecto para ajustar la longitud de nicks cortos.',
-      'Usa fuentes Small Caps (ᴍɪ ɴɪᴄᴋ) para que quepan nombres más largos dentro de los 12 caracteres permitidos.'
+      'El espacio invisible pequeño (U+FEFF) es útil para ajustar la longitud de apodos cortos.',
+      'Usa fuentes Small Caps (ᴍɪ ɴɪᴄᴋ) para que quepan nombres más largos dentro de la longitud habitual.'
     ]
   },
 
@@ -497,7 +497,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
       'hangul filler u3164'
     ],
     canonical: 'https://conversordeletrasbonitas.net/espacio-invisible/',
-    badge: '👻 Carácter Invisible Oficial U+3164',
+    badge: '👻 Carácter Invisible Unicode U+3164',
     guideTitle: '¿Cómo Usar el Espacio Invisible en Free Fire, WhatsApp e Instagram?',
     guideSteps: [
       { step: '1', title: 'Copia el Espacio Invisible', text: 'Haz clic en el botón "Copiar Espacio Invisible [ㅤ]" para guardarlo en tu portapapeles.' },
@@ -844,16 +844,16 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     faqs: [
       {
         question: '¿Los emojis y fuentes bonitas cuentan como 1 o más caracteres?',
-        answer: 'En la mayoría de plataformas (Instagram, TikTok), las letras Unicode estilizadas cuentan como 1 o 2 unidades de código UTF-16, mientras que los emojis complejos pueden ocupar hasta 4 bytes. Nuestro contador desglosa exactamente el espacio real que ocupan.'
+        answer: 'En la mayoría de plataformas (Instagram, TikTok), las letras Unicode estilizadas cuentan como 1 o 2 unidades de código UTF-16, mientras que los emojis complejos pueden ocupar hasta 4 bytes. Nuestro contador desglosa el espacio de referencia que ocupan.'
       },
       {
-        question: '¿Cuál es el límite oficial de caracteres en la biografía de Instagram?',
-        answer: 'El límite oficial es de 150 caracteres para la biografía y 30 caracteres para el campo de nombre.'
+        question: '¿Cuál es el límite habitual de caracteres en la biografía de Instagram?',
+        answer: 'Instagram suele permitir hasta 150 caracteres en la biografía y 30 caracteres en el campo de nombre. Este límite puede cambiar según futuras actualizaciones de la plataforma.'
       }
     ],
     proTips: [
-      'Aprovecha al máximo los 150 caracteres usando letras en negrita en la primera línea para captar la atención.',
-      'Los saltos de línea cuentan como 1 carácter cada uno en Instagram.'
+      'Aprovecha el espacio disponible usando letras en negrita en la primera línea para captar la atención.',
+      'Los saltos de línea suelen contar como 1 carácter cada uno en Instagram.'
     ]
   },
 
@@ -889,7 +889,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
 
   'politica-de-privacidad': {
     title: 'Política de Privacidad - Conversor de Letras Bonitas',
-    metaDescription: 'Consulta nuestra política de privacidad, uso de cookies conforme a GDPR y CCPA, y declaración de publicidad de terceros.',
+    metaDescription: 'Consulta nuestra política de privacidad, uso de cookies y opciones de protección de datos.',
     h1: 'Política de Privacidad y Protección de Datos',
     h2Secondary: 'Procesamiento Local en el Dispositivo y Transparencia',
     keywords: [
@@ -897,15 +897,15 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
       'terminos de uso conversor',
       'seguridad de datos',
       'politica de cookies',
-      'gdpr ccpa letras bonitas'
+      'privacidad letras bonitas'
     ],
     canonical: 'https://conversordeletrasbonitas.net/politica-de-privacidad/',
-    badge: '🔒 Privacidad y Cumplimiento',
+    badge: '🔒 Privacidad, Cookies y Datos',
     guideTitle: 'Compromiso de Privacidad y Seguridad',
     guideSteps: [
       { step: '1', title: 'Sin Registro Requerido', text: 'No solicitamos contraseñas, correos electrónicos ni datos de tarjetas para usar el conversor.' },
       { step: '2', title: 'Ejecución Local', text: 'Los algoritmos de conversión ocurren en el navegador de tu propio dispositivo.' },
-      { step: '3', title: 'Transparencia', text: 'Cumplimos con las normativas aplicables de protección de datos.' }
+      { step: '3', title: 'Transparencia', text: 'Esta política explica cómo funciona el procesamiento local, las cookies y los servicios de terceros utilizados por el sitio.' }
     ],
     faqs: [
       {

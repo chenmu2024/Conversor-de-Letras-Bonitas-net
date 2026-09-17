@@ -12,28 +12,41 @@ type PagesFunction<T = unknown> = (context: {
   waitUntil: (promise: Promise<unknown>) => void;
 }) => Response | Promise<Response>;
 
+const ALLOWED_ORIGINS = new Set([
+  'https://conversordeletrasbonitas.net',
+  'https://www.conversordeletrasbonitas.net',
+]);
+
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const ALLOWED_TOPICS = new Set(['sugerencia', 'error', 'duda']);
 
+// TODO: Add Turnstile or rate limiting before high traffic.
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const { request, env } = context;
 
-  const corsHeaders = {
+  const origin = request.headers.get('Origin') || request.headers.get('origin');
+
+  if (origin && !ALLOWED_ORIGINS.has(origin)) {
+    return new Response(
+      JSON.stringify({
+        success: false,
+        error: 'Origen de petición no autorizado.',
+      }),
+      {
+        status: 403,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
+
+  const corsHeaders: Record<string, string> = {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
+    ...(origin && ALLOWED_ORIGINS.has(origin) ? { 'Access-Control-Allow-Origin': origin } : {}),
   };
 
   try {
-    // 1. Origin / Referer check if present
-    const origin = request.headers.get('origin');
-    const referer = request.headers.get('referer');
-    if (origin && !origin.includes('conversordeletrasbonitas.net') && !origin.includes('localhost') && !origin.includes('127.0.0.1') && !origin.includes('.run.app')) {
-      return new Response(
-        JSON.stringify({ success: false, error: 'Origen de petición no autorizado.' }),
-        { status: 403, headers: corsHeaders }
-      );
-    }
-
     const data = await request.json().catch(() => null) as {
       name?: string;
       email?: string;

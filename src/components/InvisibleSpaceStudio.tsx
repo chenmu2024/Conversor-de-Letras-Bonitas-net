@@ -79,7 +79,7 @@ export const InvisibleSpaceStudio: React.FC<InvisibleSpaceStudioProps> = ({
           <div>
             <div className="flex items-center gap-2">
               <span className="text-[11px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                👻 Carácter Oficial Hangul Filler U+3164
+                👻 Carácter Hangul Filler U+3164
               </span>
             </div>
             <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">

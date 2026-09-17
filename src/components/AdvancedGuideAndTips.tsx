@@ -182,7 +182,7 @@ export const AdvancedGuideAndTips: React.FC = () => {
               No estás instalando archivos de fuentes (.ttf o .otf) en tu teléfono. El conversor sustituye los caracteres alfanuméricos ASCII estándar por <strong>símbolos Unicode universales</strong> (como los bloques matemáticos alfanuméricos).
             </p>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Esto garantiza que cualquier dispositivo Android, iPhone, iPad, Windows o Mac pueda leer el texto exactamente como lo ves aquí.
+              Esto permite que la gran mayoría de dispositivos Android, iPhone, iPad, Windows o Mac puedan interpretar el texto de forma consistente.
             </p>
           </div>
 
@@ -191,7 +191,7 @@ export const AdvancedGuideAndTips: React.FC = () => {
               <div className="w-7 h-7 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-black text-xs">
                 ✓
               </div>
-              <div className="text-xs font-extrabold text-slate-900">100% Compatible con Redes</div>
+              <div className="text-xs font-extrabold text-slate-900">Alta Compatibilidad con Redes</div>
               <p className="text-[11px] text-slate-600 leading-relaxed">
                 Pega sin errores en Instagram Bio, Historias, TikTok, WhatsApp, Facebook, Discord, Twitter / X y Telegram.
               </p>

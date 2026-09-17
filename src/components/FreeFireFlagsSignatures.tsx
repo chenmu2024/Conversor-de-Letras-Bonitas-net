@@ -107,9 +107,9 @@ interface ProSignaturePreset {
 const PRO_SIGNATURES: ProSignaturePreset[] = [
   {
     id: 'sig-1',
-    title: 'Ⓥ Influencer Verificado Oficial',
-    code: '[b][c][ffd319]Ⓥ [ffffff]JUGADOR OFICIAL',
-    preview: 'Ⓥ JUGADOR OFICIAL',
+    title: 'Ⓥ Estilo Influencer Verificado',
+    code: '[b][c][ffd319]Ⓥ [ffffff]JUGADOR PRO',
+    preview: 'Ⓥ JUGADOR PRO',
     tag: 'Influencer',
   },
   {
@@ -194,7 +194,7 @@ export const FreeFireFlagsSignatures: React.FC = () => {
             <Flag className="w-4 h-4" />
             <span>Creador de Banderas de Países:</span>
           </span>
-          <span className="text-[10px] text-slate-400">Códigos oficiales Garena</span>
+          <span className="text-[10px] text-slate-400">Códigos de color HEX</span>
         </div>
 
         {/* Flag Selector */}

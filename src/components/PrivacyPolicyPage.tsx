@@ -6,15 +6,15 @@ export const PrivacyPolicyPage: React.FC = () => {
     <div className="max-w-4xl mx-auto py-8 sm:py-12 space-y-10">
       {/* Header */}
       <div className="text-center space-y-3">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-black shadow-xs">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold shadow-xs">
           <Lock className="w-4 h-4" />
-          <span>Cumplimiento RGPD (GDPR), CCPA y Google AdSense</span>
+          <span>Privacidad, Cookies y Protección de Datos</span>
         </div>
         <h1 className="font-heading text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
           Política de Privacidad y Cookies
         </h1>
         <p className="text-sm sm:text-base text-slate-500 max-w-xl mx-auto">
-          Última actualización: Agosto de 2026. Tu privacidad, seguridad y el control de tus datos son nuestra prioridad absoluta.
+          Última actualización: Septiembre de 2026. Tu privacidad, seguridad y el control de tus datos son fundamentales.
         </p>
       </div>
 
@@ -56,7 +56,7 @@ export const PrivacyPolicyPage: React.FC = () => {
             <span>Cero Venta de Información</span>
           </div>
           <p className="text-xs text-slate-600 leading-relaxed">
-            Cumplimos estrictamente con la ley CCPA de California: <em>No vendemos ni compartimos su información personal</em> (Do Not Sell My Personal Information).
+            Esta política describe las opciones disponibles para los usuarios de California y otras regiones en materia de privacidad. <em>No vendemos ni compartimos su información personal</em>.
           </p>
         </div>
       </div>
@@ -74,19 +74,19 @@ export const PrivacyPolicyPage: React.FC = () => {
           </p>
         </section>
 
-        {/* 2. Publicidad de Terceros y Cookies de Google AdSense (Crucial for AdSense) */}
+        {/* 2. Publicidad de Terceros y Cookies de Google AdSense */}
         <section className="space-y-3 bg-amber-50/60 p-5 rounded-2xl border border-amber-200/80">
           <h2 className="font-bold text-base text-amber-950 flex items-center gap-2">
             <Cookie className="w-5 h-5 text-amber-600" />
-            <span>2. Publicidad, Proveedores de Terceros y Cookie DoubleClick de Google</span>
+            <span>2. Publicidad, Proveedores de Terceros y Cookies</span>
           </h2>
           <div className="space-y-2 text-xs sm:text-sm text-amber-900/90 leading-relaxed">
             <p>
-              Para mantener este servicio completamente gratuito, este sitio web utiliza servicios de publicidad de terceros, incluyendo <strong>Google AdSense</strong>. Le informamos sobre las siguientes prácticas estándar de la industria:
+              Para mantener este servicio completamente gratuito, si el sitio incorpora servicios de publicidad de terceros o redes como Google AdSense, le informamos sobre las siguientes prácticas estándar del sector:
             </p>
             <ul className="list-disc pl-5 space-y-1.5">
               <li>
-                <strong>Proveedores de terceros</strong>, incluido Google, utilizan cookies para publicar anuncios en función de las visitas anteriores de un usuario a este sitio web o a otros sitios web de Internet.
+                <strong>Proveedores de terceros</strong>, incluido Google, pueden utilizar cookies para publicar anuncios en función de las visitas anteriores de un usuario a este sitio web o a otros sitios web de Internet.
               </li>
               <li>
                 El uso de cookies de publicidad por parte de Google (como la cookie de <strong>DoubleClick DART</strong>) permite a Google y a sus socios comerciales mostrar anuncios pertinentes a los usuarios en función de sus visitas a este y otros sitios en la red.
@@ -141,13 +141,13 @@ export const PrivacyPolicyPage: React.FC = () => {
             <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
               <span className="font-bold text-slate-900">Cookies Analíticas</span>
               <p className="text-slate-600">
-                Nos permiten contabilizar visitas y fuentes de tráfico agregadas de forma anónima para medir y mejorar el rendimiento de la aplicación.
+                Si están habilitadas, permiten contabilizar visitas y fuentes de tráfico agregadas de forma anónima para medir y mejorar el rendimiento de la aplicación.
               </p>
             </div>
             <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
               <span className="font-bold text-slate-900">Cookies Publicitarias</span>
               <p className="text-slate-600">
-                Establecidas por socios publicitarios autorizados para mostrar anuncios relevantes acordes a sus intereses y limitar la frecuencia de un mismo anuncio.
+                En caso de integrarse anuncios de terceros, pueden ser establecidas por socios publicitarios autorizados para mostrar anuncios relevantes y limitar la frecuencia de un mismo anuncio.
               </p>
             </div>
           </div>
@@ -160,7 +160,7 @@ export const PrivacyPolicyPage: React.FC = () => {
             Derechos de los Usuarios según el RGPD / GDPR (Unión Europea)
           </h2>
           <p>
-            Si usted reside en el Espacio Económico Europeo (EEE), tiene garantizados los siguientes derechos respecto a sus datos:
+            Si usted reside en el Espacio Económico Europeo (EEE), tiene a su disposición los siguientes derechos respecto a sus datos:
           </p>
           <ul className="list-disc pl-5 space-y-1 text-xs sm:text-sm text-slate-600">
             <li><strong>Derecho de acceso:</strong> Conocer si se están tratando datos personales.</li>
@@ -177,10 +177,10 @@ export const PrivacyPolicyPage: React.FC = () => {
             Derechos de Privacidad en California (CCPA / CPRA) y Latinoamérica
           </h2>
           <p>
-            En cumplimiento de las normativas de California (CCPA/CPRA) y los marcos de protección de datos de Latinoamérica (como la Ley Federal de Protección de Datos Personales en México, Ley 25.326 de Argentina, Ley 1581 de Colombia y LGPD de Brasil):
+            En relación con las normativas de privacidad aplicables en California y otros países, ponemos a disposición de los usuarios mecanismos para gestionar o solicitar información sobre sus datos:
           </p>
           <ul className="list-disc pl-5 space-y-1 text-xs sm:text-sm text-slate-600">
-            <li><strong>No vendemos datos personales:</strong> No comercializamos, alquilamos ni cedemos información identificable con terceros ni intermediarios publicitarios.</li>
+            <li><strong>No venta de datos personales:</strong> No comercializamos, alquilamos ni cedemos información identificable con terceros ni intermediarios publicitarios.</li>
             <li><strong>Derechos ARCO (Acceso, Rectificación, Cancelación y Oposición):</strong> Los usuarios de cualquier país pueden solicitar el borrado de cualquier dato técnico transmitido en consultas de soporte.</li>
             <li><strong>Derecho a no discriminación:</strong> Todos los usuarios acceden a la totalidad de las fuentes y herramientas sin restricción independientemente de las opciones de privacidad seleccionadas.</li>
           </ul>
@@ -218,7 +218,7 @@ export const PrivacyPolicyPage: React.FC = () => {
       {/* Trust Seal */}
       <div className="text-center text-xs text-slate-400 flex items-center justify-center gap-2">
         <CheckCircle className="w-4 h-4 text-emerald-500" />
-        <span>Garantía de Privacidad, Transparencia y Cumplimiento Digital 2026</span>
+        <span>Privacidad y Transparencia · Última revisión: Septiembre 2026</span>
       </div>
     </div>
   );

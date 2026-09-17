@@ -135,7 +135,7 @@ export const WhatsAppBusinessTemplates: React.FC = () => {
             WhatsApp Business & Ventas
           </span>
           <span className="text-[11px] text-slate-500 font-bold">
-            Formato con Negritas, Monospaciado y Listas Oficiales
+            Formato con Negritas, Monospaciado y Listas Nativas
           </span>
         </div>
         <h3 className="font-extrabold text-lg text-slate-900 flex items-center gap-2 mt-1">
@@ -143,7 +143,7 @@ export const WhatsAppBusinessTemplates: React.FC = () => {
           <span>Plantillas Profesionales de Negocios y Atención al Cliente</span>
         </h3>
         <p className="text-xs text-slate-500 mt-1">
-          Copia mensajes perfectamente formateados con sintaxis oficial de WhatsApp (negritas <code>*texto*</code>, códigos monospaciados <code>```código```</code> para CBU/Alias y viñetas ordenadas).
+          Copia mensajes estructurados con sintaxis de WhatsApp (negritas <code>*texto*</code>, códigos monospaciados <code>```código```</code> para CBU/Alias y viñetas ordenadas).
         </p>
       </div>
 
