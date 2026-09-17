@@ -33,10 +33,10 @@ export const PrivacyPolicyPage: React.FC = () => {
         <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-2">
           <div className="flex items-center gap-2 text-indigo-600 font-bold text-sm">
             <Database className="w-5 h-5" />
-            <span>Procesamiento 100% en Cliente</span>
+            <span>Procesamiento Local en Navegador</span>
           </div>
           <p className="text-xs text-slate-600 leading-relaxed">
-            El texto que ingresas en los cuadros de texto se convierte mediante funciones JavaScript locales en tu navegador. Ningún contenido se transmite a nuestros servidores.
+            El texto introducido directamente en el conversor se procesa localmente en tu navegador y no se envía automáticamente a nuestro servidor. Si utilizas una función de compartir mediante URL, el texto puede quedar incluido en el enlace generado y, por tanto, puede aparecer en el historial del navegador, registros técnicos o servicios donde compartas dicho enlace.
           </p>
         </div>
 

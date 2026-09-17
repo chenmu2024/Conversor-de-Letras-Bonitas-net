@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, MessageSquare, Send, CheckCircle2, Bug, Sparkles, HelpCircle, Loader2, Clock, ShieldCheck } from 'lucide-react';
+import { Mail, Send, CheckCircle2, Bug, Sparkles, HelpCircle, Loader2, ShieldCheck, AlertCircle } from 'lucide-react';
 
 export const ContactPage: React.FC = () => {
   const [topic, setTopic] = useState<'sugerencia' | 'error' | 'duda'>('sugerencia');
@@ -8,22 +8,52 @@ export const ContactPage: React.FC = () => {
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [ticketId, setTicketId] = useState('');
+  const [ticketId, setTicketId] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!message.trim()) return;
-    
+
     setIsSubmitting(true);
-    // Simulate real async API submission with realistic latency
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setTicketId(`REQ-${Math.floor(100000 + Math.random() * 900000)}`);
-      setSubmitted(true);
-      if (typeof navigator !== 'undefined' && navigator.vibrate) {
-        navigator.vibrate(30);
+    setErrorMessage(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          topic,
+          name: name.trim(),
+          email: email.trim(),
+          message: message.trim(),
+        }),
+      });
+
+      const data = await response.json().catch(() => null);
+
+      if (response.ok && data?.success) {
+        setIsSubmitting(false);
+        setSubmitted(true);
+        setTicketId(data.ticketId || null);
+        if (typeof navigator !== 'undefined' && navigator.vibrate) {
+          navigator.vibrate(30);
+        }
+      } else {
+        setIsSubmitting(false);
+        setErrorMessage(
+          data?.error ||
+          'No pudimos enviar tu mensaje. Inténtalo de nuevo o escribe directamente a soporte@conversordeletrasbonitas.net.'
+        );
       }
-    }, 850);
+    } catch {
+      setIsSubmitting(false);
+      setErrorMessage(
+        'No pudimos enviar tu mensaje. Inténtalo de nuevo o escribe directamente a soporte@conversordeletrasbonitas.net.'
+      );
+    }
   };
 
   return (
@@ -48,8 +78,10 @@ export const ContactPage: React.FC = () => {
             <CheckCircle2 className="w-8 h-8" />
           </div>
           <div className="space-y-1">
-            <h2 className="text-2xl font-bold text-slate-900">¡Mensaje Recibido Correctamente!</h2>
-            <p className="text-xs font-mono font-bold text-indigo-600">ID de Referencia: {ticketId}</p>
+            <h2 className="text-2xl font-bold text-slate-900">Mensaje enviado correctamente.</h2>
+            {ticketId && (
+              <p className="text-xs font-mono font-bold text-indigo-600">ID de Referencia: {ticketId}</p>
+            )}
           </div>
           <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
             Muchas gracias por tu contribución. Hemos registrado tu consulta en nuestra cola de revisión técnica. Responderemos al correo proporcionado en un plazo habitual de 24 a 48 horas hábiles.
@@ -63,6 +95,8 @@ export const ContactPage: React.FC = () => {
                 setMessage('');
                 setName('');
                 setEmail('');
+                setTicketId(null);
+                setErrorMessage(null);
               }}
               className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs transition-all shadow-sm active:scale-95"
             >
@@ -72,6 +106,16 @@ export const ContactPage: React.FC = () => {
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-8 shadow-sm space-y-6">
+          {errorMessage && (
+            <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 flex items-start gap-3 text-rose-800 text-xs sm:text-sm">
+              <AlertCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
+              <div className="space-y-1">
+                <p className="font-bold">Error al enviar el formulario</p>
+                <p className="leading-relaxed">{errorMessage}</p>
+              </div>
+            </div>
+          )}
+
           {/* Topic Selection */}
           <div className="space-y-2">
             <label className="block text-xs font-black uppercase text-slate-500 tracking-wider">
@@ -183,7 +227,7 @@ export const ContactPage: React.FC = () => {
             type="submit"
             id="contact-submit-btn"
             disabled={isSubmitting}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-bold text-xs shadow-md shadow-indigo-600/20 transition-all hover:scale-[1.01] active:scale-95"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-bold text-xs shadow-md shadow-indigo-600/20 transition-all hover:scale-[1.01] active:scale-95 cursor-pointer disabled:cursor-not-allowed"
           >
             {isSubmitting ? (
               <>
@@ -202,7 +246,7 @@ export const ContactPage: React.FC = () => {
 
       {/* Direct Contact Info */}
       <div className="text-center text-xs text-slate-500 space-y-1">
-        <p>También puedes contactar directamente a nuestro laboratorio tipográfico en:</p>
+        <p>También puedes contactar directamente a nuestro equipo técnico en:</p>
         <p className="font-mono font-bold text-indigo-600" dangerouslySetInnerHTML={{ __html: '<!--email_off-->soporte@conversordeletrasbonitas.net<!--/email_off-->' }} />
       </div>
     </div>

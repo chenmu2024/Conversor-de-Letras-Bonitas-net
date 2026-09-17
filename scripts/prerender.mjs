@@ -51,7 +51,7 @@ async function runPrerender() {
       ? seo.canonical
       : `https://conversordeletrasbonitas.net${seo.canonical}`;
 
-    // 1. Render App component to static HTML with React 19 prerender static API (waits for Suspense & lazy components)
+    // 1. Render App component to static HTML with React 19 prerender static API
     let appHtml = '';
     try {
       const { prelude } = await prerender(React.createElement(App, { initialRoute: routeKey }));
@@ -68,7 +68,7 @@ async function runPrerender() {
       appHtml = '';
     }
 
-    // 2. Build Schema.org JSON-LD (clean, NO fake AggregateRating)
+    // 2. Build Schema.org JSON-LD (WebSite, WebApplication, BreadcrumbList, Organization only)
     const structuredData = {
       '@context': 'https://schema.org',
       '@graph': [
@@ -79,14 +79,14 @@ async function runPrerender() {
           name: 'Conversor de Letras Bonitas',
           description: 'Fuentes y tipografías bonitas para copiar y pegar',
           inLanguage: 'es',
-          potentialAction: {
-            '@type': 'SearchAction',
-            target: {
-              '@type': 'EntryPoint',
-              urlTemplate: 'https://conversordeletrasbonitas.net/?text={search_term_string}',
-            },
-            'query-input': 'required name=search_term_string',
-          },
+        },
+        {
+          '@type': 'Organization',
+          '@id': 'https://conversordeletrasbonitas.net/#organization',
+          name: 'Conversor de Letras Bonitas',
+          url: 'https://conversordeletrasbonitas.net/',
+          logo: 'https://conversordeletrasbonitas.net/favicon.svg',
+          image: 'https://conversordeletrasbonitas.net/og-image.png',
         },
         {
           '@type': 'WebApplication',
@@ -131,22 +131,6 @@ async function runPrerender() {
       ],
     };
 
-    // Add FAQ schema if route has FAQs
-    if (seo.faqs && seo.faqs.length > 0) {
-      structuredData['@graph'].push({
-        '@type': 'FAQPage',
-        '@id': `${canonicalUrl}#faq`,
-        mainEntity: seo.faqs.map((faq) => ({
-          '@type': 'Question',
-          name: faq.question,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: faq.answer,
-          },
-        })),
-      });
-    }
-
     // 3. Inject SEO metadata into HTML template
     let pageHtml = baseTemplate;
 
@@ -172,6 +156,15 @@ async function runPrerender() {
       `<link rel="canonical" href="${canonicalUrl}" />`
     );
 
+    // Robots meta
+    const robotsContent = routeKey === '404'
+      ? 'noindex, follow'
+      : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+    pageHtml = pageHtml.replace(
+      /<meta\s+name=["']robots["']\s+content=["'][\s\S]*?["']\s*\/?>/i,
+      `<meta name="robots" content="${robotsContent}" />`
+    );
+
     // Replace OpenGraph meta tags
     pageHtml = pageHtml.replace(
       /<meta\s+property=["']og:title["']\s+content=["'][\s\S]*?["']\s*\/?>/i,
@@ -185,6 +178,14 @@ async function runPrerender() {
       /<meta\s+property=["']og:url["']\s+content=["'][\s\S]*?["']\s*\/?>/i,
       `<meta property="og:url" content="${canonicalUrl}" />`
     );
+    pageHtml = pageHtml.replace(
+      /<meta\s+property=["']og:image["']\s+content=["'][\s\S]*?["']\s*\/?>/i,
+      `<meta property="og:image" content="https://conversordeletrasbonitas.net/og-image.png" />`
+    );
+    pageHtml = pageHtml.replace(
+      /<meta\s+property=["']og:image:type["']\s+content=["'][\s\S]*?["']\s*\/?>/i,
+      `<meta property="og:image:type" content="image/png" />`
+    );
 
     // Replace Twitter meta tags
     pageHtml = pageHtml.replace(
@@ -194,6 +195,10 @@ async function runPrerender() {
     pageHtml = pageHtml.replace(
       /<meta\s+name=["']twitter:description["']\s+content=["'][\s\S]*?["']\s*\/?>/i,
       `<meta name="twitter:description" content="${escapeHtml(seo.metaDescription)}" />`
+    );
+    pageHtml = pageHtml.replace(
+      /<meta\s+name=["']twitter:image["']\s+content=["'][\s\S]*?["']\s*\/?>/i,
+      `<meta name="twitter:image" content="https://conversordeletrasbonitas.net/og-image.png" />`
     );
 
     // Replace JSON-LD Schema Script
@@ -231,20 +236,9 @@ async function runPrerender() {
 
     fs.writeFileSync(targetFilePath, pageHtml, 'utf8');
     successCount++;
-
-    // If routeKey has a short alias that differs from the path (e.g. 'goticas' vs 'letras-goticas'),
-    // generate an alias index.html so both URLs work seamlessly and have canonical pointing to canonicalUrl
-    const cleanPathSlug = routeConfig.path.replace(/^\/+|\/+$/g, '');
-    if (routeKey !== 'inicio' && routeKey !== '404' && routeKey !== cleanPathSlug) {
-      const aliasDir = path.join(distDir, routeKey);
-      if (!fs.existsSync(aliasDir)) {
-        fs.mkdirSync(aliasDir, { recursive: true });
-      }
-      fs.writeFileSync(path.join(aliasDir, 'index.html'), pageHtml, 'utf8');
-    }
   }
 
-  console.log(`✅ [Prerender] Successfully prerendered ${successCount} pages with complete SEO & HTML!`);
+  console.log(`✅ [Prerender] Successfully prerendered ${successCount} standard pages with complete SEO & HTML!`);
 }
 
 runPrerender().catch((err) => {

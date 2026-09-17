@@ -10,16 +10,6 @@
     <link rel="canonical" href="https://conversordeletrasbonitas.net/" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
-    <!-- International hreflang regional targeting (LATAM + Spain + Global Spanish) -->
-    <link rel="alternate" hreflang="es" href="https://conversordeletrasbonitas.net/" />
-    <link rel="alternate" hreflang="es-ES" href="https://conversordeletrasbonitas.net/" />
-    <link rel="alternate" hreflang="es-MX" href="https://conversordeletrasbonitas.net/" />
-    <link rel="alternate" hreflang="es-CO" href="https://conversordeletrasbonitas.net/" />
-    <link rel="alternate" hreflang="es-AR" href="https://conversordeletrasbonitas.net/" />
-    <link rel="alternate" hreflang="es-PE" href="https://conversordeletrasbonitas.net/" />
-    <link rel="alternate" hreflang="es-CL" href="https://conversordeletrasbonitas.net/" />
-    <link rel="alternate" hreflang="x-default" href="https://conversordeletrasbonitas.net/" />
-
     <!-- OpenGraph Metadata -->
     <meta property="og:locale" content="es_ES" />
     <meta property="og:site_name" content="Conversor de Letras Bonitas" />
@@ -27,17 +17,17 @@
     <meta property="og:description" content="Convierte texto en letras bonitas, cursivas y aesthetic gratis. +80 fuentes para copiar y pegar en Instagram, TikTok, WhatsApp y Free Fire." />
     <meta property="og:url" content="https://conversordeletrasbonitas.net/" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://conversordeletrasbonitas.net/og-image.svg" />
+    <meta property="og:image" content="https://conversordeletrasbonitas.net/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:alt" content="Conversor de Letras Bonitas y Fuentes para Redes Sociales" />
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Conversor de Letras Bonitas - Fuentes para Copiar" />
     <meta name="twitter:description" content="Transforma tus frases en letras cursivas, góticas, con alas y aesthetic gratis." />
-    <meta name="twitter:image" content="https://conversordeletrasbonitas.net/og-image.svg" />
+    <meta name="twitter:image" content="https://conversordeletrasbonitas.net/og-image.png" />
     
     <!-- Favicon & Touch Icons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -65,15 +55,32 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" />
     </noscript>
 
-    <!-- Structured Data (JSON-LD) for Google SEO Rich Snippets + Sitelinks Searchbox -->
+    <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
+          "@type": "WebSite",
+          "@id": "https://conversordeletrasbonitas.net/#website",
+          "url": "https://conversordeletrasbonitas.net/",
+          "name": "Conversor de Letras Bonitas",
+          "description": "Fuentes y tipografías bonitas para copiar y pegar",
+          "inLanguage": "es"
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://conversordeletrasbonitas.net/#organization",
+          "name": "Conversor de Letras Bonitas",
+          "url": "https://conversordeletrasbonitas.net/",
+          "logo": "https://conversordeletrasbonitas.net/favicon.svg",
+          "image": "https://conversordeletrasbonitas.net/og-image.png"
+        },
+        {
           "@type": "WebApplication",
           "@id": "https://conversordeletrasbonitas.net/#webapp",
           "name": "Conversor de Letras Bonitas",
+          "alternateName": "Conversor de Letras Bonitas y Fuentes Online",
           "url": "https://conversordeletrasbonitas.net/",
           "applicationCategory": "UtilitiesApplication",
           "operatingSystem": "All (iOS, Android, Windows, macOS, Linux)",
@@ -88,108 +95,15 @@
           }
         },
         {
-          "@type": "WebSite",
-          "@id": "https://conversordeletrasbonitas.net/#website",
-          "url": "https://conversordeletrasbonitas.net/",
-          "name": "Conversor de Letras Bonitas",
-          "description": "Fuentes y tipografías bonitas para copiar y pegar",
-          "inLanguage": "es",
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": {
-              "@type": "EntryPoint",
-              "urlTemplate": "https://conversordeletrasbonitas.net/?q={search_term_string}"
-            },
-            "query-input": "required name=search_term_string"
-          }
-        },
-        {
-          "@type": "FAQPage",
-          "@id": "https://conversordeletrasbonitas.net/#faq",
-          "mainEntity": [
+          "@type": "BreadcrumbList",
+          "@id": "https://conversordeletrasbonitas.net/#breadcrumb",
+          "itemListElement": [
             {
-              "@type": "Question",
-              "name": "¿El conversor de letras bonitas es 100% gratis?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Sí, todas las fuentes, símbolos, letras cursivas y decoraciones de conversordeletrasbonitas.net son completamente gratis e ilimitadas sin necesidad de registro ni descargas."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "¿Cómo poner letras en cursiva o negrita en la biografía de Instagram y TikTok?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Escribe tu frase en la caja de texto superior, elige el estilo Cursiva Bold o Negrita Sans, haz clic en el botón Copiar y pégalo directamente en la biografía o pie de foto de tu perfil."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "¿Cómo crear nicks insanos con alas y espacio invisible para Free Fire?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Usa nuestro Generador de Nicks para Free Fire para añadir alas ꧁༺ ༻꧂, coronas de rey 亗 y la insignia de verificado ⓥ. Además puedes copiar el espacio invisible [ㅤ] en un solo clic."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "¿Cómo convertir fechas a números romanos para tatuajes?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "En nuestra sección de Letras para Tatuajes (/letras-para-tatuajes/), introduce tu fecha de nacimiento (ej: 15/08/2002) y obtendrás automáticamente la transcripción perfecta en números romanos (XV · VIII · MMII) y fuentes Old English."
-              }
-            }
-          ]
-        },
-        {
-          "@type": "HowTo",
-          "@id": "https://conversordeletrasbonitas.net/#howto",
-          "name": "Cómo Convertir y Copiar Letras Bonitas",
-          "description": "Aprende a transformar cualquier texto en fuentes bonitas y pegarlo en redes sociales en 3 sencillos pasos.",
-          "step": [
-            {
-              "@type": "HowToStep",
+              "@type": "ListItem",
               "position": 1,
-              "name": "Escribe o pega tu texto",
-              "text": "Introduce tus palabras o frase en el campo de entrada del conversor."
-            },
-            {
-              "@type": "HowToStep",
-              "position": 2,
-              "name": "Selecciona el estilo de fuente",
-              "text": "Explora entre más de 80 variantes tipográficas Unicode como cursiva, gótica, círculos o letras con alas."
-            },
-            {
-              "@type": "HowToStep",
-              "position": 3,
-              "name": "Copia y pega en tu red social",
-              "text": "Haz clic en el botón 'Copiar' y pégalo en tu perfil de Instagram, biografía de TikTok, chat de WhatsApp o nick de Free Fire."
+              "name": "Inicio",
+              "item": "https://conversordeletrasbonitas.net/"
             }
-          ]
-        },
-        {
-          "@type": "Organization",
-          "@id": "https://conversordeletrasbonitas.net/#organization",
-          "name": "Conversor de Letras Bonitas Editorial Lab",
-          "url": "https://conversordeletrasbonitas.net/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://conversordeletrasbonitas.net/og-image.svg",
-            "width": 1200,
-            "height": 630
-          },
-          "publishingPrinciples": "https://conversordeletrasbonitas.net/sobre-nosotros/",
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "contactType": "customer support",
-            "url": "https://conversordeletrasbonitas.net/contacto/",
-            "availableLanguage": ["es"]
-          },
-          "knowsAbout": [
-            "Unicode Standard ISO/IEC 10646",
-            "Digital Typography",
-            "Web Accessibility WCAG 2.1 AA",
-            "Cross-Platform Font Rendering"
           ]
         }
       ]

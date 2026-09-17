@@ -128,7 +128,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ currentRoute = 'inicio' 
                 Compatible con Instagram, TikTok, WhatsApp, Free Fire, Discord y más.
               </div>
               <div className="text-[11px] text-slate-300">
-                100% caracteres Unicode legales sin riesgo de baneo ni instalación de teclados extra.
+                Utiliza caracteres Unicode estándar. La aceptación de determinados símbolos puede variar según la plataforma y sus políticas.
               </div>
             </div>
           </div>

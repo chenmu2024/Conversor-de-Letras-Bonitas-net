@@ -177,7 +177,7 @@ const ROUTE_PRESETS: Record<PageRoute, PresetTag[]> = {
     { id: 'sn1', label: 'Laboratorio', value: 'Laboratorio de Tipografías Unicode', icon: <Sparkles className="w-3 h-3 text-indigo-500" /> },
   ],
   'politica-de-privacidad': [
-    { id: 'pp1', label: 'Privacidad', value: 'Procesamiento Seguro 100% Local', icon: <ShieldCheck className="w-3 h-3 text-emerald-500" /> },
+    { id: 'pp1', label: 'Privacidad', value: 'Procesamiento Seguro Local', icon: <ShieldCheck className="w-3 h-3 text-emerald-500" /> },
   ],
   'politica-de-cookies': [
     { id: 'pc1', label: 'Cookies', value: 'Gestión de Consentimiento RGPD', icon: <ShieldCheck className="w-3 h-3 text-amber-500" /> },

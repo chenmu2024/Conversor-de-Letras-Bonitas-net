@@ -37,7 +37,7 @@ export const PlatformLimits: React.FC<PlatformLimitsProps> = ({ text }) => {
             </span>
           ) : (
             <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-              ✓ 100% Compatible en Juegos y Redes
+              ✓ Amplia compatibilidad con redes y juegos
             </span>
           )}
           <span className="text-[11px] font-bold text-slate-700">

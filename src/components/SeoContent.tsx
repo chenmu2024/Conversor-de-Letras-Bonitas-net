@@ -86,7 +86,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
       title: 'Letras para Free Fire - Nicks con Alas, Coronas 亗, Dúos y Espacio Invisible',
       subtitle: 'Crea nombres insanos para Free Fire, Dúo Dinámico, Banderas de Países, Clanes PvP y Códigos de Color.',
       description:
-        'El generador de letras para Free Fire te permite crear nicks personalizados con alas ꧁༺ ༻꧂, símbolos de rey 亗, rayos ⚡, nicks de parejas para Dúos Dinámicos, banderas de países con bloques de colores [███] y los 3 tamaños de espacios invisibles (Grande, Mediano y Pequeño) 100% compatibles con el límite estricto de 12 caracteres de Garena.',
+        'El generador de letras para Free Fire te permite crear nicks personalizados con alas ꧁༺ ༻꧂, símbolos de rey 亗, rayos ⚡, nicks de parejas para Dúos Dinámicos, banderas de países con bloques de colores [███] y los 3 tamaños de espacios invisibles (Grande, Mediano y Pequeño) ampliamente compatibles con el límite de 12 caracteres de Garena.',
       tips: [
         'Free Fire impone un límite estricto de 12 caracteres: nuestro contador te alerta en tiempo real si tu combinación supera el límite del juego.',
         'Para nicks de Dúo Dinámico (parejas), usa marcos simétricos como (꧁ঔৣ☬ KING ☬ঔৣ꧂ / ꧁ঔৣ☬ QUEEN ☬ঔৣ꧂ o 亗 BONNIE 亗 / 亗 CLYDE 亗).',
@@ -160,7 +160,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
       title: 'Generador de Nicks para Free Fire - Alas, Coronas 亗, ⓥ y Espacio Invisible',
       subtitle: 'Crea nombres insanos para Garena Free Fire con símbolos de armas y tags de clan.',
       description:
-        'Personaliza tu gamertag con alas ꧁༺ ༻꧂, la insignia de verificado oficial ⓥ, coronas de rey 亗, armas francotirador ︻╦╤─ y el espacio invisible [ㅤ] 100% compatible con Free Fire en Android e iOS.',
+        'Personaliza tu gamertag con alas ꧁༺ ༻꧂, la insignia de verificado oficial ⓥ, coronas de rey 亗, armas francotirador ︻╦╤─ y el espacio invisible [ㅤ] probado para Free Fire en Android e iOS.',
       tips: [
         'Copia el Espacio Invisible [ㅤ] con un solo toque para separar palabras en tu nick.',
         'Añade tags de clan como ᴮᴼˢˢ★ o 亗 para que tu escuadra resalte en el lobby.',
@@ -464,7 +464,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     {
       q: '¿Por qué algunas letras en círculos negros se ven como emojis o cuadrados en ciertos móviles?',
-      a: 'Las letras en círculos blancos (Ⓒⓘⓡⓒⓤⓛⓞⓢ) y negros (🅒🅘🅡🅒🅤🅛🅞🅢) forman parte oficial del estándar Unicode. La inmensa mayoría de dispositivos modernos (iOS 12+, Android 9+, Windows 10/11) los soportan nativamente. Si deseas máxima compatibilidad visual en cualquier pantalla, los círculos blancos (Ⓐ-Ⓩ, ⓐ-ⓩ) y los números encerrados (①-⑳) ofrecen un soporte del 100%.',
+      a: 'Las letras en círculos blancos (Ⓒⓘⓡⓒⓤⓛⓞⓢ) y negros (🅒🅘🅡🅒🅤🅛🅞🅢) forman parte oficial del estándar Unicode. La inmensa mayoría de dispositivos modernos (iOS 12+, Android 9+, Windows 10/11) los soportan nativamente. Si deseas máxima compatibilidad visual en cualquier pantalla, los círculos blancos (Ⓐ-Ⓩ, ⓐ-ⓩ) y los números encerrados (①-⑳) ofrecen un soporte muy extendido.',
     },
     {
       q: '¿Qué es el texto Zalgo (Texto Maldito / Cursed Text) y cómo se genera?',
@@ -492,7 +492,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     {
       q: '¿Cómo decorar un nombre para Free Fire con alas y símbolos insanos?',
-      a: 'En nuestro "Decorador de Textos y Nicks", escribe tu nombre o apodo en el campo superior, selecciona el adorno izquierdo (como alas tibetanas ꧁༺ o corona 亗), el adorno derecho (༻꧂) y elige una tipografía interior como Gótica o Cursiva Bold. La herramienta te alertará si superas el límite de 12 caracteres de Free Fire para garantizar que tu nick sea 100% válido.',
+      a: 'En nuestro "Decorador de Textos y Nicks", escribe tu nombre o apodo en el campo superior, selecciona el adorno izquierdo (como alas tibetanas ꧁༺ o corona 亗), el adorno derecho (༻꧂) y elige una tipografía interior como Gótica o Cursiva Bold. La herramienta te alertará si superas el límite de 12 caracteres de Free Fire para ayudarte a que tu nick encaje dentro de los límites del juego.',
     },
     {
       q: '¿Puedo combinar decoraciones con letras aesthetic para TikTok e Instagram?',
