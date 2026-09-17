@@ -32,9 +32,9 @@ async function runPrerender() {
 
   const baseTemplate = fs.readFileSync(templatePath, 'utf8');
 
-  // Dynamically load React SSR and app modules
+  // Dynamically load React SSR and app modules using React 19 Static prerender API
   const React = (await import('react')).default;
-  const { renderToString } = await import('react-dom/server');
+  const { prerender } = await import('react-dom/static');
   const App = (await import('../src/App.tsx')).default;
   const { ROUTE_CONFIGS } = await import('../src/data/routeConfigs.ts');
   const { SEO_ROUTE_DATA } = await import('../src/data/seoRouteData.ts');
@@ -51,10 +51,18 @@ async function runPrerender() {
       ? seo.canonical
       : `https://conversordeletrasbonitas.net${seo.canonical}`;
 
-    // 1. Render App component to static HTML string
+    // 1. Render App component to static HTML with React 19 prerender static API (waits for Suspense & lazy components)
     let appHtml = '';
     try {
-      appHtml = renderToString(React.createElement(App, { initialRoute: routeKey }));
+      const { prelude } = await prerender(React.createElement(App, { initialRoute: routeKey }));
+      const reader = prelude.getReader();
+      const chunks = [];
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        chunks.push(value);
+      }
+      appHtml = Buffer.concat(chunks).toString('utf8');
     } catch (renderError) {
       console.error(`⚠️ [Prerender] Failed to SSR render route "${routeKey}":`, renderError);
       appHtml = '';

@@ -18,7 +18,7 @@ const CopyHistoryDrawer = lazy(() => import('./components/CopyHistoryDrawer').th
 const PwaInstallModal = lazy(() => import('./components/PwaInstallModal').then(m => ({ default: m.PwaInstallModal })));
 const PwaInstallPrompt = lazy(() => import('./components/PwaInstallPrompt').then(m => ({ default: m.PwaInstallPrompt })));
 
-// Defer below-the-fold auxiliary sections until scrolled into view or idle
+// Auxiliary sections rendered with React 19 Suspense and content-visibility for instant SEO and low initial layout cost
 interface DeferredAuxiliaryProps {
   currentRoute: PageRoute;
   globalText: string;
@@ -29,41 +29,11 @@ interface DeferredAuxiliaryProps {
 }
 
 const DeferredAuxiliarySections: React.FC<DeferredAuxiliaryProps> = (props) => {
-  const [shouldLoad, setShouldLoad] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    // Intersection observer to load when user approaches the section
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0]?.isIntersecting) {
-          setShouldLoad(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: '350px' }
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
   return (
-    <div ref={containerRef}>
-      {shouldLoad ? (
-        <Suspense fallback={<div className="h-20 animate-pulse bg-slate-100 dark:bg-slate-800/40 rounded-2xl my-8" />}>
-          <AuxiliarySections {...props} />
-        </Suspense>
-      ) : (
-        <div className="h-24 my-8" />
-      )}
+    <div className="min-h-[120px] [content-visibility:auto] [contain-intrinsic-size:auto_500px]">
+      <Suspense fallback={<div className="h-20 animate-pulse bg-slate-100 dark:bg-slate-800/40 rounded-2xl my-8" />}>
+        <AuxiliarySections {...props} />
+      </Suspense>
     </div>
   );
 };
@@ -170,14 +140,22 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
     return resolveRouteFromUrl(initialRoute);
   });
 
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
-    if (typeof window !== 'undefined') {
+  // SSR and first client hydration render use consistent default: light mode (false)
+  // After mount, hydrate user preference from localStorage or prefers-color-scheme
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+
+  useEffect(() => {
+    try {
       const saved = localStorage.getItem('letras_bonitas_theme');
-      if (saved) return saved === 'dark';
-      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved) {
+        setIsDarkMode(saved === 'dark');
+      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setIsDarkMode(true);
+      }
+    } catch (e) {
+      console.warn('Theme preference read failed', e);
     }
-    return false;
-  });
+  }, []);
 
   const toggleDarkMode = () => {
     setIsDarkMode((prev) => {
@@ -196,14 +174,24 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
   const [previewText, setPreviewText] = useState<string>('𝓣𝓾 𝓣𝓮𝔁𝓽𝓸 𝓐𝓺𝓾í ✨');
   const [previewFontName, setPreviewFontName] = useState<string>('Cursiva Negrita');
   const [showScrollTop, setShowScrollTop] = useState<boolean>(false);
+
+  // Initial text matches route default consistently during SSR and first client render
   const [globalText, setGlobalText] = useState<string>(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const q = params.get('text') || params.get('q');
-      if (q) return q;
-    }
     return ROUTE_CONFIGS[currentRoute]?.defaultText || 'Letras Bonitas';
   });
+
+  // Hydrate custom query parameter (?text= / ?q=) after mount to prevent hydration mismatch
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const q = params.get('text') || params.get('q');
+      if (q && q !== globalText) {
+        setGlobalText(q);
+      }
+    } catch (e) {
+      console.warn('Query text sync failed', e);
+    }
+  }, []);
 
   // Dynamic SEO Head injection (Title, Canonical, Meta Description, Schema.org JSON-LD)
   useSeoHead(currentRoute);
