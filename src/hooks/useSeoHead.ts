@@ -144,14 +144,6 @@ export function useSeoHead(currentRoute: PageRoute) {
             '@type': 'SpeakableSpecification',
             cssSelector: ['h1', '#seo-h1', '#faq-heading', '.faq-question'],
           },
-          aggregateRating: {
-            '@type': 'AggregateRating',
-            "ratingValue": "4.9",
-            "bestRating": "5.0",
-            "worstRating": "1.0",
-            "ratingCount": "15420",
-            "reviewCount": "15420"
-          },
           offers: {
             '@type': 'Offer',
             price: '0',

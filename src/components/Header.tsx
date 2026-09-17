@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { PageRoute } from '../types';
+import { ROUTE_CONFIGS } from '../data/routeConfigs';
 import { 
   Sparkles, 
   Instagram, 
@@ -83,9 +84,13 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo & Brand Identity */}
-          <button
+          <a
             id="logo-button"
-            onClick={() => onRouteChange('inicio')}
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              onRouteChange('inicio');
+            }}
             className="flex items-center gap-3 text-left group transition-all"
           >
             <div className="relative flex items-center justify-center w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-600 via-indigo-700 to-violet-800 text-white shadow-md shadow-indigo-600/25 group-hover:scale-105 group-hover:shadow-indigo-600/40 transition-all duration-200">
@@ -106,7 +111,7 @@ export const Header: React.FC<HeaderProps> = ({
                 conversordeletrasbonitas.net
               </p>
             </div>
-          </button>
+          </a>
 
           {/* Right Action Bar */}
           <div className="flex items-center gap-2 sm:gap-2.5">
@@ -204,11 +209,16 @@ export const Header: React.FC<HeaderProps> = ({
           <nav className="flex items-center gap-1.5 py-2 overflow-x-auto no-scrollbar">
             {navItems.map((item) => {
               const isActive = currentRoute === item.route;
+              const path = ROUTE_CONFIGS[item.route]?.path || '/';
               return (
-                <button
+                <a
                   key={item.route}
                   id={`nav-item-${item.route}`}
-                  onClick={() => onRouteChange(item.route)}
+                  href={path}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onRouteChange(item.route);
+                  }}
                   className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-150 ${
                     isActive
                       ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-600/30 font-bold'
@@ -224,7 +234,7 @@ export const Header: React.FC<HeaderProps> = ({
                       {item.badge}
                     </span>
                   )}
-                </button>
+                </a>
               );
             })}
           </nav>
@@ -240,11 +250,14 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="grid grid-cols-2 gap-2">
             {navItems.map((item) => {
               const isActive = currentRoute === item.route;
+              const path = ROUTE_CONFIGS[item.route]?.path || '/';
               return (
-                <button
+                <a
                   key={item.route}
                   id={`mobile-nav-item-${item.route}`}
-                  onClick={() => {
+                  href={path}
+                  onClick={(e) => {
+                    e.preventDefault();
                     onRouteChange(item.route);
                     setMobileMenuOpen(false);
                   }}
@@ -261,7 +274,7 @@ export const Header: React.FC<HeaderProps> = ({
                       {item.badge}
                     </span>
                   )}
-                </button>
+                </a>
               );
             })}
           </div>

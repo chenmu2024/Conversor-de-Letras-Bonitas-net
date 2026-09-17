@@ -48,6 +48,9 @@ export interface RouteMeta {
   label: string;
   seoKeyword: string;
   defaultText: string;
+  title: string;
+  description: string;
+  canonical: string;
 }
 
 export interface FontGenerator {

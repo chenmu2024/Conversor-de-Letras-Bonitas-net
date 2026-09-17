@@ -1,6 +1,7 @@
 import { PageRoute, RouteMeta } from '../types';
+import { SEO_ROUTE_DATA } from './seoRouteData';
 
-export const ROUTE_CONFIGS: Record<PageRoute, RouteMeta> = {
+const BASE_ROUTE_CONFIGS: Record<PageRoute, Omit<RouteMeta, 'title' | 'description' | 'canonical'>> = {
   inicio: {
     route: 'inicio',
     path: '/',
@@ -234,3 +235,20 @@ export const ROUTE_CONFIGS: Record<PageRoute, RouteMeta> = {
     defaultText: '404',
   },
 };
+
+export const ROUTE_CONFIGS: Record<PageRoute, RouteMeta> = Object.fromEntries(
+  Object.entries(BASE_ROUTE_CONFIGS).map(([key, config]) => {
+    const routeKey = key as PageRoute;
+    const seo = SEO_ROUTE_DATA[routeKey] || SEO_ROUTE_DATA.inicio;
+    return [
+      routeKey,
+      {
+        ...config,
+        title: seo.title,
+        description: seo.metaDescription,
+        canonical: seo.canonical,
+      },
+    ];
+  })
+) as Record<PageRoute, RouteMeta>;
+

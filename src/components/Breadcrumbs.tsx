@@ -18,13 +18,17 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ currentRoute, onRouteC
       aria-label="Breadcrumb"
       className="mb-4 flex items-center gap-1.5 text-xs text-slate-500 font-medium overflow-x-auto py-1 whitespace-nowrap"
     >
-      <button
-        onClick={() => onRouteChange('inicio')}
+      <a
+        href="/"
+        onClick={(e) => {
+          e.preventDefault();
+          onRouteChange('inicio');
+        }}
         className="inline-flex items-center gap-1 text-slate-600 hover:text-indigo-600 transition-colors"
       >
         <Home className="w-3.5 h-3.5" />
         <span>Inicio</span>
-      </button>
+      </a>
 
       <ChevronRight className="w-3 h-3 text-slate-400 shrink-0" />
 

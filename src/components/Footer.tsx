@@ -1,5 +1,6 @@
 import React from 'react';
 import { PageRoute } from '../types';
+import { ROUTE_CONFIGS } from '../data/routeConfigs';
 import { Type, ArrowUp, Sparkles, Heart } from 'lucide-react';
 
 interface FooterProps {
@@ -9,6 +10,23 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const renderLink = (route: PageRoute, label: string, className?: string) => {
+    const path = ROUTE_CONFIGS[route]?.path || '/';
+    return (
+      <a
+        href={path}
+        onClick={(e) => {
+          e.preventDefault();
+          onRouteChange(route);
+          scrollToTop();
+        }}
+        className={className || "hover:text-indigo-400 transition-colors text-left block"}
+      >
+        {label}
+      </a>
+    );
   };
 
   return (
@@ -40,46 +58,11 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
               Por Red Social
             </h3>
             <ul className="space-y-2.5 text-xs font-medium">
-              <li>
-                <button
-                  onClick={() => { onRouteChange('instagram'); scrollToTop(); }}
-                  className="hover:text-indigo-400 transition-colors text-left"
-                >
-                  Letras para Instagram (/letras-para-instagram/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('tiktok'); scrollToTop(); }}
-                  className="hover:text-indigo-400 transition-colors text-left"
-                >
-                  Letras para TikTok (/letras-para-tiktok/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('whatsapp'); scrollToTop(); }}
-                  className="hover:text-indigo-400 transition-colors text-left"
-                >
-                  Letras para WhatsApp (/letras-para-whatsapp/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('free-fire'); scrollToTop(); }}
-                  className="hover:text-amber-400 transition-colors text-left font-bold text-amber-300/90"
-                >
-                  Letras para Free Fire (/letras-para-free-fire/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('facebook'); scrollToTop(); }}
-                  className="hover:text-indigo-400 transition-colors text-left"
-                >
-                  Letras para Facebook (/letras-para-facebook/)
-                </button>
-              </li>
+              <li>{renderLink('instagram', 'Letras para Instagram (/letras-para-instagram/)')}</li>
+              <li>{renderLink('tiktok', 'Letras para TikTok (/letras-para-tiktok/)')}</li>
+              <li>{renderLink('whatsapp', 'Letras para WhatsApp (/letras-para-whatsapp/)')}</li>
+              <li>{renderLink('free-fire', 'Letras para Free Fire (/letras-para-free-fire/)', 'hover:text-amber-400 transition-colors text-left font-bold text-amber-300/90 block')}</li>
+              <li>{renderLink('facebook', 'Letras para Facebook (/letras-para-facebook/)')}</li>
             </ul>
           </div>
 
@@ -89,118 +72,20 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
               Estilos de Tipografías
             </h3>
             <ul className="space-y-2.5 text-xs font-medium">
-              <li>
-                <button
-                  onClick={() => { onRouteChange('letras-chidas'); scrollToTop(); }}
-                  className="hover:text-amber-400 transition-colors text-left text-amber-300 font-bold"
-                >
-                  Letras Chidas & Nicks (/letras-chidas/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('letras-tatuajes'); scrollToTop(); }}
-                  className="hover:text-amber-400 transition-colors text-left text-amber-200 font-bold"
-                >
-                  Letras para Tatuajes (/letras-para-tatuajes/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('nicks-free-fire'); scrollToTop(); }}
-                  className="hover:text-red-400 transition-colors text-left text-red-300 font-bold"
-                >
-                  Nicks Free Fire Insanos (/generador-de-nicks-free-fire/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('espacio-invisible'); scrollToTop(); }}
-                  className="hover:text-indigo-400 transition-colors text-left text-indigo-300 font-bold"
-                >
-                  Espacio Invisible [ㅤ] (/espacio-invisible/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('nombres-parejas'); scrollToTop(); }}
-                  className="hover:text-rose-400 transition-colors text-left text-rose-300 font-bold"
-                >
-                  Nombres para Parejas Dúos (/nombres-para-parejas/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('abecedario'); scrollToTop(); }}
-                  className="hover:text-amber-400 transition-colors text-left text-amber-300 font-bold"
-                >
-                  Abecedario A-Z Completo (/abecedario-letras-bonitas/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('letras-chinas'); scrollToTop(); }}
-                  className="hover:text-rose-400 transition-colors text-left text-rose-300 font-bold"
-                >
-                  Letras Chinas & Kanji (/letras-chinas/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('letras-elegantes'); scrollToTop(); }}
-                  className="hover:text-indigo-400 transition-colors text-left text-indigo-300 font-bold"
-                >
-                  Letras Elegantes (/letras-elegantes/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('letras-raras'); scrollToTop(); }}
-                  className="hover:text-purple-400 transition-colors text-left text-purple-300 font-bold"
-                >
-                  Letras Raras & Símbolos (/letras-raras/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('cursiva'); scrollToTop(); }}
-                  className="hover:text-indigo-400 transition-colors text-left"
-                >
-                  Traductor a Cursiva (/traductor-cursiva/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('goticas'); scrollToTop(); }}
-                  className="hover:text-indigo-400 transition-colors text-left"
-                >
-                  Letras Góticas (/letras-goticas/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('invertidas'); scrollToTop(); }}
-                  className="hover:text-indigo-400 transition-colors text-left"
-                >
-                  Tachadas e Invertidas (/letras-tachadas-e-invertidas/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('circulos'); scrollToTop(); }}
-                  className="hover:text-indigo-400 transition-colors text-left"
-                >
-                  Círculos y Cuadros (/letras-en-circulos-y-cuadros/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('glitch'); scrollToTop(); }}
-                  className="hover:text-indigo-400 transition-colors text-left"
-                >
-                  Letras Glitch y Zalgo (/letras-glitch-zalgo/)
-                </button>
-              </li>
+              <li>{renderLink('letras-chidas', 'Letras Chidas & Nicks (/letras-chidas/)', 'hover:text-amber-400 transition-colors text-left text-amber-300 font-bold block')}</li>
+              <li>{renderLink('letras-tatuajes', 'Letras para Tatuajes (/letras-para-tatuajes/)', 'hover:text-amber-400 transition-colors text-left text-amber-200 font-bold block')}</li>
+              <li>{renderLink('nicks-free-fire', 'Nicks Free Fire Insanos (/generador-de-nicks-free-fire/)', 'hover:text-red-400 transition-colors text-left text-red-300 font-bold block')}</li>
+              <li>{renderLink('espacio-invisible', 'Espacio Invisible [ㅤ] (/espacio-invisible/)', 'hover:text-indigo-400 transition-colors text-left text-indigo-300 font-bold block')}</li>
+              <li>{renderLink('nombres-parejas', 'Nombres para Parejas Dúos (/nombres-para-parejas/)', 'hover:text-rose-400 transition-colors text-left text-rose-300 font-bold block')}</li>
+              <li>{renderLink('abecedario', 'Abecedario A-Z Completo (/abecedario-letras-bonitas/)', 'hover:text-amber-400 transition-colors text-left text-amber-300 font-bold block')}</li>
+              <li>{renderLink('letras-chinas', 'Letras Chinas & Kanji (/letras-chinas/)', 'hover:text-rose-400 transition-colors text-left text-rose-300 font-bold block')}</li>
+              <li>{renderLink('letras-elegantes', 'Letras Elegantes (/letras-elegantes/)', 'hover:text-indigo-400 transition-colors text-left text-indigo-300 font-bold block')}</li>
+              <li>{renderLink('letras-raras', 'Letras Raras & Símbolos (/letras-raras/)', 'hover:text-purple-400 transition-colors text-left text-purple-300 font-bold block')}</li>
+              <li>{renderLink('cursiva', 'Traductor a Cursiva (/traductor-cursiva/)')}</li>
+              <li>{renderLink('goticas', 'Letras Góticas (/letras-goticas/)')}</li>
+              <li>{renderLink('invertidas', 'Tachadas e Invertidas (/letras-tachadas-e-invertidas/)')}</li>
+              <li>{renderLink('circulos', 'Círculos y Cuadros (/letras-en-circulos-y-cuadros/)')}</li>
+              <li>{renderLink('glitch', 'Letras Glitch y Zalgo (/letras-glitch-zalgo/)')}</li>
             </ul>
           </div>
 
@@ -210,70 +95,14 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
               Recursos & E-E-A-T
             </h3>
             <ul className="space-y-2.5 text-xs font-medium">
-              <li>
-                <button
-                  onClick={() => { onRouteChange('contador-bio'); scrollToTop(); }}
-                  className="hover:text-amber-400 transition-colors text-left text-amber-300/90 font-bold"
-                >
-                  Contador Caracteres Bio (/contador-de-caracteres-bio/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('simbolos'); scrollToTop(); }}
-                  className="hover:text-indigo-400 transition-colors text-left"
-                >
-                  Símbolos y Emojis (/simbolos-y-emojis/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('decorador'); scrollToTop(); }}
-                  className="hover:text-indigo-400 transition-colors text-left"
-                >
-                  Decorador de Nicks Gamer (/decorador-de-nicks/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('sobre-nosotros'); scrollToTop(); }}
-                  className="hover:text-indigo-400 transition-colors text-left"
-                >
-                  Sobre Nosotros (/sobre-nosotros/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('politica-de-privacidad'); scrollToTop(); }}
-                  className="hover:text-indigo-400 transition-colors text-left"
-                >
-                  Política de Privacidad (/politica-de-privacidad/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('politica-de-cookies'); scrollToTop(); }}
-                  className="hover:text-indigo-400 transition-colors text-left"
-                >
-                  Política de Cookies (/politica-de-cookies/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('terminos-y-condiciones'); scrollToTop(); }}
-                  className="hover:text-indigo-400 transition-colors text-left"
-                >
-                  Términos y Condiciones (/terminos-y-condiciones/)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { onRouteChange('contacto'); scrollToTop(); }}
-                  className="hover:text-indigo-400 transition-colors text-left"
-                >
-                  Contacto y Reportes (/contacto/)
-                </button>
-              </li>
+              <li>{renderLink('contador-bio', 'Contador Caracteres Bio (/contador-de-caracteres-bio/)', 'hover:text-amber-400 transition-colors text-left text-amber-300/90 font-bold block')}</li>
+              <li>{renderLink('simbolos', 'Símbolos y Emojis (/simbolos-y-emojis/)')}</li>
+              <li>{renderLink('decorador', 'Decorador de Nicks Gamer (/decorador-de-nicks/)')}</li>
+              <li>{renderLink('sobre-nosotros', 'Sobre Nosotros (/sobre-nosotros/)')}</li>
+              <li>{renderLink('politica-de-privacidad', 'Política de Privacidad (/politica-de-privacidad/)')}</li>
+              <li>{renderLink('politica-de-cookies', 'Política de Cookies (/politica-de-cookies/)')}</li>
+              <li>{renderLink('terminos-y-condiciones', 'Términos y Condiciones (/terminos-y-condiciones/)')}</li>
+              <li>{renderLink('contacto', 'Contacto y Reportes (/contacto/)')}</li>
               <li>
                 <button
                   type="button"
@@ -309,11 +138,11 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
         <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-slate-500">
             <span>© {new Date().getFullYear()} Conversor de Letras Bonitas.</span>
-            <button onClick={() => { onRouteChange('sobre-nosotros'); scrollToTop(); }} className="hover:text-slate-300 underline">Sobre Nosotros</button>
-            <button onClick={() => { onRouteChange('politica-de-privacidad'); scrollToTop(); }} className="hover:text-slate-300 underline">Privacidad</button>
-            <button onClick={() => { onRouteChange('politica-de-cookies'); scrollToTop(); }} className="hover:text-slate-300 underline">Política de Cookies</button>
-            <button onClick={() => { onRouteChange('terminos-y-condiciones'); scrollToTop(); }} className="hover:text-slate-300 underline">Términos</button>
-            <button onClick={() => { onRouteChange('contacto'); scrollToTop(); }} className="hover:text-slate-300 underline">Contacto</button>
+            {renderLink('sobre-nosotros', 'Sobre Nosotros', 'hover:text-slate-300 underline inline')}
+            {renderLink('politica-de-privacidad', 'Privacidad', 'hover:text-slate-300 underline inline')}
+            {renderLink('politica-de-cookies', 'Política de Cookies', 'hover:text-slate-300 underline inline')}
+            {renderLink('terminos-y-condiciones', 'Términos', 'hover:text-slate-300 underline inline')}
+            {renderLink('contacto', 'Contacto', 'hover:text-slate-300 underline inline')}
             <button
               type="button"
               onClick={() => {
