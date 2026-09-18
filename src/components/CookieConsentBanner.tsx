@@ -9,11 +9,23 @@ interface CookieConsentBannerProps {
 export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onRouteChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showConfigModal, setShowConfigModal] = useState(false);
-  const [analyticsEnabled, setAnalyticsEnabled] = useState(true);
-  const [adsEnabled, setAdsEnabled] = useState(true);
+
+  // Environmental feature flags for third-party scripts (safeguarded for Node/SSR prerender)
+  const env = (typeof import.meta !== 'undefined' && import.meta.env) ? import.meta.env : (typeof process !== 'undefined' && process.env ? process.env : {});
+  const analyticsAvailable = env.VITE_ENABLE_ANALYTICS === 'true';
+  const adsAvailable = env.VITE_ENABLE_ADS === 'true';
+
+  const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
+  const [adsEnabled, setAdsEnabled] = useState(false);
 
   useEffect(() => {
     const consent = localStorage.getItem('letras_cookie_consent');
+    const savedAnalytics = localStorage.getItem('letras_cookies_analytics');
+    const savedAds = localStorage.getItem('letras_cookies_ads');
+
+    setAnalyticsEnabled(savedAnalytics === 'true');
+    setAdsEnabled(savedAds === 'true');
+
     if (!consent) {
       // Delay slightly for smooth page load
       const timer = setTimeout(() => setIsOpen(true), 800);
@@ -21,9 +33,15 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onRout
     }
   }, []);
 
-  // Expose opener globally so Footer can trigger it
+  // Expose opener globally so Footer can trigger it and re-sync states
   useEffect(() => {
     (window as unknown as { openCookiePreferences?: () => void }).openCookiePreferences = () => {
+      const savedAnalytics = localStorage.getItem('letras_cookies_analytics');
+      const savedAds = localStorage.getItem('letras_cookies_ads');
+
+      setAnalyticsEnabled(savedAnalytics === 'true');
+      setAdsEnabled(savedAds === 'true');
+
       setShowConfigModal(true);
       setIsOpen(true);
     };
@@ -31,8 +49,12 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onRout
 
   const handleAcceptAll = () => {
     localStorage.setItem('letras_cookie_consent', 'all');
-    localStorage.setItem('letras_cookies_analytics', 'true');
-    localStorage.setItem('letras_cookies_ads', 'true');
+    if (analyticsAvailable) {
+      localStorage.setItem('letras_cookies_analytics', 'true');
+    }
+    if (adsAvailable) {
+      localStorage.setItem('letras_cookies_ads', 'true');
+    }
     setIsOpen(false);
     setShowConfigModal(false);
   };
@@ -41,14 +63,24 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onRout
     localStorage.setItem('letras_cookie_consent', 'essential');
     localStorage.setItem('letras_cookies_analytics', 'false');
     localStorage.setItem('letras_cookies_ads', 'false');
+    setAnalyticsEnabled(false);
+    setAdsEnabled(false);
     setIsOpen(false);
     setShowConfigModal(false);
   };
 
   const handleSaveCustom = () => {
     localStorage.setItem('letras_cookie_consent', 'custom');
-    localStorage.setItem('letras_cookies_analytics', analyticsEnabled ? 'true' : 'false');
-    localStorage.setItem('letras_cookies_ads', adsEnabled ? 'true' : 'false');
+    if (analyticsAvailable) {
+      localStorage.setItem('letras_cookies_analytics', analyticsEnabled ? 'true' : 'false');
+    } else {
+      localStorage.setItem('letras_cookies_analytics', 'false');
+    }
+    if (adsAvailable) {
+      localStorage.setItem('letras_cookies_ads', adsEnabled ? 'true' : 'false');
+    } else {
+      localStorage.setItem('letras_cookies_ads', 'false');
+    }
     setIsOpen(false);
     setShowConfigModal(false);
   };
@@ -70,10 +102,10 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onRout
               </div>
               <div className="space-y-1">
                 <h3 className="font-heading font-black text-sm text-white">
-                  Valoramos tu Privacidad y Consentimiento de Cookies
+                  Valoramos tu Privacidad y Preferencias
                 </h3>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Utilizamos cookies propias y de terceros (como Google AdSense y analítica anónima) para personalizar anuncios, analizar el tráfico y mantener este sitio 100% gratuito conforme al RGPD y CCPA.{' '}
+                  Este sitio utiliza almacenamiento local y cookies técnicas para recordar tus preferencias. Si en el futuro se habilitan servicios analíticos o publicitarios de terceros, podrás decidir si los aceptas desde este panel.{' '}
                   <button
                     onClick={() => {
                       onRouteChange('politica-de-privacidad');
@@ -160,37 +192,41 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onRout
                 />
               </div>
 
-              {/* Analytics */}
-              <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-start justify-between gap-3">
-                <div className="space-y-1">
-                  <span className="font-bold text-slate-900">Cookies de Rendimiento y Análisis</span>
-                  <p className="text-slate-600 leading-relaxed">
-                    Nos ayudan a entender de forma completamente anónima qué estilos de letras son más populares para mejorar la herramienta.
-                  </p>
+              {/* Analytics - only displayed if enabled via environment flag */}
+              {analyticsAvailable && (
+                <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-start justify-between gap-3">
+                  <div className="space-y-1">
+                    <span className="font-bold text-slate-900">Cookies de Rendimiento y Análisis</span>
+                    <p className="text-slate-600 leading-relaxed">
+                      Nos ayudan a entender de forma completamente anónima qué estilos de letras son más populares para mejorar la herramienta.
+                    </p>
+                  </div>
+                  <input
+                    type="checkbox"
+                    checked={analyticsEnabled}
+                    onChange={(e) => setAnalyticsEnabled(e.target.checked)}
+                    className="mt-1 w-4 h-4 rounded text-indigo-600 accent-indigo-600 cursor-pointer"
+                  />
                 </div>
-                <input
-                  type="checkbox"
-                  checked={analyticsEnabled}
-                  onChange={(e) => setAnalyticsEnabled(e.target.checked)}
-                  className="mt-1 w-4 h-4 rounded text-indigo-600 accent-indigo-600 cursor-pointer"
-                />
-              </div>
+              )}
 
-              {/* Advertising */}
-              <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-start justify-between gap-3">
-                <div className="space-y-1">
-                  <span className="font-bold text-slate-900">Cookies Publicitarias de Terceros (Google AdSense)</span>
-                  <p className="text-slate-600 leading-relaxed">
-                    Permiten mostrar publicidad no invasiva relevante y financiar los servidores para mantener la web 100% gratuita.
-                  </p>
+              {/* Advertising - only displayed if enabled via environment flag */}
+              {adsAvailable && (
+                <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-start justify-between gap-3">
+                  <div className="space-y-1">
+                    <span className="font-bold text-slate-900">Cookies Publicitarias de Terceros</span>
+                    <p className="text-slate-600 leading-relaxed">
+                      Permiten mostrar publicidad relevante y financiar los servidores para mantener la web 100% gratuita.
+                    </p>
+                  </div>
+                  <input
+                    type="checkbox"
+                    checked={adsEnabled}
+                    onChange={(e) => setAdsEnabled(e.target.checked)}
+                    className="mt-1 w-4 h-4 rounded text-indigo-600 accent-indigo-600 cursor-pointer"
+                  />
                 </div>
-                <input
-                  type="checkbox"
-                  checked={adsEnabled}
-                  onChange={(e) => setAdsEnabled(e.target.checked)}
-                  className="mt-1 w-4 h-4 rounded text-indigo-600 accent-indigo-600 cursor-pointer"
-                />
-              </div>
+              )}
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-end gap-2 pt-2 border-t border-slate-100">

@@ -71,6 +71,9 @@ async function validateBuild() {
       if (!html.includes('name="robots"')) {
         errors.push(`[${routeKey}] Missing robots tag`);
       }
+      if (html.includes('noindex')) {
+        errors.push(`[${routeKey}] Indexable page must not contain noindex`);
+      }
     }
 
     // Verify H1 tag exists
@@ -225,6 +228,15 @@ async function validateBuild() {
     }
     if (!robotsContent.includes('Sitemap: https://conversordeletrasbonitas.net/sitemap.xml')) {
       errors.push('dist/robots.txt missing valid Sitemap directive');
+    }
+  }
+
+  // Check ads.txt if present
+  const adsPath = path.join(distDir, 'ads.txt');
+  if (fs.existsSync(adsPath)) {
+    const adsContent = fs.readFileSync(adsPath, 'utf8');
+    if (adsContent.includes('pub-XXXXXXXXXXXXXXXX')) {
+      errors.push('ads.txt contains placeholder AdSense publisher ID (pub-XXXXXXXXXXXXXXXX)');
     }
   }
 

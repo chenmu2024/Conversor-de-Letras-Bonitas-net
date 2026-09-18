@@ -15,13 +15,13 @@ export const CookiePolicyPage: React.FC = () => {
       <div className="text-center space-y-3">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-black shadow-xs">
           <Cookie className="w-4 h-4 text-amber-600" />
-          <span>Guía de Cookies RGPD / ePrivacy & Google AdSense</span>
+          <span>Guía de Cookies, Privacidad y Preferencias</span>
         </div>
         <h1 className="font-heading text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
           Política de Cookies
         </h1>
         <p className="text-sm sm:text-base text-slate-500 max-w-xl mx-auto">
-          Última actualización: Agosto de 2026. Te explicamos qué son las cookies, qué tipos utilizamos en este sitio y cómo puedes configurarlas o rechazarlas en cualquier momento.
+          Última actualización: Septiembre de 2026. Te explicamos qué son las cookies, qué almacenamiento utilizamos en este sitio y cómo puedes configurarlo o rechazarlo en cualquier momento.
         </p>
       </div>
 
@@ -56,22 +56,22 @@ export const CookiePolicyPage: React.FC = () => {
           </p>
         </section>
 
-        {/* Section 2: Google AdSense and DoubleClick Cookie */}
+        {/* Section 2: Optional third party and advertising services */}
         <section className="space-y-3 bg-amber-50/70 p-5 sm:p-6 rounded-2xl border border-amber-200">
           <h2 className="font-bold text-base text-amber-950 flex items-center gap-2">
             <Lock className="w-5 h-5 text-amber-600" />
-            <span>2. Cookies de Terceros y Publicidad de Google AdSense</span>
+            <span>2. Cookies de Terceros y Servicios Opcionales</span>
           </h2>
           <div className="space-y-2 text-xs sm:text-sm text-amber-900 leading-relaxed">
             <p>
-              Este sitio web puede utilizar <strong>Google AdSense</strong> para mostrar anuncios relevantes y no intrusivos que permiten mantener todas nuestras herramientas 100% gratuitas. Respecto a este servicio:
+              Actualmente el conversor funciona mediante almacenamiento local y cookies técnicas. Si en el futuro se incorporan servicios publicitarios de terceros como <strong>Google AdSense</strong> o herramientas analíticas:
             </p>
             <ul className="list-disc pl-5 space-y-1.5">
               <li>
-                <strong>Google y proveedores externos:</strong> Utilizan cookies (como la cookie de <strong>DoubleClick DART</strong>) para publicar anuncios basados en las visitas previas de un usuario a este sitio web o a otros sitios de Internet.
+                <strong>Google y proveedores externos:</strong> Podrán utilizar cookies (como la cookie de <strong>DoubleClick DART</strong>) para publicar anuncios basados en las visitas previas de un usuario a este sitio web o a otros sitios de Internet.
               </li>
               <li>
-                <strong>Publicidad personalizada:</strong> Los anuncios que se muestran pueden ser personalizados o no personalizados según las preferencias que haya seleccionado en nuestro banner de consentimiento.
+                <strong>Publicidad personalizada:</strong> Los anuncios que se muestren podrán ser personalizados o no personalizados según las preferencias que haya seleccionado en el banner de consentimiento.
               </li>
               <li>
                 <strong>Cómo inhabilitar la publicidad personalizada:</strong> Puede gestionar o inhabilitar la personalización de anuncios en cualquier momento visitando la{' '}
@@ -101,7 +101,7 @@ export const CookiePolicyPage: React.FC = () => {
         <section className="space-y-3">
           <h2 className="font-bold text-base text-slate-900 flex items-center gap-2">
             <span className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-black">3</span>
-            Tabla Detallada de Cookies Utilizadas
+            Cookies y almacenamiento actualmente utilizados
           </h2>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border border-slate-200 rounded-xl overflow-hidden">
@@ -117,9 +117,9 @@ export const CookiePolicyPage: React.FC = () => {
               <tbody className="divide-y divide-slate-150">
                 <tr>
                   <td className="p-3 font-mono font-bold text-indigo-600">letras_cookie_consent</td>
-                  <td className="p-3">Propia</td>
-                  <td className="p-3">Almacena el estado de aceptación del banner de cookies del usuario.</td>
-                  <td className="p-3">12 meses</td>
+                  <td className="p-3">Propia (localStorage)</td>
+                  <td className="p-3">Almacena el estado de aceptación del banner de preferencias del usuario.</td>
+                  <td className="p-3">Persistente local</td>
                   <td className="p-3"><span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Técnica</span></td>
                 </tr>
                 <tr>
@@ -130,21 +130,22 @@ export const CookiePolicyPage: React.FC = () => {
                   <td className="p-3"><span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Funcional</span></td>
                 </tr>
                 <tr>
-                  <td className="p-3 font-mono font-bold text-indigo-600">__gads / __gpi</td>
-                  <td className="p-3">Google AdSense</td>
-                  <td className="p-3">Permite a Google medir el rendimiento de los anuncios y evitar fraudes o impresiones repetitivas.</td>
-                  <td className="p-3">13 meses</td>
-                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-semibold">Publicitaria</span></td>
-                </tr>
-                <tr>
-                  <td className="p-3 font-mono font-bold text-indigo-600">IDE / DSID</td>
-                  <td className="p-3">Google DoubleClick</td>
-                  <td className="p-3">Utilizada para reorientar, medir la conversión de anuncios y limitar la frecuencia de visualización.</td>
-                  <td className="p-3">12 meses</td>
-                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-semibold">Publicitaria</span></td>
+                  <td className="p-3 font-mono font-bold text-indigo-600">letras_theme</td>
+                  <td className="p-3">Propia (localStorage)</td>
+                  <td className="p-3">Guarda la preferencia visual de tema (claro / oscuro) del usuario.</td>
+                  <td className="p-3">Persistente local</td>
+                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Técnica</span></td>
                 </tr>
               </tbody>
             </table>
+          </div>
+
+          {/* Prospective cookies section */}
+          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5 text-xs text-slate-600 mt-3">
+            <strong className="text-slate-800">Cookies que podrían utilizarse si se habilitan servicios publicitarios:</strong>
+            <p>
+              Si en el futuro se activa Google AdSense, Google u otros proveedores pueden utilizar cookies propias (como <code>__gads</code>, <code>__gpi</code>, <code>IDE</code> o <code>DSID</code>) según sus políticas y las preferencias de consentimiento del usuario para medir impresiones y prevenir fraudes.
+            </p>
           </div>
         </section>
 
@@ -180,7 +181,7 @@ export const CookiePolicyPage: React.FC = () => {
       {/* Trust Seal */}
       <div className="text-center text-xs text-slate-400 flex items-center justify-center gap-2">
         <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-        <span>Política de Cookies Conforme al Reglamento General de Protección de Datos (RGPD UE 2016/679)</span>
+        <span>Política de Cookies y Transparencia de Datos · Última revisión: Septiembre 2026</span>
       </div>
     </div>
   );

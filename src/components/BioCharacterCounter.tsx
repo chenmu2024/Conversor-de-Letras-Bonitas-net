@@ -167,7 +167,7 @@ export const BioCharacterCounter: React.FC<BioCharacterCounterProps> = ({
           </div>
           <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 text-center">
             <div className="font-heading font-black text-xl text-purple-600">{stats.rawLength}</div>
-            <div className="text-[11px] font-bold text-slate-500 uppercase">UTF-16 Bytes</div>
+            <div className="text-[11px] font-bold text-slate-500 uppercase">Unidades UTF-16</div>
           </div>
         </div>
       </div>
