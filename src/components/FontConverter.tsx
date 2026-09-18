@@ -609,7 +609,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
     },
     'politica-de-cookies': {
       title: 'Política de Cookies y Configuración de Privacidad',
-      subtitle: 'Transparencia total sobre el uso de cookies propias y cookies de Google AdSense / DoubleClick según RGPD y ePrivacy.',
+      subtitle: 'Transparencia sobre almacenamiento local, cookies técnicas y preferencias de privacidad.',
       icon: <Sparkles className="w-4 h-4 text-amber-600" />,
       badge: 'Consentimiento de Cookies',
       gradient: 'from-amber-600 to-slate-900',

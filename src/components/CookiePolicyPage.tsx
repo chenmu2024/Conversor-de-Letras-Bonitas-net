@@ -31,7 +31,7 @@ export const CookiePolicyPage: React.FC = () => {
           <Sliders className="w-6 h-6 text-indigo-600 shrink-0" />
           <div>
             <div className="font-bold text-sm text-slate-900">Panel de Control y Preferencias de Cookies</div>
-            <p className="text-xs text-slate-600">Puedes activar o desactivar las cookies analíticas y publicitarias cuando lo desees.</p>
+            <p className="text-xs text-slate-600">Puedes gestionar las preferencias disponibles desde este panel. Si en el futuro se habilitan servicios analíticos o publicitarios, también podrás gestionar su consentimiento desde aquí.</p>
           </div>
         </div>
         <button
@@ -97,19 +97,22 @@ export const CookiePolicyPage: React.FC = () => {
           </div>
         </section>
 
-        {/* Section 3: Cookie Table */}
+        {/* Section 3: Storage and Cookie Table */}
         <section className="space-y-3">
           <h2 className="font-bold text-base text-slate-900 flex items-center gap-2">
             <span className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-black">3</span>
-            Cookies y almacenamiento actualmente utilizados
+            Cookies y almacenamiento local actualmente utilizados
           </h2>
+          <p className="text-xs text-slate-600">
+            A continuación se detallan los elementos de almacenamiento local (<code>localStorage</code>) y cookies técnicas que la aplicación utiliza en su dispositivo para su correcto funcionamiento:
+          </p>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border border-slate-200 rounded-xl overflow-hidden">
               <thead className="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
                 <tr>
-                  <th className="p-3">Nombre</th>
-                  <th className="p-3">Proveedor</th>
-                  <th className="p-3">Finalidad</th>
+                  <th className="p-3">Nombre / Clave</th>
+                  <th className="p-3">Mecanismo</th>
+                  <th className="p-3">Finalidad y Uso</th>
                   <th className="p-3">Duración</th>
                   <th className="p-3">Tipo</th>
                 </tr>
@@ -117,24 +120,59 @@ export const CookiePolicyPage: React.FC = () => {
               <tbody className="divide-y divide-slate-150">
                 <tr>
                   <td className="p-3 font-mono font-bold text-indigo-600">letras_cookie_consent</td>
-                  <td className="p-3">Propia (localStorage)</td>
-                  <td className="p-3">Almacena el estado de aceptación del banner de preferencias del usuario.</td>
+                  <td className="p-3">Almacenamiento local (localStorage)</td>
+                  <td className="p-3">Guarda la elección general de privacidad / consentimiento.</td>
                   <td className="p-3">Persistente local</td>
                   <td className="p-3"><span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Técnica</span></td>
                 </tr>
                 <tr>
-                  <td className="p-3 font-mono font-bold text-indigo-600">letras_favorites_v1</td>
-                  <td className="p-3">Propia (localStorage)</td>
-                  <td className="p-3">Guarda las fuentes y nicks que el usuario marca con la estrella de favoritos.</td>
+                  <td className="p-3 font-mono font-bold text-indigo-600">letras_cookies_analytics</td>
+                  <td className="p-3">Almacenamiento local (localStorage)</td>
+                  <td className="p-3">Guarda la preferencia del usuario respecto a servicios analíticos opcionales. Actualmente puede permanecer en false si no hay analítica habilitada.</td>
+                  <td className="p-3">Persistente local</td>
+                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Preferencia</span></td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-mono font-bold text-indigo-600">letras_cookies_ads</td>
+                  <td className="p-3">Almacenamiento local (localStorage)</td>
+                  <td className="p-3">Guarda la preferencia del usuario respecto a servicios publicitarios opcionales. Actualmente puede permanecer en false si no hay publicidad habilitada.</td>
+                  <td className="p-3">Persistente local</td>
+                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Preferencia</span></td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-mono font-bold text-indigo-600">letras_bonitas_theme</td>
+                  <td className="p-3">Almacenamiento local (localStorage)</td>
+                  <td className="p-3">Guarda la preferencia de tema claro / oscuro.</td>
+                  <td className="p-3">Persistente local</td>
+                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Técnica</span></td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-mono font-bold text-indigo-600">letras_bonitas_favs</td>
+                  <td className="p-3">Almacenamiento local (localStorage)</td>
+                  <td className="p-3">Guarda localmente las fuentes o estilos marcados como favoritos.</td>
                   <td className="p-3">Persistente local</td>
                   <td className="p-3"><span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Funcional</span></td>
                 </tr>
                 <tr>
-                  <td className="p-3 font-mono font-bold text-indigo-600">letras_theme</td>
-                  <td className="p-3">Propia (localStorage)</td>
-                  <td className="p-3">Guarda la preferencia visual de tema (claro / oscuro) del usuario.</td>
+                  <td className="p-3 font-mono font-bold text-indigo-600">letras_bonitas_copy_history</td>
+                  <td className="p-3">Almacenamiento local (localStorage)</td>
+                  <td className="p-3">Guarda localmente el historial reciente de textos o estilos copiados.</td>
                   <td className="p-3">Persistente local</td>
-                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Técnica</span></td>
+                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Funcional</span></td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-mono font-bold text-indigo-600">conversor_feedback</td>
+                  <td className="p-3">Almacenamiento local (localStorage)</td>
+                  <td className="p-3">Guarda localmente la valoración simple Sí / No de la herramienta.</td>
+                  <td className="p-3">Persistente local</td>
+                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Funcional</span></td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-mono font-bold text-indigo-600">feedback_*</td>
+                  <td className="p-3">Almacenamiento local (localStorage)</td>
+                  <td className="p-3">Guarda localmente si una guía concreta fue marcada como útil (clave dinámica según el artículo).</td>
+                  <td className="p-3">Persistente local</td>
+                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Funcional</span></td>
                 </tr>
               </tbody>
             </table>
@@ -142,9 +180,9 @@ export const CookiePolicyPage: React.FC = () => {
 
           {/* Prospective cookies section */}
           <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5 text-xs text-slate-600 mt-3">
-            <strong className="text-slate-800">Cookies que podrían utilizarse si se habilitan servicios publicitarios:</strong>
+            <strong className="text-slate-800">Cookies que podrían utilizarse si se habilitan servicios publicitarios o de terceros:</strong>
             <p>
-              Si en el futuro se activa Google AdSense, Google u otros proveedores pueden utilizar cookies propias (como <code>__gads</code>, <code>__gpi</code>, <code>IDE</code> o <code>DSID</code>) según sus políticas y las preferencias de consentimiento del usuario para medir impresiones y prevenir fraudes.
+              Si en el futuro se activan servicios de publicidad como Google AdSense o herramientas analíticas, los proveedores externos pueden utilizar cookies HTTP en el navegador (como <code>__gads</code>, <code>__gpi</code>, <code>IDE</code> o <code>DSID</code>) según sus políticas y las opciones de consentimiento del usuario para medir impresiones y prevenir fraudes.
             </p>
           </div>
         </section>

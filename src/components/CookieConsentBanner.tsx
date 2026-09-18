@@ -49,12 +49,13 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onRout
 
   const handleAcceptAll = () => {
     localStorage.setItem('letras_cookie_consent', 'all');
-    if (analyticsAvailable) {
-      localStorage.setItem('letras_cookies_analytics', 'true');
-    }
-    if (adsAvailable) {
-      localStorage.setItem('letras_cookies_ads', 'true');
-    }
+
+    localStorage.setItem('letras_cookies_analytics', analyticsAvailable ? 'true' : 'false');
+    localStorage.setItem('letras_cookies_ads', adsAvailable ? 'true' : 'false');
+
+    setAnalyticsEnabled(analyticsAvailable);
+    setAdsEnabled(adsAvailable);
+
     setIsOpen(false);
     setShowConfigModal(false);
   };
