@@ -43,7 +43,7 @@ export const PlatformLimitChecker: React.FC<PlatformLimitCheckerProps> = ({ text
             </span>
           ) : (
             <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-              <CheckCircle2 className="w-3 h-3" /> 100% Compatible en Juegos & Apps
+              <CheckCircle2 className="w-3 h-3" /> Alta Compatibilidad en Juegos & Apps
             </span>
           )}
         </div>

@@ -39,7 +39,7 @@ export const InvisibleSpaceStudio: React.FC<InvisibleSpaceStudioProps> = ({
       title: 'Espacio Invisible Simple (U+3164)',
       code: HANGUL_FILLER,
       desc: 'El más usado para Free Fire & WhatsApp',
-      tag: '⭐ 100% Compatible',
+      tag: '⭐ Alta Compatibilidad',
     },
     {
       title: 'Espacio Invisible Doble (2x)',

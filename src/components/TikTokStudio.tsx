@@ -171,7 +171,7 @@ export const TikTokStudio: React.FC<TikTokStudioProps> = ({
                 Generador de Biografías, Emojis Secretos y Textos para TikTok
               </h2>
               <p className="text-xs sm:text-sm text-white/80 mt-1">
-                Personaliza tu nombre con letras bonitas, controla el límite estricto de 80 caracteres y usa los emojis secretos de TikTok.
+                Personaliza tu nombre con letras bonitas, controla el límite habitual de 80 caracteres y usa los emojis secretos de TikTok.
               </p>
             </div>
           </div>

@@ -178,7 +178,7 @@ export const AlphabetReferenceTable: React.FC = () => {
           </div>
         </div>
 
-        {/* E-E-A-T Technical Specification Accordion/Card */}
+        {/* Technical Specification Card */}
         <div className="mt-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-slate-900 to-indigo-950 text-white shadow-sm border border-slate-800">
           <h3 className="font-extrabold text-sm sm:text-base text-indigo-100 flex items-center gap-2">
             <span>ℹ️ ¿Por Qué el Sistema Unicode Permite Estas Letras?</span>

@@ -534,7 +534,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
       'duos toxicos free fire',
       'nombres combinados para parejas'
     ],
-    canonical: 'https://conversordeletrasbonitas.net/nombres-parejas/',
+    canonical: 'https://conversordeletrasbonitas.net/nombres-para-parejas/',
     badge: '💑 Especial Dúos y Parejas Goals',
     guideTitle: '¿Cómo Crear Nombres Combinados Perfectos para Parejas?',
     guideSteps: [
@@ -913,8 +913,8 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
         answer: 'No. El conversor funciona de manera local en el cliente (lado del navegador). El servidor no almacena el contenido de los textos que conviertes.'
       },
       {
-        question: '¿Cómo gestiona este sitio las cookies publicitarias de Google AdSense?',
-        answer: 'Utilizamos cookies técnicas necesarias y proveedores de publicidad de terceros (como Google AdSense) para financiar el servicio gratuito. Puedes aceptar, rechazar o configurar las cookies en cualquier momento desde nuestro banner de consentimiento.'
+        question: '¿Cómo gestiona este sitio las cookies publicitarias de terceros?',
+        answer: 'Si el sitio incorpora servicios publicitarios de terceros como Google AdSense, dichos proveedores pueden utilizar cookies de acuerdo con las preferencias de consentimiento del usuario. Puedes aceptar, rechazar o configurar las cookies en cualquier momento desde nuestro banner de consentimiento.'
       }
     ],
     proTips: [
@@ -924,7 +924,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
 
   'politica-de-cookies': {
     title: 'Política de Cookies - Conversor de Letras Bonitas (RGPD)',
-    metaDescription: 'Información detallada sobre el uso de cookies técnicas, analíticas y publicitarias de Google AdSense, DoubleClick y cómo configurar sus preferencias.',
+    metaDescription: 'Información sobre el uso de cookies técnicas y de posibles proveedores publicitarios de terceros, y cómo configurar o revocar tus preferencias.',
     h1: 'Política de Cookies y Consentimiento de Privacidad',
     h2Secondary: 'Transparencia en el Uso de Cookies Propias y de Terceros Conforme a la Directiva ePrivacy',
     keywords: [
@@ -938,13 +938,13 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     guideTitle: 'Cómo Gestionamos las Cookies en este Sitio Web',
     guideSteps: [
       { step: '1', title: 'Cookies Técnicas Esenciales', text: 'Permiten la funcionalidad básica del conversor y almacenar localmente tus preferencias.' },
-      { step: '2', title: 'Publicidad de Google AdSense', text: 'Ayudan a mantener la infraestructura para ofrecer un servicio gratuito.' },
+      { step: '2', title: 'Servicios Publicitarios de Terceros', text: 'En caso de incorporarse anuncios, ayudan a sostener la infraestructura para ofrecer un servicio gratuito.' },
       { step: '3', title: 'Control del Usuario', text: 'Puedes modificar o retirar tu consentimiento en cualquier momento desde el panel inferior.' }
     ],
     faqs: [
       {
-        question: '¿Qué es la cookie DoubleClick DART utilizada por Google?',
-        answer: 'Google utiliza la cookie de DART para publicar anuncios en función de las visitas de los usuarios a este y otros sitios web. Los usuarios pueden inhabilitar el uso de la cookie de DART a través de la Política de Privacidad de la red de contenido y anuncios de Google.'
+        question: '¿Cómo funcionan las cookies publicitarias de terceros como DoubleClick?',
+        answer: 'En caso de utilizarse servicios publicitarios de Google, estos pueden emplear cookies para publicar anuncios según las visitas de los usuarios en la web. Los usuarios pueden inhabilitar este uso a través de la Configuración de Anuncios de Google o el banner de cookies.'
       },
       {
         question: '¿Puedo revocar mi consentimiento de cookies en cualquier momento?',

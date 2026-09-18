@@ -588,7 +588,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
     },
     'contador-bio': {
       title: 'Contador de Caracteres para Biografía de Instagram y TikTok',
-      subtitle: 'Calcula caracteres y palabras en tiempo real verificando los límites exactos de biografía de Instagram (150), TikTok (80) y Twitter (280).',
+      subtitle: 'Calcula caracteres y palabras en tiempo real verificando los límites habituales de biografía de Instagram (150), TikTok (80) y Twitter (280).',
       icon: <span className="font-mono font-bold text-xs text-indigo-600">#150</span>,
       badge: 'Contador de Biografía',
       gradient: 'from-indigo-600 to-pink-600',

@@ -90,7 +90,7 @@ export const BioCharacterCounter: React.FC<BioCharacterCounterProps> = ({
           Contador de Caracteres para Redes Sociales
         </h1>
         <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
-          Escribe o pega tu texto y visualiza en tiempo real el cumplimiento de límites para Instagram, TikTok, WhatsApp, Twitter y Free Fire.
+          Escribe o pega tu texto y visualiza en tiempo real una referencia de los límites habituales para Instagram, TikTok, WhatsApp, X y Free Fire.
         </p>
       </div>
 
@@ -174,11 +174,16 @@ export const BioCharacterCounter: React.FC<BioCharacterCounterProps> = ({
 
       {/* Social Media Limits Progress Grid */}
       <div className="space-y-4">
-        <div className="flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-indigo-600" />
-          <h2 className="font-heading text-lg font-bold text-slate-900">
-            Compatibilidad con Límites de Plataformas
-          </h2>
+        <div>
+          <div className="flex items-center gap-2">
+            <Sparkles className="w-5 h-5 text-indigo-600" />
+            <h2 className="font-heading text-lg font-bold text-slate-900">
+              Compatibilidad con Límites de Plataformas
+            </h2>
+          </div>
+          <p className="text-[11px] text-slate-500 mt-1">
+            Los límites mostrados son referencias habituales y pueden cambiar según las actualizaciones de cada plataforma.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

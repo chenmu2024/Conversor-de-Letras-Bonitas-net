@@ -10,12 +10,11 @@ const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..');
 
 async function generateSitemap() {
-  console.log('🗺️ [Sitemap] Generating public/sitemap.xml...');
+  console.log('🗺️ [Sitemap] Generating dist/sitemap.xml...');
 
   const { ROUTE_CONFIGS } = await import('../src/data/routeConfigs.ts');
   const { SEO_ROUTE_DATA } = await import('../src/data/seoRouteData.ts');
 
-  const today = new Date().toISOString().split('T')[0];
   const routes = Object.values(ROUTE_CONFIGS).filter((r) => r.route !== '404');
 
   // Priority and changefreq logic
@@ -48,7 +47,6 @@ async function generateSitemap() {
 
     xml += `  <url>\n`;
     xml += `    <loc>${loc}</loc>\n`;
-    xml += `    <lastmod>${today}</lastmod>\n`;
     xml += `    <changefreq>${changefreq}</changefreq>\n`;
     xml += `    <priority>${priority}</priority>\n`;
     xml += `  </url>\n`;
@@ -56,16 +54,15 @@ async function generateSitemap() {
 
   xml += `</urlset>\n`;
 
-  const publicSitemapPath = path.join(projectRoot, 'public', 'sitemap.xml');
-  fs.writeFileSync(publicSitemapPath, xml, 'utf8');
-
-  // Also write to dist/sitemap.xml if dist exists
-  const distSitemapPath = path.join(projectRoot, 'dist', 'sitemap.xml');
-  if (fs.existsSync(path.join(projectRoot, 'dist'))) {
-    fs.writeFileSync(distSitemapPath, xml, 'utf8');
+  const distDir = path.join(projectRoot, 'dist');
+  if (!fs.existsSync(distDir)) {
+    fs.mkdirSync(distDir, { recursive: true });
   }
 
-  console.log(`✅ [Sitemap] Successfully generated sitemap with ${routes.length} URLs (lastmod: ${today}) without regional hreflangs.`);
+  const distSitemapPath = path.join(distDir, 'sitemap.xml');
+  fs.writeFileSync(distSitemapPath, xml, 'utf8');
+
+  console.log(`✅ [Sitemap] Successfully generated sitemap with ${routes.length} URLs.`);
 }
 
 generateSitemap().catch((err) => {

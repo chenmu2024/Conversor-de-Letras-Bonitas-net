@@ -124,11 +124,59 @@ async function validateBuild() {
     }
 
     // Check no legacy alias URLs in sitemap
-    const legacyAliases = ['/instagram/', '/tiktok/', '/whatsapp/', '/free-fire/', '/facebook/', '/nicks-free-fire/'];
+    const legacyAliases = [
+      '/instagram/',
+      '/tiktok/',
+      '/whatsapp/',
+      '/free-fire/',
+      '/facebook/',
+      '/letras-tatuajes/',
+      '/nicks-free-fire/',
+      '/nombres-parejas/',
+      '/abecedario/',
+      '/cursiva/',
+      '/goticas/',
+      '/invertidas/',
+      '/circulos/',
+      '/glitch/',
+      '/simbolos/',
+      '/decorador/',
+      '/contador-bio/',
+    ];
+
     for (const alias of legacyAliases) {
-      if (sitemapContent.includes(`conversordeletrasbonitas.net${alias}`)) {
-        errors.push(`dist/sitemap.xml must not contain legacy alias URL: ${alias}`);
+      if (sitemapContent.includes(`https://conversordeletrasbonitas.net${alias}`) || sitemapContent.includes(`conversordeletrasbonitas.net${alias}`)) {
+        errors.push(`dist/sitemap.xml contains legacy alias URL: ${alias}`);
       }
+    }
+  }
+
+  // Check that legacy aliases do NOT have generated HTML directories in dist
+  const legacyAliases = [
+    '/instagram/',
+    '/tiktok/',
+    '/whatsapp/',
+    '/free-fire/',
+    '/facebook/',
+    '/letras-tatuajes/',
+    '/nicks-free-fire/',
+    '/nombres-parejas/',
+    '/abecedario/',
+    '/cursiva/',
+    '/goticas/',
+    '/invertidas/',
+    '/circulos/',
+    '/glitch/',
+    '/simbolos/',
+    '/decorador/',
+    '/contador-bio/',
+  ];
+
+  for (const alias of legacyAliases) {
+    const aliasDir = alias.replace(/^\/|\/$/g, '');
+    const aliasFile = path.join(distDir, aliasDir, 'index.html');
+    if (fs.existsSync(aliasFile)) {
+      errors.push(`Legacy alias generated as HTML: ${alias}`);
     }
   }
 
@@ -138,8 +186,31 @@ async function validateBuild() {
     errors.push('dist/_redirects is missing');
   } else {
     const redirectsContent = fs.readFileSync(redirectsPath, 'utf8');
-    if (!redirectsContent.includes('/instagram/ /letras-para-instagram/ 301')) {
-      errors.push('dist/_redirects is missing key 301 redirect rules');
+    const expectedRedirects = [
+      ['/instagram/', '/letras-para-instagram/'],
+      ['/tiktok/', '/letras-para-tiktok/'],
+      ['/whatsapp/', '/letras-para-whatsapp/'],
+      ['/free-fire/', '/letras-para-free-fire/'],
+      ['/facebook/', '/letras-para-facebook/'],
+      ['/letras-tatuajes/', '/letras-para-tatuajes/'],
+      ['/nicks-free-fire/', '/generador-de-nicks-free-fire/'],
+      ['/nombres-parejas/', '/nombres-para-parejas/'],
+      ['/abecedario/', '/abecedario-letras-bonitas/'],
+      ['/cursiva/', '/traductor-cursiva/'],
+      ['/goticas/', '/letras-goticas/'],
+      ['/invertidas/', '/letras-tachadas-e-invertidas/'],
+      ['/circulos/', '/letras-en-circulos-y-cuadros/'],
+      ['/glitch/', '/letras-glitch-zalgo/'],
+      ['/simbolos/', '/simbolos-y-emojis/'],
+      ['/decorador/', '/decorador-de-nicks/'],
+      ['/contador-bio/', '/contador-de-caracteres-bio/'],
+    ];
+
+    for (const [from, to] of expectedRedirects) {
+      const rule = `${from} ${to} 301`;
+      if (!redirectsContent.includes(rule)) {
+        errors.push(`Missing redirect rule: ${rule}`);
+      }
     }
   }
 
@@ -163,7 +234,7 @@ async function validateBuild() {
     process.exit(1);
   }
 
-  console.log('✅ [Validate] All 28 SEO routes, canonical tags, titles, descriptions, scripts, and sitemap verified successfully!');
+  console.log('✅ [Validate] All 28 indexable SEO pages + 404 page verified successfully.');
 }
 
 validateBuild().catch((err) => {
