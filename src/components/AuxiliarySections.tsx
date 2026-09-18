@@ -1,34 +1,36 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { PageRoute } from '../types';
-import { InvisibleSpaceCard } from './InvisibleSpaceCard';
-import { TextDecorator } from './TextDecorator';
-import { PlatformPreview } from './PlatformPreview';
-import { AlphabetReference } from './AlphabetReference';
-import { SymbolsLibrary } from './SymbolsLibrary';
-import { SingleLetterExplorer } from './SingleLetterExplorer';
-import { ReadyBioTemplates } from './ReadyBioTemplates';
-import { SafetyAndUnicodeGuide } from './SafetyAndUnicodeGuide';
-import { CrossPlatformGlyphMatrix } from './CrossPlatformGlyphMatrix';
-import { EditorialTypographyMasterclass } from './EditorialTypographyMasterclass';
-import { AdvancedGuideAndTips } from './AdvancedGuideAndTips';
-import { ReadyNicknamesSection } from './ReadyNicknamesSection';
-import { RegionalSearchTerms } from './RegionalSearchTerms';
-import { PopularNamesSection } from './PopularNamesSection';
-import { SymbolMatrixSection } from './SymbolMatrixSection';
-import { AlphabetTableSection } from './AlphabetTableSection';
-import { UnicodeGlossarySection } from './UnicodeGlossarySection';
-import { CompatibilitySection } from './CompatibilitySection';
-import { SignatureGeneratorSection } from './SignatureGeneratorSection';
-import { CouplesNameGeneratorSection } from './CouplesNameGeneratorSection';
-import { BioTemplatesSection } from './BioTemplatesSection';
-import { SpecialOccasionsPhrasesSection } from './SpecialOccasionsPhrasesSection';
-import { TextDecoratorsGallery } from './TextDecoratorsGallery';
-import { GlyphInspectorSection } from './GlyphInspectorSection';
-import { InvisibleSpaceSection } from './InvisibleSpaceSection';
-import { SeoContent } from './SeoContent';
-import { UserRatingsSection } from './UserRatingsSection';
-import { RelatedSilosSection } from './RelatedSilosSection';
-import { TableOfContents } from './TableOfContents';
+
+// Code-split each individual auxiliary section so they are only downloaded when needed
+const InvisibleSpaceCard = lazy(() => import('./InvisibleSpaceCard').then(m => ({ default: m.InvisibleSpaceCard })));
+const TextDecorator = lazy(() => import('./TextDecorator').then(m => ({ default: m.TextDecorator })));
+const PlatformPreview = lazy(() => import('./PlatformPreview').then(m => ({ default: m.PlatformPreview })));
+const AlphabetReference = lazy(() => import('./AlphabetReference').then(m => ({ default: m.AlphabetReference })));
+const SymbolsLibrary = lazy(() => import('./SymbolsLibrary').then(m => ({ default: m.SymbolsLibrary })));
+const SingleLetterExplorer = lazy(() => import('./SingleLetterExplorer').then(m => ({ default: m.SingleLetterExplorer })));
+const ReadyBioTemplates = lazy(() => import('./ReadyBioTemplates').then(m => ({ default: m.ReadyBioTemplates })));
+const SafetyAndUnicodeGuide = lazy(() => import('./SafetyAndUnicodeGuide').then(m => ({ default: m.SafetyAndUnicodeGuide })));
+const CrossPlatformGlyphMatrix = lazy(() => import('./CrossPlatformGlyphMatrix').then(m => ({ default: m.CrossPlatformGlyphMatrix })));
+const EditorialTypographyMasterclass = lazy(() => import('./EditorialTypographyMasterclass').then(m => ({ default: m.EditorialTypographyMasterclass })));
+const AdvancedGuideAndTips = lazy(() => import('./AdvancedGuideAndTips').then(m => ({ default: m.AdvancedGuideAndTips })));
+const ReadyNicknamesSection = lazy(() => import('./ReadyNicknamesSection').then(m => ({ default: m.ReadyNicknamesSection })));
+const RegionalSearchTerms = lazy(() => import('./RegionalSearchTerms').then(m => ({ default: m.RegionalSearchTerms })));
+const PopularNamesSection = lazy(() => import('./PopularNamesSection').then(m => ({ default: m.PopularNamesSection })));
+const SymbolMatrixSection = lazy(() => import('./SymbolMatrixSection').then(m => ({ default: m.SymbolMatrixSection })));
+const AlphabetTableSection = lazy(() => import('./AlphabetTableSection').then(m => ({ default: m.AlphabetTableSection })));
+const UnicodeGlossarySection = lazy(() => import('./UnicodeGlossarySection').then(m => ({ default: m.UnicodeGlossarySection })));
+const CompatibilitySection = lazy(() => import('./CompatibilitySection').then(m => ({ default: m.CompatibilitySection })));
+const SignatureGeneratorSection = lazy(() => import('./SignatureGeneratorSection').then(m => ({ default: m.SignatureGeneratorSection })));
+const CouplesNameGeneratorSection = lazy(() => import('./CouplesNameGeneratorSection').then(m => ({ default: m.CouplesNameGeneratorSection })));
+const BioTemplatesSection = lazy(() => import('./BioTemplatesSection').then(m => ({ default: m.BioTemplatesSection })));
+const SpecialOccasionsPhrasesSection = lazy(() => import('./SpecialOccasionsPhrasesSection').then(m => ({ default: m.SpecialOccasionsPhrasesSection })));
+const TextDecoratorsGallery = lazy(() => import('./TextDecoratorsGallery').then(m => ({ default: m.TextDecoratorsGallery })));
+const GlyphInspectorSection = lazy(() => import('./GlyphInspectorSection').then(m => ({ default: m.GlyphInspectorSection })));
+const InvisibleSpaceSection = lazy(() => import('./InvisibleSpaceSection').then(m => ({ default: m.InvisibleSpaceSection })));
+const SeoContent = lazy(() => import('./SeoContent').then(m => ({ default: m.SeoContent })));
+const UserRatingsSection = lazy(() => import('./UserRatingsSection').then(m => ({ default: m.UserRatingsSection })));
+const RelatedSilosSection = lazy(() => import('./RelatedSilosSection').then(m => ({ default: m.RelatedSilosSection })));
+const TableOfContents = lazy(() => import('./TableOfContents').then(m => ({ default: m.TableOfContents })));
 
 interface AuxiliarySectionsProps {
   currentRoute: PageRoute;
@@ -48,7 +50,7 @@ export const AuxiliarySections: React.FC<AuxiliarySectionsProps> = ({
   onRouteChange,
 }) => {
   return (
-    <>
+    <Suspense fallback={<div className="h-32 animate-pulse bg-slate-100 rounded-3xl my-8" />}>
       {/* Espacio Invisible Quick Tool */}
       <div className="mt-8 mb-8">
         <InvisibleSpaceCard />
@@ -168,7 +170,7 @@ export const AuxiliarySections: React.FC<AuxiliarySectionsProps> = ({
 
       {/* Related Silos */}
       <RelatedSilosSection currentRoute={currentRoute} onRouteChange={onRouteChange} />
-    </>
+    </Suspense>
   );
 };
 export default AuxiliarySections;

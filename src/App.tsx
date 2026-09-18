@@ -4,14 +4,14 @@ import { ROUTE_CONFIGS } from './data/routeConfigs';
 import { useSeoHead } from './hooks/useSeoHead';
 import { Header } from './components/Header';
 import { FontConverter } from './components/FontConverter';
-import { SubStudioRouter } from './components/SubStudioRouter';
 import { Breadcrumbs } from './components/Breadcrumbs';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { ToastNotification } from './components/ToastNotification';
 import { Footer } from './components/Footer';
 import { ArrowUp, Star } from 'lucide-react';
 
-// Lazy load below-the-fold auxiliary sections and interactive drawer modals
+// Lazy load below-the-fold auxiliary sections, interactive sub-studios, and interactive drawer modals
+const SubStudioRouter = lazy(() => import('./components/SubStudioRouter').then(m => ({ default: m.SubStudioRouter })));
 const AuxiliarySections = lazy(() => import('./components/AuxiliarySections'));
 const FavoritesModal = lazy(() => import('./components/FavoritesModal').then(m => ({ default: m.FavoritesModal })));
 const CopyHistoryDrawer = lazy(() => import('./components/CopyHistoryDrawer').then(m => ({ default: m.CopyHistoryDrawer })));
@@ -337,12 +337,14 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
 
         {isStandalonePage ? (
           /* Standalone Information & Legal Pages (Own H1, Clean Single-View Layout) */
-          <SubStudioRouter
-            currentRoute={currentRoute}
-            globalText={globalText}
-            onApplyText={(t) => setGlobalText(t)}
-            onRouteChange={handleRouteChange}
-          />
+          <Suspense fallback={<div className="h-40 animate-pulse bg-slate-100 rounded-3xl my-8" />}>
+            <SubStudioRouter
+              currentRoute={currentRoute}
+              globalText={globalText}
+              onApplyText={(t) => setGlobalText(t)}
+              onRouteChange={handleRouteChange}
+            />
+          </Suspense>
         ) : (
           <>
             {/* 1. Primary Unicode Font Converter (Top H1 Title, Input Workbench & Real-time Fonts) */}
@@ -356,12 +358,14 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
             />
 
             {/* 2. Dedicated Interactive Studio / Platform Toolkit (Sub-studios for Instagram, Free Fire, etc.) */}
-            <SubStudioRouter
-              currentRoute={currentRoute}
-              globalText={globalText}
-              onApplyText={(t) => setGlobalText(t)}
-              onRouteChange={handleRouteChange}
-            />
+            <Suspense fallback={null}>
+              <SubStudioRouter
+                currentRoute={currentRoute}
+                globalText={globalText}
+                onApplyText={(t) => setGlobalText(t)}
+                onRouteChange={handleRouteChange}
+              />
+            </Suspense>
 
             {/* 3. Auxiliary Content, Alphabet Tables, Guides, Infographics & SEO (Deferred to eliminate LCP delay) */}
             <DeferredAuxiliarySections
