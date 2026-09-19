@@ -203,8 +203,8 @@ async function runPrerender() {
 
     // Replace JSON-LD Schema Script
     pageHtml = pageHtml.replace(
-      /<script\s+type=["']application\/ld\+json["']>[\s\S]*?<\/script>/i,
-      `<script type="application/ld+json">\n${JSON.stringify(structuredData, null, 2)}\n    </script>`
+      /<script\s+(?:id=["']seo-jsonld["']\s+)?type=["']application\/ld\+json["']>[\s\S]*?<\/script>/i,
+      `<script id="seo-jsonld" type="application/ld+json">\n${JSON.stringify(structuredData, null, 2)}\n    </script>`
     );
 
     // Replace root element content with SSR rendered React markup safely

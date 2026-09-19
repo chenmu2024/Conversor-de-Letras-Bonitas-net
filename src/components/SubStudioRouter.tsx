@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { PageRoute } from '../types';
+import { LazyOnVisible } from './LazyOnVisible';
 
 // Lazy load heavy sub-studio tools and secondary pages
 const InstagramTools = lazy(() => import('./InstagramTools').then(m => ({ default: m.InstagramTools })));
@@ -192,7 +193,9 @@ export const SubStudioRouter: React.FC<SubStudioRouterProps> = ({
     <Suspense fallback={<div className="h-16" />}>
       {isInteractiveStudio ? (
         <div id="sub-studio-section" className="mb-10 scroll-mt-20">
-          {renderContent()}
+          <LazyOnVisible minHeight="280px">
+            {renderContent()}
+          </LazyOnVisible>
         </div>
       ) : (
         renderContent()

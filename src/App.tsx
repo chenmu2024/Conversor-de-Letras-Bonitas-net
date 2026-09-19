@@ -140,34 +140,6 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
     return resolveRouteFromUrl(initialRoute);
   });
 
-  // SSR and first client hydration render use consistent default: light mode (false)
-  // After mount, hydrate user preference from localStorage or prefers-color-scheme
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
-
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem('letras_bonitas_theme');
-      if (saved) {
-        setIsDarkMode(saved === 'dark');
-      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        setIsDarkMode(true);
-      }
-    } catch (e) {
-      console.warn('Theme preference read failed', e);
-    }
-  }, []);
-
-  const toggleDarkMode = () => {
-    setIsDarkMode((prev) => {
-      const next = !prev;
-      try {
-        localStorage.setItem('letras_bonitas_theme', next ? 'dark' : 'light');
-      } catch (e) {
-        console.warn('Theme could not be saved', e);
-      }
-      return next;
-    });
-  };
   const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
   const [isFavoritesOpen, setIsFavoritesOpen] = useState<boolean>(false);
   const [isPwaModalOpen, setIsPwaModalOpen] = useState<boolean>(false);
@@ -313,9 +285,7 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
   ].includes(currentRoute);
 
   return (
-    <div className={`min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white relative transition-colors duration-200 ${
-      isDarkMode ? 'dark bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'
-    }`}>
+    <div className="min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white relative bg-slate-50 text-slate-900">
       {/* Non-blocking IntersectionObserver Sentinel for scroll detection */}
       <div id="scroll-sentinel" className="absolute top-[380px] left-0 w-full h-1 pointer-events-none opacity-0" aria-hidden="true" />
 
@@ -325,8 +295,6 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
         onRouteChange={handleRouteChange}
         favoritesCount={favorites.length}
         onOpenFavorites={() => setIsFavoritesOpen(true)}
-        isDarkMode={isDarkMode}
-        onToggleDarkMode={toggleDarkMode}
         onOpenPwaInstall={() => setIsPwaModalOpen(true)}
       />
 
@@ -355,6 +323,7 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
               onPreview={handleOpenPreview}
               initialText={globalText}
               onTextChange={(t) => setGlobalText(t)}
+              onRouteChange={handleRouteChange}
             />
 
             {/* 2. Dedicated Interactive Studio / Platform Toolkit (Sub-studios for Instagram, Free Fire, etc.) */}

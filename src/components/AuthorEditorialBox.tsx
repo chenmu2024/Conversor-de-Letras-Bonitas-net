@@ -87,14 +87,17 @@ export const AuthorEditorialBox: React.FC<AuthorEditorialBoxProps> = ({
 
       {onRouteChange && (
         <div className="flex justify-end pt-1">
-          <button
-            type="button"
-            onClick={() => onRouteChange('sobre-nosotros')}
+          <a
+            href="/sobre-nosotros/"
+            onClick={(e) => {
+              e.preventDefault();
+              onRouteChange('sobre-nosotros');
+            }}
             className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-400 hover:text-indigo-300 transition-colors"
           >
             <span>Más sobre nuestro proyecto</span>
             <ArrowRight className="w-3.5 h-3.5" />
-          </button>
+          </a>
         </div>
       )}
     </div>

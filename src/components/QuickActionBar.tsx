@@ -68,7 +68,7 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
   };
 
   const toInvertedCase = () => {
-    const formatted = Array.from(text)
+    const formatted = (Array.from(text) as string[])
       .map((c, i) => (i % 2 === 0 ? c.toUpperCase() : c.toLowerCase()))
       .join('');
     onTextChange(formatted);

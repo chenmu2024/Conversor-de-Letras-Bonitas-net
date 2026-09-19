@@ -93,13 +93,26 @@ export function useSeoHead(currentRoute: PageRoute) {
     setLinkTag('canonical', canonicalUrl);
 
     // 4. Inject Simplified Schema.org JSON-LD (WebSite + WebApplication + BreadcrumbList + Organization)
-    const scriptId = 'dynamic-seo-jsonld';
+    const scriptId = 'seo-jsonld';
     let scriptTag = document.getElementById(scriptId) as HTMLScriptElement | null;
     if (!scriptTag) {
-      scriptTag = document.createElement('script');
-      scriptTag.id = scriptId;
-      scriptTag.type = 'application/ld+json';
-      document.head.appendChild(scriptTag);
+      scriptTag = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement | null;
+      if (scriptTag) {
+        scriptTag.id = scriptId;
+      } else {
+        scriptTag = document.createElement('script');
+        scriptTag.id = scriptId;
+        scriptTag.type = 'application/ld+json';
+        document.head.appendChild(scriptTag);
+      }
+    }
+
+    // Ensure no duplicate JSON-LD script tags exist in document
+    const allLdJson = document.querySelectorAll('script[type="application/ld+json"]');
+    if (allLdJson.length > 1) {
+      allLdJson.forEach((el) => {
+        if (el !== scriptTag) el.remove();
+      });
     }
 
     const graphItems: any[] = [

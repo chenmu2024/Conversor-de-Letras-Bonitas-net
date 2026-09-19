@@ -15,8 +15,6 @@ import {
   Layers, 
   Wand2, 
   Zap, 
-  Moon, 
-  Sun,
   Download
 } from 'lucide-react';
 import { INVISIBLE_SPACE } from '../data/symbols';
@@ -26,8 +24,6 @@ interface HeaderProps {
   onRouteChange: (route: PageRoute) => void;
   favoritesCount: number;
   onOpenFavorites: () => void;
-  isDarkMode?: boolean;
-  onToggleDarkMode?: () => void;
   onOpenPwaInstall?: () => void;
 }
 
@@ -36,8 +32,6 @@ export const Header: React.FC<HeaderProps> = ({
   onRouteChange,
   favoritesCount,
   onOpenFavorites,
-  isDarkMode,
-  onToggleDarkMode,
   onOpenPwaInstall,
 }) => {
   const [copiedSpace, setCopiedSpace] = useState(false);
@@ -153,24 +147,6 @@ export const Header: React.FC<HeaderProps> = ({
               >
                 <Download className="w-3.5 h-3.5 text-indigo-600" />
                 <span>Instalar App</span>
-              </button>
-            )}
-
-            {/* Dark Mode Toggle Button */}
-            {onToggleDarkMode && (
-              <button
-                type="button"
-                id="header-theme-toggle-btn"
-                aria-label={isDarkMode ? 'Cambiar a Modo Claro' : 'Cambiar a Modo Oscuro'}
-                onClick={onToggleDarkMode}
-                className="p-2 rounded-xl text-slate-700 hover:text-indigo-600 bg-slate-100/80 hover:bg-indigo-50 border border-slate-200/80 hover:border-indigo-200 transition-all active:scale-95"
-                title={isDarkMode ? 'Cambiar a Modo Claro' : 'Cambiar a Modo Oscuro'}
-              >
-                {isDarkMode ? (
-                  <Sun className="w-4 h-4 text-amber-500 fill-amber-400" />
-                ) : (
-                  <Moon className="w-4 h-4 text-indigo-600" />
-                )}
               </button>
             )}
 

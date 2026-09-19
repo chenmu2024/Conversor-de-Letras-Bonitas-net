@@ -54,6 +54,7 @@ interface FontConverterProps {
   onToggleFavorite: (generator: FontGenerator, result: string) => void;
   onPreview: (resultText: string, fontName: string) => void;
   onTextChange?: (text: string) => void;
+  onRouteChange: (route: PageRoute) => void;
 }
 
 const POPULAR_WORD_PILLS = [
@@ -78,6 +79,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
   onToggleFavorite,
   onPreview,
   onTextChange: notifyParentTextChange,
+  onRouteChange,
 }) => {
   const [inputText, setInputText] = useState<string>(initialText);
   const deferredInputText = useDeferredValue(inputText);
@@ -535,7 +537,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
               const defText = ROUTE_CONFIGS[route]?.defaultText;
               if (defText) notifyParentTextChange(defText);
             }
-            window.location.hash = `#/${route === 'inicio' ? '' : route}`;
+            onRouteChange(route);
           }}
         />
       </Suspense>

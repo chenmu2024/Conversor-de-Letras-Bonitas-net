@@ -71,9 +71,11 @@ export const RelatedSilosSection: React.FC<RelatedSilosSectionProps> = ({
           const cfg = ROUTE_CONFIGS[key];
           if (!cfg) return null;
           return (
-            <button
+            <a
               key={key}
-              onClick={() => {
+              href={cfg.path}
+              onClick={(e) => {
+                e.preventDefault();
                 onRouteChange(key);
                 scrollToTop();
               }}
@@ -84,8 +86,8 @@ export const RelatedSilosSection: React.FC<RelatedSilosSectionProps> = ({
                   <span className="text-xs font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
                     {cfg.label}
                   </span>
-                  <span className="text-[10px] font-semibold text-slate-400 font-mono">
-                    {cfg.path}
+                  <span className="text-[10px] font-bold text-indigo-500 bg-indigo-50 px-2 py-0.5 rounded-full border border-indigo-100">
+                    Ver estilo
                   </span>
                 </div>
                 <p className="text-[11px] text-slate-500 line-clamp-2 leading-relaxed">
@@ -97,7 +99,7 @@ export const RelatedSilosSection: React.FC<RelatedSilosSectionProps> = ({
                 <span>Abrir Conversor</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </div>
-            </button>
+            </a>
           );
         })}
       </div>

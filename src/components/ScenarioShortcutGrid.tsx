@@ -1,5 +1,6 @@
 import React from 'react';
 import { PageRoute } from '../types';
+import { ROUTE_CONFIGS } from '../data/routeConfigs';
 import { 
   Instagram, 
   Flame, 
@@ -111,12 +112,16 @@ export const ScenarioShortcutGrid: React.FC<ScenarioShortcutGridProps> = ({
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-3">
         {SHORTCUTS.map((item) => {
           const isActive = currentRoute === item.id;
+          const targetPath = ROUTE_CONFIGS[item.id]?.path || '/';
           return (
-            <button
+            <a
               key={item.id}
-              type="button"
+              href={targetPath}
               id={`shortcut-btn-${item.id}`}
-              onClick={() => onRouteChange(item.id)}
+              onClick={(e) => {
+                e.preventDefault();
+                onRouteChange(item.id);
+              }}
               className={`group relative text-left p-3.5 rounded-2xl border transition-all duration-200 bg-gradient-to-br ${item.bg} ${
                 isActive
                   ? 'border-indigo-600 ring-2 ring-indigo-500/20 bg-white shadow-md'
@@ -140,7 +145,7 @@ export const ScenarioShortcutGrid: React.FC<ScenarioShortcutGridProps> = ({
               <div className="text-[11px] text-slate-500 mt-0.5 truncate font-normal">
                 {item.subtitle}
               </div>
-            </button>
+            </a>
           );
         })}
       </div>

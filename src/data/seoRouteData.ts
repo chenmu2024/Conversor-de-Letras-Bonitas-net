@@ -45,7 +45,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
       },
       {
         question: '¿Por qué las fuentes del Conversor de Letras Bonitas se pueden copiar y pegar?',
-        answer: 'El Conversor de Letras Bonitas no utiliza archivos de fuentes tradicionales, sino glifos universales del estándar Unicode que se visualizan en cualquier móvil o PC.'
+        answer: 'El Conversor de Letras Bonitas no utiliza archivos de fuentes tradicionales, sino glifos universales del estándar Unicode que tienen amplia compatibilidad en dispositivos modernos, aunque algunos caracteres pueden mostrarse de forma diferente o no estar disponibles en sistemas antiguos.'
       },
       {
         question: '¿Cómo copiar múltiples fuentes en el Conversor de Letras Bonitas?',
@@ -84,7 +84,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
       'letras bonitas para perfil'
     ],
     canonical: 'https://conversordeletrasbonitas.net/letras-para-instagram/',
-    badge: '📸 Optimizado para Instagram Bio & Stories',
+    badge: '📸 Diseñado para Instagram Bio & Stories',
     guideTitle: '¿Cómo Cambiar la Letra de tu Biografía en Instagram?',
     guideSteps: [
       { step: '1', title: 'Genera tu Texto Aesthetic', text: 'Escribe tu biografía o nombre en el conversor y selecciona un estilo cursivo o sans bold.' },
@@ -238,7 +238,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
       }
     ],
     proTips: [
-      'En Marketplace, utiliza la tipografía tachada para mostrar ofertas (Ejemplo: ~~$50~~ $35) y duplicar las consultas de compradores.'
+      'En Marketplace, utiliza la tipografía tachada para mostrar ofertas (Ejemplo: ~~$50~~ $35), lo que puede ayudar a hacer más visible el precio promocional.'
     ]
   },
 
@@ -273,7 +273,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
       },
       {
         question: '¿Las letras chidas funcionan en nicks de Free Fire y clanes?',
-        answer: 'Sí, todas nuestras letras chidas están basadas en caracteres Unicode compatibles con el motor de Garena Free Fire y videojuegos móviles.'
+        answer: 'Muchos caracteres Unicode suelen ser compatibles con Free Fire, aunque la compatibilidad puede variar según la versión del juego, el dispositivo y el sistema operativo.'
       },
       {
         question: '¿Cómo poner letras chidas con espacio invisible en un nick?',
