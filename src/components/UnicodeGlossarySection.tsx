@@ -74,18 +74,18 @@ export const UnicodeGlossarySection: React.FC = () => {
   return (
     <section
       id="glosario-unicode-seccion"
-      className="mb-12 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xs"
+      className="mb-12 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs"
     >
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 text-xs font-bold uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 text-rose-700 text-xs font-bold uppercase tracking-wider mb-2">
             <BookOpen className="w-3.5 h-3.5" />
             Conversor de Letras Bonitas · Glosario Técnico
           </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
             Glosario Técnico del Conversor de Letras Bonitas y Unicode
           </h2>
-          <p className="text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-2xl">
+          <p className="text-sm text-slate-600 mt-1 max-w-2xl">
             Aprende cómo funciona internamente el Conversor de Letras Bonitas mediante el estándar universal <strong>Unicode ISO/IEC 10646</strong> y por qué puedes copiarlas y pegarlas en cualquier aplicación.
           </p>
         </div>
@@ -93,7 +93,7 @@ export const UnicodeGlossarySection: React.FC = () => {
         <button
           type="button"
           onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-xl transition-colors shrink-0"
+          className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors shrink-0"
           aria-expanded={isExpanded}
         >
           <span>{isExpanded ? 'Plegar Glosario' : 'Desplegar Glosario Completo'}</span>
@@ -106,33 +106,33 @@ export const UnicodeGlossarySection: React.FC = () => {
           {glossaryTerms.map((item, idx) => (
             <li
               key={item.term}
-              className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/60 flex flex-col justify-between hover:border-rose-300 dark:hover:border-rose-700 transition-colors list-none"
+              className="p-5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-rose-300 transition-colors list-none"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white">
+                  <h3 className="text-base font-bold text-slate-900">
                     {idx + 1}. {item.term}
                   </h3>
-                  <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-md bg-rose-100 dark:bg-rose-950 text-rose-900 dark:text-rose-200 shrink-0">
+                  <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-md bg-rose-100 text-rose-900 shrink-0">
                     {item.unicodeRange}
                   </span>
                 </div>
 
-                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed mt-2">
+                <p className="text-xs text-slate-700 leading-relaxed mt-2">
                   {item.definition}
                 </p>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-slate-200/80 dark:border-slate-700/80 space-y-2">
-                <div className="flex items-center justify-between text-xs bg-white dark:bg-slate-800 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700">
+              <div className="mt-4 pt-3 border-t border-slate-200/80 space-y-2">
+                <div className="flex items-center justify-between text-xs bg-white p-2.5 rounded-xl border border-slate-200">
                   <div className="truncate mr-2">
-                    <span className="text-[11px] text-slate-600 dark:text-slate-400 font-semibold block">Ejemplo Convertido:</span>
-                    <span className="font-semibold text-slate-900 dark:text-slate-100">{item.exampleTransformed}</span>
+                    <span className="text-[11px] text-slate-600 font-semibold block">Ejemplo Convertido:</span>
+                    <span className="font-semibold text-slate-900">{item.exampleTransformed}</span>
                   </div>
                   <button
                     type="button"
                     onClick={() => handleCopy(item.exampleTransformed)}
-                    className="p-1.5 rounded-lg text-slate-600 hover:text-rose-700 dark:text-slate-300 dark:hover:text-rose-300 hover:bg-rose-50 dark:hover:bg-rose-950/60 transition-colors shrink-0"
+                    className="p-1.5 rounded-lg text-slate-600 hover:text-rose-700 hover:bg-rose-50 transition-colors shrink-0"
                     title="Copiar ejemplo"
                     aria-label={`Copiar ejemplo de ${item.term}`}
                   >
@@ -143,8 +143,8 @@ export const UnicodeGlossarySection: React.FC = () => {
                     )}
                   </button>
                 </div>
-                <div className="text-[11px] text-slate-600 dark:text-slate-300">
-                  <span className="font-bold text-slate-800 dark:text-slate-200">Uso principal:</span> {item.useCase}
+                <div className="text-[11px] text-slate-600">
+                  <span className="font-bold text-slate-800">Uso principal:</span> {item.useCase}
                 </div>
               </div>
             </li>

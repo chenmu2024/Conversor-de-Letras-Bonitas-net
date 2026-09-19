@@ -15,22 +15,8 @@ async function generateSitemap() {
   const { ROUTE_CONFIGS } = await import('../src/data/routeConfigs.ts');
   const { SEO_ROUTE_DATA } = await import('../src/data/seoRouteData.ts');
 
+  // Filter out 404 route - exclusively indexable routes from ROUTE_CONFIGS
   const routes = Object.values(ROUTE_CONFIGS).filter((r) => r.route !== '404');
-
-  // Priority and changefreq logic
-  function getPriority(route) {
-    if (route === 'inicio') return '1.0';
-    if (['instagram', 'free-fire', 'tiktok', 'whatsapp'].includes(route)) return '0.9';
-    if (['goticas', 'cursivas', 'letras-chidas', 'aesthetic', 'espacio-invisible'].includes(route)) return '0.85';
-    if (['sobre-nosotros', 'contacto', 'politica-de-privacidad', 'terminos-y-condiciones', 'politica-de-cookies'].includes(route)) return '0.5';
-    return '0.8';
-  }
-
-  function getChangefreq(route) {
-    if (route === 'inicio') return 'daily';
-    if (['sobre-nosotros', 'contacto', 'politica-de-privacidad', 'terminos-y-condiciones', 'politica-de-cookies'].includes(route)) return 'monthly';
-    return 'weekly';
-  }
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
@@ -42,13 +28,8 @@ async function generateSitemap() {
       ? seo.canonical
       : `https://conversordeletrasbonitas.net${seo.canonical}`;
 
-    const priority = getPriority(routeKey);
-    const changefreq = getChangefreq(routeKey);
-
     xml += `  <url>\n`;
     xml += `    <loc>${loc}</loc>\n`;
-    xml += `    <changefreq>${changefreq}</changefreq>\n`;
-    xml += `    <priority>${priority}</priority>\n`;
     xml += `  </url>\n`;
   }
 
@@ -62,7 +43,7 @@ async function generateSitemap() {
   const distSitemapPath = path.join(distDir, 'sitemap.xml');
   fs.writeFileSync(distSitemapPath, xml, 'utf8');
 
-  console.log(`✅ [Sitemap] Successfully generated sitemap with ${routes.length} URLs.`);
+  console.log(`✅ [Sitemap] Successfully generated clean sitemap with ${routes.length} URLs.`);
 }
 
 generateSitemap().catch((err) => {

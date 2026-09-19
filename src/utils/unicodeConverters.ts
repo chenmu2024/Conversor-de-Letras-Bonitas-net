@@ -343,7 +343,7 @@ function intercalate(text: string, symbol: string): string {
     .join('') + (text.length > 0 ? symbol : '');
 }
 
-// 80+ Master Font Generators
+// 90+ Master Font Generators
 export const FONT_GENERATORS: FontGenerator[] = [
   // ================= CURSIVA / SCRIPT =================
   {

@@ -1,4 +1,6 @@
 import React, { useState, useMemo } from 'react';
+import { PageRoute } from '../types';
+import { FONT_COUNT_PLUS } from '../constants/siteStats';
 import { 
   Hash, 
   Copy, 
@@ -33,11 +35,13 @@ const PLATFORM_LIMITS: PlatformLimit[] = [
 
 interface BioCharacterCounterProps {
   onApplyText?: (text: string) => void;
+  onRouteChange?: (route: PageRoute) => void;
   initialText?: string;
 }
 
 export const BioCharacterCounter: React.FC<BioCharacterCounterProps> = ({
   onApplyText,
+  onRouteChange,
   initialText = '✨ Creador de contenido & Diseñador 🎨\n📍 Madrid | Contacto por DM 📩',
 }) => {
   const [text, setText] = useState(initialText);
@@ -254,18 +258,21 @@ export const BioCharacterCounter: React.FC<BioCharacterCounterProps> = ({
       <div className="bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 rounded-3xl border border-indigo-200/80 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>
           <h3 className="font-bold text-slate-900 text-sm">¿Quieres estilizar tu texto para tu biografía?</h3>
-          <p className="text-xs text-slate-600 mt-0.5">Aplica más de 80 fuentes Unicode bonitas, símbolos y espaciado invisible con 1 clic.</p>
+          <p className="text-xs text-slate-600 mt-0.5">Aplica {FONT_COUNT_PLUS} fuentes Unicode bonitas, símbolos y espaciado invisible con 1 clic.</p>
         </div>
-        <button
-          type="button"
-          onClick={() => {
-            if (onApplyText && text) onApplyText(text);
-            window.location.hash = '#/instagram';
+        <a
+          href="/letras-para-instagram/"
+          onClick={(e) => {
+            if (onRouteChange) {
+              e.preventDefault();
+              if (onApplyText && text) onApplyText(text);
+              onRouteChange('instagram');
+            }
           }}
-          className="shrink-0 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-xs active:scale-95 transition-all"
+          className="shrink-0 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-xs active:scale-95 transition-all inline-block"
         >
           Ver Fuentes para Biografía →
-        </button>
+        </a>
       </div>
     </div>
   );

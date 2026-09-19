@@ -18,6 +18,7 @@ import {
   Download
 } from 'lucide-react';
 import { INVISIBLE_SPACE } from '../data/symbols';
+import { FONT_COUNT_PLUS } from '../constants/siteStats';
 
 interface HeaderProps {
   currentRoute: PageRoute;
@@ -98,7 +99,7 @@ export const Header: React.FC<HeaderProps> = ({
                 </span>
                 <span className="hidden sm:inline-flex items-center gap-1 text-[10px] uppercase font-extrabold tracking-wider px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-100/80">
                   <Zap className="w-2.5 h-2.5 text-indigo-600 fill-indigo-600" />
-                  80+ Tipos
+                  {FONT_COUNT_PLUS} Tipos
                 </span>
               </div>
               <p className="text-[11px] text-slate-400 hidden sm:block font-medium">

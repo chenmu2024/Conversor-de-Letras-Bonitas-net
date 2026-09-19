@@ -234,29 +234,29 @@ export const SymbolsLibrary: React.FC<SymbolsLibraryProps> = ({ onApplyText }) =
         </div>
 
         {/* Click Action Mode Selector & Quick Switcher */}
-        <div className="mb-6 p-3 bg-indigo-50/70 dark:bg-slate-800/60 rounded-2xl border border-indigo-100 dark:border-slate-700/60 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="mb-6 p-3 bg-indigo-50/70 rounded-2xl border border-indigo-100 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <span className="p-1.5 rounded-lg bg-indigo-600 text-white shadow-xs">
               <MousePointerClick className="w-4 h-4" />
             </span>
             <div>
-              <span className="text-xs font-black text-slate-800 dark:text-slate-200">
+              <span className="text-xs font-black text-slate-800">
                 Al tocar un símbolo:
               </span>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400">
+              <p className="text-[11px] text-slate-500">
                 Elige qué sucede al hacer clic sobre cualquier icono de la lista.
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-1.5 bg-white dark:bg-slate-900 p-1 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs w-full sm:w-auto justify-center">
+          <div className="flex items-center gap-1.5 bg-white p-1 rounded-xl border border-slate-200 shadow-2xs w-full sm:w-auto justify-center">
             <button
               type="button"
               onClick={() => setClickMode('copy')}
               className={`flex-1 sm:flex-none px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
                 clickMode === 'copy'
                   ? 'bg-indigo-600 text-white shadow-xs'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white'
+                  : 'text-slate-600 hover:text-indigo-600'
               }`}
             >
               <Zap className="w-3.5 h-3.5" />
@@ -268,7 +268,7 @@ export const SymbolsLibrary: React.FC<SymbolsLibraryProps> = ({ onApplyText }) =
               className={`flex-1 sm:flex-none px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
                 clickMode === 'insert'
                   ? 'bg-indigo-600 text-white shadow-xs'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white'
+                  : 'text-slate-600 hover:text-indigo-600'
               }`}
             >
               <Plus className="w-3.5 h-3.5" />
@@ -280,7 +280,7 @@ export const SymbolsLibrary: React.FC<SymbolsLibraryProps> = ({ onApplyText }) =
               className={`flex-1 sm:flex-none px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
                 clickMode === 'scratchpad'
                   ? 'bg-indigo-600 text-white shadow-xs'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white'
+                  : 'text-slate-600 hover:text-indigo-600'
               }`}
             >
               <FileEdit className="w-3.5 h-3.5" />

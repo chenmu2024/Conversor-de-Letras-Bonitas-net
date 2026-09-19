@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { List, ChevronDown, ChevronUp, Sparkles, BookOpen, Layers, HelpCircle, Globe2, ShieldCheck } from 'lucide-react';
+import { FONT_COUNT_PLUS } from '../constants/siteStats';
 
 interface TocItem {
   id: string;
@@ -15,7 +16,7 @@ export const TableOfContents: React.FC = () => {
     {
       id: 'conversor-principal',
       label: '1. Conversor y Generador de Letras en Vivo',
-      badge: '80+ Fuentes',
+      badge: `${FONT_COUNT_PLUS} Fuentes`,
       icon: <Sparkles className="w-4 h-4 text-indigo-500" />,
     },
     {
@@ -73,21 +74,21 @@ export const TableOfContents: React.FC = () => {
     <nav
       id="tabla-de-contenidos-nav"
       aria-label="Índice de contenidos de la página"
-      className="mb-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-xs transition-all"
+      className="mb-8 bg-white border border-slate-200 rounded-2xl p-5 shadow-xs transition-all"
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-indigo-50 dark:bg-indigo-950/60 rounded-xl text-indigo-600 dark:text-indigo-400">
+          <div className="p-2 bg-indigo-50 rounded-xl text-indigo-600">
             <List className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
               Índice Rápido de Contenidos
-              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">
+              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700">
                 Guía Rápida
               </span>
             </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-slate-500">
               Navega directamente a las herramientas, tablas del abecedario y preguntas frecuentes
             </p>
           </div>
@@ -96,7 +97,7 @@ export const TableOfContents: React.FC = () => {
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 rounded-lg transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors"
           aria-expanded={isOpen}
           aria-controls="toc-list"
         >
@@ -106,20 +107,20 @@ export const TableOfContents: React.FC = () => {
       </div>
 
       {isOpen && (
-        <ol id="toc-list" className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 grid grid-cols-1 md:grid-cols-2 gap-2.5 list-none">
+        <ol id="toc-list" className="mt-4 pt-4 border-t border-slate-100 grid grid-cols-1 md:grid-cols-2 gap-2.5 list-none">
           {sections.map((item) => (
             <li key={item.id}>
               <button
                 type="button"
                 onClick={() => handleScrollTo(item.id)}
-                className="w-full text-left flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors group"
+                className="w-full text-left flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 text-xs sm:text-sm font-medium text-slate-700 hover:text-indigo-600 transition-colors group"
               >
                 <span className="flex items-center gap-2 truncate">
                   {item.icon}
                   <span className="truncate group-hover:translate-x-0.5 transition-transform">{item.label}</span>
                 </span>
                 {item.badge && (
-                  <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 shrink-0 ml-2">
+                  <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 shrink-0 ml-2">
                     {item.badge}
                   </span>
                 )}

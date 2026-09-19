@@ -3,6 +3,7 @@ import { PageRoute, TabCategory, FontGenerator, FavoriteItem } from '../types';
 import { ROUTE_CONFIGS } from '../data/routeConfigs';
 import { ROUTE_HEADERS } from '../data/routeHeaders';
 import { FONT_GENERATORS } from '../utils/unicodeConverters';
+import { FONT_COUNT } from '../constants/siteStats';
 import { FontCard } from './FontCard';
 import { QuickActionBar } from './QuickActionBar';
 import { QuickPresets } from './QuickPresets';
@@ -1049,14 +1050,14 @@ export const FontConverter: React.FC<FontConverterProps> = ({
             </div>
           )
         ) : (
-          <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 sm:p-12 text-center shadow-xs">
-            <div className="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mx-auto mb-3">
+          <div className="bg-white rounded-3xl border border-slate-200 p-8 sm:p-12 text-center shadow-xs">
+            <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto mb-3">
               <Filter className="w-6 h-6" />
             </div>
-            <p className="text-base font-extrabold text-slate-800 dark:text-white">
+            <p className="text-base font-extrabold text-slate-800">
               No encontramos fuentes para "{searchQuery}"
             </p>
-            <p className="text-xs text-slate-400 dark:text-slate-500 mt-1 max-w-sm mx-auto">
+            <p className="text-xs text-slate-400 mt-1 max-w-sm mx-auto">
               Prueba con alguno de estos estilos populares o limpia la búsqueda:
             </p>
 
@@ -1067,7 +1068,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
                   key={tag}
                   type="button"
                   onClick={() => setSearchQuery(tag)}
-                  className="px-3 py-1 text-xs font-bold rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-indigo-50 hover:text-indigo-600 transition-colors border border-slate-200 dark:border-slate-700"
+                  className="px-3 py-1 text-xs font-bold rounded-xl bg-slate-100 text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors border border-slate-200"
                 >
                   #{tag}
                 </button>
@@ -1081,7 +1082,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
               }}
               className="mt-6 px-5 py-2.5 text-xs font-bold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 transition-colors shadow-sm shadow-indigo-600/25"
             >
-              Restablecer y Ver todas las 80+ fuentes
+              Restablecer y Ver todas las {FONT_COUNT} fuentes
             </button>
           </div>
         )}

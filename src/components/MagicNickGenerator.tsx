@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Sparkles, Copy, Check, Wand2, Flame, Heart, Crown, Skull, RefreshCw, ArrowUpRight } from 'lucide-react';
+import { FONT_COUNT_PLUS } from '../constants/siteStats';
 
 interface MagicNickGeneratorProps {
   currentText: string;
@@ -275,7 +276,7 @@ export const MagicNickGenerator: React.FC<MagicNickGeneratorProps> = ({ currentT
                   type="button"
                   onClick={() => handleLoadInEditor(formattedNick)}
                   className="py-1.5 px-2.5 rounded-xl bg-slate-700/70 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-bold transition-all flex items-center gap-1"
-                  title="Cargar este diseño en el conversor de 80+ fuentes"
+                  title={`Cargar este diseño en el conversor de ${FONT_COUNT_PLUS} fuentes`}
                 >
                   <span>Probar</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />

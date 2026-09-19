@@ -52,7 +52,7 @@ export const RelatedSilosSection: React.FC<RelatedSilosSectionProps> = ({
   };
 
   return (
-    <section className="mt-12 bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-7 shadow-xs">
+    <section id="secciones-relacionadas" className="mt-12 bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-7 shadow-xs">
       <div className="flex items-center gap-2 mb-2">
         <Sparkles className="w-4 h-4 text-indigo-600" />
         <span className="text-xs font-bold uppercase tracking-wider text-indigo-600">

@@ -17,7 +17,7 @@ export interface RouteSeoData {
 export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   inicio: {
     title: 'Conversor de Letras Bonitas - Fuentes para Copiar y Pegar',
-    metaDescription: 'Conversor de letras bonitas online gratis. +80 tipografías cursivas, góticas y aesthetic para copiar y pegar en Instagram, TikTok, Free Fire y WhatsApp.',
+    metaDescription: 'Conversor de letras bonitas online gratis. 90+ tipografías cursivas, góticas y aesthetic para copiar y pegar en Instagram, TikTok, Free Fire y WhatsApp.',
     h1: 'Conversor de Letras Bonitas (Copiar y Pegar)',
     h2Secondary: 'Fuentes, Tipografías y Nicks Aesthetic en el Conversor de Letras Bonitas',
     keywords: [
@@ -35,7 +35,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     guideTitle: '¿Cómo Usar el Conversor de Letras Bonitas?',
     guideSteps: [
       { step: '1', title: 'Escribe tu Frase en el Conversor de Letras Bonitas', text: 'Introduce cualquier texto o apodo en el cuadro del Conversor de Letras Bonitas. La transformación ocurrirá en tiempo real sin demoras.' },
-      { step: '2', title: 'Elige tu Estilo en el Conversor de Letras Bonitas', text: 'Navega por más de 80 estilos del Conversor de Letras Bonitas (Cursivas, Góticas, Círculos, Aesthetic, Glitch o Gaming).' },
+      { step: '2', title: 'Elige tu Estilo en el Conversor de Letras Bonitas', text: 'Navega por 90+ estilos del Conversor de Letras Bonitas (Cursivas, Góticas, Círculos, Aesthetic, Glitch o Gaming).' },
       { step: '3', title: 'Copia con 1 Clic desde el Conversor de Letras Bonitas', text: 'Toca cualquier tarjeta del Conversor de Letras Bonitas para copiar automáticamente y pegar en tu biografía, estado o juego.' }
     ],
     faqs: [
@@ -72,7 +72,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
 
   instagram: {
     title: 'Letras para Instagram ➜ Fuentes Bio para Copiar y Pegar',
-    metaDescription: 'Letras bonitas para Instagram. Crea biografías aesthetic, stories y nombres en negrita o cursiva. +80 fuentes gratis para copiar y pegar en tu perfil.',
+    metaDescription: 'Letras bonitas para Instagram. Crea biografías aesthetic, stories y nombres en negrita o cursiva. 90+ fuentes gratis para copiar y pegar en tu perfil.',
     h1: 'Letras para Instagram (Bio, Stories y Perfil)',
     h2Secondary: 'Tipografías Aesthetic, Cursivas Elegantes y Negritas para Biografías',
     keywords: [
@@ -234,7 +234,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     faqs: [
       {
         question: '¿Por qué Facebook no tiene botón de negrita en los perfiles personales?',
-        answer: 'Facebook solo ofrece herramientas de formato enriquecido en notas o ciertos grupos. Con nuestro conversor Unicode puedes publicar en negrita en cualquier parte sin restricciones.'
+        answer: 'Facebook solo ofrece herramientas de formato enriquecido en notas o ciertos grupos. Con nuestro conversor Unicode puedes publicar en negrita directamente en tu muro, comentarios o perfil con alta compatibilidad.'
       }
     ],
     proTips: [
@@ -243,7 +243,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
   },
 
   'letras-chidas': {
-    title: 'Letras Chidas (2026) ➜ +80 Fuentes para Copiar y Pegar',
+    title: 'Letras Chidas (2026) ➜ 90+ Fuentes para Copiar y Pegar',
     metaDescription: 'Generador de letras chidas gratis para copiar y pegar. Fuentes aesthetic, nicks con alas y letras perronas para Free Fire, TikTok, Instagram y WhatsApp.',
     h1: 'Letras Chidas para Copiar y Pegar (Fuentes y Nicks 2026)',
     h2Secondary: 'Fuentes Chidas, Nicks Insanos y Letras Bonitas para Redes y Videojuegos',
@@ -263,7 +263,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     guideTitle: '¿Cómo Usar y Copiar Letras Chidas en tu Celular?',
     guideSteps: [
       { step: '1', title: 'Escribe tu frase o Nick Chido', text: 'Escribe tu nombre, apodo o frase en la caja de texto superior.' },
-      { step: '2', title: 'Elige tu Estilo Perrón', text: 'Elige entre más de 80 variantes chidas: letras con alas, góticas insanas, cursivas aesthetic y símbolos de rey 亗.' },
+      { step: '2', title: 'Elige tu Estilo Perrón', text: 'Elige entre más de 90 variantes chidas: letras con alas, góticas insanas, cursivas aesthetic y símbolos de rey 亗.' },
       { step: '3', title: 'Copia con 1 Toque y Pega', text: 'Toca cualquier tarjeta para copiar automáticamente al portapapeles y pégala en tu juego o biografía.' }
     ],
     faqs: [
@@ -978,7 +978,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     faqs: [
       {
         question: '¿Puedo usar las letras generadas para mi marca comercial o logotipo?',
-        answer: 'Sí. Los caracteres Unicode son estándar público internacional y puedes utilizarlos en nombres de marca, biografías, perfiles o publicaciones comerciales sin restricciones de licencia.'
+        answer: 'Sí. Los caracteres Unicode son parte de un estándar internacional universal y puedes utilizarlos libremente en nombres de marca, biografías, perfiles o publicaciones comerciales sin necesidad de licencias de software.'
       },
       {
         question: '¿Existe algún límite en la cantidad de textos que puedo convertir?',

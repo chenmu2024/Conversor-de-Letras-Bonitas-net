@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Mail, Send, CheckCircle2, Bug, Sparkles, HelpCircle, Loader2, ShieldCheck, AlertCircle } from 'lucide-react';
 
 export const ContactPage: React.FC = () => {
@@ -7,10 +7,53 @@ export const ContactPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [website, setWebsite] = useState(''); // Honeypot field for spam prevention
+  const [turnstileToken, setTurnstileToken] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [ticketId, setTicketId] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const turnstileContainerRef = useRef<HTMLDivElement>(null);
+  const siteKey =
+    typeof import.meta !== 'undefined' && import.meta.env
+      ? ((import.meta.env.VITE_TURNSTILE_SITE_KEY as string) || '')
+      : '';
+
+  useEffect(() => {
+    if (!siteKey || typeof window === 'undefined') return;
+
+    const renderWidget = () => {
+      if ((window as any).turnstile && turnstileContainerRef.current) {
+        try {
+          (window as any).turnstile.render(turnstileContainerRef.current, {
+            sitekey: siteKey,
+            callback: (token: string) => {
+              setTurnstileToken(token);
+            },
+            'error-callback': () => {
+              setTurnstileToken('');
+            },
+            'expired-callback': () => {
+              setTurnstileToken('');
+            },
+          });
+        } catch {
+          // Widget might already be rendered
+        }
+      }
+    };
+
+    if (!(window as any).turnstile) {
+      const script = document.createElement('script');
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      script.async = true;
+      script.defer = true;
+      script.onload = renderWidget;
+      document.head.appendChild(script);
+    } else {
+      renderWidget();
+    }
+  }, [siteKey]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,6 +63,11 @@ export const ContactPage: React.FC = () => {
     if (website.trim() !== '') {
       setIsSubmitting(false);
       setSubmitted(true);
+      return;
+    }
+
+    if (siteKey && !turnstileToken) {
+      setErrorMessage('Por favor, completa la verificación de seguridad antes de enviar.');
       return;
     }
 
@@ -38,6 +86,7 @@ export const ContactPage: React.FC = () => {
           email: email.trim().slice(0, 254),
           message: message.trim().slice(0, 5000),
           website: website.trim(),
+          turnstileToken: turnstileToken || undefined,
         }),
       });
 
@@ -250,6 +299,13 @@ export const ContactPage: React.FC = () => {
               Los datos enviados mediante este formulario se utilizan para gestionar tu consulta y pueden ser procesados por los proveedores técnicos necesarios para prestar el servicio de correo. Consulta nuestra <a href="/politica-de-privacidad/" className="text-indigo-600 hover:underline font-semibold">Política de Privacidad</a> para más información.
             </span>
           </div>
+
+          {/* Turnstile verification widget if configured */}
+          {siteKey && (
+            <div className="flex justify-start py-1">
+              <div ref={turnstileContainerRef} id="cf-turnstile-container"></div>
+            </div>
+          )}
 
           {/* Submit Button */}
           <button

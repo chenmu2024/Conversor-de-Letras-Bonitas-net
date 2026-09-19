@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Sparkles, Feather, Copy, Check, Shield, Calendar, Heart, Award } from 'lucide-react';
+import { FONT_COUNT } from '../constants/siteStats';
 
 interface LetrasTatuajesStudioProps {
   onApplyText: (text: string) => void;
@@ -95,7 +96,7 @@ export const LetrasTatuajesStudio: React.FC<LetrasTatuajesStudioProps> = ({
           className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-400 text-stone-950 transition-all active:scale-95 shadow-md shadow-amber-500/20"
         >
           <Sparkles className="w-3.5 h-3.5" />
-          <span>Ver Todas las +80 Fuentes</span>
+          <span>Ver Todas las {FONT_COUNT} Fuentes</span>
         </button>
       </div>
 

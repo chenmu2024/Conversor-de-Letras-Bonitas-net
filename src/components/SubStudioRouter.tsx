@@ -68,7 +68,7 @@ export const SubStudioRouter: React.FC<SubStudioRouterProps> = ({
       <>
         {currentRoute === 'contador-bio' && (
           <div className="mb-8">
-            <BioCharacterCounter onApplyText={onApplyText} />
+            <BioCharacterCounter onApplyText={onApplyText} onRouteChange={onRouteChange} />
           </div>
         )}
 

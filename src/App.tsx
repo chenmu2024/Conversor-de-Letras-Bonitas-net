@@ -30,8 +30,8 @@ interface DeferredAuxiliaryProps {
 
 const DeferredAuxiliarySections: React.FC<DeferredAuxiliaryProps> = (props) => {
   return (
-    <div className="min-h-[120px] [content-visibility:auto] [contain-intrinsic-size:auto_500px]">
-      <Suspense fallback={<div className="h-20 animate-pulse bg-slate-100 dark:bg-slate-800/40 rounded-2xl my-8" />}>
+    <div className="min-h-[120px]">
+      <Suspense fallback={<div className="h-20 animate-pulse bg-slate-100 rounded-2xl my-8" />}>
         <AuxiliarySections {...props} />
       </Suspense>
     </div>

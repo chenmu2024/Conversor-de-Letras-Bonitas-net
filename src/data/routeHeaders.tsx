@@ -13,9 +13,9 @@ export interface RouteHeaderInfo {
 export const ROUTE_HEADERS: Record<PageRoute, RouteHeaderInfo> = {
   inicio: {
     title: 'Conversor de Letras Bonitas y Fuentes para Copiar y Pegar',
-    subtitle: 'Bienvenido al Conversor de Letras Bonitas online: transforma cualquier texto en más de 80 fuentes de letras bonitas, cursivas y nicks gamer para copiar y pegar con un solo clic.',
+    subtitle: 'Bienvenido al Conversor de Letras Bonitas online: transforma cualquier texto en 90+ fuentes de letras bonitas, cursivas y nicks gamer para copiar y pegar con un solo clic.',
     icon: <Sparkles className="w-4 h-4 text-indigo-600" />,
-    badge: 'Conversor de Letras Bonitas · 80+ Fuentes',
+    badge: 'Conversor de Letras Bonitas · 90+ Fuentes',
     gradient: 'from-indigo-600 to-violet-600',
   },
   instagram: {

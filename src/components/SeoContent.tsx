@@ -35,7 +35,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
       title: 'Conversor de Letras Bonitas y Fuentes para Redes Sociales',
       subtitle: 'El Conversor de Letras Bonitas y generador de tipografías estéticas más completo en español.',
       description:
-        'El Conversor de Letras Bonitas online convierte cualquier frase ordinaria en más de 80 variaciones de letras bonitas con caracteres Unicode universales. Con este conversor de letras bonitas obtienes tipografías aesthetic, cursivas y nicks gamer al instante sin instalar programas en tu móvil o PC.',
+        'El Conversor de Letras Bonitas online convierte cualquier frase ordinaria en 90+ variaciones de letras bonitas con caracteres Unicode universales. Con este conversor de letras bonitas obtienes tipografías aesthetic, cursivas y nicks gamer al instante sin instalar programas en tu móvil o PC.',
       tips: [
         'Usa el Conversor de Letras Bonitas para crear biografías elegantes en cursiva para Instagram.',
         'En el Conversor de Letras Bonitas combina símbolos de alas ꧁ ꧂ y coronas 亗 para nicks de Free Fire.',
@@ -630,7 +630,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
               Elige tu Estilo en el Conversor de Letras Bonitas
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed font-normal">
-              Explora en el Conversor de Letras Bonitas más de 80 tipos de letras bonitas: cursivas, góticas, letras en círculos, invertidas y decoradas con alas.
+              Explora en el Conversor de Letras Bonitas 90+ tipos de letras bonitas: cursivas, góticas, letras en círculos, invertidas y decoradas con alas.
             </p>
           </div>
 

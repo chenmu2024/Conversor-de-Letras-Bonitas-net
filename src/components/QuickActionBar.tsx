@@ -19,6 +19,7 @@ import {
   Send
 } from 'lucide-react';
 import { FONT_GENERATORS } from '../utils/unicodeConverters';
+import { FONT_COUNT } from '../constants/siteStats';
 
 interface QuickActionBarProps {
   text: string;
@@ -387,7 +388,7 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
               type="button"
               id="btn-download-txt"
               onClick={handleDownloadTxt}
-              title="Descargar todas las 80+ versiones en un archivo de texto .txt"
+              title={`Descargar todas las ${FONT_COUNT} versiones en un archivo de texto .txt`}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold transition-all active:scale-95 ${
                 downloaded
                   ? 'bg-emerald-600 text-white'

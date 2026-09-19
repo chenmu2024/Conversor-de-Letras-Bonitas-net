@@ -2,6 +2,7 @@ import React from 'react';
 import { PageRoute } from '../types';
 import { ROUTE_CONFIGS } from '../data/routeConfigs';
 import { Type, ArrowUp, Sparkles, Heart } from 'lucide-react';
+import { FONT_COUNT_PLUS } from '../constants/siteStats';
 
 interface FooterProps {
   onRouteChange: (route: PageRoute) => void;
@@ -44,7 +45,7 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
               </span>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed font-normal">
-              Conversor de Letras Bonitas y fuentes tipográficas Unicode online. Con el Conversor de Letras Bonitas accede a más de 80 tipos de letras bonitas para copiar y pegar gratis.
+              Conversor de Letras Bonitas y fuentes tipográficas Unicode online. Accede a {FONT_COUNT_PLUS} estilos de letras para copiar y pegar gratis.
             </p>
             <div className="mt-5 inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-indigo-400">
               <Sparkles className="w-3.5 h-3.5 text-amber-400" />
@@ -58,11 +59,11 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
               Por Red Social
             </h3>
             <ul className="space-y-2.5 text-xs font-medium">
-              <li>{renderLink('instagram', 'Letras para Instagram (/letras-para-instagram/)')}</li>
-              <li>{renderLink('tiktok', 'Letras para TikTok (/letras-para-tiktok/)')}</li>
-              <li>{renderLink('whatsapp', 'Letras para WhatsApp (/letras-para-whatsapp/)')}</li>
-              <li>{renderLink('free-fire', 'Letras para Free Fire (/letras-para-free-fire/)', 'hover:text-amber-400 transition-colors text-left font-bold text-amber-300/90 block')}</li>
-              <li>{renderLink('facebook', 'Letras para Facebook (/letras-para-facebook/)')}</li>
+              <li>{renderLink('instagram', 'Letras para Instagram')}</li>
+              <li>{renderLink('tiktok', 'Letras para TikTok')}</li>
+              <li>{renderLink('whatsapp', 'Letras para WhatsApp')}</li>
+              <li>{renderLink('free-fire', 'Letras para Free Fire', 'hover:text-amber-400 transition-colors text-left font-bold text-amber-300/90 block')}</li>
+              <li>{renderLink('facebook', 'Letras para Facebook')}</li>
             </ul>
           </div>
 
@@ -72,20 +73,20 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
               Estilos de Tipografías
             </h3>
             <ul className="space-y-2.5 text-xs font-medium">
-              <li>{renderLink('letras-chidas', 'Letras Chidas & Nicks (/letras-chidas/)', 'hover:text-amber-400 transition-colors text-left text-amber-300 font-bold block')}</li>
-              <li>{renderLink('letras-tatuajes', 'Letras para Tatuajes (/letras-para-tatuajes/)', 'hover:text-amber-400 transition-colors text-left text-amber-200 font-bold block')}</li>
-              <li>{renderLink('nicks-free-fire', 'Nicks Free Fire Insanos (/generador-de-nicks-free-fire/)', 'hover:text-red-400 transition-colors text-left text-red-300 font-bold block')}</li>
-              <li>{renderLink('espacio-invisible', 'Espacio Invisible [ㅤ] (/espacio-invisible/)', 'hover:text-indigo-400 transition-colors text-left text-indigo-300 font-bold block')}</li>
-              <li>{renderLink('nombres-parejas', 'Nombres para Parejas Dúos (/nombres-para-parejas/)', 'hover:text-rose-400 transition-colors text-left text-rose-300 font-bold block')}</li>
-              <li>{renderLink('abecedario', 'Abecedario A-Z Completo (/abecedario-letras-bonitas/)', 'hover:text-amber-400 transition-colors text-left text-amber-300 font-bold block')}</li>
-              <li>{renderLink('letras-chinas', 'Letras Chinas & Kanji (/letras-chinas/)', 'hover:text-rose-400 transition-colors text-left text-rose-300 font-bold block')}</li>
-              <li>{renderLink('letras-elegantes', 'Letras Elegantes (/letras-elegantes/)', 'hover:text-indigo-400 transition-colors text-left text-indigo-300 font-bold block')}</li>
-              <li>{renderLink('letras-raras', 'Letras Raras & Símbolos (/letras-raras/)', 'hover:text-purple-400 transition-colors text-left text-purple-300 font-bold block')}</li>
-              <li>{renderLink('cursiva', 'Traductor a Cursiva (/traductor-cursiva/)')}</li>
-              <li>{renderLink('goticas', 'Letras Góticas (/letras-goticas/)')}</li>
-              <li>{renderLink('invertidas', 'Tachadas e Invertidas (/letras-tachadas-e-invertidas/)')}</li>
-              <li>{renderLink('circulos', 'Círculos y Cuadros (/letras-en-circulos-y-cuadros/)')}</li>
-              <li>{renderLink('glitch', 'Letras Glitch y Zalgo (/letras-glitch-zalgo/)')}</li>
+              <li>{renderLink('letras-chidas', 'Letras Chidas & Nicks', 'hover:text-amber-400 transition-colors text-left text-amber-300 font-bold block')}</li>
+              <li>{renderLink('letras-tatuajes', 'Letras para Tatuajes', 'hover:text-amber-400 transition-colors text-left text-amber-200 font-bold block')}</li>
+              <li>{renderLink('nicks-free-fire', 'Nicks Free Fire Insanos', 'hover:text-red-400 transition-colors text-left text-red-300 font-bold block')}</li>
+              <li>{renderLink('espacio-invisible', 'Espacio Invisible [ㅤ]', 'hover:text-indigo-400 transition-colors text-left text-indigo-300 font-bold block')}</li>
+              <li>{renderLink('nombres-parejas', 'Nombres para Parejas Dúos', 'hover:text-rose-400 transition-colors text-left text-rose-300 font-bold block')}</li>
+              <li>{renderLink('abecedario', 'Abecedario A-Z Completo', 'hover:text-amber-400 transition-colors text-left text-amber-300 font-bold block')}</li>
+              <li>{renderLink('letras-chinas', 'Letras Chinas & Kanji', 'hover:text-rose-400 transition-colors text-left text-rose-300 font-bold block')}</li>
+              <li>{renderLink('letras-elegantes', 'Letras Elegantes', 'hover:text-indigo-400 transition-colors text-left text-indigo-300 font-bold block')}</li>
+              <li>{renderLink('letras-raras', 'Letras Raras & Símbolos', 'hover:text-purple-400 transition-colors text-left text-purple-300 font-bold block')}</li>
+              <li>{renderLink('cursiva', 'Traductor a Cursiva')}</li>
+              <li>{renderLink('goticas', 'Letras Góticas')}</li>
+              <li>{renderLink('invertidas', 'Tachadas e Invertidas')}</li>
+              <li>{renderLink('circulos', 'Círculos y Cuadros')}</li>
+              <li>{renderLink('glitch', 'Letras Glitch y Zalgo')}</li>
             </ul>
           </div>
 
@@ -95,14 +96,14 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
               Recursos
             </h3>
             <ul className="space-y-2.5 text-xs font-medium">
-              <li>{renderLink('contador-bio', 'Contador Caracteres Bio (/contador-de-caracteres-bio/)', 'hover:text-amber-400 transition-colors text-left text-amber-300/90 font-bold block')}</li>
-              <li>{renderLink('simbolos', 'Símbolos y Emojis (/simbolos-y-emojis/)')}</li>
-              <li>{renderLink('decorador', 'Decorador de Nicks Gamer (/decorador-de-nicks/)')}</li>
-              <li>{renderLink('sobre-nosotros', 'Sobre Nosotros (/sobre-nosotros/)')}</li>
-              <li>{renderLink('politica-de-privacidad', 'Política de Privacidad (/politica-de-privacidad/)')}</li>
-              <li>{renderLink('politica-de-cookies', 'Política de Cookies (/politica-de-cookies/)')}</li>
-              <li>{renderLink('terminos-y-condiciones', 'Términos y Condiciones (/terminos-y-condiciones/)')}</li>
-              <li>{renderLink('contacto', 'Contacto y Reportes (/contacto/)')}</li>
+              <li>{renderLink('contador-bio', 'Contador Caracteres Bio', 'hover:text-amber-400 transition-colors text-left text-amber-300/90 font-bold block')}</li>
+              <li>{renderLink('simbolos', 'Símbolos y Emojis')}</li>
+              <li>{renderLink('decorador', 'Decorador de Nicks Gamer')}</li>
+              <li>{renderLink('sobre-nosotros', 'Sobre Nosotros')}</li>
+              <li>{renderLink('politica-de-privacidad', 'Política de Privacidad')}</li>
+              <li>{renderLink('politica-de-cookies', 'Política de Cookies')}</li>
+              <li>{renderLink('terminos-y-condiciones', 'Términos y Condiciones')}</li>
+              <li>{renderLink('contacto', 'Contacto y Reportes')}</li>
               <li>
                 <button
                   type="button"

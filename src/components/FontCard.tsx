@@ -118,6 +118,7 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
   return (
     <div
       id={`font-card-${generator.id}`}
+      data-font-card={generator.id}
       onClick={handleCopy}
       className={`group relative bg-white rounded-2xl border transition-all duration-200 cursor-pointer select-none p-4 sm:p-5 flex flex-col justify-between hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.06)] hover:border-indigo-300 ${
         isSelected

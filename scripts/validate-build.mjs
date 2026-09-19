@@ -17,9 +17,16 @@ async function validateBuild() {
   const { SEO_ROUTE_DATA } = await import('../src/data/seoRouteData.ts');
 
   const routes = Object.values(ROUTE_CONFIGS);
-  console.log(`Checking ${routes.length} routes in ${distDir}...`);
+  const indexableRoutes = routes.filter((r) => r.route !== '404');
+  const expectedIndexableCount = indexableRoutes.length;
+
+  console.log(`Checking ${routes.length} total routes (${expectedIndexableCount} indexable) in ${distDir}...`);
 
   let errors = [];
+
+  const seenTitles = new Map();
+  const seenDescriptions = new Map();
+  const validInternalPaths = new Set(routes.map((r) => r.path));
 
   for (const routeConfig of routes) {
     const routeKey = routeConfig.route;
@@ -42,27 +49,60 @@ async function validateBuild() {
 
     const html = fs.readFileSync(targetFilePath, 'utf8');
 
-    // Verify title
-    if (!html.includes('<title>') || !html.includes('</title>')) {
-      errors.push(`[${routeKey}] Missing <title> tag`);
+    // 1. Verify H1 tag (must be exactly 1)
+    const h1Matches = html.match(/<h1\b[^>]*>[\s\S]*?<\/h1>/gi) || [];
+    if (h1Matches.length !== 1) {
+      errors.push(`[${routeKey}] Expected exactly 1 H1, found ${h1Matches.length}`);
     }
 
-    // Verify meta description
-    if (!html.includes('name="description"')) {
-      errors.push(`[${routeKey}] Missing meta description`);
+    // 2. Verify Canonical tag (must be exactly 1)
+    const canonicalMatches = html.match(/<link\b[^>]*rel=["']canonical["'][^>]*>/gi) || [];
+    if (canonicalMatches.length !== 1) {
+      errors.push(`[${routeKey}] Expected exactly 1 canonical tag, found ${canonicalMatches.length}`);
     }
-
-    // Verify canonical
     const expectedCanonical = seo.canonical.startsWith('http')
       ? seo.canonical
       : `https://conversordeletrasbonitas.net${seo.canonical}`;
-    if (!html.includes('rel="canonical"')) {
-      errors.push(`[${routeKey}] Missing canonical tag`);
-    } else if (!html.includes(`href="${expectedCanonical}"`)) {
+    if (!html.includes(`href="${expectedCanonical}"`)) {
       errors.push(`[${routeKey}] Canonical URL mismatch: expected ${expectedCanonical}`);
     }
 
-    // Verify robots
+    // 3. Verify JSON-LD (must be exactly 1 and have id="seo-jsonld")
+    const jsonLdMatches = html.match(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>/gi) || [];
+    if (jsonLdMatches.length !== 1) {
+      errors.push(`[${routeKey}] Expected exactly 1 JSON-LD script, found ${jsonLdMatches.length}`);
+    }
+    if (!html.includes('id="seo-jsonld"')) {
+      errors.push(`[${routeKey}] Missing id="seo-jsonld" on JSON-LD script tag`);
+    }
+
+    // 4. Verify Title uniqueness among indexable routes
+    const titleMatch = html.match(/<title>([\s\S]*?)<\/title>/i);
+    const title = titleMatch ? titleMatch[1].trim() : '';
+    if (!title) {
+      errors.push(`[${routeKey}] Missing <title> tag`);
+    } else if (routeKey !== '404') {
+      if (seenTitles.has(title)) {
+        errors.push(`[${routeKey}] Duplicate title with route [${seenTitles.get(title)}]: "${title}"`);
+      } else {
+        seenTitles.set(title, routeKey);
+      }
+    }
+
+    // 5. Verify Meta Description uniqueness among indexable routes
+    const descMatch = html.match(/<meta\b[^>]*name=["']description["'][^>]*content=["']([\s\S]*?)["'][^>]*>/i);
+    const description = descMatch ? descMatch[1].trim() : '';
+    if (!description) {
+      errors.push(`[${routeKey}] Missing meta description`);
+    } else if (routeKey !== '404') {
+      if (seenDescriptions.has(description)) {
+        errors.push(`[${routeKey}] Duplicate meta description with route [${seenDescriptions.get(description)}]: "${description}"`);
+      } else {
+        seenDescriptions.set(description, routeKey);
+      }
+    }
+
+    // Verify robots tag
     if (routeKey === '404') {
       if (!html.includes('content="noindex')) {
         errors.push(`[${routeKey}] 404 page must have noindex in robots meta tag`);
@@ -76,17 +116,12 @@ async function validateBuild() {
       }
     }
 
-    // Verify H1 tag exists
-    if (!html.includes('<h1') || !html.includes('</h1>')) {
-      errors.push(`[${routeKey}] Missing <h1> tag`);
-    }
-
     // Verify OpenGraph
     if (!html.includes('property="og:title"')) {
       errors.push(`[${routeKey}] Missing og:title`);
     }
 
-    // Verify script tags are preserved (Vite bundle)
+    // Verify Vite bundle script tag
     if (!html.includes('<script type="module" crossorigin src="/assets/')) {
       errors.push(`[${routeKey}] Vite main script tag missing or corrupted!`);
     }
@@ -95,9 +130,38 @@ async function validateBuild() {
     if (html.includes('<div id="root"></div>')) {
       errors.push(`[${routeKey}] Empty <div id="root"></div> detected - SSR failed to render!`);
     }
+
+    // 7. Check for forbidden legacy hash routing
+    const forbiddenHashes = ['#/instagram', '#/tiktok', '#/whatsapp', '#/free-fire', '#/facebook', 'window.location.hash ='];
+    for (const forbidden of forbiddenHashes) {
+      if (html.includes(forbidden)) {
+        errors.push(`[${routeKey}] Contains forbidden legacy hash routing pattern: "${forbidden}"`);
+      }
+    }
+
+    // 8. Check internal <a href="/..."> links validity
+    const hrefMatches = [...html.matchAll(/<a\b[^>]*\bhref=["'](\/[^"'#?]*)["']/gi)].map((m) => m[1]);
+    for (const internalHref of hrefMatches) {
+      // Ignore static assets or root
+      if (
+        internalHref.startsWith('/assets/') ||
+        internalHref.startsWith('/fonts/') ||
+        internalHref.endsWith('.svg') ||
+        internalHref.endsWith('.png') ||
+        internalHref.endsWith('.ico') ||
+        internalHref.endsWith('.json') ||
+        internalHref.endsWith('.txt') ||
+        internalHref.endsWith('.xml')
+      ) {
+        continue;
+      }
+      if (!validInternalPaths.has(internalHref) && !validInternalPaths.has(`${internalHref}/`)) {
+        errors.push(`[${routeKey}] Broken internal link detected: href="${internalHref}"`);
+      }
+    }
   }
 
-  // Check sitemap
+  // 6. Check Sitemap completeness and validity
   const sitemapPath = path.join(distDir, 'sitemap.xml');
   if (!fs.existsSync(sitemapPath)) {
     errors.push('dist/sitemap.xml is missing');
@@ -106,8 +170,8 @@ async function validateBuild() {
     const locMatches = [...sitemapContent.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]);
     const sitemapUrlCount = locMatches.length;
 
-    if (sitemapUrlCount !== 28) {
-      errors.push(`dist/sitemap.xml has ${sitemapUrlCount} URLs instead of 28`);
+    if (sitemapUrlCount !== expectedIndexableCount) {
+      errors.push(`dist/sitemap.xml has ${sitemapUrlCount} URLs instead of ${expectedIndexableCount}`);
     }
 
     // Check no duplicate URLs
@@ -116,7 +180,33 @@ async function validateBuild() {
       errors.push(`dist/sitemap.xml contains duplicate URLs`);
     }
 
-    // Check no 404 URL
+    // Check all indexable routes are in sitemap
+    for (const r of indexableRoutes) {
+      const seo = SEO_ROUTE_DATA[r.route] || SEO_ROUTE_DATA.inicio;
+      const expectedLoc = seo.canonical.startsWith('http')
+        ? seo.canonical
+        : `https://conversordeletrasbonitas.net${seo.canonical}`;
+      if (!uniqueUrls.has(expectedLoc)) {
+        errors.push(`dist/sitemap.xml missing indexable route canonical: ${expectedLoc}`);
+      }
+    }
+
+    // Check no unexpected URLs outside ROUTE_CONFIGS
+    const expectedUrlsSet = new Set(
+      indexableRoutes.map((r) => {
+        const seo = SEO_ROUTE_DATA[r.route] || SEO_ROUTE_DATA.inicio;
+        return seo.canonical.startsWith('http')
+          ? seo.canonical
+          : `https://conversordeletrasbonitas.net${seo.canonical}`;
+      })
+    );
+    for (const url of locMatches) {
+      if (!expectedUrlsSet.has(url)) {
+        errors.push(`dist/sitemap.xml contains unexpected URL outside ROUTE_CONFIGS: ${url}`);
+      }
+    }
+
+    // Check no 404 URL in sitemap
     if (sitemapContent.includes('404')) {
       errors.push('dist/sitemap.xml must not contain 404 page');
     }
@@ -246,7 +336,7 @@ async function validateBuild() {
     process.exit(1);
   }
 
-  console.log('✅ [Validate] All 28 indexable SEO pages + 404 page verified successfully.');
+  console.log(`✅ [Validate] All ${expectedIndexableCount} indexable SEO pages + 404 page verified successfully.`);
 }
 
 validateBuild().catch((err) => {

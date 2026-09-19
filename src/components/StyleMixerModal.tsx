@@ -135,18 +135,18 @@ export const StyleMixerModal: React.FC<StyleMixerModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-      <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
         {/* Header */}
-        <div className="p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+        <div className="p-5 border-b border-slate-100 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-2xl bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+            <div className="w-9 h-9 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center">
               <Dices className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-extrabold font-heading text-lg text-slate-900 dark:text-white">
+              <h3 className="font-extrabold font-heading text-lg text-slate-900">
                 Mezclador Mágico de Estilos
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
+              <p className="text-xs text-slate-500">
                 Combina múltiples fuentes de forma armónica y legible.
               </p>
             </div>
@@ -154,7 +154,7 @@ export const StyleMixerModal: React.FC<StyleMixerModalProps> = ({
 
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 flex items-center justify-center transition-colors"
+            className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -163,16 +163,16 @@ export const StyleMixerModal: React.FC<StyleMixerModalProps> = ({
         {/* Body */}
         <div className="p-5 space-y-4 overflow-y-auto">
           {/* Result Box */}
-          <div className="p-6 rounded-2xl bg-gradient-to-br from-indigo-50/70 via-slate-50 to-purple-50/60 dark:from-slate-800/80 dark:via-slate-900 dark:to-indigo-950/40 border border-indigo-100/90 dark:border-indigo-900/40 shadow-xs text-center flex flex-col items-center justify-center min-h-[130px] relative">
+          <div className="p-6 rounded-2xl bg-gradient-to-br from-indigo-50/70 via-slate-50 to-purple-50/60 border border-indigo-100/90 shadow-xs text-center flex flex-col items-center justify-center min-h-[130px] relative">
             <div className="flex items-center justify-between w-full mb-2">
-              <span className="text-[10px] font-extrabold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
+              <span className="text-[10px] font-extrabold text-indigo-600 uppercase tracking-wider">
                 Resultado Mágico Generado:
               </span>
               {history.length > 0 && (
                 <button
                   type="button"
                   onClick={handleUndo}
-                  className="inline-flex items-center gap-1 text-[11px] font-bold text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 bg-white dark:bg-slate-800 px-2 py-0.5 rounded-lg border border-slate-200 dark:border-slate-700 shadow-2xs transition-all active:scale-95"
+                  className="inline-flex items-center gap-1 text-[11px] font-bold text-slate-600 hover:text-indigo-600 bg-white px-2 py-0.5 rounded-lg border border-slate-200 shadow-2xs transition-all active:scale-95"
                   title="Deshacer y volver a la mezcla anterior"
                 >
                   <Undo2 className="w-3 h-3" />
@@ -181,16 +181,16 @@ export const StyleMixerModal: React.FC<StyleMixerModalProps> = ({
               )}
             </div>
 
-            <p className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white break-words max-w-full my-2 selection:bg-indigo-600 selection:text-white">
+            <p className="text-xl sm:text-2xl font-bold text-slate-900 break-words max-w-full my-2 selection:bg-indigo-600 selection:text-white">
               {mixedResult}
             </p>
           </div>
 
           {/* Word Lock Inspector for Multi-word inputs */}
           {words.length > 1 && (
-            <div className="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200/80 dark:border-slate-700">
+            <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200/80">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-[11px] font-extrabold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center gap-1">
+                <span className="text-[11px] font-extrabold text-slate-700 uppercase tracking-wider flex items-center gap-1">
                   <Lock className="w-3 h-3 text-amber-500" />
                   <span>Bloquear Palabras (Fijar para no cambiarlas al remezclar):</span>
                 </span>
@@ -226,11 +226,11 @@ export const StyleMixerModal: React.FC<StyleMixerModalProps> = ({
                       }}
                       className={`px-2.5 py-1 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
                         isLocked
-                          ? 'bg-amber-100 dark:bg-amber-900/40 text-amber-900 dark:text-amber-200 border border-amber-300 dark:border-amber-700 shadow-2xs'
-                          : 'bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600 hover:border-indigo-300'
+                          ? 'bg-amber-100 text-amber-900 border border-amber-300 shadow-2xs'
+                          : 'bg-white text-slate-700 border border-slate-200 hover:border-indigo-300'
                       }`}
                     >
-                      {isLocked ? <Lock className="w-3 h-3 text-amber-600 dark:text-amber-400" /> : <Unlock className="w-3 h-3 text-slate-400" />}
+                      {isLocked ? <Lock className="w-3 h-3 text-amber-600" /> : <Unlock className="w-3 h-3 text-slate-400" />}
                       <span>{w}</span>
                     </button>
                   );
@@ -248,7 +248,7 @@ export const StyleMixerModal: React.FC<StyleMixerModalProps> = ({
               <button
                 type="button"
                 onClick={generateRandomWordMix}
-                className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-indigo-300 bg-white dark:bg-slate-800 hover:bg-indigo-50/40 dark:hover:bg-slate-700 text-left transition-all text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2 shadow-2xs"
+                className="p-2.5 rounded-xl border border-slate-200 hover:border-indigo-300 bg-white hover:bg-indigo-50/40 text-left transition-all text-xs font-bold text-slate-800 flex items-center gap-2 shadow-2xs"
               >
                 <Dices className="w-4 h-4 text-indigo-500 shrink-0" />
                 <span>Palabras Armónicas</span>
@@ -256,7 +256,7 @@ export const StyleMixerModal: React.FC<StyleMixerModalProps> = ({
               <button
                 type="button"
                 onClick={generateCursiveHybrid}
-                className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-indigo-300 bg-white dark:bg-slate-800 hover:bg-indigo-50/40 dark:hover:bg-slate-700 text-left transition-all text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2 shadow-2xs"
+                className="p-2.5 rounded-xl border border-slate-200 hover:border-indigo-300 bg-white hover:bg-indigo-50/40 text-left transition-all text-xs font-bold text-slate-800 flex items-center gap-2 shadow-2xs"
               >
                 <Zap className="w-4 h-4 text-purple-500 shrink-0" />
                 <span>Cursiva + Versalitas</span>
@@ -264,7 +264,7 @@ export const StyleMixerModal: React.FC<StyleMixerModalProps> = ({
               <button
                 type="button"
                 onClick={generateAlternatingMix}
-                className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-indigo-300 bg-white dark:bg-slate-800 hover:bg-indigo-50/40 dark:hover:bg-slate-700 text-left transition-all text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2 shadow-2xs"
+                className="p-2.5 rounded-xl border border-slate-200 hover:border-indigo-300 bg-white hover:bg-indigo-50/40 text-left transition-all text-xs font-bold text-slate-800 flex items-center gap-2 shadow-2xs"
               >
                 <RefreshCw className="w-4 h-4 text-indigo-500 shrink-0" />
                 <span>Letras Alternadas</span>
@@ -272,7 +272,7 @@ export const StyleMixerModal: React.FC<StyleMixerModalProps> = ({
               <button
                 type="button"
                 onClick={generateAestheticMix}
-                className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-indigo-300 bg-white dark:bg-slate-800 hover:bg-indigo-50/40 dark:hover:bg-slate-700 text-left transition-all text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2 shadow-2xs"
+                className="p-2.5 rounded-xl border border-slate-200 hover:border-indigo-300 bg-white hover:bg-indigo-50/40 text-left transition-all text-xs font-bold text-slate-800 flex items-center gap-2 shadow-2xs"
               >
                 <Sparkles className="w-4 h-4 text-pink-500 shrink-0" />
                 <span>Aesthetic Sakura</span>
@@ -280,7 +280,7 @@ export const StyleMixerModal: React.FC<StyleMixerModalProps> = ({
               <button
                 type="button"
                 onClick={generateGamerKingMix}
-                className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-indigo-300 bg-white dark:bg-slate-800 hover:bg-indigo-50/40 dark:hover:bg-slate-700 text-left transition-all text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2 shadow-2xs col-span-2"
+                className="p-2.5 rounded-xl border border-slate-200 hover:border-indigo-300 bg-white hover:bg-indigo-50/40 text-left transition-all text-xs font-bold text-slate-800 flex items-center gap-2 shadow-2xs col-span-2"
               >
                 <Wand2 className="w-4 h-4 text-amber-500 shrink-0" />
                 <span>Gamer King FF 亗</span>
@@ -290,13 +290,13 @@ export const StyleMixerModal: React.FC<StyleMixerModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="p-4 bg-slate-50 dark:bg-slate-800/80 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+        <div className="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <button
               onClick={generateRandomWordMix}
-              className="px-3.5 py-2 text-xs font-bold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs flex items-center gap-1.5"
+              className="px-3.5 py-2 text-xs font-bold text-slate-700 bg-white hover:bg-slate-100 rounded-xl border border-slate-200 shadow-2xs flex items-center gap-1.5"
             >
-              <Dices className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+              <Dices className="w-3.5 h-3.5 text-indigo-600" />
               <span>Remezclar</span>
             </button>
           </div>

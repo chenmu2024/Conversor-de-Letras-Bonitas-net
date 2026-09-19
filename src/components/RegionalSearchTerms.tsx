@@ -90,31 +90,31 @@ export const RegionalSearchTerms: React.FC<RegionalSearchTermsProps> = ({ onAppl
   return (
     <section
       id="busquedas-regionales-seccion"
-      className="mb-12 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xs"
+      className="mb-12 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs"
     >
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 text-xs font-bold uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-700 text-xs font-bold uppercase tracking-wider mb-2">
             <Globe2 className="w-3.5 h-3.5" />
             Conversor de Letras Bonitas · Términos Regionales
           </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
             Conversor de Letras Bonitas en Cada País
           </h2>
-          <p className="text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-2xl">
+          <p className="text-sm text-slate-600 mt-1 max-w-2xl">
             Descubre cómo buscan el Conversor de Letras Bonitas en tu país: desde <strong>"letras chidas"</strong> en México hasta <strong>"fuentes chulas"</strong> en España y <strong>"letras copadas"</strong> en Argentina. Haz clic en cualquier término para convertirlo en el Conversor de Letras Bonitas al instante.
           </p>
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex flex-wrap gap-1.5 p-1 bg-slate-100 dark:bg-slate-800/60 rounded-xl shrink-0">
+        <div className="flex flex-wrap gap-1.5 p-1 bg-slate-100 rounded-xl shrink-0">
           <button
             type="button"
             onClick={() => setActiveCountry('all')}
             className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
               activeCountry === 'all'
-                ? 'bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-xs'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                ? 'bg-white text-indigo-600 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             🌎 Todos
@@ -126,8 +126,8 @@ export const RegionalSearchTerms: React.FC<RegionalSearchTermsProps> = ({ onAppl
               onClick={() => setActiveCountry(r.country.split(' ')[0])}
               className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
                 activeCountry === r.country.split(' ')[0]
-                  ? 'bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-xs'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  ? 'bg-white text-indigo-600 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               <span>{r.flag}</span>
@@ -141,28 +141,28 @@ export const RegionalSearchTerms: React.FC<RegionalSearchTermsProps> = ({ onAppl
         {filteredData.map((item) => (
           <div
             key={item.country}
-            className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/60 flex flex-col justify-between hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors"
+            className="p-5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-indigo-300 transition-colors"
           >
             <div>
               <div className="flex items-center justify-between mb-2.5">
                 <span className="text-2xl">{item.flag}</span>
-                <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full">
+                <span className="text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
                   {item.searchVolume}
                 </span>
               </div>
 
-              <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+              <h3 className="text-base font-bold text-slate-900 flex items-center gap-1.5">
                 {item.localTerm}
-                <span className="text-xs font-normal text-slate-500 dark:text-slate-400">({item.country})</span>
+                <span className="text-xs font-normal text-slate-500">({item.country})</span>
               </h3>
 
-              <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 line-clamp-2 leading-relaxed">
+              <p className="text-xs text-slate-600 mt-2 line-clamp-2 leading-relaxed">
                 {item.description}
               </p>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-slate-200/80 dark:border-slate-700/80">
-              <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-2">
+            <div className="mt-4 pt-3 border-t border-slate-200/80">
+              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-2">
                 Búsquedas Frecuentes:
               </span>
               <div className="flex flex-wrap gap-1.5">
@@ -171,7 +171,7 @@ export const RegionalSearchTerms: React.FC<RegionalSearchTermsProps> = ({ onAppl
                     key={ex}
                     type="button"
                     onClick={() => handleApply(ex)}
-                    className="group text-[11px] font-medium px-2.5 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-indigo-400 dark:hover:border-indigo-500 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all flex items-center gap-1"
+                    className="group text-[11px] font-medium px-2.5 py-1 rounded-lg bg-white border border-slate-200 hover:border-indigo-400 text-slate-700 hover:text-indigo-600 transition-all flex items-center gap-1"
                     title={`Convertir "${ex}"`}
                   >
                     <Search className="w-2.5 h-2.5 text-slate-400 group-hover:text-indigo-500" />
@@ -184,9 +184,9 @@ export const RegionalSearchTerms: React.FC<RegionalSearchTermsProps> = ({ onAppl
         ))}
       </div>
 
-      <div className="mt-6 p-4 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-indigo-900 dark:text-indigo-200">
+      <div className="mt-6 p-4 rounded-2xl bg-indigo-50/60 border border-indigo-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-indigo-900">
         <div className="flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0" />
+          <Sparkles className="w-4 h-4 text-indigo-600 shrink-0" />
           <span>
             <strong>Consejo SEO & Usabilidad:</strong> Todas las variaciones regionales son procesadas mediante el mismo algoritmo universal Unicode para favorecer la compatibilidad en cualquier país.
           </span>

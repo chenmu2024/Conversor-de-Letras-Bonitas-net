@@ -1,20 +1,19 @@
 // Service Worker for Conversor de Letras Bonitas
-// Cache version for instant offline loads and Core Web Vitals optimization
+// Optimized for Core Web Vitals, instant loads, and reliable crawler access
 
-const CACHE_NAME = 'letras-bonitas-v2.1.0';
+const CACHE_NAME = 'letras-bonitas-v3.1.0';
 const OFFLINE_URL = '/';
 
+// 1. Precache ONLY app shell and core assets (DO NOT precache robots.txt or sitemap.xml)
 const PRECACHE_ASSETS = [
   '/',
-  '/index.html',
-  '/manifest.json',
   '/favicon.svg',
-  '/og-image.svg',
-  '/robots.txt',
-  '/sitemap.xml'
+  '/manifest.json',
+  '/icon-192.png',
+  '/icon-512.png'
 ];
 
-// Install: Cache core application shell
+// Install: Precache core application shell
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -23,7 +22,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Activate: Clean up stale caches
+// Activate: Clean up previous caches and take control
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -38,49 +37,102 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch: Stale-While-Revalidate strategy for assets, Cache-First for static fonts & images
+// Fetch handler with strategic caching
 self.addEventListener('fetch', (event) => {
   const request = event.request;
   const url = new URL(request.url);
 
-  // Skip non-GET and cross-origin analytics/ad requests
+  // Skip non-GET requests
   if (request.method !== 'GET') return;
-  if (url.origin.includes('google') || url.origin.includes('pagead') || url.origin.includes('analytics')) {
+
+  // Never intercept crawler/indexing endpoints or external ad/analytics scripts
+  if (
+    url.pathname === '/robots.txt' ||
+    url.pathname === '/sitemap.xml' ||
+    url.pathname.endsWith('.xml') ||
+    url.pathname.startsWith('/api/') ||
+    url.origin.includes('google') ||
+    url.origin.includes('pagead') ||
+    url.origin.includes('analytics') ||
+    url.origin.includes('cloudflare')
+  ) {
     return;
   }
 
-  // Handle local navigation or asset requests
+  // Only handle same-origin requests
+  if (url.origin !== self.location.origin) {
+    return;
+  }
+
+  // 2. Navigation requests (HTML pages): Network First -> Fallback to Cache
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const responseClone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
+          }
+          return networkResponse;
+        })
+        .catch(async () => {
+          const cachedResponse = await caches.match(request);
+          if (cachedResponse) {
+            return cachedResponse;
+          }
+          return caches.match(OFFLINE_URL);
+        })
+    );
+    return;
+  }
+
+  // 3. Static Assets (JS, CSS, Fonts, Images): Cache First -> Network fallback
+  const isStaticAsset =
+    url.pathname.startsWith('/assets/') ||
+    url.pathname.startsWith('/fonts/') ||
+    /\.(?:js|css|woff2?|ttf|png|jpe?g|gif|svg|ico|webp)$/i.test(url.pathname);
+
+  if (isStaticAsset) {
+    event.respondWith(
+      caches.match(request).then((cachedResponse) => {
+        if (cachedResponse) {
+          // Revalidate in background for CSS/JS assets
+          fetch(request)
+            .then((networkResponse) => {
+              if (networkResponse && networkResponse.status === 200) {
+                caches.open(CACHE_NAME).then((cache) => cache.put(request, networkResponse));
+              }
+            })
+            .catch(() => {});
+          return cachedResponse;
+        }
+
+        return fetch(request).then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const responseClone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
+          }
+          return networkResponse;
+        });
+      })
+    );
+    return;
+  }
+
+  // 4. Other requests: Stale-While-Revalidate
   event.respondWith(
     caches.match(request).then((cachedResponse) => {
-      if (cachedResponse) {
-        // Return cached instantly, update in background (Stale-While-Revalidate)
-        fetch(request).then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
-            caches.open(CACHE_NAME).then((cache) => cache.put(request, networkResponse));
+      const fetchPromise = fetch(request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const responseClone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
           }
-        }).catch(() => {
-          // Offline mode
-        });
-        return cachedResponse;
-      }
-
-      return fetch(request).then((networkResponse) => {
-        if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
           return networkResponse;
-        }
+        })
+        .catch(() => null);
 
-        const responseToCache = networkResponse.clone();
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(request, responseToCache);
-        });
-
-        return networkResponse;
-      }).catch(() => {
-        // Fallback for HTML navigations
-        if (request.mode === 'navigate') {
-          return caches.match(OFFLINE_URL);
-        }
-      });
+      return cachedResponse || fetchPromise;
     })
   );
 });

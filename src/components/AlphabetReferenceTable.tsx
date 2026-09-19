@@ -135,7 +135,7 @@ export const AlphabetReferenceTable: React.FC = () => {
                         <Sparkles className="w-3.5 h-3.5 text-indigo-500 shrink-0" />
                         <span>{item.styleName}</span>
                       </div>
-                      <div className="text-[11px] text-slate-600 dark:text-slate-400 font-medium mt-0.5 md:hidden">
+                      <div className="text-[11px] text-slate-600 font-medium mt-0.5 md:hidden">
                         {item.category}
                       </div>
                     </td>

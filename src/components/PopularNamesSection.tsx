@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { User, Copy, Check, Search, ArrowUpRight, Flame, Sparkles, Crown } from 'lucide-react';
+import { FONT_COUNT_PLUS } from '../constants/siteStats';
 
 interface PopularNameItem {
   name: string;
@@ -414,7 +415,7 @@ export const PopularNamesSection: React.FC<PopularNamesSectionProps> = ({ onSele
                 className="inline-flex items-center gap-1 text-[11px] font-bold text-indigo-600 hover:text-indigo-800 group-hover:translate-x-0.5 transition-all"
                 title="Personalizar este nombre en el conversor"
               >
-                <span>Generar +80</span>
+                <span>Generar {FONT_COUNT_PLUS}</span>
                 <ArrowUpRight className="w-3 h-3" />
               </button>
             </div>

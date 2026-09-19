@@ -1,6 +1,7 @@
 interface Env {
   RESEND_API_KEY?: string;
   CONTACT_EMAIL?: string;
+  TURNSTILE_SECRET_KEY?: string;
 }
 
 type PagesFunction<T = unknown> = (context: {
@@ -19,8 +20,8 @@ const ALLOWED_ORIGINS = new Set([
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const ALLOWED_TOPICS = new Set(['sugerencia', 'error', 'duda']);
+const MAX_CONTENT_LENGTH = 10240; // 10 KB
 
-// TODO: Add Turnstile or rate limiting before high traffic.
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const { request, env } = context;
 
@@ -46,6 +47,18 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     ...(origin && ALLOWED_ORIGINS.has(origin) ? { 'Access-Control-Allow-Origin': origin } : {}),
   };
 
+  // 1. Content-Length validation limit
+  const contentLength = request.headers.get('content-length');
+  if (contentLength && parseInt(contentLength, 10) > MAX_CONTENT_LENGTH) {
+    return new Response(
+      JSON.stringify({
+        success: false,
+        error: 'El tamaño de la petición excede el límite permitido (10 KB).',
+      }),
+      { status: 413, headers: corsHeaders }
+    );
+  }
+
   try {
     const data = await request.json().catch(() => null) as {
       name?: string;
@@ -53,6 +66,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       topic?: string;
       message?: string;
       website?: string; // Honeypot field
+      turnstileToken?: string;
     } | null;
 
     if (!data) {
@@ -62,7 +76,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       );
     }
 
-    // 2. Honeypot check - if filled, silently succeed
+    // 2. Honeypot check - if filled by bot, silently return success
     if (data.website && typeof data.website === 'string' && data.website.trim() !== '') {
       return new Response(
         JSON.stringify({ success: true, message: 'Mensaje enviado correctamente.' }),
@@ -70,6 +84,44 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       );
     }
 
+    // 3. Turnstile bot protection verification if configured
+    if (env.TURNSTILE_SECRET_KEY) {
+      const turnstileToken = data.turnstileToken || request.headers.get('CF-Turnstile-Token');
+      if (!turnstileToken) {
+        return new Response(
+          JSON.stringify({
+            success: false,
+            error: 'Verificación de seguridad requerida (Turnstile).',
+          }),
+          { status: 400, headers: corsHeaders }
+        );
+      }
+
+      const clientIp = request.headers.get('CF-Connecting-IP') || '';
+      const turnstileParams = new URLSearchParams();
+      turnstileParams.append('secret', env.TURNSTILE_SECRET_KEY);
+      turnstileParams.append('response', turnstileToken);
+      if (clientIp) turnstileParams.append('remoteip', clientIp);
+
+      const turnstileRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: turnstileParams.toString(),
+      });
+
+      const outcome = await turnstileRes.json().catch(() => null) as { success?: boolean } | null;
+      if (!outcome || !outcome.success) {
+        return new Response(
+          JSON.stringify({
+            success: false,
+            error: 'La verificación de seguridad ha fallado. Por favor, recarga la página.',
+          }),
+          { status: 403, headers: corsHeaders }
+        );
+      }
+    }
+
+    // 4. Validate message body
     if (!data.message || typeof data.message !== 'string' || !data.message.trim()) {
       return new Response(
         JSON.stringify({
