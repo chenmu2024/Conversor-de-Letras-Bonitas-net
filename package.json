@@ -9,7 +9,9 @@
     "preview": "vite preview --host 0.0.0.0 --port 3000",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "submit:indexnow": "node scripts/submit-indexnow.mjs",
+    "submit:indexnow:dry-run": "node scripts/submit-indexnow.mjs --dry-run"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",

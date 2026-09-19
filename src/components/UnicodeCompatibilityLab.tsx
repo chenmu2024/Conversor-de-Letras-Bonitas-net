@@ -4,22 +4,22 @@ import {
   AlertTriangle, 
   XCircle, 
   HelpCircle, 
+  BookOpen,
   Copy, 
   Check, 
   Layers, 
   Sparkles, 
-  ArrowRight,
   Info,
   Smartphone,
   Globe,
-  Sliders
+  Sliders,
+  ShieldAlert
 } from 'lucide-react';
 import { 
   UNICODE_COMPATIBILITY_DATA, 
   INVISIBLE_CHARACTERS_DATA,
   CompatibilityStatus,
-  UnicodeCompatibilityItem,
-  InvisibleCharacterItem
+  UnicodeCompatibilityItem
 } from '../data/unicodeCompatibility';
 import { OfficialReferencesSection } from './OfficialReferencesSection';
 
@@ -53,6 +53,13 @@ export const UnicodeCompatibilityLab: React.FC<UnicodeCompatibilityLabProps> = (
           <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" aria-hidden="true" />
             <span>Comprobado</span>
+          </span>
+        );
+      case 'reference':
+        return (
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 border border-blue-200">
+            <BookOpen className="w-3.5 h-3.5 text-blue-600" aria-hidden="true" />
+            <span>Referencia</span>
           </span>
         );
       case 'partial':
@@ -89,10 +96,10 @@ export const UnicodeCompatibilityLab: React.FC<UnicodeCompatibilityLabProps> = (
           <span>Especificación Técnica & Estándares ISO/IEC 10646</span>
         </div>
         <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-          Laboratorio de Compatibilidad Unicode: Matriz y Pruebas Multiplataforma
+          Laboratorio de Compatibilidad Unicode: Matriz Técnica y Referencias Multiplataforma
         </h1>
         <p className="text-base sm:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
-          Base de datos técnica y laboratorio interactivo para verificar qué estilos tipográficos y caracteres especiales (como el Hangul Filler U+3164) son soportados en cada sistema operativo y red social sin mostrar caracteres rotos o tofu (□).
+          Base de datos técnica y referencias estándar para comprender cómo se comportan los bloques de caracteres Unicode en diferentes sistemas operativos y aplicaciones, distinguiendo especificaciones teóricas de comprobaciones documentadas.
         </p>
       </header>
 
@@ -109,7 +116,7 @@ export const UnicodeCompatibilityLab: React.FC<UnicodeCompatibilityLabProps> = (
         </div>
         <div className="flex flex-wrap gap-2 text-xs sm:text-sm font-medium">
           <a href="#metodologia" className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-700 transition-colors">
-            Metodología de Pruebas
+            Metodología de Referencias
           </a>
           <a href="#tabla-compatibilidad" className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-700 transition-colors">
             Tabla de Compatibilidad
@@ -126,7 +133,7 @@ export const UnicodeCompatibilityLab: React.FC<UnicodeCompatibilityLabProps> = (
         </div>
       </section>
 
-      {/* 2. Metodología de Comprobaciones (P0-5) */}
+      {/* 2. Metodología de Comprobaciones (P0-7) */}
       <section 
         id="metodologia" 
         aria-labelledby="metodologia-title" 
@@ -137,13 +144,16 @@ export const UnicodeCompatibilityLab: React.FC<UnicodeCompatibilityLabProps> = (
             <Info className="w-5 h-5" aria-hidden="true" />
           </div>
           <h2 id="metodologia-title" className="text-xl sm:text-2xl font-bold text-slate-900">
-            Cómo Realizamos las Comprobaciones Técnicas
+            Criterios de Datos y Metodología
           </h2>
         </div>
 
-        <p className="text-slate-700 text-sm sm:text-base leading-relaxed mb-6">
-          La codificación Unicode no garantiza que todos los caracteres se visualicen de la misma forma en todas las plataformas.
-          La apariencia real depende de las fuentes instaladas en el sistema operativo, el navegador y los filtros de cada aplicación.
+        <p className="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">
+          Los resultados de esta página combinan referencias del estándar Unicode, documentación oficial y comprobaciones manuales únicamente cuando estas han sido realizadas y documentadas. Los elementos marcados como &quot;Referencia&quot; no deben interpretarse como una garantía de compatibilidad en una aplicación concreta.
+        </p>
+
+        <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6">
+          La codificación Unicode define puntos de código universales, pero la visualización real depende de las fuentes instaladas en el sistema operativo, el motor de renderizado del navegador y las reglas de filtrado de nombres que aplica cada plataforma.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
@@ -163,7 +173,7 @@ export const UnicodeCompatibilityLab: React.FC<UnicodeCompatibilityLabProps> = (
               Fuentes del Sistema Operativo
             </h3>
             <p className="text-slate-600">
-              Si Android, iOS o Windows carecen de la fuente correspondiente para un bloque, el glifo se mostrará como un recuadro vacío (tofu).
+              Si el sistema operativo carece de la fuente tipográfica adecuada para un bloque determinado, el glifo se mostrará como un recuadro vacío (tofu).
             </p>
           </div>
 
@@ -173,7 +183,7 @@ export const UnicodeCompatibilityLab: React.FC<UnicodeCompatibilityLabProps> = (
               Filtros en Nombres de Usuario
             </h3>
             <p className="text-slate-600">
-              Redes sociales como TikTok o juegos como Free Fire limitan los caracteres admitidos en nombres de perfil aunque el móvil pueda dibujarlos.
+              Diversas aplicaciones y videojuegos limitan los caracteres admitidos en nombres de perfil aunque la pantalla pueda dibujarlos en mensajes de texto.
             </p>
           </div>
 
@@ -183,41 +193,57 @@ export const UnicodeCompatibilityLab: React.FC<UnicodeCompatibilityLabProps> = (
               Actualizaciones Continuas
             </h3>
             <p className="text-slate-600">
-              Los resultados reflejan pruebas reales realizadas en entornos controlados y se actualizan periódicamente ante nuevos parches de software.
+              Mantenemos las referencias técnicas en revisión continua conforme se publican nuevas versiones del estándar Unicode y políticas de plataformas.
             </p>
           </div>
         </div>
       </section>
 
-      {/* 3. Tabla Principal de Compatibilidad (P0-6) */}
+      {/* 3. Tabla Principal de Compatibilidad (P0-8, P0-9) */}
       <section 
         id="tabla-compatibilidad" 
         aria-labelledby="tabla-title" 
-        className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs"
+        className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs space-y-6"
       >
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6 pb-4 border-b border-slate-200">
-          <div>
-            <h2 id="tabla-title" className="text-xl sm:text-2xl font-bold text-slate-900 mb-1">
-              Tabla de Compatibilidad por Plataforma
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-600">
-              Pruebas empíricas sobre 16 estilos tipográficos clave y sus bloques Unicode asociados.
-            </p>
-          </div>
-          <div className="flex items-center gap-3 text-xs text-slate-500 shrink-0">
-            <span className="inline-flex items-center gap-1">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Comprobado
-            </span>
-            <span className="inline-flex items-center gap-1">
-              <AlertTriangle className="w-3.5 h-3.5 text-amber-600" /> Variable
-            </span>
-            <span className="inline-flex items-center gap-1">
-              <XCircle className="w-3.5 h-3.5 text-rose-600" /> No compatible
-            </span>
+        <div className="pb-4 border-b border-slate-200">
+          <h2 id="tabla-title" className="text-xl sm:text-2xl font-bold text-slate-900 mb-1">
+            Tabla de Compatibilidad por Plataforma
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600">
+            Matriz técnica de 16 estilos tipográficos y sus bloques Unicode asociados.
+          </p>
+        </div>
+
+        {/* Data Source Legend (P0-9) */}
+        <div className="p-4 bg-slate-50 border border-slate-200/80 rounded-xl text-xs space-y-2">
+          <h3 className="font-bold text-slate-800 uppercase tracking-wider text-[11px]">
+            Leyenda de fuentes de datos:
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 text-slate-600">
+            <div className="flex items-start gap-1.5">
+              <span className="font-semibold text-emerald-800 shrink-0">✅ Comprobado:</span>
+              <span>resultado obtenido mediante una prueba manual documentada.</span>
+            </div>
+            <div className="flex items-start gap-1.5">
+              <span className="font-semibold text-blue-800 shrink-0">📘 Referencia:</span>
+              <span>información basada en Unicode o documentación oficial, sin validación manual específica en esa plataforma.</span>
+            </div>
+            <div className="flex items-start gap-1.5">
+              <span className="font-semibold text-amber-800 shrink-0">⚠️ Variable:</span>
+              <span>el resultado puede cambiar según versión, dispositivo o aplicación.</span>
+            </div>
+            <div className="flex items-start gap-1.5">
+              <span className="font-semibold text-rose-800 shrink-0">❌ No compatible:</span>
+              <span>confirmado que la plataforma restringe o no dibuja el carácter.</span>
+            </div>
+            <div className="flex items-start gap-1.5">
+              <span className="font-semibold text-slate-700 shrink-0">— Sin datos:</span>
+              <span>todavía no disponemos de evidencia suficiente.</span>
+            </div>
           </div>
         </div>
 
-        {/* Responsive Table Container with Horizontal Scroll (P2-8) */}
+        {/* Responsive Table Container with Horizontal Scroll */}
         <div className="overflow-x-auto rounded-xl border border-slate-200">
           <table className="w-full text-left text-xs sm:text-sm border-collapse">
             <thead className="bg-slate-50 border-b border-slate-200 text-slate-700 font-semibold">
@@ -294,13 +320,13 @@ export const UnicodeCompatibilityLab: React.FC<UnicodeCompatibilityLabProps> = (
           </table>
         </div>
 
-        {/* Selected Item Detail Inspector Modal / Drawer (P0-4) */}
+        {/* Selected Item Detail Inspector Modal / Drawer (P0-5: No fake fallback environments) */}
         {selectedItem && (
-          <div className="mt-6 p-5 bg-slate-50 rounded-xl border border-slate-200 animate-in fade-in duration-200">
+          <div className="p-5 bg-slate-50 rounded-xl border border-slate-200 animate-in fade-in duration-200">
             <div className="flex items-start justify-between gap-4 mb-4">
               <div>
                 <span className="text-xs font-semibold text-blue-600 uppercase tracking-wider">
-                  Informe de Prueba Técnica
+                  Informe de Referencia Técnica
                 </span>
                 <h3 className="text-lg font-bold text-slate-900">{selectedItem.name}</h3>
                 <p className="text-xs text-slate-600">{selectedItem.description}</p>
@@ -319,7 +345,9 @@ export const UnicodeCompatibilityLab: React.FC<UnicodeCompatibilityLabProps> = (
                   <span>Android</span>
                   {renderStatusBadge(selectedItem.android.status)}
                 </div>
-                <div className="text-slate-500">{selectedItem.android.environment || 'Android 14 (Pixel / Samsung)'}</div>
+                {selectedItem.android.environment && (
+                  <div className="text-slate-500 text-[11px]">{selectedItem.android.environment}</div>
+                )}
                 {selectedItem.android.notes && (
                   <div className="mt-1 text-slate-700 text-[11px]">{selectedItem.android.notes}</div>
                 )}
@@ -330,7 +358,9 @@ export const UnicodeCompatibilityLab: React.FC<UnicodeCompatibilityLabProps> = (
                   <span>iOS (iPhone)</span>
                   {renderStatusBadge(selectedItem.ios.status)}
                 </div>
-                <div className="text-slate-500">{selectedItem.ios.environment || 'iOS 18 (Safari 18)'}</div>
+                {selectedItem.ios.environment && (
+                  <div className="text-slate-500 text-[11px]">{selectedItem.ios.environment}</div>
+                )}
                 {selectedItem.ios.notes && (
                   <div className="mt-1 text-slate-700 text-[11px]">{selectedItem.ios.notes}</div>
                 )}
@@ -341,7 +371,9 @@ export const UnicodeCompatibilityLab: React.FC<UnicodeCompatibilityLabProps> = (
                   <span>Instagram</span>
                   {renderStatusBadge(selectedItem.instagram.status)}
                 </div>
-                <div className="text-slate-500">{selectedItem.instagram.environment || 'Instagram v345'}</div>
+                {selectedItem.instagram.environment && (
+                  <div className="text-slate-500 text-[11px]">{selectedItem.instagram.environment}</div>
+                )}
                 {selectedItem.instagram.notes && (
                   <div className="mt-1 text-slate-700 text-[11px]">{selectedItem.instagram.notes}</div>
                 )}
@@ -352,7 +384,9 @@ export const UnicodeCompatibilityLab: React.FC<UnicodeCompatibilityLabProps> = (
                   <span>Free Fire</span>
                   {renderStatusBadge(selectedItem.freeFire.status)}
                 </div>
-                <div className="text-slate-500">{selectedItem.freeFire.environment || 'Free Fire OB45/OB46'}</div>
+                {selectedItem.freeFire.environment && (
+                  <div className="text-slate-500 text-[11px]">{selectedItem.freeFire.environment}</div>
+                )}
                 {selectedItem.freeFire.notes && (
                   <div className="mt-1 text-slate-700 text-[11px]">{selectedItem.freeFire.notes}</div>
                 )}
@@ -365,9 +399,17 @@ export const UnicodeCompatibilityLab: React.FC<UnicodeCompatibilityLabProps> = (
             </div>
           </div>
         )}
+
+        {/* Compatibility Notice (P0-17) */}
+        <div className="flex items-start gap-2.5 p-4 rounded-xl bg-amber-50 border border-amber-200/80 text-xs text-amber-900">
+          <ShieldAlert className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" aria-hidden="true" />
+          <p className="leading-relaxed">
+            <strong>Aviso de compatibilidad:</strong> La compatibilidad mostrada no constituye una garantía permanente. Las plataformas y desarrolladores de aplicaciones pueden actualizar filtros, fuentes y reglas de nombres sin previo aviso.
+          </p>
+        </div>
       </section>
 
-      {/* 4. Comparativa de Caracteres Invisibles (P0-7, P0-10, P0-11) */}
+      {/* 4. Comparativa de Caracteres Invisibles */}
       <section 
         id="espacios-invisibles" 
         aria-labelledby="invisibles-title" 
@@ -427,13 +469,13 @@ export const UnicodeCompatibilityLab: React.FC<UnicodeCompatibilityLabProps> = (
                     <span>{char.typicalUse}</span>
                   </div>
                   <div>
-                    <strong className="text-slate-900 block">Limitaciones técnicas:</strong>
+                    <strong className="text-slate-900 block">Propiedades y limitaciones:</strong>
                     <span>{char.limitations}</span>
                   </div>
                 </div>
               </div>
 
-              {/* Copy Action Buttons (P0-11) */}
+              {/* Copy Action Buttons */}
               <div className="pt-3 border-t border-slate-200/80 grid grid-cols-2 gap-2">
                 <button
                   onClick={() => handleCopy(char.character, `char-${char.id}`)}
@@ -535,7 +577,7 @@ export const UnicodeCompatibilityLab: React.FC<UnicodeCompatibilityLabProps> = (
         </div>
       </section>
 
-      {/* 6. Contextual Topic Clusters Navigation Hub (P1-12, P1-23) */}
+      {/* 6. Contextual Topic Clusters Navigation Hub */}
       <section 
         aria-labelledby="clusters-title" 
         className="bg-slate-900 text-white rounded-2xl p-6 sm:p-8"
@@ -694,7 +736,7 @@ export const UnicodeCompatibilityLab: React.FC<UnicodeCompatibilityLabProps> = (
         </div>
       </section>
 
-      {/* 7. Fuentes y Referencias Oficiales (P1-6, P1-7) */}
+      {/* 7. Fuentes y Referencias Oficiales */}
       <OfficialReferencesSection />
     </div>
   );

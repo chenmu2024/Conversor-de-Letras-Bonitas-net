@@ -16,9 +16,52 @@ async function validateBuild() {
   const { ROUTE_CONFIGS } = await import('../src/data/routeConfigs.ts');
   const { SEO_ROUTE_DATA } = await import('../src/data/seoRouteData.ts');
   const { FONT_COUNT, FONT_COUNT_PLUS } = await import('../src/constants/siteStats.ts');
+  const { UNICODE_COMPATIBILITY_DATA } = await import('../src/data/unicodeCompatibility.ts');
+  const { COMPATIBILITY_TEST_LOG } = await import('../src/data/compatibilityTestLog.ts');
 
   const expectedFontBucket = `${Math.floor(FONT_COUNT / 10) * 10}+`;
   console.log(`ℹ️ [Validate] Font stats: FONT_COUNT=${FONT_COUNT}, FONT_COUNT_PLUS=${FONT_COUNT_PLUS} (Bucket: ${expectedFontBucket})`);
+
+  // Unicode Compatibility Lab Data Integrity Validation
+  const validStatuses = new Set(['verified', 'reference', 'partial', 'unsupported', 'unknown']);
+  const platformKeys = ['chrome', 'safari', 'android', 'ios', 'instagram', 'whatsapp', 'tiktok', 'freeFire'];
+  let verifiedCount = 0;
+  let referenceCount = 0;
+
+  for (const item of UNICODE_COMPATIBILITY_DATA) {
+    if (!item.id || !item.name || !item.unicodeRange) {
+      errors.push(`[Unicode Compatibility] Incomplete item data for "${item.name || 'unnamed'}"`);
+    }
+    for (const pKey of platformKeys) {
+      const res = item[pKey];
+      if (!res || !validStatuses.has(res.status)) {
+        errors.push(`[Unicode Compatibility] Invalid status "${res?.status}" for item "${item.id}" on platform "${pKey}"`);
+      }
+      if (res?.status === 'verified') {
+        verifiedCount++;
+      }
+      if (res?.status === 'reference') {
+        referenceCount++;
+      }
+    }
+  }
+
+  console.log(`ℹ️ [Validate] Unicode items: ${UNICODE_COMPATIBILITY_DATA.length}, reference: ${referenceCount}, verified: ${verifiedCount}, empirical log records: ${COMPATIBILITY_TEST_LOG.length}`);
+
+  // Strict rule: verified status MUST have corresponding empirical test log evidence
+  if (verifiedCount > 0 && COMPATIBILITY_TEST_LOG.length === 0) {
+    errors.push(`[Unicode Compatibility] Found ${verifiedCount} 'verified' statuses but COMPATIBILITY_TEST_LOG is empty! Fake verification without evidence is prohibited.`);
+  }
+
+  // Validate any evidence screenshot files if present in COMPATIBILITY_TEST_LOG
+  for (const logRecord of COMPATIBILITY_TEST_LOG) {
+    if (logRecord.evidence && typeof logRecord.evidence === 'string') {
+      const evidenceFilePath = path.join(projectRoot, logRecord.evidence.replace(/^\//, ''));
+      if (!fs.existsSync(evidenceFilePath)) {
+        errors.push(`[Unicode Compatibility] Test log evidence file does not exist: "${logRecord.evidence}"`);
+      }
+    }
+  }
 
   const routes = Object.values(ROUTE_CONFIGS);
   const indexableRoutes = routes.filter((r) => r.route !== '404');

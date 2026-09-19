@@ -374,14 +374,14 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
       examples: ['Soporte Directo', 'Solicitudes de Fuentes', 'Reporte de Bugs'],
     },
     'compatibilidad-unicode': {
-      title: 'Laboratorio de Compatibilidad Unicode & Matriz de Renderizado',
-      subtitle: 'Matriz técnica de compatibilidad multiplataforma en iOS, Android, Free Fire, Instagram, TikTok y WhatsApp.',
+      title: 'Compatibilidad Unicode: Matriz Técnica y Referencias',
+      subtitle: 'Matriz técnica de caracteres Unicode y referencias de compatibilidad multiplataforma.',
       description:
-        'Base de datos técnica y laboratorio interactivo para verificar qué estilos tipográficos y caracteres especiales (como el Hangul Filler U+3164) son soportados en cada sistema operativo y red social sin mostrar caracteres rotos o tofu (□).',
+        'Base de datos técnica y referencias estándar para comprender cómo se comportan los bloques de caracteres Unicode en diferentes sistemas operativos y aplicaciones, distinguiendo especificaciones teóricas de comprobaciones documentadas.',
       tips: [
-        'Verifica compatibilidad antes de copiar a bios o juegos con filtros.',
-        'Utiliza el inspector de glifos para examinar puntos de código hexadecimales.',
-        'Basado en las especificaciones del Consorcio Unicode ISO/IEC 10646.',
+        'Verifica el comportamiento de los caracteres en tu entorno o aplicación antes de publicar.',
+        'Utiliza el inspector de glifos para examinar puntos de código y bloques Unicode.',
+        'Basado en las especificaciones del Consorcio Unicode e informes técnicos.',
       ],
       examples: ['U+1D4D0 Mathematical Bold Script', 'U+3164 Hangul Filler', 'U+1D504 Fraktur Gothic'],
     },
@@ -412,7 +412,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     {
       q: '¿Por qué algunas letras del Conversor de Letras Bonitas se ven como cuadros blancos (□)?',
-      a: 'Esto solo ocurre en teléfonos móviles o navegadores muy antiguos que no han actualizado su tabla Unicode. Más del 99% de los dispositivos modernos soportan todos los caracteres del Conversor de Letras Bonitas sin ningún problema.',
+      a: 'Esto puede ocurrir si el sistema operativo o navegador no cuenta con la fuente tipográfica para ese bloque Unicode específico. La mayoría de sistemas modernos soportan estos glifos, aunque la apariencia final depende de las fuentes instaladas y de los filtros de cada aplicación.',
     },
     {
       q: '¿Cómo poner letras en cursiva o negrita en Instagram con el Conversor de Letras Bonitas?',
@@ -420,7 +420,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     {
       q: '¿Cómo centrar la biografía de Instagram con el Conversor de Letras Bonitas?',
-      a: 'Instagram borra los espacios normales al guardar tu perfil. Para centrar tu biografía, utiliza en el Conversor de Letras Bonitas el botón "Espacio Invisible [ㅤ]". Añade de 4 a 6 espacios invisibles al inicio de cada línea para lograr un centrado perfecto y simétrico en Instagram.',
+      a: 'Instagram tiende a eliminar espacios convencionales consecutivos al guardar el perfil. Para separar o alinear líneas, muchos usuarios recurren al carácter "Espacio Invisible [ㅤ]" (U+3164) insertándolo al inicio de cada línea.',
     },
     {
       q: '¿Cómo cambiar la letra de las Historias de Instagram con el Conversor de Letras Bonitas?',
@@ -432,7 +432,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     {
       q: '¿Cómo tener un nombre invisible en Free Fire con el Conversor de Letras Bonitas?',
-      a: 'En el Conversor de Letras Bonitas haz clic en el botón de "Copiar Espacio Invisible [ㅤ]". Este carácter especial (Hangul Filler U+3164) del Conversor de Letras Bonitas es validado por el juego como texto real sin mostrar nada en pantalla.',
+      a: 'En el Conversor de Letras Bonitas puedes copiar el "Espacio Invisible [ㅤ]" (Hangul Filler U+3164). Ten en cuenta que la aceptación de este carácter en nicks o clanes depende de las reglas de validación y parches vigentes del juego.',
     },
     {
       q: '¿Cómo poner letras en negrita en Facebook con el Conversor de Letras Bonitas?',

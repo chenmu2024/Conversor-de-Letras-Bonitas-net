@@ -31,6 +31,10 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
       path: '/contador-de-caracteres-bio/',
       h1: /Caracteres|Bio/i,
     },
+    {
+      path: '/compatibilidad-unicode/',
+      h1: /Compatibilidad Unicode/i,
+    },
   ];
 
   for (const route of seoRoutes) {
@@ -171,6 +175,39 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
     await expect(homeLink).toBeVisible();
     await homeLink.click();
     await expect(page).toHaveURL(/\/$/);
+  });
+
+  // Unicode Compatibility Lab specific tests
+  test('Unicode Compatibility Lab renders matrix, table with 16 rows, and interactive elements', async ({ page }) => {
+    await page.goto('/compatibilidad-unicode/');
+
+    // 1. Verify H1 exists
+    const h1 = page.locator('h1');
+    await expect(h1).toHaveCount(1);
+    await expect(h1).toContainText('Laboratorio de Compatibilidad Unicode');
+
+    // 2. Verify Table contains 16 rows
+    const rows = page.locator('#tabla-compatibilidad tbody tr');
+    await expect(rows).toHaveCount(16);
+
+    // 3. Verify presence of "Referencia" badge
+    const refBadge = page.locator('span:has-text("Referencia")').first();
+    await expect(refBadge).toBeVisible();
+
+    // 4. Verify clicking "Detalles" opens details inspector
+    const detailBtn = page.locator('button:has-text("Detalles")').first();
+    await expect(detailBtn).toBeVisible();
+    await detailBtn.click();
+    await expect(page.locator('text=Informe de Referencia Técnica')).toBeVisible();
+
+    // 5. Verify live tester input
+    const testerInput = page.locator('input#lab-tester-input');
+    await expect(testerInput).toBeVisible();
+    await testerInput.fill('Prueba E2E');
+
+    // 6. Verify official references section
+    const refSection = page.locator('#fuentes-oficiales');
+    await expect(refSection).toBeVisible();
   });
 });
 

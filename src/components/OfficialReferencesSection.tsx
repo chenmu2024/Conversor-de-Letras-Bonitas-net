@@ -45,9 +45,14 @@ export const OfficialReferencesSection: React.FC = () => {
             <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-1">
               {ref.title}
             </h3>
-            <p className="text-xs text-slate-600 line-clamp-2 leading-normal">
+            <p className="text-xs text-slate-600 leading-normal mb-2">
               {ref.description}
             </p>
+            {ref.lastChecked && (
+              <div className="mt-auto pt-2 border-t border-slate-100 text-[11px] text-slate-400">
+                Consultado: {ref.lastChecked}
+              </div>
+            )}
           </a>
         ))}
       </div>

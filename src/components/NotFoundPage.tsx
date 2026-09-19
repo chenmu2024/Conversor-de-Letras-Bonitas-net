@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Search, Home, ArrowRight, Compass, Sparkles, AlertTriangle, RefreshCw } from 'lucide-react';
 import { PageRoute } from '../types';
+import { FONT_COUNT_PLUS } from '../constants/siteStats';
 
 interface NotFoundPageProps {
   onRouteChange: (route: PageRoute) => void;
@@ -11,7 +12,7 @@ export const NotFoundPage: React.FC<NotFoundPageProps> = ({ onRouteChange, onSea
   const [searchTerm, setSearchTerm] = useState('');
 
   const quickLinks: { route: PageRoute; label: string; icon: string; desc: string }[] = [
-    { route: 'inicio', label: 'Conversor Principal', icon: '✨', desc: 'Más de 120 fuentes bonitas' },
+    { route: 'inicio', label: 'Conversor Principal', icon: '✨', desc: `Más de ${FONT_COUNT_PLUS} fuentes bonitas` },
     { route: 'nicks-free-fire', label: 'Nicks Free Fire', icon: '亗', desc: 'Espacios invisibles y símbolos gamer' },
     { route: 'instagram', label: 'Letras para Instagram', icon: '📸', desc: 'Fuentes cursivas y estéticas para bio' },
     { route: 'letras-chidas', label: 'Letras Chidas', icon: '🔥', desc: 'Decoradores aesthetic y símbolos raros' },
