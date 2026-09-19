@@ -16,7 +16,7 @@ const rootElement = document.getElementById('root');
 
 if (rootElement) {
   // If the container already contains prerendered HTML nodes (production prerender), hydrate them
-  if (rootElement.hasChildNodes()) {
+  if (rootElement.firstElementChild) {
     hydrateRoot(
       rootElement,
       <StrictMode>

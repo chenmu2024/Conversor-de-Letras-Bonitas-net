@@ -234,7 +234,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     faqs: [
       {
         question: '¿Por qué Facebook no tiene botón de negrita en los perfiles personales?',
-        answer: 'Facebook solo ofrece herramientas de formato enriquecido en notas o ciertos grupos. Con nuestro conversor Unicode puedes publicar en negrita directamente en tu muro, comentarios o perfil con alta compatibilidad.'
+        answer: 'Facebook solo ofrece herramientas de formato enriquecido en notas o ciertos grupos. Con nuestro conversor puedes generar caracteres Unicode para probarlos en publicaciones, comentarios o perfiles. La visualización puede variar según la función, aplicación y dispositivo.'
       }
     ],
     proTips: [

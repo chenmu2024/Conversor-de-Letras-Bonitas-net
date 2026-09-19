@@ -83,7 +83,7 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onRouteChange }) => {
           </h2>
         </div>
         <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
-          Probamos periódicamente la visualización de glifos y símbolos en una variedad de plataformas y dispositivos:
+          La compatibilidad se evalúa principalmente a partir del estándar Unicode y mediante comprobaciones manuales en algunos navegadores, sistemas y aplicaciones populares:
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs">
           <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
@@ -96,7 +96,7 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onRouteChange }) => {
           </div>
           <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
             <div className="font-black text-white mb-1">🎮 Free Fire</div>
-            <div className="text-slate-400">Comprobación de caracteres aceptados y Hangul Filler [ㅤ].</div>
+            <div className="text-slate-400">Comprobaciones manuales seleccionadas; la aceptación puede variar según la versión del juego.</div>
           </div>
           <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
             <div className="font-black text-white mb-1">💬 Redes Sociales</div>

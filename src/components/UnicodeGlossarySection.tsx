@@ -86,7 +86,7 @@ export const UnicodeGlossarySection: React.FC = () => {
             Glosario Técnico del Conversor de Letras Bonitas y Unicode
           </h2>
           <p className="text-sm text-slate-600 mt-1 max-w-2xl">
-            Aprende cómo funciona internamente el Conversor de Letras Bonitas mediante el estándar universal <strong>Unicode ISO/IEC 10646</strong> y por qué puedes copiarlas y pegarlas en cualquier aplicación.
+            Aprende cómo funciona internamente el Conversor de Letras Bonitas mediante el estándar universal <strong>Unicode ISO/IEC 10646</strong> y por qué puedes copiarlas y pegarlas en múltiples aplicaciones y redes sociales.
           </p>
         </div>
 

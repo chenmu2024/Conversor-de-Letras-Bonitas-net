@@ -24,7 +24,7 @@ export const AuthorEditorialBox: React.FC<AuthorEditorialBoxProps> = ({
               Cómo verificamos la compatibilidad
             </h4>
             <p className="text-xs text-slate-400 mt-0.5">
-              Pruebas periódicas de caracteres y símbolos en múltiples navegadores y aplicaciones
+              Evaluación basada en Unicode y comprobaciones manuales seleccionadas
             </p>
           </div>
         </div>
@@ -38,7 +38,7 @@ export const AuthorEditorialBox: React.FC<AuthorEditorialBoxProps> = ({
       {/* Verified Platforms & Systems */}
       <div className="space-y-2">
         <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
-          Entornos y plataformas evaluadas:
+          Entornos utilizados como referencia:
         </span>
         <div className="flex flex-wrap gap-2 text-xs">
           {['Chrome', 'Safari', 'Android', 'iOS', 'Instagram', 'TikTok', 'WhatsApp', 'Free Fire'].map((item) => (
@@ -50,6 +50,9 @@ export const AuthorEditorialBox: React.FC<AuthorEditorialBoxProps> = ({
             </span>
           ))}
         </div>
+        <p className="text-[11px] text-slate-400 leading-relaxed pt-1">
+          La compatibilidad puede variar según la versión de la aplicación, el sistema operativo, el dispositivo y las fuentes disponibles.
+        </p>
       </div>
 
       {/* Technical Process Grid */}

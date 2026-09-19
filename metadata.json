@@ -1,6 +1,5 @@
 {
   "name": "Conversor de Letras Bonitas",
   "description": "Conversor de letras bonitas online gratis. 90+ tipografías cursivas, góticas y aesthetic para copiar y pegar en Instagram, TikTok, Free Fire y WhatsApp.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "requestFramePermissions": []
 }

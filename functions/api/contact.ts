@@ -22,6 +22,13 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const ALLOWED_TOPICS = new Set(['sugerencia', 'error', 'duda']);
 const MAX_CONTENT_LENGTH = 10240; // 10 KB
 
+/**
+ * Cloudflare Pages Functions - /api/contact
+ * NOTE on Turnstile security:
+ * VITE_TURNSTILE_SITE_KEY (client-side) and TURNSTILE_SECRET_KEY (server-side)
+ * MUST be configured as a pair in production environments. Never expose the SECRET_KEY in VITE_*.
+ * If TURNSTILE_SECRET_KEY is not defined, the endpoint permits submissions without captcha validation.
+ */
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const { request, env } = context;
 
@@ -47,9 +54,10 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     ...(origin && ALLOWED_ORIGINS.has(origin) ? { 'Access-Control-Allow-Origin': origin } : {}),
   };
 
-  // 1. Content-Length validation limit
+  // 1. Content-Length validation limit (P2-1 robust check)
   const contentLength = request.headers.get('content-length');
-  if (contentLength && parseInt(contentLength, 10) > MAX_CONTENT_LENGTH) {
+  const parsedLength = Number(contentLength);
+  if (contentLength && Number.isFinite(parsedLength) && parsedLength > MAX_CONTENT_LENGTH) {
     return new Response(
       JSON.stringify({
         success: false,
@@ -76,8 +84,16 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       );
     }
 
+    // Sanitize string fields with upper bound limits (P2-2)
+    const website = typeof data.website === 'string' ? data.website.trim().slice(0, 500) : '';
+    const turnstileToken = (
+      typeof data.turnstileToken === 'string'
+        ? data.turnstileToken.slice(0, 4096)
+        : (request.headers.get('CF-Turnstile-Token') || '').slice(0, 4096)
+    );
+
     // 2. Honeypot check - if filled by bot, silently return success
-    if (data.website && typeof data.website === 'string' && data.website.trim() !== '') {
+    if (website !== '') {
       return new Response(
         JSON.stringify({ success: true, message: 'Mensaje enviado correctamente.' }),
         { status: 200, headers: corsHeaders }
@@ -86,7 +102,6 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
     // 3. Turnstile bot protection verification if configured
     if (env.TURNSTILE_SECRET_KEY) {
-      const turnstileToken = data.turnstileToken || request.headers.get('CF-Turnstile-Token');
       if (!turnstileToken) {
         return new Response(
           JSON.stringify({
@@ -114,7 +129,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         return new Response(
           JSON.stringify({
             success: false,
-            error: 'La verificación de seguridad ha fallado. Por favor, recarga la página.',
+            error: 'La verificación de seguridad ha fallado. Por favor, completa de nuevo la verificación.',
           }),
           { status: 403, headers: corsHeaders }
         );

@@ -6,11 +6,6 @@ export function useSeoHead(currentRoute: PageRoute) {
   const prevRouteRef = useRef<PageRoute | null>(null);
 
   useEffect(() => {
-    // Skip initial mount if server already generated static meta tags for this route
-    if (prevRouteRef.current === null) {
-      prevRouteRef.current = currentRoute;
-      return;
-    }
     if (prevRouteRef.current === currentRoute) return;
     prevRouteRef.current = currentRoute;
 

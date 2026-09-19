@@ -184,7 +184,7 @@ export const AlphabetReferenceTable: React.FC = () => {
             <span>ℹ️ ¿Por Qué el Sistema Unicode Permite Estas Letras?</span>
           </h3>
           <p className="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed font-normal">
-            El estándar <strong>Unicode (ISO/IEC 10646)</strong> asigna un código numérico único a cada símbolo tipográfico del mundo. Al usar este conversor, tus palabras son transformadas a símbolos matemáticos alfanuméricos de alta compatibilidad que cualquier plataforma web (Instagram, TikTok, WhatsApp, Discord o Free Fire) interpreta de forma nativa sin necesidad de cargar tipografías externas.
+            El estándar <strong>Unicode (ISO/IEC 10646)</strong> asigna un código numérico único a cada símbolo tipográfico del mundo. Al usar este conversor, tus palabras son transformadas a símbolos alfanuméricos estandarizados que la mayoría de plataformas web y móviles (Instagram, TikTok, WhatsApp, Discord o Free Fire) interpretan de forma nativa sin necesidad de cargar tipografías externas.
           </p>
         </div>
       </div>

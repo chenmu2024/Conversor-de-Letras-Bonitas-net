@@ -19,7 +19,13 @@
       "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "/favicon.svg",
@@ -34,42 +40,78 @@
       "short_name": "Instagram",
       "description": "Fuentes cursivas y aesthetic para la biografía de Instagram",
       "url": "/letras-para-instagram/",
-      "icons": [{ "src": "/favicon.svg", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     },
     {
       "name": "Letras para Free Fire",
       "short_name": "Free Fire",
       "description": "Nicks con alas y símbolos insanos para Free Fire",
       "url": "/letras-para-free-fire/",
-      "icons": [{ "src": "/favicon.svg", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     },
     {
       "name": "Traductor a Cursiva",
       "short_name": "Cursiva",
       "description": "Conversor directo a letra cursiva y elegante",
       "url": "/traductor-cursiva/",
-      "icons": [{ "src": "/favicon.svg", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     },
     {
       "name": "Espacio Invisible [ㅤ]",
       "short_name": "Espacio",
       "description": "Espacio en blanco y letra invisible para Free Fire y WhatsApp",
       "url": "/espacio-invisible/",
-      "icons": [{ "src": "/favicon.svg", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     },
     {
       "name": "Nombres Parejas",
       "short_name": "Parejas",
       "description": "Matching nicks y dúos para Free Fire y redes",
       "url": "/nombres-para-parejas/",
-      "icons": [{ "src": "/favicon.svg", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     },
     {
       "name": "Contador de Bio",
       "short_name": "Contador",
       "description": "Calculador de límites de 150 caracteres para biografías",
       "url": "/contador-de-caracteres-bio/",
-      "icons": [{ "src": "/favicon.svg", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     }
   ]
 }

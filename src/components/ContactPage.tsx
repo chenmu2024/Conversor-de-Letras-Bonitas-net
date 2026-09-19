@@ -14,18 +14,43 @@ export const ContactPage: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const turnstileContainerRef = useRef<HTMLDivElement>(null);
+  const turnstileWidgetIdRef = useRef<string | null>(null);
+
+  /**
+   * NOTE on Turnstile configuration:
+   * VITE_TURNSTILE_SITE_KEY (frontend) and TURNSTILE_SECRET_KEY (backend) must be
+   * configured as a pair in production.
+   * If siteKey is not configured (empty string), the form allows submissions normally.
+   */
   const siteKey =
     typeof import.meta !== 'undefined' && import.meta.env
       ? ((import.meta.env.VITE_TURNSTILE_SITE_KEY as string) || '')
       : '';
 
+  const resetTurnstile = () => {
+    setTurnstileToken('');
+    if (
+      typeof window !== 'undefined' &&
+      (window as any).turnstile &&
+      turnstileWidgetIdRef.current !== null
+    ) {
+      try {
+        (window as any).turnstile.reset(turnstileWidgetIdRef.current);
+      } catch {}
+    }
+  };
+
   useEffect(() => {
     if (!siteKey || typeof window === 'undefined') return;
 
     const renderWidget = () => {
-      if ((window as any).turnstile && turnstileContainerRef.current) {
+      if (
+        (window as any).turnstile &&
+        turnstileContainerRef.current &&
+        turnstileWidgetIdRef.current === null
+      ) {
         try {
-          (window as any).turnstile.render(turnstileContainerRef.current, {
+          const widgetId = (window as any).turnstile.render(turnstileContainerRef.current, {
             sitekey: siteKey,
             callback: (token: string) => {
               setTurnstileToken(token);
@@ -37,22 +62,44 @@ export const ContactPage: React.FC = () => {
               setTurnstileToken('');
             },
           });
+          turnstileWidgetIdRef.current = widgetId;
         } catch {
           // Widget might already be rendered
         }
       }
     };
 
+    const existingScript = document.querySelector(
+      'script[src*="challenges.cloudflare.com/turnstile"]'
+    );
+
     if (!(window as any).turnstile) {
-      const script = document.createElement('script');
-      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
-      script.async = true;
-      script.defer = true;
-      script.onload = renderWidget;
-      document.head.appendChild(script);
+      if (!existingScript) {
+        const script = document.createElement('script');
+        script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+        script.async = true;
+        script.defer = true;
+        script.onload = renderWidget;
+        document.head.appendChild(script);
+      } else {
+        existingScript.addEventListener('load', renderWidget);
+      }
     } else {
       renderWidget();
     }
+
+    return () => {
+      if (
+        typeof window !== 'undefined' &&
+        (window as any).turnstile &&
+        turnstileWidgetIdRef.current !== null
+      ) {
+        try {
+          (window as any).turnstile.remove(turnstileWidgetIdRef.current);
+        } catch {}
+        turnstileWidgetIdRef.current = null;
+      }
+    };
   }, [siteKey]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -101,6 +148,9 @@ export const ContactPage: React.FC = () => {
         }
       } else {
         setIsSubmitting(false);
+        if (response.status === 400 || response.status === 403) {
+          resetTurnstile();
+        }
         setErrorMessage(
           data?.error ||
           'No pudimos enviar tu mensaje. Inténtalo de nuevo o escribe directamente a soporte@conversordeletrasbonitas.net.'
@@ -108,6 +158,7 @@ export const ContactPage: React.FC = () => {
       }
     } catch {
       setIsSubmitting(false);
+      resetTurnstile();
       setErrorMessage(
         'No pudimos enviar tu mensaje. Inténtalo de nuevo o escribe directamente a soporte@conversordeletrasbonitas.net.'
       );
@@ -130,7 +181,7 @@ export const ContactPage: React.FC = () => {
         </p>
       </div>
 
-      {submitted ? (
+      {submitted && (
         <div className="bg-white rounded-3xl border border-emerald-200 p-8 text-center space-y-4 shadow-sm animate-in fade-in zoom-in-95 duration-200">
           <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto shadow-inner">
             <CheckCircle2 className="w-8 h-8" />
@@ -156,6 +207,7 @@ export const ContactPage: React.FC = () => {
                 setWebsite('');
                 setTicketId(null);
                 setErrorMessage(null);
+                resetTurnstile();
               }}
               className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs transition-all shadow-sm active:scale-95 cursor-pointer"
             >
@@ -163,8 +215,9 @@ export const ContactPage: React.FC = () => {
             </button>
           </div>
         </div>
-      ) : (
-        <form onSubmit={handleSubmit} className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-8 shadow-sm space-y-6">
+      )}
+
+      <form onSubmit={handleSubmit} className={`bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-8 shadow-sm space-y-6 ${submitted ? 'hidden' : ''}`}>
           {errorMessage && (
             <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 flex items-start gap-3 text-rose-800 text-xs sm:text-sm">
               <AlertCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
@@ -327,7 +380,6 @@ export const ContactPage: React.FC = () => {
             )}
           </button>
         </form>
-      )}
 
       {/* Direct Contact Info */}
       <div className="text-center text-xs text-slate-500 space-y-1">

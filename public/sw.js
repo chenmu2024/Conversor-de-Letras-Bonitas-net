@@ -1,7 +1,7 @@
 // Service Worker for Conversor de Letras Bonitas
 // Optimized for Core Web Vitals, instant loads, and reliable crawler access
 
-const CACHE_NAME = 'letras-bonitas-v3.1.0';
+const CACHE_NAME = 'letras-bonitas-v3.2.0';
 const OFFLINE_URL = '/';
 
 // 1. Precache ONLY app shell and core assets (DO NOT precache robots.txt or sitemap.xml)
@@ -69,7 +69,7 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       fetch(request)
         .then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200) {
+          if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
             const responseClone = networkResponse.clone();
             caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
           }
@@ -99,7 +99,7 @@ self.addEventListener('fetch', (event) => {
           // Revalidate in background for CSS/JS assets
           fetch(request)
             .then((networkResponse) => {
-              if (networkResponse && networkResponse.status === 200) {
+              if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
                 caches.open(CACHE_NAME).then((cache) => cache.put(request, networkResponse));
               }
             })
@@ -108,7 +108,7 @@ self.addEventListener('fetch', (event) => {
         }
 
         return fetch(request).then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200) {
+          if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
             const responseClone = networkResponse.clone();
             caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
           }
@@ -124,7 +124,7 @@ self.addEventListener('fetch', (event) => {
     caches.match(request).then((cachedResponse) => {
       const fetchPromise = fetch(request)
         .then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200) {
+          if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
             const responseClone = networkResponse.clone();
             caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
           }

@@ -1,53 +1,117 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Conversor de Letras Bonitas - E2E Smoke Tests', () => {
-  test('1. Home page renders exactly 1 H1, 1 Canonical, and 1 JSON-LD', async ({ page }) => {
+test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
+  // P1-1 & P1-2: Matrix test across 7 core routes
+  const seoRoutes = [
+    {
+      path: '/',
+      h1: /Conversor/i,
+    },
+    {
+      path: '/letras-para-instagram/',
+      h1: /Instagram/i,
+    },
+    {
+      path: '/letras-para-free-fire/',
+      h1: /Free Fire/i,
+    },
+    {
+      path: '/letras-goticas/',
+      h1: /Góticas/i,
+    },
+    {
+      path: '/traductor-cursiva/',
+      h1: /Cursiva/i,
+    },
+    {
+      path: '/espacio-invisible/',
+      h1: /Invisible/i,
+    },
+    {
+      path: '/contador-de-caracteres-bio/',
+      h1: /Caracteres|Bio/i,
+    },
+  ];
+
+  for (const route of seoRoutes) {
+    test(`SEO smoke & Canonical verification: ${route.path}`, async ({ page }) => {
+      await page.goto(route.path);
+
+      // Verify exactly 1 H1
+      const h1 = page.locator('h1');
+      await expect(h1).toHaveCount(1);
+      await expect(h1).toContainText(route.h1);
+
+      // Verify exactly 1 Canonical tag with exact matching URL (P1-2)
+      const canonical = page.locator('link[rel="canonical"]');
+      await expect(canonical).toHaveCount(1);
+      await expect(canonical).toHaveAttribute('href', `https://conversordeletrasbonitas.net${route.path}`);
+
+      // Verify exactly 1 JSON-LD tag with id="seo-jsonld"
+      const jsonLd = page.locator('script[type="application/ld+json"]');
+      await expect(jsonLd).toHaveCount(1);
+      await expect(page.locator('script#seo-jsonld')).toHaveCount(1);
+    });
+  }
+
+  // P1-3: SPA Route Switching JSON-LD Regression Test
+  test('SPA route transitions update JSON-LD Schema URL correctly without duplicates', async ({ page }) => {
     await page.goto('/');
 
-    // Verify exactly 1 H1
-    const h1Elements = page.locator('h1');
-    await expect(h1Elements).toHaveCount(1);
-    await expect(h1Elements).toBeVisible();
+    const routesToTest = [
+      { linkSelector: 'a[href="/letras-para-instagram/"]', expectedPath: '/letras-para-instagram/' },
+      { linkSelector: 'a[href="/letras-para-free-fire/"]', expectedPath: '/letras-para-free-fire/' },
+      { linkSelector: 'a[href="/traductor-cursiva/"]', expectedPath: '/traductor-cursiva/' },
+      { linkSelector: 'a[href="/letras-goticas/"]', expectedPath: '/letras-goticas/' },
+    ];
 
-    // Verify exactly 1 Canonical tag pointing to root
-    const canonical = page.locator('link[rel="canonical"]');
-    await expect(canonical).toHaveCount(1);
-    await expect(canonical).toHaveAttribute('href', 'https://conversordeletrasbonitas.net/');
+    for (const step of routesToTest) {
+      const link = page.locator(step.linkSelector).first();
+      await expect(link).toBeVisible();
+      await link.click();
 
-    // Verify exactly 1 JSON-LD tag with id="seo-jsonld"
-    const jsonLd = page.locator('script[type="application/ld+json"]');
-    await expect(jsonLd).toHaveCount(1);
-    await expect(jsonLd).toHaveAttribute('id', 'seo-jsonld');
+      await expect(page).toHaveURL(new RegExp(`${step.expectedPath}$`));
+
+      // Check unique JSON-LD
+      const jsonLdCount = await page.locator('script[type="application/ld+json"]').count();
+      expect(jsonLdCount).toBe(1);
+
+      // Parse JSON-LD content and verify WebApplication URL matching
+      const jsonText = await page.locator('#seo-jsonld').textContent();
+      expect(jsonText).toBeTruthy();
+      const schema = JSON.parse(jsonText || '{}');
+      const webApp = schema['@graph']
+        ? schema['@graph'].find((item: any) => item['@type'] === 'WebApplication')
+        : schema;
+      expect(webApp?.url).toBe(`https://conversordeletrasbonitas.net${step.expectedPath}`);
+    }
   });
 
-  test('2. ScenarioShortcutGrid performs clean URL navigation and updates metadata', async ({ page }) => {
+  // P1-4: Browser Back and Forward history navigation with complete metadata validation
+  test('Browser Back and Forward history navigation preserves clean URLs, H1, and Canonical tags', async ({ page }) => {
     await page.goto('/');
 
-    // Locate Instagram shortcut in scenario grid and click
-    const instagramLink = page.locator('a[href="/letras-para-instagram/"]').first();
-    await expect(instagramLink).toBeVisible();
-    await instagramLink.click();
+    // Navigate to Free Fire page
+    const ffLink = page.locator('a[href="/letras-para-free-fire/"]').first();
+    await ffLink.click();
+    await expect(page).toHaveURL(/\/letras-para-free-fire\/$/);
 
-    // Verify URL is clean (no hashes)
-    await expect(page).toHaveURL(/\/letras-para-instagram\/$/);
+    // Navigate back to Home
+    await page.goBack();
+    await expect(page).toHaveURL(/\/$/);
+    await expect(page.locator('h1')).toHaveCount(1);
+    await expect(page.locator('h1')).toContainText('Conversor');
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://conversordeletrasbonitas.net/');
 
-    // Verify H1 updated to Instagram
-    const h1 = page.locator('h1');
-    await expect(h1).toHaveCount(1);
-    await expect(h1).toContainText('Instagram');
-
-    // Verify Canonical updated
-    const canonical = page.locator('link[rel="canonical"]');
-    await expect(canonical).toHaveCount(1);
-    await expect(canonical).toHaveAttribute('href', 'https://conversordeletrasbonitas.net/letras-para-instagram/');
-
-    // Verify unique JSON-LD
-    const jsonLd = page.locator('script[type="application/ld+json"]');
-    await expect(jsonLd).toHaveCount(1);
-    await expect(jsonLd).toHaveAttribute('id', 'seo-jsonld');
+    // Navigate forward to Free Fire
+    await page.goForward();
+    await expect(page).toHaveURL(/\/letras-para-free-fire\/$/);
+    await expect(page.locator('h1')).toHaveCount(1);
+    await expect(page.locator('h1')).toContainText('Free Fire');
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://conversordeletrasbonitas.net/letras-para-free-fire/');
   });
 
-  test('3. RelatedSilosSection renders clean anchor tags without hashes', async ({ page }) => {
+  test('RelatedSilosSection renders clean anchor tags without hashes', async ({ page }) => {
     await page.goto('/letras-para-instagram/');
 
     // Scroll down to load deferred auxiliary content
@@ -66,26 +130,7 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke Tests', () => {
     }
   });
 
-  test('4. Browser Back and Forward history navigation preserves clean URLs and state', async ({ page }) => {
-    await page.goto('/');
-
-    // Navigate to Free Fire page
-    const ffLink = page.locator('a[href="/letras-para-free-fire/"]').first();
-    await ffLink.click();
-    await expect(page).toHaveURL(/\/letras-para-free-fire\/$/);
-
-    // Navigate back
-    await page.goBack();
-    await expect(page).toHaveURL(/\/$/);
-    const h1 = page.locator('h1');
-    await expect(h1).toContainText('Conversor');
-
-    // Navigate forward
-    await page.goForward();
-    await expect(page).toHaveURL(/\/letras-para-free-fire\/$/);
-  });
-
-  test('5. Font Converter transforms text and allows copying', async ({ page }) => {
+  test('Font Converter transforms text and allows copying', async ({ page }) => {
     await page.goto('/');
 
     const inputArea = page.locator('textarea#main-text-input');
@@ -104,11 +149,22 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke Tests', () => {
     await copyButton.click();
   });
 
-  test('6. 404 page handles invalid routes gracefully', async ({ page }) => {
-    await page.goto('/ruta-que-no-existe-404/');
+  // P0-4 & P0-5: 404 UI and Robots Noindex validation
+  test('Unknown route renders 404 UI with noindex meta tag', async ({ page }) => {
+    // Note: Local Vite preview serves index.html fallback for client-side routing.
+    // Cloudflare Pages in production handles HTTP 404 status code via 404.html.
+    const response = await page.goto('/ruta-que-no-existe-404-test/');
+    expect(response).not.toBeNull();
 
-    // Verify 404 content appears
-    await expect(page.locator('h1:has-text("404")')).toBeVisible();
+    // Verify 404 H1 is rendered
+    const h1 = page.locator('h1');
+    await expect(h1).toHaveCount(1);
+    await expect(h1).toContainText('404');
+
+    // Verify robots noindex meta tag
+    const robots = page.locator('meta[name="robots"]');
+    await expect(robots).toHaveCount(1);
+    await expect(robots).toHaveAttribute('content', /noindex/i);
 
     // Verify link back to home exists and works
     const homeLink = page.locator('a[href="/"]').first();
@@ -117,3 +173,4 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke Tests', () => {
     await expect(page).toHaveURL(/\/$/);
   });
 });
+

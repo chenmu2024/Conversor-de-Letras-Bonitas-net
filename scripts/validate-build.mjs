@@ -15,6 +15,10 @@ async function validateBuild() {
 
   const { ROUTE_CONFIGS } = await import('../src/data/routeConfigs.ts');
   const { SEO_ROUTE_DATA } = await import('../src/data/seoRouteData.ts');
+  const { FONT_COUNT, FONT_COUNT_PLUS } = await import('../src/constants/siteStats.ts');
+
+  const expectedFontBucket = `${Math.floor(FONT_COUNT / 10) * 10}+`;
+  console.log(`ℹ️ [Validate] Font stats: FONT_COUNT=${FONT_COUNT}, FONT_COUNT_PLUS=${FONT_COUNT_PLUS} (Bucket: ${expectedFontBucket})`);
 
   const routes = Object.values(ROUTE_CONFIGS);
   const indexableRoutes = routes.filter((r) => r.route !== '404');
@@ -158,6 +162,15 @@ async function validateBuild() {
       if (!validInternalPaths.has(internalHref) && !validInternalPaths.has(`${internalHref}/`)) {
         errors.push(`[${routeKey}] Broken internal link detected: href="${internalHref}"`);
       }
+    }
+  }
+
+  // 5b. Font Count Build Guard (P2-7): Verify home page includes correct font bucket
+  const homeHtmlPath = path.join(distDir, 'index.html');
+  if (fs.existsSync(homeHtmlPath)) {
+    const homeHtml = fs.readFileSync(homeHtmlPath, 'utf8');
+    if (!homeHtml.includes(expectedFontBucket)) {
+      errors.push(`[home] Index HTML does not include expected font count bucket "${expectedFontBucket}"`);
     }
   }
 
