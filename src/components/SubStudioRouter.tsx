@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { PageRoute } from '../types';
+import { ROUTE_CONFIGS } from '../data/routeConfigs';
 import { LazyOnVisible } from './LazyOnVisible';
 
 // Lazy load heavy sub-studio tools and secondary pages
@@ -22,6 +23,7 @@ const LetrasChinasStudio = lazy(() => import('./LetrasChinasStudio').then(m => (
 const InvisibleSpaceStudio = lazy(() => import('./InvisibleSpaceStudio').then(m => ({ default: m.InvisibleSpaceStudio })));
 const CoupleNicksStudio = lazy(() => import('./CoupleNicksStudio').then(m => ({ default: m.CoupleNicksStudio })));
 const BioCharacterCounter = lazy(() => import('./BioCharacterCounter').then(m => ({ default: m.BioCharacterCounter })));
+const UnicodeCompatibilityLab = lazy(() => import('./UnicodeCompatibilityLab').then(m => ({ default: m.UnicodeCompatibilityLab })));
 const AboutUsPage = lazy(() => import('./AboutUsPage').then(m => ({ default: m.AboutUsPage })));
 const PrivacyPolicyPage = lazy(() => import('./PrivacyPolicyPage').then(m => ({ default: m.PrivacyPolicyPage })));
 const CookiePolicyPage = lazy(() => import('./CookiePolicyPage').then(m => ({ default: m.CookiePolicyPage })));
@@ -69,6 +71,22 @@ export const SubStudioRouter: React.FC<SubStudioRouterProps> = ({
         {currentRoute === 'contador-bio' && (
           <div className="mb-8">
             <BioCharacterCounter onApplyText={onApplyText} onRouteChange={onRouteChange} />
+          </div>
+        )}
+
+        {currentRoute === 'compatibilidad-unicode' && (
+          <div className="mb-8">
+            <UnicodeCompatibilityLab
+              onNavigate={(path) => {
+                const clean = path.replace(/\/$/, '');
+                const match = Object.values(ROUTE_CONFIGS).find(r => r.path === path || r.path.replace(/\/$/, '') === clean);
+                if (match) {
+                  onRouteChange(match.route);
+                } else if (path === '/') {
+                  onRouteChange('inicio');
+                }
+              }}
+            />
           </div>
         )}
 

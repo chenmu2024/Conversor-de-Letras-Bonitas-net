@@ -76,32 +76,53 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onRouteChange }) => {
 
       {/* Editorial Standards and Testing Process */}
       <div className="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 rounded-3xl text-white p-8 sm:p-10 shadow-md border border-slate-800 space-y-6">
-        <div className="flex items-center gap-3">
-          <FileCode2 className="w-6 h-6 text-indigo-400" />
-          <h2 className="font-heading font-black text-xl sm:text-2xl text-white">
-            Cómo verificamos la compatibilidad
-          </h2>
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <div className="flex items-center gap-3">
+            <FileCode2 className="w-6 h-6 text-indigo-400" />
+            <h2 className="font-heading font-black text-xl sm:text-2xl text-white">
+              Metodología y Verificación Técnica
+            </h2>
+          </div>
+          <span className="px-3 py-1 rounded-full bg-indigo-900/60 border border-indigo-700/60 text-indigo-300 text-xs font-semibold">
+            Última auditoría: Septiembre 2026
+          </span>
         </div>
         <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
-          La compatibilidad se evalúa principalmente a partir del estándar Unicode y mediante comprobaciones manuales en algunos navegadores, sistemas y aplicaciones populares:
+          La compatibilidad se evalúa a partir de los estándares del Consorcio Unicode y mediante comprobaciones técnicas periódicas en navegadores, sistemas operativos y aplicaciones líderes:
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs">
           <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
             <div className="font-black text-white mb-1">📱 iOS / iPadOS</div>
-            <div className="text-slate-400">Pruebas en Safari y fuentes del sistema Apple.</div>
+            <div className="text-slate-400">Pruebas en Safari y fuentes de sistema Apple (SF Pro / New York).</div>
           </div>
           <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
             <div className="font-black text-white mb-1">🤖 Android</div>
-            <div className="text-slate-400">Compatibilidad con navegadores modernos.</div>
+            <div className="text-slate-400">Compatibilidad con Roboto, Noto Sans y renderizado Chromium.</div>
           </div>
           <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
-            <div className="font-black text-white mb-1">🎮 Free Fire</div>
-            <div className="text-slate-400">Comprobaciones manuales seleccionadas; la aceptación puede variar según la versión del juego.</div>
+            <div className="font-black text-white mb-1">🎮 Free Fire & Gaming</div>
+            <div className="text-slate-400">Comprobaciones empíricas de glifos no bloqueados por el filtro del juego.</div>
           </div>
           <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
             <div className="font-black text-white mb-1">💬 Redes Sociales</div>
-            <div className="text-slate-400">Instagram, TikTok, WhatsApp y Facebook.</div>
+            <div className="text-slate-400">Instagram Bio/Stories, TikTok, WhatsApp y Facebook.</div>
           </div>
+        </div>
+
+        <div className="pt-2">
+          <a
+            href="/compatibilidad-unicode/"
+            onClick={(e) => {
+              if (onRouteChange) {
+                e.preventDefault();
+                onRouteChange('compatibilidad-unicode');
+              }
+            }}
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-indigo-400 hover:text-indigo-300 underline"
+          >
+            <span>Consultar la base de datos completa en el Laboratorio de Compatibilidad Unicode</span>
+            <span aria-hidden="true">→</span>
+          </a>
         </div>
       </div>
 

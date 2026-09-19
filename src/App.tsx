@@ -5,6 +5,8 @@ import { useSeoHead } from './hooks/useSeoHead';
 import { Header } from './components/Header';
 import { FontConverter } from './components/FontConverter';
 import { Breadcrumbs } from './components/Breadcrumbs';
+import { QuickAnswerSection } from './components/QuickAnswerSection';
+import { SEO_ROUTE_DATA } from './data/seoRouteData';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { ToastNotification } from './components/ToastNotification';
 import { Footer } from './components/Footer';
@@ -281,6 +283,7 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
     'terminos-y-condiciones',
     'contacto',
     'contador-bio',
+    'compatibilidad-unicode',
     '404',
   ].includes(currentRoute);
 
@@ -302,6 +305,22 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Visual Breadcrumb Navigation for Google Crawlers & Users */}
         <Breadcrumbs currentRoute={currentRoute} onRouteChange={handleRouteChange} />
+
+        {/* Direct Answer Paragraph for SEO & GEO (Respuesta Rápida 40-100 palabras) */}
+        {SEO_ROUTE_DATA[currentRoute] && (
+          <QuickAnswerSection
+            seo={SEO_ROUTE_DATA[currentRoute]}
+            onNavigate={(path) => {
+              const clean = path.replace(/\/$/, '');
+              const match = Object.values(ROUTE_CONFIGS).find(r => r.path === path || r.path.replace(/\/$/, '') === clean);
+              if (match) {
+                handleRouteChange(match.route);
+              } else if (path === '/') {
+                handleRouteChange('inicio');
+              }
+            }}
+          />
+        )}
 
         {isStandalonePage ? (
           /* Standalone Information & Legal Pages (Own H1, Clean Single-View Layout) */

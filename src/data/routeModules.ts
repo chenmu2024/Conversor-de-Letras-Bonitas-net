@@ -180,6 +180,7 @@ export const ROUTE_MODULES: Record<PageRoute, AuxiliaryModule[]> = {
     'platformPreview',
     'userRatings',
   ],
+  'compatibilidad-unicode': [],
   'sobre-nosotros': [],
   'politica-de-privacidad': [],
   'politica-de-cookies': [],

@@ -207,6 +207,13 @@ export const ROUTE_HEADERS: Record<PageRoute, RouteHeaderInfo> = {
     badge: 'Soporte y Contacto',
     gradient: 'from-indigo-600 to-blue-600',
   },
+  'compatibilidad-unicode': {
+    title: 'Laboratorio de Compatibilidad Unicode & Matriz de Renderizado',
+    subtitle: 'Verifica la compatibilidad de estilos de letras y caracteres especiales en iOS, Android, Free Fire, Instagram, TikTok y WhatsApp.',
+    icon: <span className="text-xs">🔬</span>,
+    badge: 'Unicode Lab',
+    gradient: 'from-indigo-600 via-purple-600 to-slate-900',
+  },
   '404': {
     title: '404 - Página No Encontrada',
     subtitle: 'Lo sentimos, la página que buscas no existe o ha sido movida.',

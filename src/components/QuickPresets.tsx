@@ -188,6 +188,11 @@ const ROUTE_PRESETS: Record<PageRoute, PresetTag[]> = {
   contacto: [
     { id: 'ct1', label: 'Soporte', value: 'Sugerencias de Fuentes & Soporte', icon: <MessageCircle className="w-3 h-3 text-sky-500" /> },
   ],
+  'compatibilidad-unicode': [
+    { id: 'cu1', label: '🔬 Matriz Compatibilidad', value: 'Test de Compatibilidad Multiplataforma', icon: <Sparkles className="w-3 h-3 text-indigo-500" /> },
+    { id: 'cu2', label: '👻 Hangul Filler U+3164', value: 'ㅤ', icon: <ShieldCheck className="w-3 h-3 text-emerald-500" /> },
+    { id: 'cu3', label: '亗 Coronas FF', value: '亗 PRO 亗', icon: <Flame className="w-3 h-3 text-amber-500" /> },
+  ],
   '404': [
     { id: 'nf1', label: 'Inicio', value: 'Letras Bonitas', icon: <Sparkles className="w-3 h-3 text-indigo-500" /> },
   ],

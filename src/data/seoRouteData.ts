@@ -8,6 +8,11 @@ export interface RouteSeoData {
   keywords: string[];
   canonical: string;
   badge: string;
+  quickAnswer?: {
+    question: string;
+    answer: string;
+    relatedLink?: { text: string; href: string };
+  };
   guideTitle: string;
   guideSteps: { step: string; title: string; text: string }[];
   faqs: { question: string; answer: string }[];
@@ -32,6 +37,10 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     ],
     canonical: 'https://conversordeletrasbonitas.net/',
     badge: '✨ Conversor de Letras Bonitas',
+    quickAnswer: {
+      question: '¿Cómo funciona el conversor de letras bonitas?',
+      answer: 'Escribe tu texto en el campo superior y el conversor mapeará automáticamente cada letra a caracteres tipográficos del estándar Unicode (cursiva, gótica, negrita, círculos y símbolos). Haz clic en cualquier estilo para copiarlo al portapapeles y pégalo directamente en tus perfiles, biografías o publicaciones.'
+    },
     guideTitle: '¿Cómo Usar el Conversor de Letras Bonitas?',
     guideSteps: [
       { step: '1', title: 'Escribe tu Frase en el Conversor de Letras Bonitas', text: 'Introduce cualquier texto o apodo en el cuadro del Conversor de Letras Bonitas. La transformación ocurrirá en tiempo real sin demoras.' },
@@ -85,6 +94,10 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     ],
     canonical: 'https://conversordeletrasbonitas.net/letras-para-instagram/',
     badge: '📸 Diseñado para Instagram Bio & Stories',
+    quickAnswer: {
+      question: '¿Cómo poner letras bonitas en Instagram?',
+      answer: 'Escribe tu nombre o biografía en el conversor, elige un estilo Unicode y cópialo. Después abre Instagram → Editar perfil y pega el texto en Nombre o Biografía. La apariencia puede variar según el dispositivo y los caracteres utilizados.'
+    },
     guideTitle: '¿Cómo Cambiar la Letra de tu Biografía en Instagram?',
     guideSteps: [
       { step: '1', title: 'Genera tu Texto Aesthetic', text: 'Escribe tu biografía o nombre en el conversor y selecciona un estilo cursivo o sans bold.' },
@@ -122,6 +135,14 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     ],
     canonical: 'https://conversordeletrasbonitas.net/letras-para-free-fire/',
     badge: '🎮 Gaming & Nicks Insanos',
+    quickAnswer: {
+      question: '¿Qué letras y símbolos funcionan en Free Fire?',
+      answer: 'Free Fire puede aceptar numerosos caracteres Unicode en los nombres de jugador, pero la compatibilidad depende de la versión del juego, la región y los caracteres utilizados. Por eso recomendamos probar el nick antes de confirmar el cambio de nombre.',
+      relatedLink: {
+        text: 'Ver tabla de compatibilidad Unicode',
+        href: '/compatibilidad-unicode/'
+      }
+    },
     guideTitle: '¿Cómo Crear el Mejor Nick para Free Fire con Alas y Espacio?',
     guideSteps: [
       { step: '1', title: 'Escribe tu Nickname', text: 'Escribe el nombre de tu clan o apodo en el conversor de letras.' },
@@ -420,6 +441,14 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     ],
     canonical: 'https://conversordeletrasbonitas.net/generador-de-nicks-free-fire/',
     badge: '🎮 Nicks Gamer 2026',
+    quickAnswer: {
+      question: '¿Cómo crear un nick para Free Fire con símbolos y espacio invisible?',
+      answer: 'Genera combinaciones con alas gamer (꧁, ꧂), el símbolo de verificación (ⓥ), coronas y espacios invisibles (U+3164). Recuerda que el juego aplica como referencia un límite de hasta 12 caracteres visibles/bytes según la versión.',
+      relatedLink: {
+        text: 'Consultar compatibilidad de símbolos gamer',
+        href: '/compatibilidad-unicode/#free-fire'
+      }
+    },
     guideTitle: '¿Cómo Crear y Copiar un Nick Insano para Free Fire?',
     guideSteps: [
       { step: '1', title: 'Escribe tu Apodo o Nombre', text: 'Escribe tu nombre de jugador en el generador gamer.' },
@@ -498,6 +527,14 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     ],
     canonical: 'https://conversordeletrasbonitas.net/espacio-invisible/',
     badge: '👻 Carácter Invisible Unicode U+3164',
+    quickAnswer: {
+      question: '¿Qué es el espacio invisible y cómo se usa?',
+      answer: 'El espacio invisible utiliza caracteres Unicode visualmente vacíos como Hangul Filler (U+3164) o Braille Pattern Blank (U+2800) que el sistema procesa como texto válido. Se emplea para separar palabras en Free Fire, crear saltos de línea limpios en Instagram y dejar estados vacíos en WhatsApp.',
+      relatedLink: {
+        text: 'Ver comparativa técnica de caracteres invisibles',
+        href: '/compatibilidad-unicode/#espacios-invisibles'
+      }
+    },
     guideTitle: '¿Cómo Usar el Espacio Invisible en Free Fire, WhatsApp e Instagram?',
     guideSteps: [
       { step: '1', title: 'Copia el Espacio Invisible', text: 'Haz clic en el botón "Copiar Espacio Invisible [ㅤ]" para guardarlo en tu portapapeles.' },
@@ -611,6 +648,14 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     ],
     canonical: 'https://conversordeletrasbonitas.net/traductor-cursiva/',
     badge: '✍️ Caligrafía y Cursivas Elegantes',
+    quickAnswer: {
+      question: '¿Cómo convertir texto normal a letra cursiva?',
+      answer: 'Introduce tu frase en el traductor para transformarla al instante en glifos matemáticos y caligráficos en cursiva (Script Regular 𝓈𝒸𝓇𝒾𝓅𝓉 o Script Bold 𝓼𝓬𝓻𝓲𝓹𝓽). Cópialos con un solo toque para usarlos en firmas digitales, dedicatorias y perfiles de redes sociales.',
+      relatedLink: {
+        text: 'Comprobar compatibilidad de cursivas',
+        href: '/compatibilidad-unicode/#tabla-compatibilidad'
+      }
+    },
     guideTitle: '¿Cómo Funciona el Traductor a Cursiva Online?',
     guideSteps: [
       { step: '1', title: 'Escribe tu Texto', text: 'Escribe nombres, cartas, dedicatorias o firmas en la caja de texto.' },
@@ -643,6 +688,14 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     ],
     canonical: 'https://conversordeletrasbonitas.net/letras-goticas/',
     badge: '🖤 Tipografías Medievales & Dark',
+    quickAnswer: {
+      question: '¿Cómo generar letras góticas para copiar y pegar?',
+      answer: 'Escribe tu texto y selecciona las variantes Fraktur (𝔉𝔯𝔞𝔨𝔱𝔲𝔯) o Bold Fraktur (𝕱𝖗𝖆𝖐𝖙𝖚𝖗). Estos caracteres provienen del bloque Mathematical Alphanumeric Symbols y pueden pegarse en nicks de juegos, biografías y títulos.',
+      relatedLink: {
+        text: 'Ver soporte en móviles y juegos',
+        href: '/compatibilidad-unicode/#tabla-compatibilidad'
+      }
+    },
     guideTitle: '¿Qué Son las Letras Góticas (Fraktur) y Cómo Usarlas?',
     guideSteps: [
       { step: '1', title: 'Introduce tu Nombre o Frase', text: 'Escribe el texto que deseas transformar en estilo medieval o gótico.' },
@@ -835,6 +888,10 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     ],
     canonical: 'https://conversordeletrasbonitas.net/contador-de-caracteres-bio/',
     badge: '📊 Herramienta de Precisión para Biografías',
+    quickAnswer: {
+      question: '¿Cómo contar caracteres para biografías de redes sociales?',
+      answer: 'Pega o redacta tu biografía en el contador para visualizar en tiempo real los límites de Instagram (150 caracteres), TikTok (80 caracteres) y Twitter/X (160 caracteres), asegurando que los emojis y caracteres Unicode especiales no superen el espacio permitido.'
+    },
     guideTitle: '¿Cómo Contar Caracteres y Ajustar tu Biografía?',
     guideSteps: [
       { step: '1', title: 'Escribe o Pega tu Texto', text: 'Pega tu biografía, tweet o estado para ver el conteo de caracteres en tiempo real.' },
@@ -854,6 +911,49 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     proTips: [
       'Aprovecha el espacio disponible usando letras en negrita en la primera línea para captar la atención.',
       'Los saltos de línea suelen contar como 1 carácter cada uno en Instagram.'
+    ]
+  },
+
+  'compatibilidad-unicode': {
+    title: 'Compatibilidad Unicode: Instagram, WhatsApp, Free Fire, TikTok y Móviles',
+    metaDescription: 'Consulta cómo se visualizan distintos estilos Unicode en navegadores, móviles, redes sociales y juegos. Pruebas y referencias de compatibilidad actualizadas.',
+    h1: 'Compatibilidad de Letras Unicode por Plataforma y Dispositivo',
+    h2Secondary: 'Laboratorio de Pruebas de Renderizado, Glifos y Caracteres Especiales',
+    keywords: [
+      'compatibilidad unicode',
+      'letras unicode instagram',
+      'simbolos compatibles free fire',
+      'caracteres especiales whatsapp',
+      'renderizado fuentes unicode'
+    ],
+    canonical: 'https://conversordeletrasbonitas.net/compatibilidad-unicode/',
+    badge: '🔬 Laboratorio de Compatibilidad Unicode',
+    quickAnswer: {
+      question: '¿Por qué algunos caracteres Unicode no se ven iguales en todos los dispositivos?',
+      answer: 'Unicode asigna un código numérico estándar a cada carácter, pero el dibujo visual final depende de las fuentes instaladas en el sistema operativo (iOS, Android, Windows) y de los filtros de texto que aplica cada aplicación en nombres de usuario.',
+      relatedLink: {
+        text: 'Ver metodología de comprobaciones',
+        href: '#metodologia'
+      }
+    },
+    guideTitle: '¿Cómo Consultar la Compatibilidad de Fuentes Unicode?',
+    guideSteps: [
+      { step: '1', title: 'Localiza el Estilo o Rango', text: 'Busca el estilo tipográfico o carácter invisible que deseas comprobar en la tabla técnica.' },
+      { step: '2', title: 'Revisa el Estado de Comprobación', text: 'Identifica si el glifo está verificado manualmente, si es una referencia estándar o si tiene soporte variable.' },
+      { step: '3', title: 'Prueba en tu Dispositivo', text: 'Utiliza el área de prueba en vivo para verificar el renderizado antes de aplicar cambios en tus perfiles.' }
+    ],
+    faqs: [
+      {
+        question: '¿Qué significa que un carácter tenga compatibilidad "variable"?',
+        answer: 'Indica que el glifo puede visualizarse de forma diferente o como un símbolo no soportado (tofu) según la versión de Android/iOS o si la aplicación móvil aplica filtros a los caracteres no ASCII.'
+      },
+      {
+        question: '¿Por qué las letras bonitas ocupan más memoria que el texto normal?',
+        answer: 'Las letras alfanuméricas estándar ocupan 1 byte en UTF-8, mientras que los glifos matemáticos y los caracteres invisibles como U+3164 ocupan 3 o 4 bytes cada uno.'
+      }
+    ],
+    proTips: [
+      'Para nombres de usuario en juegos competitivos, prueba siempre el apodo en el chat antes de consumir un cupón de cambio de nombre.'
     ]
   },
 

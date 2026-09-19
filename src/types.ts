@@ -34,6 +34,7 @@ export type PageRoute =
   | 'simbolos'
   | 'decorador'
   | 'contador-bio'
+  | 'compatibilidad-unicode'
   | 'sobre-nosotros'
   | 'politica-de-privacidad'
   | 'politica-de-cookies'

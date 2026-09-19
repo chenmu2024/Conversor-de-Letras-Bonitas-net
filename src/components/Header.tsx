@@ -72,6 +72,7 @@ export const Header: React.FC<HeaderProps> = ({
     { route: 'simbolos', label: 'Símbolos', icon: <Layers className="w-3.5 h-3.5 text-violet-500" /> },
     { route: 'decorador', label: 'Decorador Nicks', icon: <Wand2 className="w-3.5 h-3.5 text-amber-500" /> },
     { route: 'contador-bio', label: 'Contador Bio', icon: <span className="font-mono font-black text-xs text-indigo-600">#150</span>, badge: 'Nuevo' },
+    { route: 'compatibilidad-unicode', label: 'Lab Unicode', icon: <span className="text-xs">🔬</span>, badge: 'Lab' },
   ];
 
   return (

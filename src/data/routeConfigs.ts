@@ -186,6 +186,14 @@ const BASE_ROUTE_CONFIGS: Record<PageRoute, Omit<RouteMeta, 'title' | 'descripti
     seoKeyword: 'Contador de Caracteres para Biografía de Instagram, TikTok y Twitter',
     defaultText: 'Mi Biografía Aesthetic ✨',
   },
+  'compatibilidad-unicode': {
+    route: 'compatibilidad-unicode',
+    path: '/compatibilidad-unicode/',
+    category: 'recursos',
+    label: 'Compatibilidad Unicode',
+    seoKeyword: 'Compatibilidad de Letras Unicode por Plataforma y Dispositivo',
+    defaultText: 'Unicode Test',
+  },
   'sobre-nosotros': {
     route: 'sobre-nosotros',
     path: '/sobre-nosotros/',

@@ -33,6 +33,7 @@ const RELATED_MAPPING: Record<PageRoute, PageRoute[]> = {
   simbolos: ['letras-chidas', 'letras-raras', 'decorador', 'free-fire', 'instagram', 'whatsapp'],
   decorador: ['letras-chidas', 'free-fire', 'simbolos', 'tiktok', 'glitch', 'instagram'],
   'contador-bio': ['letras-elegantes', 'instagram', 'tiktok', 'whatsapp', 'cursiva', 'decorador'],
+  'compatibilidad-unicode': ['espacio-invisible', 'nicks-free-fire', 'cursiva', 'goticas', 'contador-bio', 'inicio'],
   'sobre-nosotros': ['politica-de-privacidad', 'politica-de-cookies', 'terminos-y-condiciones', 'contacto', 'inicio'],
   'politica-de-privacidad': ['politica-de-cookies', 'sobre-nosotros', 'terminos-y-condiciones', 'contacto', 'inicio'],
   'politica-de-cookies': ['politica-de-privacidad', 'terminos-y-condiciones', 'sobre-nosotros', 'contacto', 'inicio'],

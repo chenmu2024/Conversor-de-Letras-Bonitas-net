@@ -373,6 +373,18 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
       ],
       examples: ['Soporte Directo', 'Solicitudes de Fuentes', 'Reporte de Bugs'],
     },
+    'compatibilidad-unicode': {
+      title: 'Laboratorio de Compatibilidad Unicode & Matriz de Renderizado',
+      subtitle: 'Matriz técnica de compatibilidad multiplataforma en iOS, Android, Free Fire, Instagram, TikTok y WhatsApp.',
+      description:
+        'Base de datos técnica y laboratorio interactivo para verificar qué estilos tipográficos y caracteres especiales (como el Hangul Filler U+3164) son soportados en cada sistema operativo y red social sin mostrar caracteres rotos o tofu (□).',
+      tips: [
+        'Verifica compatibilidad antes de copiar a bios o juegos con filtros.',
+        'Utiliza el inspector de glifos para examinar puntos de código hexadecimales.',
+        'Basado en las especificaciones del Consorcio Unicode ISO/IEC 10646.',
+      ],
+      examples: ['U+1D4D0 Mathematical Bold Script', 'U+3164 Hangul Filler', 'U+1D504 Fraktur Gothic'],
+    },
     '404': {
       title: 'Página no encontrada (Error 404)',
       subtitle: 'La URL ingresada no corresponde a ninguna de nuestras herramientas activas.',

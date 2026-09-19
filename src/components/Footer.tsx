@@ -96,6 +96,7 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
               Recursos
             </h3>
             <ul className="space-y-2.5 text-xs font-medium">
+              <li>{renderLink('compatibilidad-unicode', '🔬 Lab de Compatibilidad Unicode', 'hover:text-indigo-400 transition-colors text-left text-indigo-300 font-bold block')}</li>
               <li>{renderLink('contador-bio', 'Contador Caracteres Bio', 'hover:text-amber-400 transition-colors text-left text-amber-300/90 font-bold block')}</li>
               <li>{renderLink('simbolos', 'Símbolos y Emojis')}</li>
               <li>{renderLink('decorador', 'Decorador de Nicks Gamer')}</li>

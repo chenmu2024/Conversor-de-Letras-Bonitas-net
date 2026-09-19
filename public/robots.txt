@@ -18,6 +18,10 @@ Allow: /
 User-agent: AdsBot-Google-Mobile
 Allow: /
 
+# OpenAI Search crawler
+User-agent: OAI-SearchBot
+Allow: /
+
 # Bing, Apple, DuckDuckGo & Other Major Engines
 User-agent: Bingbot
 Allow: /
