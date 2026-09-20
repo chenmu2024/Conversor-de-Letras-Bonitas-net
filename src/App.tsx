@@ -306,22 +306,6 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
         {/* Visual Breadcrumb Navigation for Google Crawlers & Users */}
         <Breadcrumbs currentRoute={currentRoute} onRouteChange={handleRouteChange} />
 
-        {/* Direct Answer Paragraph for SEO & GEO (Respuesta Rápida 40-100 palabras) */}
-        {SEO_ROUTE_DATA[currentRoute] && (
-          <QuickAnswerSection
-            seo={SEO_ROUTE_DATA[currentRoute]}
-            onNavigate={(path) => {
-              const clean = path.replace(/\/$/, '');
-              const match = Object.values(ROUTE_CONFIGS).find(r => r.path === path || r.path.replace(/\/$/, '') === clean);
-              if (match) {
-                handleRouteChange(match.route);
-              } else if (path === '/') {
-                handleRouteChange('inicio');
-              }
-            }}
-          />
-        )}
-
         {isStandalonePage ? (
           /* Standalone Information & Legal Pages (Own H1, Clean Single-View Layout) */
           <Suspense fallback={<div className="h-40 animate-pulse bg-slate-100 rounded-3xl my-8" />}>
@@ -334,7 +318,7 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
           </Suspense>
         ) : (
           <>
-            {/* 1. Primary Unicode Font Converter (Top H1 Title, Input Workbench & Real-time Fonts) */}
+            {/* 1. Primary Unicode Font Converter (Top H1 Title, Input Workbench, Injected Quick Answer & Real-time Fonts) */}
             <FontConverter
               currentRoute={currentRoute}
               favorites={favorites}
@@ -343,6 +327,22 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
               initialText={globalText}
               onTextChange={(t) => setGlobalText(t)}
               onRouteChange={handleRouteChange}
+              quickAnswerSlot={
+                SEO_ROUTE_DATA[currentRoute]?.quickAnswer ? (
+                  <QuickAnswerSection
+                    seo={SEO_ROUTE_DATA[currentRoute]}
+                    onNavigate={(path) => {
+                      const clean = path.replace(/\/$/, '');
+                      const match = Object.values(ROUTE_CONFIGS).find(r => r.path === path || r.path.replace(/\/$/, '') === clean);
+                      if (match) {
+                        handleRouteChange(match.route);
+                      } else if (path === '/') {
+                        handleRouteChange('inicio');
+                      }
+                    }}
+                  />
+                ) : undefined
+              }
             />
 
             {/* 2. Dedicated Interactive Studio / Platform Toolkit (Sub-studios for Instagram, Free Fire, etc.) */}

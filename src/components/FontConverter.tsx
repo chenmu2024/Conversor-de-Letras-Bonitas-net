@@ -56,6 +56,7 @@ interface FontConverterProps {
   onPreview: (resultText: string, fontName: string) => void;
   onTextChange?: (text: string) => void;
   onRouteChange: (route: PageRoute) => void;
+  quickAnswerSlot?: React.ReactNode;
 }
 
 const POPULAR_WORD_PILLS = [
@@ -81,6 +82,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
   onPreview,
   onTextChange: notifyParentTextChange,
   onRouteChange,
+  quickAnswerSlot,
 }) => {
   const [inputText, setInputText] = useState<string>(initialText);
   const deferredInputText = useDeferredValue(inputText);
@@ -482,9 +484,12 @@ export const FontConverter: React.FC<FontConverterProps> = ({
             {headerInfo.icon}
             <span>{headerInfo.badge}</span>
           </div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100/90 border border-slate-200/80 text-slate-700 text-xs font-semibold shadow-2xs">
-            <span>⚡</span>
-            <span>100% Offline & Privado (Sin descargas)</span>
+          <div 
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100/90 border border-slate-200/80 text-slate-700 text-xs font-semibold shadow-2xs"
+            title="El texto del conversor principal se transforma directamente en tu navegador."
+          >
+            <span>🔒</span>
+            <span>Tu texto se procesa localmente</span>
           </div>
         </div>
 
@@ -727,6 +732,13 @@ export const FontConverter: React.FC<FontConverterProps> = ({
           <PlatformLimits text={inputText} />
         </Suspense>
       </section>
+
+      {/* Quick Answer Slot (SEO & GEO semantic placement after H1 and main input workbench) */}
+      {quickAnswerSlot && (
+        <div className="my-6">
+          {quickAnswerSlot}
+        </div>
+      )}
 
       {/* 3. FILTER TABS & SEARCH BAR & CONTROLS STRIP */}
       <section className="mb-6 space-y-3.5">

@@ -13,6 +13,8 @@ const distDir = path.join(projectRoot, 'dist');
 async function validateBuild() {
   console.log('🔍 [Validate] Starting post-build validation...');
 
+  const errors = [];
+
   const { ROUTE_CONFIGS } = await import('../src/data/routeConfigs.ts');
   const { SEO_ROUTE_DATA } = await import('../src/data/seoRouteData.ts');
   const { FONT_COUNT, FONT_COUNT_PLUS } = await import('../src/constants/siteStats.ts');
@@ -39,6 +41,15 @@ async function validateBuild() {
       }
       if (res?.status === 'verified') {
         verifiedCount++;
+        // Strict matching: verify empirical record exists in COMPATIBILITY_TEST_LOG
+        const match = COMPATIBILITY_TEST_LOG.find(
+          (log) => log.styleId === item.id && log.platform === pKey
+        );
+        if (!match) {
+          errors.push(`[Unicode Compatibility] Item "${item.id}" on platform "${pKey}" is marked 'verified' but has no empirical entry in COMPATIBILITY_TEST_LOG!`);
+        } else if (match.result !== 'pass') {
+          errors.push(`[Unicode Compatibility] Item "${item.id}" on platform "${pKey}" is marked 'verified' but test log result is "${match.result}" (expected 'pass')`);
+        }
       }
       if (res?.status === 'reference') {
         referenceCount++;
@@ -68,8 +79,6 @@ async function validateBuild() {
   const expectedIndexableCount = indexableRoutes.length;
 
   console.log(`Checking ${routes.length} total routes (${expectedIndexableCount} indexable) in ${distDir}...`);
-
-  let errors = [];
 
   const seenTitles = new Map();
   const seenDescriptions = new Map();

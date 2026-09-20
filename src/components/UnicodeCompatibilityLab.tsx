@@ -22,6 +22,8 @@ import {
   UnicodeCompatibilityItem
 } from '../data/unicodeCompatibility';
 import { OfficialReferencesSection } from './OfficialReferencesSection';
+import { QuickAnswerSection } from './QuickAnswerSection';
+import { SEO_ROUTE_DATA } from '../data/seoRouteData';
 
 interface UnicodeCompatibilityLabProps {
   onNavigate?: (path: string) => void;
@@ -102,6 +104,14 @@ export const UnicodeCompatibilityLab: React.FC<UnicodeCompatibilityLabProps> = (
           Base de datos técnica y referencias estándar para comprender cómo se comportan los bloques de caracteres Unicode en diferentes sistemas operativos y aplicaciones, distinguiendo especificaciones teóricas de comprobaciones documentadas.
         </p>
       </header>
+
+      {/* Direct Quick Answer for Compatibilidad Unicode */}
+      {SEO_ROUTE_DATA['compatibilidad-unicode']?.quickAnswer && (
+        <QuickAnswerSection 
+          seo={SEO_ROUTE_DATA['compatibilidad-unicode']} 
+          onNavigate={onNavigate} 
+        />
+      )}
 
       {/* 1. Quick Navigation Hub */}
       <section 

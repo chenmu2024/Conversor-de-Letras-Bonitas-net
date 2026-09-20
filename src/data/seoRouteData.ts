@@ -39,7 +39,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     badge: '✨ Conversor de Letras Bonitas',
     quickAnswer: {
       question: '¿Cómo funciona el conversor de letras bonitas?',
-      answer: 'Escribe tu texto en el campo superior y el conversor mapeará automáticamente cada letra a caracteres tipográficos del estándar Unicode (cursiva, gótica, negrita, círculos y símbolos). Haz clic en cualquier estilo para copiarlo al portapapeles y pégalo directamente en tus perfiles, biografías o publicaciones.'
+      answer: 'Escribe tu texto, elige uno de los estilos Unicode generados y pulsa Copiar. Después puedes pegarlo en biografías, publicaciones, chats o nombres compatibles. Algunos caracteres pueden visualizarse de forma diferente según el dispositivo o la plataforma.'
     },
     guideTitle: '¿Cómo Usar el Conversor de Letras Bonitas?',
     guideSteps: [
