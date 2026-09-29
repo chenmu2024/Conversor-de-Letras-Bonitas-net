@@ -518,29 +518,8 @@ export const FontConverter: React.FC<FontConverterProps> = ({
             <span>Escribe o pega tu texto:</span>
           </label>
 
-          {/* Real-time letter & word counters + TTS reader */}
+          {/* Real-time letter & word counters */}
           <div className="flex items-center gap-2">
-            {inputText && (
-              <button
-                type="button"
-                id="btn-speak-main-text"
-                aria-label="Escuchar texto por voz (Pronunciación en Español)"
-                onClick={() => {
-                  if ('speechSynthesis' in window) {
-                    window.speechSynthesis.cancel();
-                    const utter = new SpeechSynthesisUtterance(inputText);
-                    utter.lang = 'es-ES';
-                    window.speechSynthesis.speak(utter);
-                  }
-                }}
-                className="inline-flex items-center gap-1 text-xs font-bold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 px-2.5 py-1 rounded-full border border-indigo-200 transition-colors"
-                title="Escuchar texto por voz (Pronunciación en Español)"
-              >
-                <Volume2 className="w-3.5 h-3.5" />
-                <span>Escuchar</span>
-              </button>
-            )}
-
             <div className="flex items-center gap-2 text-xs font-bold text-slate-700 bg-slate-100 px-3 py-1 rounded-full border border-slate-200/80">
               <span>
                 <strong className="text-slate-900 font-extrabold">{Array.from(inputText).length}</strong> {Array.from(inputText).length === 1 ? 'letra' : 'letras'}
@@ -595,20 +574,39 @@ export const FontConverter: React.FC<FontConverterProps> = ({
           </div>
         )}
 
-        {/* Progressive disclosure: keep the primary path focused on input → results → copy */}
-        <div className="mt-1">
+        {/* Primary actions stay visible; secondary utilities are progressively disclosed */}
+        <div className="mt-1 flex items-center gap-2 flex-wrap">
+          <button
+            type="button"
+            id="btn-primary-paste"
+            onClick={handlePaste}
+            className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-2xl border border-indigo-200 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-extrabold transition-all active:scale-95"
+            title="Pegar texto desde el portapapeles"
+          >
+            <span>📋 Pegar</span>
+          </button>
+
+          {inputText && (
+            <button
+              type="button"
+              id="btn-primary-clear"
+              onClick={handleClear}
+              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-2xl border border-slate-200 bg-white hover:bg-rose-50 hover:border-rose-200 text-slate-600 hover:text-rose-700 text-xs font-bold transition-all active:scale-95"
+              title="Limpiar el texto"
+            >
+              <span>Limpiar</span>
+            </button>
+          )}
+
           <button
             type="button"
             id="btn-toggle-advanced-tools"
             aria-expanded={advancedToolsOpen}
             aria-controls="advanced-converter-tools"
             onClick={() => setAdvancedToolsOpen((open) => !open)}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 hover:text-indigo-700 text-xs font-extrabold shadow-2xs transition-all active:scale-[0.99]"
+            className="inline-flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 hover:text-indigo-700 text-xs font-extrabold shadow-2xs transition-all active:scale-95"
           >
             <span>{advancedToolsOpen ? 'Ocultar herramientas' : 'Más herramientas'}</span>
-            <span className="hidden sm:inline text-[10px] font-semibold text-slate-400">
-              Formato · símbolos · PNG · vista previa · límites
-            </span>
             <ChevronDown className={`w-4 h-4 transition-transform ${advancedToolsOpen ? 'rotate-180' : ''}`} />
           </button>
         </div>
@@ -625,16 +623,39 @@ export const FontConverter: React.FC<FontConverterProps> = ({
                   Opciones extra para decorar, editar, compartir y comprobar tu texto.
                 </p>
               </div>
-              {hasSubStudio && (
-                <button
-                  type="button"
-                  onClick={() => document.getElementById('sub-studio-section')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs border border-indigo-200 transition-all active:scale-95 shadow-2xs"
-                  title={`Ir a la suite y simuladores especializados de ${headerInfo.badge}`}
-                >
-                  <span>🛠️ Estudio {headerInfo.badge} ↓</span>
-                </button>
-              )}
+              <div className="flex items-center gap-2 flex-wrap">
+                {inputText && (
+                  <button
+                    type="button"
+                    id="btn-speak-main-text"
+                    aria-label="Escuchar texto por voz (Pronunciación en Español)"
+                    onClick={() => {
+                      if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                        const utter = new SpeechSynthesisUtterance(inputText);
+                        utter.lang = 'es-ES';
+                        window.speechSynthesis.speak(utter);
+                      }
+                    }}
+                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-indigo-50 text-indigo-700 font-bold text-xs border border-indigo-200 transition-all active:scale-95"
+                    title="Escuchar texto por voz (Pronunciación en Español)"
+                  >
+                    <Volume2 className="w-3.5 h-3.5" />
+                    <span>Escuchar</span>
+                  </button>
+                )}
+
+                {hasSubStudio && (
+                  <button
+                    type="button"
+                    onClick={() => document.getElementById('sub-studio-section')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs border border-indigo-200 transition-all active:scale-95 shadow-2xs"
+                    title={`Ir a la suite y simuladores especializados de ${headerInfo.badge}`}
+                  >
+                    <span>🛠️ Estudio {headerInfo.badge} ↓</span>
+                  </button>
+                )}
+              </div>
             </div>
 
             <div className="flex items-center gap-1.5 flex-wrap">

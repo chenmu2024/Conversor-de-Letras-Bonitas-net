@@ -159,6 +159,8 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
     const toggle = page.locator('#btn-toggle-advanced-tools');
     await expect(toggle).toBeVisible();
     await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(page.locator('#btn-primary-paste')).toBeVisible();
+    await expect(page.locator('#btn-speak-main-text')).toHaveCount(0);
 
     await expect(page.locator('#btn-open-mixer')).toHaveCount(0);
     await expect(page.locator('#btn-view-compact')).toHaveCount(0);
@@ -169,6 +171,7 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
     await expect(page.locator('#btn-open-mixer')).toBeVisible();
     await expect(page.locator('#btn-view-compact')).toBeVisible();
     await expect(page.locator('#btn-quick-export-image')).toBeVisible();
+    await expect(page.locator('#btn-speak-main-text')).toBeVisible();
     await expect(page.getByText('Atajos de estilo:', { exact: true })).toBeVisible();
 
     await toggle.click();
