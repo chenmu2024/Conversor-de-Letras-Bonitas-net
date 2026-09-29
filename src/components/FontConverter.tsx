@@ -475,7 +475,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
   return (
     <div id="conversor-principal">
       {/* 1. HERO SECTION */}
-      <section className="relative text-center pt-6 sm:pt-10 pb-6 sm:pb-8 max-w-4xl mx-auto px-2">
+      <section className="relative text-center pt-5 sm:pt-8 pb-4 sm:pb-5 max-w-4xl mx-auto px-2">
         {/* Soft Ambient Background Aura */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-32 bg-indigo-500/10 blur-3xl rounded-full pointer-events-none -z-10" />
 
@@ -502,52 +502,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
           {headerInfo.subtitle}
         </p>
 
-        {/* Quick Testing Viral Word Pills */}
-        <div className="flex items-center justify-center gap-1.5 flex-wrap mt-5 max-w-3xl mx-auto">
-          <span className="text-[11px] font-extrabold text-slate-600 uppercase tracking-wider mr-1">
-            Prueba rápida:
-          </span>
-          {POPULAR_WORD_PILLS.map((pill) => (
-            <button
-              key={pill.label}
-              type="button"
-              onClick={() => handleTextChange(pill.text)}
-              className="px-2.5 py-1 rounded-full text-xs font-semibold bg-white hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-300 border border-slate-200/80 text-slate-700 transition-all active:scale-95 shadow-2xs"
-            >
-              {pill.label}
-            </button>
-          ))}
-        </div>
-
-        {hasSubStudio && (
-          <div className="mt-3.5 flex justify-center">
-            <button
-              type="button"
-              onClick={() => {
-                document.getElementById('sub-studio-section')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold text-indigo-700 bg-indigo-50 hover:bg-indigo-100/90 border border-indigo-200/80 transition-all shadow-2xs active:scale-95"
-            >
-              <span>⚡ Suite especializada de {headerInfo.badge} disponible</span>
-              <span className="text-indigo-500 font-extrabold">↓ Ver estudio</span>
-            </button>
-          </div>
-        )}
       </section>
-
-      {/* 2. SCENARIO SHORTCUT GRID */}
-      <Suspense fallback={<div className="min-h-[50px] mb-4" />}>
-        <ScenarioShortcutGrid
-          currentRoute={currentRoute}
-          onRouteChange={(route) => {
-            if (notifyParentTextChange) {
-              const defText = ROUTE_CONFIGS[route]?.defaultText;
-              if (defText) notifyParentTextChange(defText);
-            }
-            onRouteChange(route);
-          }}
-        />
-      </Suspense>
 
       {/* 3. TEXT INPUT WORKBENCH CARD */}
       <section className="bg-white rounded-3xl border border-slate-200/90 p-4 sm:p-6 shadow-[0_12px_35px_-12px_rgba(79,70,229,0.08)] mb-8 relative transition-all">
@@ -682,6 +637,22 @@ export const FontConverter: React.FC<FontConverterProps> = ({
               )}
             </div>
 
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider mr-1">
+                Prueba rápida:
+              </span>
+              {POPULAR_WORD_PILLS.map((pill) => (
+                <button
+                  key={pill.label}
+                  type="button"
+                  onClick={() => handleTextChange(pill.text)}
+                  className="px-2.5 py-1 rounded-full text-xs font-semibold bg-white hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-300 border border-slate-200/80 text-slate-700 transition-all active:scale-95 shadow-2xs"
+                >
+                  {pill.label}
+                </button>
+              ))}
+            </div>
+
             <QuickPresets
               onSelectPreset={handleTextChange}
               currentText={inputText}
@@ -758,13 +729,6 @@ export const FontConverter: React.FC<FontConverterProps> = ({
         )}
 
       </section>
-
-      {/* Quick Answer Slot (SEO & GEO semantic placement after H1 and main input workbench) */}
-      {quickAnswerSlot && (
-        <div className="my-6">
-          {quickAnswerSlot}
-        </div>
-      )}
 
       {/* 3. FILTER TABS & SEARCH BAR & CONTROLS STRIP */}
       <section className="mb-6 space-y-3.5">
@@ -1144,6 +1108,27 @@ export const FontConverter: React.FC<FontConverterProps> = ({
           </div>
         )}
       </section>
+
+      {/* Contextual guidance appears after users can already see and copy results */}
+      {quickAnswerSlot && (
+        <div className="my-8">
+          {quickAnswerSlot}
+        </div>
+      )}
+
+      {/* Related scenarios remain available without delaying the main conversion flow */}
+      <Suspense fallback={<div className="min-h-[50px] my-6" />}>
+        <ScenarioShortcutGrid
+          currentRoute={currentRoute}
+          onRouteChange={(route) => {
+            if (notifyParentTextChange) {
+              const defText = ROUTE_CONFIGS[route]?.defaultText;
+              if (defText) notifyParentTextChange(defText);
+            }
+            onRouteChange(route);
+          }}
+        />
+      </Suspense>
 
       {/* 2.5 1-CLIC MAGIC NICK GENERATOR & VIRAL WRAPPERS */}
       <Suspense fallback={<div className="min-h-[160px] my-6" />}>
