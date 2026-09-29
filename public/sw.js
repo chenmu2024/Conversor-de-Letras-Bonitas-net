@@ -1,7 +1,7 @@
 // Service Worker for Conversor de Letras Bonitas
 // Optimized for Core Web Vitals, instant loads, and reliable crawler access
 
-const CACHE_NAME = 'letras-bonitas-v3.2.0';
+const CACHE_NAME = 'letras-bonitas-__BUILD_VERSION__';
 const OFFLINE_URL = '/';
 
 // 1. Precache ONLY app shell and core assets (DO NOT precache robots.txt or sitemap.xml)
