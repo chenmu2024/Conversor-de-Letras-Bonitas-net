@@ -258,41 +258,42 @@ export const Header: React.FC<HeaderProps> = ({
                     <ChevronDown className={`w-3.5 h-3.5 transition-transform ${open ? 'rotate-180' : ''}`} />
                   </button>
 
-                  {open && (
-                    <div className="absolute left-0 top-full pt-2 z-50 min-w-[250px]">
-                      <div className="bg-white border border-slate-200 rounded-2xl shadow-xl shadow-slate-900/10 p-2">
-                        {group.items.map((item) => {
-                          const path = ROUTE_CONFIGS[item.route]?.path || '/';
-                          const itemActive = currentRoute === item.route;
-                          return (
-                            <a
-                              key={item.route}
-                              id={`nav-item-${item.route}`}
-                              href={path}
-                              onClick={(e) => {
-                                e.preventDefault();
-                                setDesktopMenuOpen(null);
-                                onRouteChange(item.route);
-                              }}
-                              className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-colors ${
-                                itemActive
-                                  ? 'bg-indigo-50 text-indigo-700'
-                                  : 'text-slate-700 hover:bg-slate-50 hover:text-indigo-700'
-                              }`}
-                            >
-                              <span className="w-5 flex items-center justify-center shrink-0">{item.icon}</span>
-                              <span className="flex-1">{item.label}</span>
-                              {item.badge && (
-                                <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-md bg-amber-100 text-amber-800">
-                                  {item.badge}
-                                </span>
-                              )}
-                            </a>
-                          );
-                        })}
-                      </div>
+                  <div
+                    aria-hidden={!open}
+                    className={`absolute left-0 top-full pt-2 z-50 min-w-[250px] ${open ? 'block' : 'hidden'}`}
+                  >
+                    <div className="bg-white border border-slate-200 rounded-2xl shadow-xl shadow-slate-900/10 p-2">
+                      {group.items.map((item) => {
+                        const path = ROUTE_CONFIGS[item.route]?.path || '/';
+                        const itemActive = currentRoute === item.route;
+                        return (
+                          <a
+                            key={item.route}
+                            id={`nav-item-${item.route}`}
+                            href={path}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setDesktopMenuOpen(null);
+                              onRouteChange(item.route);
+                            }}
+                            className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-colors ${
+                              itemActive
+                                ? 'bg-indigo-50 text-indigo-700'
+                                : 'text-slate-700 hover:bg-slate-50 hover:text-indigo-700'
+                            }`}
+                          >
+                            <span className="w-5 flex items-center justify-center shrink-0">{item.icon}</span>
+                            <span className="flex-1">{item.label}</span>
+                            {item.badge && (
+                              <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-md bg-amber-100 text-amber-800">
+                                {item.badge}
+                              </span>
+                            )}
+                          </a>
+                        );
+                      })}
                     </div>
-                  )}
+                  </div>
                 </div>
               );
             })}
