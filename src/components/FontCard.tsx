@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FontGenerator } from '../types';
 import { Copy, Check, Star, Eye, Image as ImageIcon, CheckSquare, Square, Share2, MoreHorizontal } from 'lucide-react';
 
@@ -29,6 +29,38 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
 }) => {
   const [copied, setCopied] = useState(false);
   const [mobileActionsOpen, setMobileActionsOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
+  const mobileTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const firstMobileActionRef = useRef<HTMLButtonElement | null>(null);
+
+  useEffect(() => {
+    if (!mobileActionsOpen) return;
+
+    const focusTimer = window.requestAnimationFrame(() => firstMobileActionRef.current?.focus());
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
+        setMobileActionsOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setMobileActionsOpen(false);
+        window.requestAnimationFrame(() => mobileTriggerRef.current?.focus());
+      }
+    };
+
+    document.addEventListener('pointerdown', handlePointerDown);
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.cancelAnimationFrame(focusTimer);
+      document.removeEventListener('pointerdown', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [mobileActionsOpen]);
 
   const sizeClasses: Record<'sm' | 'md' | 'lg' | 'xl', string> = {
     sm: 'text-base sm:text-lg',
@@ -202,11 +234,13 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
             </button>
           </div>
 
-          <div className="relative sm:hidden">
+          <div ref={mobileMenuRef} className="relative sm:hidden">
             <button
+              ref={mobileTriggerRef}
               type="button"
               id={`btn-more-${generator.id}`}
               aria-label="Más acciones para esta fuente"
+              aria-haspopup="menu"
               aria-expanded={mobileActionsOpen}
               aria-controls={`font-actions-${generator.id}`}
               onClick={(e) => {
@@ -221,9 +255,13 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
             {mobileActionsOpen && (
               <div
                 id={`font-actions-${generator.id}`}
+                role="menu"
+                aria-label={`Acciones para ${generator.name}`}
                 className="absolute right-0 top-full mt-1 z-30 min-w-[150px] rounded-xl border border-slate-200 bg-white p-1.5 shadow-xl"
               >
                 <button
+                  ref={firstMobileActionRef}
+                  role="menuitem"
                   type="button"
                   onClick={(e) => {
                     e.stopPropagation();
@@ -238,6 +276,7 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
 
                 {onExportImage && (
                   <button
+                    role="menuitem"
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -252,6 +291,7 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
                 )}
 
                 <button
+                  role="menuitem"
                   type="button"
                   onClick={async (e) => {
                     setMobileActionsOpen(false);

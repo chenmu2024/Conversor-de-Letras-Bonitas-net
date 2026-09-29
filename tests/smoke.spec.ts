@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { ROUTE_CONFIGS } from '../src/data/routeConfigs';
 
 test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
   // P1-1 & P1-2: Matrix test across 7 core routes
@@ -74,7 +75,8 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
       const groupButton = page.getByRole('button', { name: step.group, exact: true });
       await groupButton.click();
 
-      const link = page.locator(step.linkSelector).first();
+      const groupSlug = step.group.toLowerCase().replace(/\s+/g, '-');
+      const link = page.locator(`#nav-menu-${groupSlug} ${step.linkSelector}`);
       await expect(link).toBeVisible();
       await link.click();
 
@@ -123,7 +125,7 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
 
     // Navigate to Free Fire page through the grouped desktop menu
     await page.getByRole('button', { name: 'Gaming', exact: true }).click();
-    const ffLink = page.locator('a[href="/letras-para-free-fire/"]').first();
+    const ffLink = page.locator('#nav-menu-gaming a[href="/letras-para-free-fire/"]');
     await expect(ffLink).toBeVisible();
     await ffLink.click();
     await expect(page).toHaveURL(/\/letras-para-free-fire\/$/);
@@ -194,15 +196,15 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
       await expect(page.locator(`#${target}`)).toHaveCount(1);
     }
 
-    await expect(page.getByRole('button', { name: /Espacio invisible/i })).toHaveCount(0);
+    await expect(page.locator('#toc-list button[data-toc-target="espacio-invisible-seccion"]')).toHaveCount(0);
   });
 
   test('Route-specific table of contents includes enabled anchored modules', async ({ page }) => {
     await page.goto('/letras-para-instagram/');
     await page.locator('#tabla-de-contenidos-nav button[aria-controls="toc-list"]').click();
 
-    await expect(page.getByRole('button', { name: /Espacio invisible/i })).toBeVisible();
-    await expect(page.getByRole('button', { name: /Símbolos y caracteres/i })).toBeVisible();
+    await expect(page.locator('#toc-list button[data-toc-target="espacio-invisible-seccion"]')).toBeVisible();
+    await expect(page.locator('#toc-list button[data-toc-target="simbolos-section"]')).toBeVisible();
   });
 
   test('RelatedSilosSection renders clean anchor tags without hashes', async ({ page }) => {
@@ -236,9 +238,18 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
     await expect(page.getByText(/carácter de sustitución/)).toBeVisible();
   });
 
-  test('Ctrl or Cmd + K focuses the main converter input', async ({ page }) => {
+  test('Ctrl or Cmd + K handler focuses the main converter input', async ({ page }) => {
     await page.goto('/');
-    await page.keyboard.press(process.platform === 'darwin' ? 'Meta+K' : 'Control+K');
+    await page.evaluate(() => {
+      window.dispatchEvent(
+        new KeyboardEvent('keydown', {
+          key: 'k',
+          ctrlKey: true,
+          bubbles: true,
+          cancelable: true,
+        })
+      );
+    });
     await expect(page.locator('#main-text-input')).toBeFocused();
   });
 
@@ -252,9 +263,20 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
 
     await more.click();
     await expect(more).toHaveAttribute('aria-expanded', 'true');
-    await expect(page.getByRole('button', { name: 'Vista previa', exact: true }).first()).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Crear imagen', exact: true }).first()).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Compartir', exact: true }).first()).toBeVisible();
+
+    const menu = page.locator('[id^="font-actions-"]').first();
+    await expect(menu).toHaveAttribute('role', 'menu');
+    await expect(menu.getByRole('menuitem', { name: 'Vista previa', exact: true })).toBeFocused();
+    await expect(menu.getByRole('menuitem', { name: 'Crear imagen', exact: true })).toBeVisible();
+    await expect(menu.getByRole('menuitem', { name: 'Compartir', exact: true })).toBeVisible();
+
+    await page.keyboard.press('Escape');
+    await expect(more).toHaveAttribute('aria-expanded', 'false');
+    await expect(more).toBeFocused();
+
+    await more.click();
+    await page.locator('h1').click();
+    await expect(more).toHaveAttribute('aria-expanded', 'false');
   });
 
   test('Font Converter transforms text and allows copying', async ({ page }) => {
@@ -341,6 +363,36 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
 
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
     await expect(sticky).toHaveCount(0);
+  });
+
+  test('All public routes pass a lightweight runtime SEO and rendering smoke check', async ({ page }) => {
+    const publicRoutes = Object.values(ROUTE_CONFIGS).filter((route) => route.route !== '404');
+
+    for (const route of publicRoutes) {
+      const runtimeErrors: string[] = [];
+      const onPageError = (error: Error) => runtimeErrors.push(error.message);
+      page.on('pageerror', onPageError);
+
+      await page.goto(route.path);
+      await expect(page.locator('h1')).toHaveCount(1);
+
+      const title = await page.title();
+      expect(title.trim().length).toBeGreaterThan(5);
+
+      const description = page.locator('meta[name="description"]');
+      await expect(description).toHaveCount(1);
+      const descriptionContent = await description.getAttribute('content');
+      expect((descriptionContent || '').trim().length).toBeGreaterThan(40);
+
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', route.canonical);
+      await expect(page.locator('script#seo-jsonld')).toHaveCount(1);
+
+      const bodyText = (await page.locator('body').innerText()).replace(/\s+/g, ' ').trim();
+      expect(bodyText.length).toBeGreaterThan(120);
+      expect(runtimeErrors, `Runtime errors on ${route.path}`).toEqual([]);
+
+      page.off('pageerror', onPageError);
+    }
   });
 
   // P0-4 & P0-5: 404 UI and Robots Noindex validation
