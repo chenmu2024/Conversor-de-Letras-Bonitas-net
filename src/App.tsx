@@ -11,6 +11,7 @@ import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { ToastNotification } from './components/ToastNotification';
 import { Footer } from './components/Footer';
 import { ArrowUp, Star } from 'lucide-react';
+import { AnalyticsLoader } from './components/AnalyticsLoader';
 
 // Lazy load below-the-fold auxiliary sections, interactive sub-studios, and interactive drawer modals
 const SubStudioRouter = lazy(() => import('./components/SubStudioRouter').then(m => ({ default: m.SubStudioRouter })));
@@ -289,6 +290,7 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
 
   return (
     <div className="min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white relative bg-slate-50 text-slate-900">
+      <AnalyticsLoader />
       {/* Non-blocking IntersectionObserver Sentinel for scroll detection */}
       <div id="scroll-sentinel" className="absolute top-[380px] left-0 w-full h-1 pointer-events-none opacity-0" aria-hidden="true" />
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Cookie, Shield, Check, X, Sliders, ExternalLink } from 'lucide-react';
 import { PageRoute } from '../types';
+import { emitAnalyticsConsentChanged } from '../utils/analytics';
 
 interface CookieConsentBannerProps {
   onRouteChange: (route: PageRoute) => void;
@@ -12,7 +13,8 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onRout
 
   // Environmental feature flags for third-party scripts (safeguarded for Node/SSR prerender)
   const env = (typeof import.meta !== 'undefined' && import.meta.env) ? import.meta.env : (typeof process !== 'undefined' && process.env ? process.env : {});
-  const analyticsAvailable = env.VITE_ENABLE_ANALYTICS === 'true';
+  const measurementId = typeof env.VITE_GA_MEASUREMENT_ID === 'string' ? env.VITE_GA_MEASUREMENT_ID.trim() : '';
+  const analyticsAvailable = env.VITE_ENABLE_ANALYTICS === 'true' && measurementId.length > 0;
   const adsAvailable = env.VITE_ENABLE_ADS === 'true';
 
   const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
@@ -23,7 +25,7 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onRout
     const savedAnalytics = localStorage.getItem('letras_cookies_analytics');
     const savedAds = localStorage.getItem('letras_cookies_ads');
 
-    setAnalyticsEnabled(savedAnalytics === 'true');
+    setAnalyticsEnabled(analyticsAvailable && savedAnalytics === 'true');
     setAdsEnabled(savedAds === 'true');
 
     if (!consent) {
@@ -39,7 +41,7 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onRout
       const savedAnalytics = localStorage.getItem('letras_cookies_analytics');
       const savedAds = localStorage.getItem('letras_cookies_ads');
 
-      setAnalyticsEnabled(savedAnalytics === 'true');
+      setAnalyticsEnabled(analyticsAvailable && savedAnalytics === 'true');
       setAdsEnabled(savedAds === 'true');
 
       setShowConfigModal(true);
@@ -55,6 +57,7 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onRout
 
     setAnalyticsEnabled(analyticsAvailable);
     setAdsEnabled(adsAvailable);
+    emitAnalyticsConsentChanged(analyticsAvailable);
 
     setIsOpen(false);
     setShowConfigModal(false);
@@ -66,17 +69,16 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onRout
     localStorage.setItem('letras_cookies_ads', 'false');
     setAnalyticsEnabled(false);
     setAdsEnabled(false);
+    emitAnalyticsConsentChanged(false);
     setIsOpen(false);
     setShowConfigModal(false);
   };
 
   const handleSaveCustom = () => {
     localStorage.setItem('letras_cookie_consent', 'custom');
-    if (analyticsAvailable) {
-      localStorage.setItem('letras_cookies_analytics', analyticsEnabled ? 'true' : 'false');
-    } else {
-      localStorage.setItem('letras_cookies_analytics', 'false');
-    }
+    const analyticsAllowed = analyticsAvailable && analyticsEnabled;
+    localStorage.setItem('letras_cookies_analytics', analyticsAllowed ? 'true' : 'false');
+    emitAnalyticsConsentChanged(analyticsAllowed);
     if (adsAvailable) {
       localStorage.setItem('letras_cookies_ads', adsEnabled ? 'true' : 'false');
     } else {
