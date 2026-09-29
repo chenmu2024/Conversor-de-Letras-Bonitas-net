@@ -78,77 +78,11 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
       await expect(link).toBeVisible();
       await link.click();
 
-      await expect(page).toHaveURL(new RegExp(`${step.expectedPath}import { test, expect } from '@playwright/test';
+      await expect(page).toHaveURL(new RegExp(`${step.expectedPath}$`));
 
-test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
-  // P1-1 & P1-2: Matrix test across 7 core routes
-  const seoRoutes = [
-    {
-      path: '/',
-      h1: /Conversor/i,
-    },
-    {
-      path: '/letras-para-instagram/',
-      h1: /Instagram/i,
-    },
-    {
-      path: '/letras-para-free-fire/',
-      h1: /Free Fire/i,
-    },
-    {
-      path: '/letras-goticas/',
-      h1: /Góticas/i,
-    },
-    {
-      path: '/traductor-cursiva/',
-      h1: /Cursiva/i,
-    },
-    {
-      path: '/espacio-invisible/',
-      h1: /Invisible/i,
-    },
-    {
-      path: '/contador-de-caracteres-bio/',
-      h1: /Caracteres|Bio/i,
-    },
-    {
-      path: '/compatibilidad-unicode/',
-      h1: /Compatibilidad Unicode/i,
-    },
-  ];
-
-  for (const route of seoRoutes) {
-    test(`SEO smoke & Canonical verification: ${route.path}`, async ({ page }) => {
-      await page.goto(route.path);
-
-      // Verify exactly 1 H1
-      const h1 = page.locator('h1');
-      await expect(h1).toHaveCount(1);
-      await expect(h1).toContainText(route.h1);
-
-      // Verify exactly 1 Canonical tag with exact matching URL (P1-2)
-      const canonical = page.locator('link[rel="canonical"]');
-      await expect(canonical).toHaveCount(1);
-      await expect(canonical).toHaveAttribute('href', `https://conversordeletrasbonitas.net${route.path}`);
-
-      // Verify exactly 1 JSON-LD tag with id="seo-jsonld"
-      const jsonLd = page.locator('script[type="application/ld+json"]');
-      await expect(jsonLd).toHaveCount(1);
-      await expect(page.locator('script#seo-jsonld')).toHaveCount(1);
-    });
-  }
-
-  // P1-3: SPA Route Switching JSON-LD Regression Test
-  test('SPA route transitions update JSON-LD Schema URL correctly without duplicates', async ({ page }) => {
-    await page.goto('/');
-
-));
-
-      // Check unique JSON-LD
       const jsonLdCount = await page.locator('script[type="application/ld+json"]').count();
       expect(jsonLdCount).toBe(1);
 
-      // Parse JSON-LD content and verify WebApplication URL matching
       const jsonText = await page.locator('#seo-jsonld').textContent();
       expect(jsonText).toBeTruthy();
       const schema = JSON.parse(jsonText || '{}');
