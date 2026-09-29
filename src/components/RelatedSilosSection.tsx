@@ -2,7 +2,6 @@ import React from 'react';
 import { PageRoute } from '../types';
 import { ROUTE_CONFIGS } from '../data/routeConfigs';
 import { Sparkles, ArrowRight, Layers, Flame, Instagram, MessageCircle } from 'lucide-react';
-import { trackEvent } from '../utils/analytics';
 
 interface RelatedSilosSectionProps {
   currentRoute: PageRoute;
@@ -78,10 +77,6 @@ export const RelatedSilosSection: React.FC<RelatedSilosSectionProps> = ({
               href={cfg.path}
               onClick={(e) => {
                 e.preventDefault();
-                trackEvent('related_tool_clicked', {
-                  from_route: currentRoute,
-                  to_route: key,
-                });
                 onRouteChange(key);
                 scrollToTop();
               }}

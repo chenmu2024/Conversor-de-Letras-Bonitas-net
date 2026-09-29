@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FontGenerator } from '../types';
 import { Copy, Check, Star, Eye, Image as ImageIcon, CheckSquare, Square, Share2, MoreHorizontal } from 'lucide-react';
-import { trackEvent } from '../utils/analytics';
 
 interface FontCardProps {
   generator: FontGenerator;
@@ -90,10 +89,6 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
     try {
       await navigator.clipboard.writeText(convertedText);
       setCopied(true);
-      trackEvent('font_copied', {
-        font_id: generator.id,
-        font_name: generator.name,
-      });
 
       // Haptic feedback for mobile devices
       if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
@@ -121,10 +116,6 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
 
   const handleShare = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    trackEvent('font_shared', {
-      font_id: generator.id,
-      font_name: generator.name,
-    });
 
     if (onShareText) {
       onShareText(convertedText, generator.name);
@@ -219,11 +210,6 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
                 aria-label="Descargar diseño como imagen"
                 onClick={(e) => {
                   e.stopPropagation();
-                  trackEvent('image_exported', {
-                    source: 'font_card',
-                    font_id: generator.id,
-                    font_name: generator.name,
-                  });
                   onExportImage(convertedText, generator.name);
                 }}
                 title="Descargar como imagen para Instagram Story / Post"
@@ -239,10 +225,6 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
               aria-label="Previsualizar en redes sociales"
               onClick={(e) => {
                 e.stopPropagation();
-                trackEvent('font_previewed', {
-                  font_id: generator.id,
-                  font_name: generator.name,
-                });
                 onPreview(convertedText, generator.name);
               }}
               title="Previsualizar en Instagram / TikTok / WhatsApp"
@@ -284,11 +266,7 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
                   onClick={(e) => {
                     e.stopPropagation();
                     setMobileActionsOpen(false);
-                    trackEvent('font_previewed', {
-                  font_id: generator.id,
-                  font_name: generator.name,
-                });
-                onPreview(convertedText, generator.name);
+                    onPreview(convertedText, generator.name);
                   }}
                   className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:bg-slate-50"
                 >
@@ -303,12 +281,7 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
                     onClick={(e) => {
                       e.stopPropagation();
                       setMobileActionsOpen(false);
-                      trackEvent('image_exported', {
-                    source: 'font_card',
-                    font_id: generator.id,
-                    font_name: generator.name,
-                  });
-                  onExportImage(convertedText, generator.name);
+                      onExportImage(convertedText, generator.name);
                     }}
                     className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:bg-slate-50"
                   >

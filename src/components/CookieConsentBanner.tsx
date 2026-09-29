@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Cookie, Shield, Check, X, Sliders, ExternalLink } from 'lucide-react';
 import { PageRoute } from '../types';
-import { emitAnalyticsConsentChanged } from '../utils/analytics';
 
 interface CookieConsentBannerProps {
   onRouteChange: (route: PageRoute) => void;
@@ -11,79 +10,61 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onRout
   const [isOpen, setIsOpen] = useState(false);
   const [showConfigModal, setShowConfigModal] = useState(false);
 
-  // Environmental feature flags for third-party scripts (safeguarded for Node/SSR prerender)
-  const env = (typeof import.meta !== 'undefined' && import.meta.env) ? import.meta.env : (typeof process !== 'undefined' && process.env ? process.env : {});
-  const measurementId = typeof env.VITE_GA_MEASUREMENT_ID === 'string' ? env.VITE_GA_MEASUREMENT_ID.trim() : '';
-  const analyticsAvailable = env.VITE_ENABLE_ANALYTICS === 'true' && measurementId.length > 0;
+  const env =
+    typeof import.meta !== 'undefined' && import.meta.env
+      ? import.meta.env
+      : typeof process !== 'undefined' && process.env
+        ? process.env
+        : {};
   const adsAvailable = env.VITE_ENABLE_ADS === 'true';
 
-  const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
   const [adsEnabled, setAdsEnabled] = useState(false);
 
   useEffect(() => {
     const consent = localStorage.getItem('letras_cookie_consent');
-    const savedAnalytics = localStorage.getItem('letras_cookies_analytics');
     const savedAds = localStorage.getItem('letras_cookies_ads');
 
-    setAnalyticsEnabled(analyticsAvailable && savedAnalytics === 'true');
-    setAdsEnabled(savedAds === 'true');
+    // Remove the old analytics-consent key from earlier versions of the site.
+    localStorage.removeItem('letras_cookies_analytics');
+    setAdsEnabled(adsAvailable && savedAds === 'true');
 
     if (!consent) {
-      // Delay slightly for smooth page load
       const timer = setTimeout(() => setIsOpen(true), 800);
       return () => clearTimeout(timer);
     }
-  }, []);
+  }, [adsAvailable]);
 
-  // Expose opener globally so Footer can trigger it and re-sync states
   useEffect(() => {
     (window as unknown as { openCookiePreferences?: () => void }).openCookiePreferences = () => {
-      const savedAnalytics = localStorage.getItem('letras_cookies_analytics');
       const savedAds = localStorage.getItem('letras_cookies_ads');
-
-      setAnalyticsEnabled(analyticsAvailable && savedAnalytics === 'true');
-      setAdsEnabled(savedAds === 'true');
-
+      setAdsEnabled(adsAvailable && savedAds === 'true');
       setShowConfigModal(true);
       setIsOpen(true);
     };
-  }, []);
+  }, [adsAvailable]);
 
   const handleAcceptAll = () => {
     localStorage.setItem('letras_cookie_consent', 'all');
-
-    localStorage.setItem('letras_cookies_analytics', analyticsAvailable ? 'true' : 'false');
     localStorage.setItem('letras_cookies_ads', adsAvailable ? 'true' : 'false');
-
-    setAnalyticsEnabled(analyticsAvailable);
+    localStorage.removeItem('letras_cookies_analytics');
     setAdsEnabled(adsAvailable);
-    emitAnalyticsConsentChanged(analyticsAvailable);
-
     setIsOpen(false);
     setShowConfigModal(false);
   };
 
   const handleEssentialOnly = () => {
     localStorage.setItem('letras_cookie_consent', 'essential');
-    localStorage.setItem('letras_cookies_analytics', 'false');
     localStorage.setItem('letras_cookies_ads', 'false');
-    setAnalyticsEnabled(false);
+    localStorage.removeItem('letras_cookies_analytics');
     setAdsEnabled(false);
-    emitAnalyticsConsentChanged(false);
     setIsOpen(false);
     setShowConfigModal(false);
   };
 
   const handleSaveCustom = () => {
     localStorage.setItem('letras_cookie_consent', 'custom');
-    const analyticsAllowed = analyticsAvailable && analyticsEnabled;
-    localStorage.setItem('letras_cookies_analytics', analyticsAllowed ? 'true' : 'false');
-    emitAnalyticsConsentChanged(analyticsAllowed);
-    if (adsAvailable) {
-      localStorage.setItem('letras_cookies_ads', adsEnabled ? 'true' : 'false');
-    } else {
-      localStorage.setItem('letras_cookies_ads', 'false');
-    }
+    localStorage.setItem('letras_cookies_ads', adsAvailable && adsEnabled ? 'true' : 'false');
+    localStorage.removeItem('letras_cookies_analytics');
     setIsOpen(false);
     setShowConfigModal(false);
   };
@@ -92,7 +73,6 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onRout
 
   return (
     <>
-      {/* Main Consent Floating Banner */}
       {!showConfigModal && (
         <div
           id="cookie-consent-banner"
@@ -108,7 +88,7 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onRout
                   Valoramos tu Privacidad y Preferencias
                 </h3>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Este sitio utiliza almacenamiento local y cookies técnicas para recordar tus preferencias. Si en el futuro se habilitan servicios analíticos o publicitarios de terceros, podrás decidir si los aceptas desde este panel.{' '}
+                  Este sitio utiliza almacenamiento local y cookies técnicas para recordar tus preferencias. Si se habilitan servicios publicitarios de terceros, podrás decidir si los aceptas desde este panel.{' '}
                   <button
                     onClick={() => {
                       onRouteChange('politica-de-privacidad');
@@ -154,7 +134,6 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onRout
         </div>
       )}
 
-      {/* Advanced Custom Preferences Modal */}
       {showConfigModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs animate-in fade-in duration-200">
           <div className="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 space-y-6 text-slate-900 animate-in zoom-in-95 duration-200">
@@ -166,7 +145,9 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onRout
                 </h3>
               </div>
               <button
+                type="button"
                 onClick={() => setShowConfigModal(false)}
+                aria-label="Cerrar preferencias de privacidad"
                 className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition-all"
               >
                 <X className="w-4 h-4" />
@@ -174,7 +155,6 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onRout
             </div>
 
             <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-1 text-xs">
-              {/* Essential */}
               <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-start justify-between gap-3">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2 font-bold text-slate-900">
@@ -191,41 +171,24 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onRout
                   type="checkbox"
                   checked={true}
                   disabled={true}
+                  aria-label="Cookies técnicas obligatorias"
                   className="mt-1 w-4 h-4 rounded text-indigo-600 accent-indigo-600 cursor-not-allowed opacity-80"
                 />
               </div>
 
-              {/* Analytics - only displayed if enabled via environment flag */}
-              {analyticsAvailable && (
-                <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-start justify-between gap-3">
-                  <div className="space-y-1">
-                    <span className="font-bold text-slate-900">Cookies de Rendimiento y Análisis</span>
-                    <p className="text-slate-600 leading-relaxed">
-                      Nos ayudan a entender de forma completamente anónima qué estilos de letras son más populares para mejorar la herramienta.
-                    </p>
-                  </div>
-                  <input
-                    type="checkbox"
-                    checked={analyticsEnabled}
-                    onChange={(e) => setAnalyticsEnabled(e.target.checked)}
-                    className="mt-1 w-4 h-4 rounded text-indigo-600 accent-indigo-600 cursor-pointer"
-                  />
-                </div>
-              )}
-
-              {/* Advertising - only displayed if enabled via environment flag */}
               {adsAvailable && (
                 <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-start justify-between gap-3">
                   <div className="space-y-1">
                     <span className="font-bold text-slate-900">Cookies Publicitarias de Terceros</span>
                     <p className="text-slate-600 leading-relaxed">
-                      Permiten mostrar publicidad relevante y financiar los servidores para mantener la web 100% gratuita.
+                      Permiten mostrar publicidad y financiar los servidores para mantener la herramienta gratuita.
                     </p>
                   </div>
                   <input
                     type="checkbox"
                     checked={adsEnabled}
                     onChange={(e) => setAdsEnabled(e.target.checked)}
+                    aria-label="Cookies publicitarias"
                     className="mt-1 w-4 h-4 rounded text-indigo-600 accent-indigo-600 cursor-pointer"
                   />
                 </div>

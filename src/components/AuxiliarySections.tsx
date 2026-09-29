@@ -27,7 +27,6 @@ const BioTemplatesSection = lazy(() => import('./BioTemplatesSection').then(m =>
 const SpecialOccasionsPhrasesSection = lazy(() => import('./SpecialOccasionsPhrasesSection').then(m => ({ default: m.SpecialOccasionsPhrasesSection })));
 const TextDecoratorsGallery = lazy(() => import('./TextDecoratorsGallery').then(m => ({ default: m.TextDecoratorsGallery })));
 const GlyphInspectorSection = lazy(() => import('./GlyphInspectorSection').then(m => ({ default: m.GlyphInspectorSection })));
-const UserRatingsSection = lazy(() => import('./UserRatingsSection').then(m => ({ default: m.UserRatingsSection })));
 
 // SEO and Informational Components (rendered directly for instant crawler indexing)
 import { SeoContent } from './SeoContent';
@@ -255,13 +254,7 @@ export const AuxiliarySections: React.FC<AuxiliarySectionsProps> = ({
         </LazyOnVisible>
       )}
 
-      {isEnabled('userRatings') && (
-        <LazyOnVisible minHeight="160px">
-          <Suspense fallback={<div className="h-24 animate-pulse bg-slate-100 rounded-3xl" />}>
-            <UserRatingsSection />
-          </Suspense>
-        </LazyOnVisible>
-      )}
+
 
       {/* 3. Cross-Silo Internal Linking */}
       <div className="mt-8">

@@ -23,74 +23,63 @@ export type AuxiliaryModule =
   | 'bioTemplates'
   | 'specialOccasions'
   | 'decoratorsGallery'
-  | 'glyphInspector'
-  | 'userRatings';
+  | 'glyphInspector';
 
 export const ROUTE_MODULES: Record<PageRoute, AuxiliaryModule[]> = {
   inicio: [
     'platformPreview',
     'readyBioTemplates',
     'safetyGuide',
-    'userRatings',
   ],
   'letras-chidas': [
     'textDecorator',
     'readyNicknames',
     'symbolsLibrary',
     'decoratorsGallery',
-    'userRatings',
   ],
   'letras-elegantes': [
     'signatureGenerator',
     'alphabetReference',
     'readyBioTemplates',
     'specialOccasions',
-    'userRatings',
   ],
   'letras-raras': [
     'symbolMatrix',
     'symbolsLibrary',
     'glyphInspector',
     'unicodeGlossary',
-    'userRatings',
   ],
   'letras-tatuajes': [
     'alphabetReference',
     'signatureGenerator',
     'singleLetterExplorer',
     'specialOccasions',
-    'userRatings',
   ],
   'nicks-free-fire': [
     'readyNicknames',
     'textDecorator',
     'invisibleSpace',
     'symbolsLibrary',
-    'userRatings',
   ],
   'letras-chinas': [
     'symbolMatrix',
     'glyphInspector',
     'decoratorsGallery',
-    'userRatings',
   ],
   'espacio-invisible': [
     'invisibleSpace',
     'safetyGuide',
-    'userRatings',
   ],
   'nombres-parejas': [
     'couplesGenerator',
     'readyBioTemplates',
     'specialOccasions',
-    'userRatings',
   ],
   abecedario: [
     'alphabetTable',
     'alphabetReference',
     'singleLetterExplorer',
     'unicodeGlossary',
-    'userRatings',
   ],
   instagram: [
     'platformPreview',
@@ -98,20 +87,17 @@ export const ROUTE_MODULES: Record<PageRoute, AuxiliaryModule[]> = {
     'bioTemplates',
     'symbolsLibrary',
     'invisibleSpace',
-    'userRatings',
   ],
   tiktok: [
     'readyBioTemplates',
     'readyNicknames',
     'symbolsLibrary',
     'platformPreview',
-    'userRatings',
   ],
   whatsapp: [
     'invisibleSpace',
     'readyBioTemplates',
     'specialOccasions',
-    'userRatings',
   ],
   'free-fire': [
     'textDecorator',
@@ -119,61 +105,51 @@ export const ROUTE_MODULES: Record<PageRoute, AuxiliaryModule[]> = {
     'invisibleSpace',
     'symbolsLibrary',
     'symbolMatrix',
-    'userRatings',
   ],
   facebook: [
     'platformPreview',
     'readyBioTemplates',
     'specialOccasions',
-    'userRatings',
   ],
   cursiva: [
     'alphabetReference',
     'alphabetTable',
     'signatureGenerator',
     'singleLetterExplorer',
-    'userRatings',
   ],
   goticas: [
     'alphabetReference',
     'alphabetTable',
     'singleLetterExplorer',
     'decoratorsGallery',
-    'userRatings',
   ],
   invertidas: [
     'glyphInspector',
     'decoratorsGallery',
-    'userRatings',
   ],
   circulos: [
     'alphabetReference',
     'alphabetTable',
     'decoratorsGallery',
-    'userRatings',
   ],
   glitch: [
     'glyphInspector',
     'decoratorsGallery',
     'symbolsLibrary',
-    'userRatings',
   ],
   simbolos: [
     'symbolsLibrary',
     'symbolMatrix',
-    'userRatings',
   ],
   decorador: [
     'textDecorator',
     'decoratorsGallery',
     'symbolsLibrary',
-    'userRatings',
   ],
   'contador-bio': [
     'readyBioTemplates',
     'bioTemplates',
     'platformPreview',
-    'userRatings',
   ],
   'compatibilidad-unicode': [],
   'sobre-nosotros': [],

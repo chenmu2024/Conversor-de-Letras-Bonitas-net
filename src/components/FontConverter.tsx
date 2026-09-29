@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useDeferredValue, useRef, Suspense, lazy } from 'react';
+import React, { useState, useMemo, useEffect, useDeferredValue, Suspense, lazy } from 'react';
 import { PageRoute, TabCategory, FontGenerator, FavoriteItem } from '../types';
 import { ROUTE_CONFIGS } from '../data/routeConfigs';
 import { ROUTE_HEADERS } from '../data/routeHeaders';
@@ -7,7 +7,6 @@ import { FONT_COUNT } from '../constants/siteStats';
 import { FontCard } from './FontCard';
 import { QuickActionBar } from './QuickActionBar';
 import { QuickPresets } from './QuickPresets';
-import { trackEvent } from '../utils/analytics';
 
 // Code-split secondary UI sections to significantly lower initial unused JavaScript
 const CompactFontRow = lazy(() => import('./CompactFontRow').then(m => ({ default: m.CompactFontRow })));
@@ -98,7 +97,6 @@ export const FontConverter: React.FC<FontConverterProps> = ({
   const [batchCopied, setBatchCopied] = useState<boolean>(false);
   const [lastDeletedText, setLastDeletedText] = useState<string | null>(null);
   const [advancedToolsOpen, setAdvancedToolsOpen] = useState<boolean>(false);
-  const inputStartedTrackedRef = useRef(false);
 
   const [batchModalOpen, setBatchModalOpen] = useState<boolean>(false);
   const [comparatorOpen, setComparatorOpen] = useState<boolean>(false);
@@ -186,16 +184,6 @@ export const FontConverter: React.FC<FontConverterProps> = ({
   const handleTextChange = (text: string) => {
     setInputText(text);
     if (notifyParentTextChange) notifyParentTextChange(text);
-  };
-
-  const handleUserTextChange = (text: string) => {
-    if (!inputStartedTrackedRef.current) {
-      inputStartedTrackedRef.current = true;
-      trackEvent('text_input_started', {
-        route: currentRoute,
-      });
-    }
-    handleTextChange(text);
   };
 
   const handleCopyShareLink = async () => {
@@ -565,7 +553,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
             id="main-text-input"
             rows={3}
             value={inputText}
-            onChange={(e) => handleUserTextChange(e.target.value)}
+            onChange={(e) => handleTextChange(e.target.value)}
             placeholder="Escribe aquí tu frase, nombre para Instagram, nick de Free Fire o estado de WhatsApp..."
             className="w-full px-4 sm:px-5 py-3.5 text-lg sm:text-xl rounded-2xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all resize-y font-medium leading-relaxed"
           />
@@ -630,13 +618,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
             id="btn-toggle-advanced-tools"
             aria-expanded={advancedToolsOpen}
             aria-controls="advanced-converter-tools"
-            onClick={() =>
-              setAdvancedToolsOpen((open) => {
-                const next = !open;
-                if (next) trackEvent('advanced_tools_opened', { route: currentRoute });
-                return next;
-              })
-            }
+            onClick={() => setAdvancedToolsOpen((open) => !open)}
             className="inline-flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 hover:text-indigo-700 text-xs font-extrabold shadow-2xs transition-all active:scale-95"
           >
             <span>{advancedToolsOpen ? 'Ocultar herramientas' : 'Más herramientas'}</span>
@@ -761,13 +743,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
                 <button
                   type="button"
                   id="btn-advanced-image"
-                  onClick={() => {
-                    trackEvent('image_exported', {
-                      source: 'advanced_tools',
-                      route: currentRoute,
-                    });
-                    setPosterModalOpen(true);
-                  }}
+                  onClick={() => setPosterModalOpen(true)}
                   className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs shadow-xs transition-all active:scale-95"
                   title="Crear imagen PNG con diseño para Instagram Stories y Estados de WhatsApp"
                 >
@@ -809,10 +785,6 @@ export const FontConverter: React.FC<FontConverterProps> = ({
                 onClick={() => {
                   setActiveCategory(cat.id);
                   setVisibleCount(24);
-                  trackEvent('category_selected', {
-                    category: cat.id,
-                    route: currentRoute,
-                  });
                 }}
                 className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl text-xs font-bold whitespace-nowrap transition-all duration-150 active:scale-95 ${
                   isActive
@@ -847,14 +819,6 @@ export const FontConverter: React.FC<FontConverterProps> = ({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              onBlur={() => {
-                if (searchQuery.trim()) {
-                  trackEvent('font_search', {
-                    query_length: Array.from(searchQuery.trim()).length,
-                    route: currentRoute,
-                  });
-                }
-              }}
               placeholder="Buscar estilos (ej: cursiva, gótica, alas)..."
               className="w-full pl-10 pr-8 py-2 text-xs font-medium rounded-xl border border-slate-200 bg-slate-50/70 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-slate-800 placeholder:text-slate-400"
             />
@@ -1104,18 +1068,9 @@ export const FontConverter: React.FC<FontConverterProps> = ({
                         fontSize={fontSize}
                         onToggleFavorite={onToggleFavorite}
                         onToggleSelect={advancedToolsOpen || selectedFontIds.length > 0 ? (id) => handleToggleSelect(id) : undefined}
-                        onPreview={(text, name) => {
-                          trackEvent('preview_opened', { source: 'font_result', font_name: name, route: currentRoute });
-                          onPreview(text, name);
-                        }}
-                        onExportImage={(text, name) => {
-                          trackEvent('image_exported', { source: 'font_result', font_name: name, route: currentRoute });
-                          setImageExportData({ text, fontName: name });
-                        }}
-                        onShareText={(text, name) => {
-                          trackEvent('font_shared', { source: 'font_result', font_name: name, route: currentRoute });
-                          setShareModalData({ text, fontName: name });
-                        }}
+                        onPreview={onPreview}
+                        onExportImage={(text, name) => setImageExportData({ text, fontName: name })}
+                        onShareText={(text, name) => setShareModalData({ text, fontName: name })}
                       />
                     </Suspense>
                   </div>

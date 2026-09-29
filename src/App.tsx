@@ -11,8 +11,6 @@ import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { ToastNotification } from './components/ToastNotification';
 import { Footer } from './components/Footer';
 import { ArrowUp, Star } from 'lucide-react';
-import { AnalyticsLoader } from './components/AnalyticsLoader';
-import { trackEvent } from './utils/analytics';
 
 // Lazy load below-the-fold auxiliary sections, interactive sub-studios, and interactive drawer modals
 const SubStudioRouter = lazy(() => import('./components/SubStudioRouter').then(m => ({ default: m.SubStudioRouter })));
@@ -216,11 +214,6 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
       // Remove
       const updated = favorites.filter((f) => f.fontName !== generator.name);
       saveFavorites(updated);
-      trackEvent('font_unfavorited', {
-        font_id: generator.id,
-        font_name: generator.name,
-        route: currentRoute,
-      });
     } else {
       // Add
       const newItem: FavoriteItem = {
@@ -231,11 +224,6 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
         createdAt: Date.now(),
       };
       saveFavorites([newItem, ...favorites]);
-      trackEvent('font_favorited', {
-        font_id: generator.id,
-        font_name: generator.name,
-        route: currentRoute,
-      });
     }
   };
 
@@ -260,15 +248,7 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
   // Sync browser back/forward buttons
   useEffect(() => {
     const handlePopState = () => {
-      const route = resolveRouteFromUrl('inicio');
-      setCurrentRoute(route);
-      window.requestAnimationFrame(() => {
-        trackEvent('page_view', {
-          route,
-          page_location: window.location.href,
-          page_title: document.title,
-        });
-      });
+      setCurrentRoute(resolveRouteFromUrl('inicio'));
     };
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
@@ -289,13 +269,6 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
         // Fallback for sandboxed iframes
       }
     }
-    window.requestAnimationFrame(() => {
-      trackEvent('page_view', {
-        route,
-        page_location: window.location.href,
-        page_title: document.title,
-      });
-    });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -316,7 +289,6 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
 
   return (
     <div className="min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white relative bg-slate-50 text-slate-900">
-      <AnalyticsLoader />
       {/* Non-blocking IntersectionObserver Sentinel for scroll detection */}
       <div id="scroll-sentinel" className="absolute top-[380px] left-0 w-full h-1 pointer-events-none opacity-0" aria-hidden="true" />
 
