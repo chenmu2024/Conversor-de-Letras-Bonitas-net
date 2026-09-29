@@ -230,7 +230,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
-        const inputEl = document.getElementById('main-font-input');
+        const inputEl = document.getElementById('main-text-input');
         if (inputEl) {
           inputEl.focus();
           inputEl.scrollIntoView({ behavior: 'smooth', block: 'center' });

@@ -107,7 +107,7 @@ export const SafetyAndUnicodeGuide: React.FC = () => {
             </span>
           </div>
           <span className="text-[11px] text-slate-500">
-            Si puedes ver correctamente los símbolos siguientes, tu dispositivo admite estos caracteres concretos.
+            Si puedes ver estos símbolos sin cuadros vacíos, tofu o caracteres de sustitución, tu dispositivo probablemente los renderiza correctamente.
           </span>
         </div>
 
@@ -119,8 +119,8 @@ export const SafetyAndUnicodeGuide: React.FC = () => {
             >
               <span className="text-[10px] text-slate-400 font-medium mb-0.5">{sample.label}</span>
               <span className="text-lg font-bold text-slate-800 my-0.5">{sample.visual || sample.char}</span>
-              <span className="text-[9px] font-bold text-emerald-600 flex items-center gap-0.5">
-                <CheckCircle className="w-2.5 h-2.5" /> Visible
+              <span className="text-[9px] font-bold text-slate-500 flex items-center gap-0.5">
+                <Info className="w-2.5 h-2.5" /> Muestra de referencia
               </span>
             </div>
           ))}

@@ -171,6 +171,39 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
     }
   });
 
+  test('Broken-character warning only appears for the Unicode replacement character', async ({ page }) => {
+    await page.goto('/');
+    const inputArea = page.locator('textarea#main-text-input');
+
+    await inputArea.fill('Texto normal');
+    await page.locator('#btn-toggle-advanced-tools').click();
+    await expect(page.getByText(/carácter de sustitución/)).toHaveCount(0);
+
+    await inputArea.fill('Texto con � roto');
+    await expect(page.getByText(/carácter de sustitución/)).toBeVisible();
+  });
+
+  test('Ctrl or Cmd + K focuses the main converter input', async ({ page }) => {
+    await page.goto('/');
+    await page.keyboard.press(process.platform === 'darwin' ? 'Meta+K' : 'Control+K');
+    await expect(page.locator('#main-text-input')).toBeFocused();
+  });
+
+  test('Mobile font cards keep secondary actions behind a compact overflow menu', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/');
+
+    const more = page.locator('[id^="btn-more-"]').first();
+    await expect(more).toBeVisible();
+    await expect(more).toHaveAttribute('aria-expanded', 'false');
+
+    await more.click();
+    await expect(more).toHaveAttribute('aria-expanded', 'true');
+    await expect(page.getByRole('button', { name: 'Vista previa', exact: true }).first()).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Crear imagen', exact: true }).first()).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Compartir', exact: true }).first()).toBeVisible();
+  });
+
   test('Font Converter transforms text and allows copying', async ({ page }) => {
     await page.goto('/');
 

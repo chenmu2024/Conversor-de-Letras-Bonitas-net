@@ -1,5 +1,6 @@
 import React from 'react';
 import { BookOpen, Clock, Users, ArrowRight, Laptop, Smartphone } from 'lucide-react';
+import { COMPATIBILITY_TEST_LOG } from '../data/compatibilityTestLog';
 import { PageRoute } from '../types';
 
 interface AuthorEditorialBoxProps {
@@ -24,7 +25,7 @@ export const AuthorEditorialBox: React.FC<AuthorEditorialBoxProps> = ({
               Cómo verificamos la compatibilidad
             </h4>
             <p className="text-xs text-slate-400 mt-0.5">
-              Evaluación basada en Unicode y comprobaciones manuales seleccionadas
+              Referencias Unicode y comprobaciones manuales solo cuando están documentadas
             </p>
           </div>
         </div>
@@ -53,6 +54,9 @@ export const AuthorEditorialBox: React.FC<AuthorEditorialBoxProps> = ({
         <p className="text-[11px] text-slate-400 leading-relaxed pt-1">
           La compatibilidad puede variar según la versión de la aplicación, el sistema operativo, el dispositivo y las fuentes disponibles.
         </p>
+        <p className="text-[11px] text-slate-500 leading-relaxed">
+          Pruebas manuales documentadas en el registro actual: <strong className="text-slate-300">{COMPATIBILITY_TEST_LOG.length}</strong>.
+        </p>
       </div>
 
       {/* Technical Process Grid */}
@@ -73,7 +77,7 @@ export const AuthorEditorialBox: React.FC<AuthorEditorialBoxProps> = ({
             <span>Pruebas en Móviles</span>
           </div>
           <p className="text-[11px] text-slate-400 leading-relaxed">
-            Evaluamos la visualización en pantallas de diversos fabricantes para detectar glifos no soportados o cajas vacías.
+            Distinguimos referencias Unicode de pruebas manuales documentadas; la visualización final puede variar según dispositivo y versión.
           </p>
         </div>
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontGenerator } from '../types';
-import { Copy, Check, Star, Eye, Image as ImageIcon, CheckSquare, Square, Share2 } from 'lucide-react';
+import { Copy, Check, Star, Eye, Image as ImageIcon, CheckSquare, Square, Share2, MoreHorizontal } from 'lucide-react';
 
 interface FontCardProps {
   generator: FontGenerator;
@@ -28,6 +28,7 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
   onShareText,
 }) => {
   const [copied, setCopied] = useState(false);
+  const [mobileActionsOpen, setMobileActionsOpen] = useState(false);
 
   const sizeClasses: Record<'sm' | 'md' | 'lg' | 'xl', string> = {
     sm: 'text-base sm:text-lg',
@@ -199,6 +200,70 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
             >
               <Eye className="w-4 h-4" />
             </button>
+          </div>
+
+          <div className="relative sm:hidden">
+            <button
+              type="button"
+              id={`btn-more-${generator.id}`}
+              aria-label="Más acciones para esta fuente"
+              aria-expanded={mobileActionsOpen}
+              aria-controls={`font-actions-${generator.id}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                setMobileActionsOpen((open) => !open);
+              }}
+              className="p-2 rounded-xl text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
+            >
+              <MoreHorizontal className="w-4 h-4" />
+            </button>
+
+            {mobileActionsOpen && (
+              <div
+                id={`font-actions-${generator.id}`}
+                className="absolute right-0 top-full mt-1 z-30 min-w-[150px] rounded-xl border border-slate-200 bg-white p-1.5 shadow-xl"
+              >
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setMobileActionsOpen(false);
+                    onPreview(convertedText, generator.name);
+                  }}
+                  className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:bg-slate-50"
+                >
+                  <Eye className="w-3.5 h-3.5 text-indigo-600" />
+                  <span>Vista previa</span>
+                </button>
+
+                {onExportImage && (
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setMobileActionsOpen(false);
+                      onExportImage(convertedText, generator.name);
+                    }}
+                    className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:bg-slate-50"
+                  >
+                    <ImageIcon className="w-3.5 h-3.5 text-pink-600" />
+                    <span>Crear imagen</span>
+                  </button>
+                )}
+
+                <button
+                  type="button"
+                  onClick={async (e) => {
+                    setMobileActionsOpen(false);
+                    await handleShare(e);
+                  }}
+                  className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:bg-slate-50"
+                >
+                  <Share2 className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Compartir</span>
+                </button>
+              </div>
+            )}
           </div>
 
           <button

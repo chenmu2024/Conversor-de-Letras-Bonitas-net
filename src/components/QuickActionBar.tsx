@@ -49,7 +49,7 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
   const [copiedLink, setCopiedLink] = useState(false);
   const [downloaded, setDownloaded] = useState(false);
 
-  const hasBrokenChars = text.includes('\uFFFD') || text.includes('');
+  const hasBrokenChars = text.includes('\uFFFD');
 
   const toUpperCase = () => {
     onTextChange(text.toUpperCase());
@@ -142,7 +142,7 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
         <div className="p-3 bg-amber-50 border border-amber-200/80 rounded-2xl flex items-center justify-between gap-3 text-xs animate-in fade-in duration-200">
           <div className="flex items-center gap-2 text-amber-950 font-bold">
             <AlertTriangle className="w-4 h-4 text-amber-700 shrink-0" />
-            <span>Detectamos signos de rombo negro () en tu texto.</span>
+            <span>Detectamos el carácter de sustitución � en tu texto.</span>
           </div>
           <div className="flex items-center gap-2">
             <button
