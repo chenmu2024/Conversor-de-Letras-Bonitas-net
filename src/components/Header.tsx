@@ -15,7 +15,8 @@ import {
   Layers, 
   Wand2, 
   Zap, 
-  Download
+  Download,
+  ChevronDown
 } from 'lucide-react';
 import { INVISIBLE_SPACE } from '../data/symbols';
 import { FONT_COUNT_PLUS } from '../constants/siteStats';
@@ -37,6 +38,7 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const [copiedSpace, setCopiedSpace] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [desktopMenuOpen, setDesktopMenuOpen] = useState<string | null>(null);
 
   const handleCopyInvisibleSpace = async () => {
     try {
@@ -48,32 +50,60 @@ export const Header: React.FC<HeaderProps> = ({
     }
   };
 
-  const navItems: { route: PageRoute; label: string; icon: React.ReactNode; badge?: string }[] = [
-    { route: 'inicio', label: 'Inicio', icon: <Sparkles className="w-3.5 h-3.5" /> },
-    { route: 'letras-chidas', label: 'Letras Chidas', icon: <Flame className="w-3.5 h-3.5 text-amber-500" />, badge: '🔥 MX' },
-    { route: 'letras-tatuajes', label: 'Tatuajes', icon: <span className="font-serif font-bold text-xs text-amber-600">💉</span>, badge: 'Ink' },
-    { route: 'nicks-free-fire', label: 'Nicks FF', icon: <Flame className="w-3.5 h-3.5 text-red-500" />, badge: '亗 999' },
-    { route: 'espacio-invisible', label: 'Espacio Invisible', icon: <span className="font-bold text-xs text-indigo-400">👻</span>, badge: '[ㅤ]' },
-    { route: 'nombres-parejas', label: 'Parejas / Dúos', icon: <span className="text-xs text-rose-500">♡</span>, badge: 'Dúos' },
-    { route: 'abecedario', label: 'Abecedario A-Z', icon: <span className="font-bold text-xs text-amber-500">A-Z</span> },
-    { route: 'letras-chinas', label: 'Chinas / Kanji', icon: <span className="font-bold text-xs text-rose-600">漢</span> },
-    { route: 'letras-elegantes', label: 'Elegantes', icon: <span className="font-serif italic font-bold text-sm text-indigo-600">𝓔</span>, badge: 'Lujo' },
-    { route: 'letras-raras', label: 'Letras Raras', icon: <span className="font-bold text-xs text-purple-600">尺</span> },
-    { route: 'instagram', label: 'Instagram', icon: <Instagram className="w-3.5 h-3.5 text-pink-500" /> },
-    { route: 'tiktok', label: 'TikTok', icon: <span className="font-bold text-[11px]">TT</span> },
-    { route: 'whatsapp', label: 'WhatsApp', icon: <MessageCircle className="w-3.5 h-3.5 text-emerald-500" /> },
-    { route: 'free-fire', label: 'Free Fire', icon: <Flame className="w-3.5 h-3.5 text-amber-500" />, badge: 'PVP' },
-    { route: 'facebook', label: 'Facebook', icon: <span className="font-black text-xs text-blue-600">f</span> },
-    { route: 'cursiva', label: 'Cursiva', icon: <span className="font-serif italic font-bold text-sm">𝒯</span> },
-    { route: 'goticas', label: 'Góticas', icon: <span className="font-bold font-serif text-sm">𝔊</span> },
-    { route: 'invertidas', label: 'Invertidas', icon: <span className="font-mono font-bold text-xs">ɐ</span> },
-    { route: 'circulos', label: 'Círculos', icon: <span className="font-bold text-xs">🅒</span> },
-    { route: 'glitch', label: 'Glitch / Zalgo', icon: <span className="font-mono font-bold text-xs text-rose-500">Z̶</span> },
-    { route: 'simbolos', label: 'Símbolos', icon: <Layers className="w-3.5 h-3.5 text-violet-500" /> },
-    { route: 'decorador', label: 'Decorador Nicks', icon: <Wand2 className="w-3.5 h-3.5 text-amber-500" /> },
-    { route: 'contador-bio', label: 'Contador Bio', icon: <span className="font-mono font-black text-xs text-indigo-600">#150</span>, badge: 'Nuevo' },
-    { route: 'compatibilidad-unicode', label: 'Lab Unicode', icon: <span className="text-xs">🔬</span>, badge: 'Lab' },
+  type NavItem = { route: PageRoute; label: string; icon: React.ReactNode; badge?: string };
+  type NavGroup = { label: string; icon: React.ReactNode; items: NavItem[] };
+
+  const navGroups: NavGroup[] = [
+    {
+      label: 'Letras',
+      icon: <Type className="w-3.5 h-3.5" />,
+      items: [
+        { route: 'letras-chidas', label: 'Letras Chidas', icon: <Flame className="w-3.5 h-3.5 text-amber-500" />, badge: 'MX' },
+        { route: 'letras-elegantes', label: 'Elegantes', icon: <span className="font-serif italic font-bold text-sm text-indigo-600">𝓔</span> },
+        { route: 'letras-raras', label: 'Letras Raras', icon: <span className="font-bold text-xs text-purple-600">尺</span> },
+        { route: 'letras-tatuajes', label: 'Tatuajes', icon: <span className="font-serif font-bold text-xs text-amber-600">💉</span> },
+        { route: 'letras-chinas', label: 'Chinas / Kanji', icon: <span className="font-bold text-xs text-rose-600">漢</span> },
+        { route: 'abecedario', label: 'Abecedario A-Z', icon: <span className="font-bold text-xs text-amber-500">A-Z</span> },
+        { route: 'cursiva', label: 'Cursiva', icon: <span className="font-serif italic font-bold text-sm">𝒯</span> },
+        { route: 'goticas', label: 'Góticas', icon: <span className="font-bold font-serif text-sm">𝔊</span> },
+        { route: 'invertidas', label: 'Invertidas', icon: <span className="font-mono font-bold text-xs">ɐ</span> },
+        { route: 'circulos', label: 'Círculos', icon: <span className="font-bold text-xs">🅒</span> },
+        { route: 'glitch', label: 'Glitch / Zalgo', icon: <span className="font-mono font-bold text-xs text-rose-500">Z̶</span> },
+      ],
+    },
+    {
+      label: 'Redes Sociales',
+      icon: <Instagram className="w-3.5 h-3.5" />,
+      items: [
+        { route: 'instagram', label: 'Instagram', icon: <Instagram className="w-3.5 h-3.5 text-pink-500" /> },
+        { route: 'tiktok', label: 'TikTok', icon: <span className="font-bold text-[11px]">TT</span> },
+        { route: 'whatsapp', label: 'WhatsApp', icon: <MessageCircle className="w-3.5 h-3.5 text-emerald-500" /> },
+        { route: 'facebook', label: 'Facebook', icon: <span className="font-black text-xs text-blue-600">f</span> },
+      ],
+    },
+    {
+      label: 'Gaming',
+      icon: <Flame className="w-3.5 h-3.5" />,
+      items: [
+        { route: 'free-fire', label: 'Free Fire', icon: <Flame className="w-3.5 h-3.5 text-amber-500" />, badge: 'PVP' },
+        { route: 'nicks-free-fire', label: 'Nicks Free Fire', icon: <Flame className="w-3.5 h-3.5 text-red-500" /> },
+        { route: 'decorador', label: 'Decorador de Nicks', icon: <Wand2 className="w-3.5 h-3.5 text-amber-500" /> },
+        { route: 'espacio-invisible', label: 'Espacio Invisible', icon: <span className="font-bold text-xs text-indigo-400">👻</span>, badge: '[ㅤ]' },
+        { route: 'nombres-parejas', label: 'Parejas / Dúos', icon: <span className="text-xs text-rose-500">♡</span> },
+      ],
+    },
+    {
+      label: 'Herramientas',
+      icon: <Layers className="w-3.5 h-3.5" />,
+      items: [
+        { route: 'simbolos', label: 'Símbolos y Emojis', icon: <Layers className="w-3.5 h-3.5 text-violet-500" /> },
+        { route: 'contador-bio', label: 'Contador Bio', icon: <span className="font-mono font-black text-xs text-indigo-600">#150</span> },
+        { route: 'compatibilidad-unicode', label: 'Lab Unicode', icon: <span className="text-xs">🔬</span>, badge: 'Lab' },
+      ],
+    },
   ];
+
+  const isGroupActive = (items: NavItem[]) => items.some((item) => item.route === currentRoute);
 
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] transition-all">
@@ -181,83 +211,163 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Desktop Horizontal Navigation Pills */}
+      {/* Desktop navigation: five clear top-level destinations, full route coverage in grouped menus */}
       <div className="hidden lg:block border-t border-slate-100 bg-slate-50/60 backdrop-blur-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center gap-1.5 py-2 overflow-x-auto no-scrollbar">
-            {navItems.map((item) => {
-              const isActive = currentRoute === item.route;
-              const path = ROUTE_CONFIGS[item.route]?.path || '/';
+          <nav className="flex items-center gap-2 py-2" aria-label="Navegación principal">
+            <a
+              id="nav-item-inicio"
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                setDesktopMenuOpen(null);
+                onRouteChange('inicio');
+              }}
+              className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
+                currentRoute === 'inicio'
+                  ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-600/30'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-white'
+              }`}
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Inicio</span>
+            </a>
+
+            {navGroups.map((group) => {
+              const active = isGroupActive(group.items);
+              const open = desktopMenuOpen === group.label;
               return (
-                <a
-                  key={item.route}
-                  id={`nav-item-${item.route}`}
-                  href={path}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onRouteChange(item.route);
-                  }}
-                  className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-150 ${
-                    isActive
-                      ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-600/30 font-bold'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
-                  }`}
+                <div
+                  key={group.label}
+                  className="relative"
+                  onMouseEnter={() => setDesktopMenuOpen(group.label)}
+                  onMouseLeave={() => setDesktopMenuOpen(null)}
                 >
-                  {item.icon}
-                  <span>{item.label}</span>
-                  {item.badge && (
-                    <span className={`text-[9px] font-extrabold px-1.5 py-0.2 rounded-md uppercase ${
-                      isActive ? 'bg-indigo-700 text-white' : 'bg-amber-100 text-amber-800'
-                    }`}>
-                      {item.badge}
-                    </span>
+                  <button
+                    type="button"
+                    aria-expanded={open}
+                    onClick={() => setDesktopMenuOpen(open ? null : group.label)}
+                    className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
+                      active
+                        ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-600/30'
+                        : 'text-slate-600 hover:text-slate-900 hover:bg-white'
+                    }`}
+                  >
+                    {group.icon}
+                    <span>{group.label}</span>
+                    <ChevronDown className={`w-3.5 h-3.5 transition-transform ${open ? 'rotate-180' : ''}`} />
+                  </button>
+
+                  {open && (
+                    <div className="absolute left-0 top-full pt-2 z-50 min-w-[250px]">
+                      <div className="bg-white border border-slate-200 rounded-2xl shadow-xl shadow-slate-900/10 p-2">
+                        {group.items.map((item) => {
+                          const path = ROUTE_CONFIGS[item.route]?.path || '/';
+                          const itemActive = currentRoute === item.route;
+                          return (
+                            <a
+                              key={item.route}
+                              id={`nav-item-${item.route}`}
+                              href={path}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setDesktopMenuOpen(null);
+                                onRouteChange(item.route);
+                              }}
+                              className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-colors ${
+                                itemActive
+                                  ? 'bg-indigo-50 text-indigo-700'
+                                  : 'text-slate-700 hover:bg-slate-50 hover:text-indigo-700'
+                              }`}
+                            >
+                              <span className="w-5 flex items-center justify-center shrink-0">{item.icon}</span>
+                              <span className="flex-1">{item.label}</span>
+                              {item.badge && (
+                                <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-md bg-amber-100 text-amber-800">
+                                  {item.badge}
+                                </span>
+                              )}
+                            </a>
+                          );
+                        })}
+                      </div>
+                    </div>
                   )}
-                </a>
+                </div>
               );
             })}
           </nav>
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer Menu: grouped by intent instead of one long flat grid */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-5 shadow-2xl animate-in slide-in-from-top-2 duration-150">
-          <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider px-1 mb-2">
-            Categorías y Redes Sociales
-          </p>
-          <div className="grid grid-cols-2 gap-2">
-            {navItems.map((item) => {
-              const isActive = currentRoute === item.route;
-              const path = ROUTE_CONFIGS[item.route]?.path || '/';
-              return (
-                <a
-                  key={item.route}
-                  id={`mobile-nav-item-${item.route}`}
-                  href={path}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onRouteChange(item.route);
-                    setMobileMenuOpen(false);
-                  }}
-                  className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold transition-all text-left ${
-                    isActive
-                      ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-600/20'
-                      : 'bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200/60'
-                  }`}
-                >
-                  {item.icon}
-                  <span className="flex-1 truncate">{item.label}</span>
-                  {item.badge && (
-                    <span className="bg-amber-100 text-amber-800 text-[9px] font-extrabold px-1.5 py-0.5 rounded">
-                      {item.badge}
-                    </span>
-                  )}
-                </a>
-              );
-            })}
+        <div className="lg:hidden border-t border-slate-200 bg-white shadow-2xl max-h-[calc(100vh-4rem)] overflow-y-auto">
+          <div className="px-4 pt-3 pb-5">
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                onRouteChange('inicio');
+                setMobileMenuOpen(false);
+              }}
+              className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold mb-4 ${
+                currentRoute === 'inicio'
+                  ? 'bg-indigo-600 text-white'
+                  : 'bg-slate-50 text-slate-700 border border-slate-200/70'
+              }`}
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>Inicio</span>
+            </a>
+
+            <div className="space-y-5">
+              {navGroups.map((group) => (
+                <section key={group.label} aria-label={group.label}>
+                  <div className="flex items-center gap-2 px-1 mb-2">
+                    <span className="text-indigo-600">{group.icon}</span>
+                    <h2 className="text-[11px] font-black text-slate-500 uppercase tracking-wider">
+                      {group.label}
+                    </h2>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    {group.items.map((item) => {
+                      const isActive = currentRoute === item.route;
+                      const path = ROUTE_CONFIGS[item.route]?.path || '/';
+                      return (
+                        <a
+                          key={item.route}
+                          id={`mobile-nav-item-${item.route}`}
+                          href={path}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            onRouteChange(item.route);
+                            setMobileMenuOpen(false);
+                          }}
+                          className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold transition-all text-left ${
+                            isActive
+                              ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-600/20'
+                              : 'bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200/60'
+                          }`}
+                        >
+                          <span className="w-5 flex items-center justify-center shrink-0">{item.icon}</span>
+                          <span className="flex-1 min-w-0 leading-tight">{item.label}</span>
+                          {item.badge && (
+                            <span className="bg-amber-100 text-amber-800 text-[9px] font-extrabold px-1.5 py-0.5 rounded">
+                              {item.badge}
+                            </span>
+                          )}
+                        </a>
+                      );
+                    })}
+                  </div>
+                </section>
+              ))}
+            </div>
           </div>
         </div>
       )}
+
     </header>
   );
 };

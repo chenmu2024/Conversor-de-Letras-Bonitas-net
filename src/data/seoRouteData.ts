@@ -43,22 +43,22 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     },
     guideTitle: '¿Cómo Usar el Conversor de Letras Bonitas?',
     guideSteps: [
-      { step: '1', title: 'Escribe tu Frase en el Conversor de Letras Bonitas', text: 'Introduce cualquier texto o apodo en el cuadro del Conversor de Letras Bonitas. La transformación ocurrirá en tiempo real sin demoras.' },
-      { step: '2', title: 'Elige tu Estilo en el Conversor de Letras Bonitas', text: 'Navega por 90+ estilos del Conversor de Letras Bonitas (Cursivas, Góticas, Círculos, Aesthetic, Glitch o Gaming).' },
-      { step: '3', title: 'Copia con 1 Clic desde el Conversor de Letras Bonitas', text: 'Toca cualquier tarjeta del Conversor de Letras Bonitas para copiar automáticamente y pegar en tu biografía, estado o juego.' }
+      { step: '1', title: 'Escribe tu texto', text: 'Introduce una frase, nombre o apodo en el cuadro principal. Los estilos se actualizan mientras escribes.' },
+      { step: '2', title: 'Elige un estilo', text: 'Explora más de 90 opciones, entre cursivas, góticas, círculos, estilos aesthetic, glitch y variantes gamer.' },
+      { step: '3', title: 'Copia y pega', text: 'Pulsa Copiar en el resultado que prefieras y pruébalo en la biografía, publicación, chat o juego donde quieras usarlo.' }
     ],
     faqs: [
       {
-        question: '¿Es gratis este Conversor de Letras Bonitas?',
-        answer: 'Sí, el Conversor de Letras Bonitas ofrece todas sus fuentes, símbolos, letras cursivas y decoradores de manera gratuita, sin registro ni descargas.'
+        question: '¿El Conversor de Letras Bonitas es gratis?',
+        answer: 'Sí. Las fuentes, símbolos, estilos cursivos y decoradores se pueden usar gratis, sin registro ni descarga.'
       },
       {
-        question: '¿Por qué las fuentes del Conversor de Letras Bonitas se pueden copiar y pegar?',
-        answer: 'El Conversor de Letras Bonitas no utiliza archivos de fuentes tradicionales, sino glifos universales del estándar Unicode que tienen amplia compatibilidad en dispositivos modernos, aunque algunos caracteres pueden mostrarse de forma diferente o no estar disponibles en sistemas antiguos.'
+        question: '¿Por qué estas letras se pueden copiar y pegar?',
+        answer: 'Los resultados usan caracteres Unicode en lugar de archivos de fuente tradicionales. La compatibilidad es amplia en dispositivos modernos, aunque algunos caracteres pueden verse distintos o no estar disponibles en ciertos sistemas.'
       },
       {
-        question: '¿Cómo copiar múltiples fuentes en el Conversor de Letras Bonitas?',
-        answer: 'Activa el modo Multi-Copiar en el Conversor de Letras Bonitas seleccionando las casillas de verificación y presiona "Copiar Todas" en la barra inferior.'
+        question: '¿Cómo puedo copiar varios estilos a la vez?',
+        answer: 'Activa Multi-Copiar, selecciona los estilos que quieras y utiliza la acción de copia en lote de la barra inferior.'
       },
       {
         question: '¿Las tipografías del Conversor de Letras Bonitas funcionan en WhatsApp e Instagram?',
@@ -74,8 +74,8 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
       }
     ],
     proTips: [
-      'En el Conversor de Letras Bonitas puedes copiar el "Espacio Invisible [ㅤ]" para separar palabras en apodos de juegos.',
-      'El Conversor de Letras Bonitas incluye un normalizador automático si utilizas palabras con tilde o la letra ñ.'
+      'Puedes copiar el "Espacio Invisible [ㅤ]" desde su herramienta dedicada para probarlo en nombres y separadores compatibles.',
+      'Si una palabra lleva tilde o ñ, el normalizador puede ayudarte a probar variantes con mayor compatibilidad entre estilos.'
     ]
   },
 

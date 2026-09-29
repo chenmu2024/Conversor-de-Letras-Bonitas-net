@@ -10,10 +10,10 @@ interface RelatedSilosSectionProps {
 
 // Group routes by relevant silo relations
 const RELATED_MAPPING: Record<PageRoute, PageRoute[]> = {
-  inicio: ['letras-chidas', 'letras-tatuajes', 'nicks-free-fire', 'letras-chinas', 'letras-elegantes', 'instagram', 'free-fire', 'cursiva', 'letras-raras'],
-  'letras-chidas': ['free-fire', 'nicks-free-fire', 'decorador', 'tiktok', 'letras-elegantes', 'simbolos', 'letras-raras'],
-  'letras-elegantes': ['cursiva', 'letras-tatuajes', 'instagram', 'letras-chidas', 'contador-bio', 'circulos', 'goticas'],
-  'letras-raras': ['letras-chinas', 'glitch', 'invertidas', 'letras-chidas', 'simbolos', 'goticas', 'decorador'],
+  inicio: ['letras-chidas', 'instagram', 'nicks-free-fire', 'cursiva', 'espacio-invisible', 'contador-bio'],
+  'letras-chidas': ['free-fire', 'nicks-free-fire', 'decorador', 'tiktok', 'letras-elegantes', 'simbolos'],
+  'letras-elegantes': ['cursiva', 'letras-tatuajes', 'instagram', 'letras-chidas', 'contador-bio', 'circulos'],
+  'letras-raras': ['letras-chinas', 'glitch', 'invertidas', 'letras-chidas', 'simbolos', 'decorador'],
   'letras-tatuajes': ['goticas', 'cursiva', 'letras-elegantes', 'simbolos', 'decorador', 'letras-raras'],
   'nicks-free-fire': ['free-fire', 'letras-chidas', 'decorador', 'simbolos', 'goticas', 'letras-raras'],
   'letras-chinas': ['letras-raras', 'simbolos', 'decorador', 'free-fire', 'tiktok', 'glitch'],
@@ -57,14 +57,14 @@ export const RelatedSilosSection: React.FC<RelatedSilosSectionProps> = ({
       <div className="flex items-center gap-2 mb-2">
         <Sparkles className="w-4 h-4 text-indigo-600" />
         <span className="text-xs font-bold uppercase tracking-wider text-indigo-600">
-          Conversor de Letras Bonitas · Red de Herramientas
+          Explora más herramientas
         </span>
       </div>
       <h3 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
-        Secciones del Conversor de Letras Bonitas y Tipografías Unicode
+        Herramientas y estilos relacionados
       </h3>
       <p className="text-xs sm:text-sm text-slate-600 mt-1 mb-6 max-w-2xl">
-        Descubre herramientas del Conversor de Letras Bonitas complementarias recomendadas para optimizar tus perfiles sociales y títulos.
+        Continúa con herramientas relacionadas con el estilo, la red social o el uso que estás trabajando.
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -97,7 +97,7 @@ export const RelatedSilosSection: React.FC<RelatedSilosSectionProps> = ({
               </div>
 
               <div className="mt-3 pt-2 border-t border-slate-200/50 flex items-center justify-between text-[11px] font-bold text-indigo-600">
-                <span>Abrir Conversor</span>
+                <span>Abrir herramienta</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </div>
             </a>

@@ -28,13 +28,8 @@ export type AuxiliaryModule =
 
 export const ROUTE_MODULES: Record<PageRoute, AuxiliaryModule[]> = {
   inicio: [
-    'invisibleSpace',
     'platformPreview',
-    'symbolsLibrary',
-    'textDecorator',
     'readyBioTemplates',
-    'readyNicknames',
-    'alphabetReference',
     'safetyGuide',
     'userRatings',
   ],

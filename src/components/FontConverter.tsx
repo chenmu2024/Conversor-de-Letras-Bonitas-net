@@ -559,7 +559,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
             <div className="w-6 h-6 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 text-white flex items-center justify-center shadow-2xs">
               <Sparkles className="w-3.5 h-3.5" />
             </div>
-            <span>Escribe o Pega tu Texto en el Conversor de Letras Bonitas:</span>
+            <span>Escribe o pega tu texto:</span>
           </label>
 
           {/* Real-time letter & word counters + TTS reader */}
@@ -604,7 +604,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
             rows={3}
             value={inputText}
             onChange={(e) => handleTextChange(e.target.value)}
-            placeholder="Escribe aquí en el Conversor de Letras Bonitas tu frase, nombre para Instagram, nick de Free Fire o estado de WhatsApp..."
+            placeholder="Escribe aquí tu frase, nombre para Instagram, nick de Free Fire o estado de WhatsApp..."
             className="w-full px-4 sm:px-5 py-3.5 text-lg sm:text-xl rounded-2xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all resize-y font-medium leading-relaxed"
           />
         </div>
@@ -788,7 +788,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Buscar en el Conversor de Letras Bonitas (ej: cursiva, gotica, alas)..."
+              placeholder="Buscar estilos (ej: cursiva, gótica, alas)..."
               className="w-full pl-10 pr-8 py-2 text-xs font-medium rounded-xl border border-slate-200 bg-slate-50/70 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-slate-800 placeholder:text-slate-400"
             />
             {searchQuery && (

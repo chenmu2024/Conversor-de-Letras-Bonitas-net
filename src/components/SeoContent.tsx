@@ -33,14 +33,14 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
   > = {
     inicio: {
       title: 'Conversor de Letras Bonitas y Fuentes para Redes Sociales',
-      subtitle: 'El Conversor de Letras Bonitas y generador de tipografías estéticas más completo en español.',
+      subtitle: 'Convierte texto normal en estilos Unicode listos para copiar y pegar en redes, chats y juegos.',
       description:
-        'El Conversor de Letras Bonitas online convierte cualquier frase ordinaria en 90+ variaciones de letras bonitas con caracteres Unicode universales. Con este conversor de letras bonitas obtienes tipografías aesthetic, cursivas y nicks gamer al instante sin instalar programas en tu móvil o PC.',
+        'El Conversor de Letras Bonitas transforma cualquier frase en 90+ estilos basados en caracteres Unicode. Puedes probar cursivas, góticas, estilos aesthetic y opciones para nicks directamente en el navegador, sin instalar fuentes ni aplicaciones.',
       tips: [
-        'Usa el Conversor de Letras Bonitas para crear biografías elegantes en cursiva para Instagram.',
-        'En el Conversor de Letras Bonitas combina símbolos de alas ꧁ ꧂ y coronas 亗 para nicks de Free Fire.',
-        'Aplica letras en círculos con el Conversor de Letras Bonitas para resaltar títulos en WhatsApp o Facebook.',
-        'El Conversor de Letras Bonitas incluye el Espacio Invisible [ㅤ] para ocultar nombres o separar líneas.',
+        'Prueba cursivas y estilos finos para nombres o biografías de Instagram.',
+        'Combina alas ꧁ ꧂, coronas 亗 y tipografías gamer para crear nicks de Free Fire.',
+        'Usa letras en círculos o negritas Unicode para destacar títulos cortos en chats y publicaciones.',
+        'El Espacio Invisible [ㅤ] está disponible como herramienta separada para usos compatibles.',
       ],
       examples: ['𝓕𝓻𝓪𝓼𝓮 𝓔𝓵𝓮𝓰𝓪𝓷𝓽𝓮', '𝕭𝖔𝖑𝖉 𝕲𝖔𝖙𝖍𝖎𝖈', '꧁༺ 𝕻𝕽𝕺 ༻꧂', '『 𝔸𝕖𝕤𝕥𝕙𝕖𝕥𝕚𝕔 』'],
     },
