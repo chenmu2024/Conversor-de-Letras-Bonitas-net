@@ -12,8 +12,7 @@
     "test:e2e": "playwright test",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "submit:indexnow:dry-run": "node scripts/submit-indexnow.mjs --dry-run",
-    "check:performance-budget": "node scripts/check-performance-budget.mjs",
-    "check:performance": "node scripts/check-performance-budget.mjs"
+    "check:performance-budget": "node scripts/check-performance-budget.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",
