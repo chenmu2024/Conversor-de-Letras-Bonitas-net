@@ -161,6 +161,9 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
     await expect(toggle).toHaveAttribute('aria-expanded', 'false');
     await expect(page.locator('#btn-primary-paste')).toBeVisible();
     await expect(page.locator('#btn-speak-main-text')).toHaveCount(0);
+    await expect(page.locator('[id^="btn-select-"]')).toHaveCount(0);
+    await expect(page.locator('[id^="btn-fav-"]').first()).toBeVisible();
+    await expect(page.locator('[id^="btn-copy-"]').first()).toBeVisible();
 
     await expect(page.locator('#btn-open-mixer')).toHaveCount(0);
     await expect(page.locator('#btn-view-compact')).toHaveCount(0);
@@ -169,6 +172,7 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
     await toggle.click();
     await expect(toggle).toHaveAttribute('aria-expanded', 'true');
     await expect(page.locator('#btn-open-mixer')).toBeVisible();
+    await expect(page.locator('[id^="btn-select-"]').first()).toBeVisible();
     await expect(page.locator('#btn-view-compact')).toBeVisible();
     await expect(page.locator('#btn-quick-export-image')).toBeVisible();
     await expect(page.locator('#btn-speak-main-text')).toBeVisible();
@@ -196,6 +200,19 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
     await expect(page.getByText('Prueba rápida:', { exact: true })).toHaveCount(0);
     await page.locator('#btn-toggle-advanced-tools').click();
     await expect(page.getByText('Prueba rápida:', { exact: true })).toBeVisible();
+  });
+
+  test('Sticky input only follows the user while font results are in view', async ({ page }) => {
+    await page.goto('/');
+
+    const sticky = page.locator('input[placeholder="Escribe para cambiar todas las fuentes..."]');
+    await expect(sticky).toHaveCount(0);
+
+    await page.locator('[data-font-card]').nth(6).scrollIntoViewIfNeeded();
+    await expect(sticky).toBeVisible();
+
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await expect(sticky).toHaveCount(0);
   });
 
   // P0-4 & P0-5: 404 UI and Robots Noindex validation

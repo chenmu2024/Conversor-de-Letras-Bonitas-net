@@ -112,23 +112,38 @@ export const FontConverter: React.FC<FontConverterProps> = ({
     return /[áéíóúÁÉÍÓÚñÑüÜ¿¡]/.test(inputText);
   }, [inputText]);
 
-  // Passive IntersectionObserver for sticky floating input bar (zero forced reflow)
+  // Sticky input follows users only while they are actively browsing generated results.
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const sentinel = document.getElementById('scroll-sentinel') || document.getElementById('main-font-input');
-    if (!sentinel) return;
+    const inputTarget = document.getElementById('scroll-sentinel') || document.getElementById('main-text-input');
+    const resultsTarget = document.getElementById('font-results-section');
+    if (!inputTarget || !resultsTarget) return;
 
+    let inputVisible = true;
+    let resultsVisible = false;
     let rafId: number;
+
+    const updateSticky = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        setShowStickyBar(!inputVisible && resultsVisible);
+      });
+    };
+
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        rafId = requestAnimationFrame(() => {
-          setShowStickyBar(!entry.isIntersecting);
-        });
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.target === inputTarget) inputVisible = entry.isIntersecting;
+          if (entry.target === resultsTarget) resultsVisible = entry.isIntersecting;
+        }
+        updateSticky();
       },
       { threshold: 0 }
     );
 
-    observer.observe(sentinel);
+    observer.observe(inputTarget);
+    observer.observe(resultsTarget);
+
     return () => {
       observer.disconnect();
       if (rafId) cancelAnimationFrame(rafId);
@@ -1029,7 +1044,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
       </Suspense>
 
       {/* 6. CONVERTED FONTS OUTPUT LIST / GRID */}
-      <section className="mb-12">
+      <section id="font-results-section" className="mb-12">
         {visibleFonts.length > 0 ? (
           viewMode === 'compact' ? (
             /* COMPACT HIGH-DENSITY LIST MODE */
@@ -1047,7 +1062,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
                         isSelected={isSelected}
                         fontSize={fontSize}
                         onToggleFavorite={onToggleFavorite}
-                        onToggleSelect={(id) => handleToggleSelect(id)}
+                        onToggleSelect={advancedToolsOpen || selectedFontIds.length > 0 ? (id) => handleToggleSelect(id) : undefined}
                         onPreview={onPreview}
                         onExportImage={(text, name) => setImageExportData({ text, fontName: name })}
                         onShareText={(text, name) => setShareModalData({ text, fontName: name })}
@@ -1072,7 +1087,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
                       isSelected={isSelected}
                       fontSize={fontSize}
                       onToggleFavorite={onToggleFavorite}
-                      onToggleSelect={(id) => handleToggleSelect(id)}
+                      onToggleSelect={advancedToolsOpen || selectedFontIds.length > 0 ? (id) => handleToggleSelect(id) : undefined}
                       onPreview={onPreview}
                       onExportImage={(text, name) => setImageExportData({ text, fontName: name })}
                       onShareText={(text, name) => setShareModalData({ text, fontName: name })}

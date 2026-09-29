@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontGenerator } from '../types';
-import { Copy, Check, Star, Eye, Image as ImageIcon, CheckSquare, Square, Share2, ThumbsUp, Send, Volume2 } from 'lucide-react';
+import { Copy, Check, Star, Eye, Image as ImageIcon, CheckSquare, Square, Share2 } from 'lucide-react';
 
 interface FontCardProps {
   generator: FontGenerator;
@@ -28,16 +28,6 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
   onShareText,
 }) => {
   const [copied, setCopied] = useState(false);
-  const [shared, setShared] = useState(false);
-  const [liked, setLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(() => {
-    // Generate deterministic pleasing baseline count based on id hash
-    let hash = 0;
-    for (let i = 0; i < generator.id.length; i++) {
-      hash = (hash << 5) - hash + generator.id.charCodeAt(i);
-    }
-    return 120 + Math.abs(hash % 380);
-  });
 
   const sizeClasses: Record<'sm' | 'md' | 'lg' | 'xl', string> = {
     sm: 'text-base sm:text-lg',
@@ -93,10 +83,12 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
 
   const handleShare = async (e: React.MouseEvent) => {
     e.stopPropagation();
+
     if (onShareText) {
       onShareText(convertedText, generator.name);
       return;
     }
+
     const shareMessage = `${convertedText}\n\n✨ Creado gratis en conversordeletrasbonitas.net`;
     if (typeof navigator !== 'undefined' && navigator.share) {
       try {
@@ -104,15 +96,13 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
           title: `Letras Bonitas: ${generator.name}`,
           text: shareMessage,
         });
-        setShared(true);
-        setTimeout(() => setShared(false), 2000);
-      } catch (err) {
-        // User cancelled or share failed, fallback to whatsapp URL
-        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareMessage)}`, '_blank');
+        return;
+      } catch {
+        // User cancelled or native sharing is unavailable; fall through to WhatsApp.
       }
-    } else {
-      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareMessage)}`, '_blank');
     }
+
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareMessage)}`, '_blank');
   };
 
   return (
@@ -120,7 +110,7 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
       id={`font-card-${generator.id}`}
       data-font-card={generator.id}
       onClick={handleCopy}
-      className={`group relative bg-white rounded-2xl border transition-all duration-200 cursor-pointer select-none p-4 sm:p-5 flex flex-col justify-between hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.06)] hover:border-indigo-300 ${
+      className={`group relative bg-white rounded-2xl border transition-all duration-200 cursor-pointer select-none p-3.5 sm:p-5 flex flex-col justify-between hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.06)] hover:border-indigo-300 ${
         isSelected
           ? 'ring-2 ring-indigo-500 border-indigo-500 bg-indigo-50/10'
           : copied 
@@ -129,7 +119,7 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
       }`}
     >
       {/* Top row: font name + category tags + action icons */}
-      <div className="flex items-center justify-between mb-2.5">
+      <div className="flex items-center justify-between mb-2 sm:mb-2.5">
         <div className="flex items-center gap-2 min-w-0 pr-2">
           {/* Multi-select toggle checkbox */}
           {onToggleSelect && (
@@ -166,77 +156,51 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
           )}
         </div>
 
-        {/* Action icons */}
+        {/* Action icons: mobile keeps only the high-frequency favorite action */}
         <div className="flex items-center gap-1">
-          {/* Share to WhatsApp / WebShare */}
-          <button
-            type="button"
-            id={`btn-share-${generator.id}`}
-            aria-label="Enviar directamente por WhatsApp"
-            onClick={(e) => {
-              e.stopPropagation();
-              const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(convertedText)}`;
-              window.open(url, '_blank');
-            }}
-            title="Enviar directamente por WhatsApp"
-            className="p-1.5 rounded-xl text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
-          >
-            <Send className="w-4 h-4 text-emerald-600" />
-          </button>
-
-          {/* Export PNG Card button */}
-          {onExportImage && (
+          <div className="hidden sm:flex items-center gap-1">
             <button
               type="button"
-              id={`btn-img-${generator.id}`}
-              aria-label="Descargar diseño como imagen"
-              onClick={(e) => {
-                e.stopPropagation();
-                onExportImage(convertedText, generator.name);
-              }}
-              title="Descargar como imagen para Instagram Story / Post"
+              id={`btn-share-${generator.id}`}
+              aria-label="Compartir texto estilizado"
+              onClick={handleShare}
+              title="Compartir texto estilizado"
               className="p-1.5 rounded-xl text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
             >
-              <ImageIcon className="w-4 h-4" />
+              <Share2 className="w-4 h-4" />
             </button>
-          )}
 
-          {/* Preview icon */}
-          <button
-            type="button"
-            id={`btn-preview-${generator.id}`}
-            aria-label="Previsualizar en redes sociales"
-            onClick={(e) => {
-              e.stopPropagation();
-              onPreview(convertedText, generator.name);
-            }}
-            title="Previsualizar en Instagram / TikTok / WhatsApp"
-            className="p-1.5 rounded-xl text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
-          >
-            <Eye className="w-4 h-4" />
-          </button>
+            {onExportImage && (
+              <button
+                type="button"
+                id={`btn-img-${generator.id}`}
+                aria-label="Descargar diseño como imagen"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onExportImage(convertedText, generator.name);
+                }}
+                title="Descargar como imagen para Instagram Story / Post"
+                className="p-1.5 rounded-xl text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
+              >
+                <ImageIcon className="w-4 h-4" />
+              </button>
+            )}
 
-          {/* Audio Pronunciation TTS button */}
-          <button
-            type="button"
-            id={`btn-speak-${generator.id}`}
-            aria-label="Escuchar pronunciación por voz"
-            onClick={(e) => {
-              e.stopPropagation();
-              if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const utter = new SpeechSynthesisUtterance(inputText || 'Letras Bonitas');
-                utter.lang = 'es-ES';
-                window.speechSynthesis.speak(utter);
-              }
-            }}
-            title="Escuchar pronunciación por voz"
-            className="p-1.5 rounded-xl text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
-          >
-            <Volume2 className="w-4 h-4" />
-          </button>
+            <button
+              type="button"
+              id={`btn-preview-${generator.id}`}
+              aria-label="Previsualizar en redes sociales"
+              onClick={(e) => {
+                e.stopPropagation();
+                onPreview(convertedText, generator.name);
+              }}
+              title="Previsualizar en Instagram / TikTok / WhatsApp"
+              className="p-1.5 rounded-xl text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
+            >
+              <Eye className="w-4 h-4" />
+            </button>
+          </div>
 
-          {/* Favorite star */}
           <button
             type="button"
             id={`btn-fav-${generator.id}`}
@@ -246,10 +210,10 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
               onToggleFavorite(generator, convertedText);
             }}
             title={isFavorite ? 'Quitar de favoritos' : 'Guardar en favoritos'}
-            className="p-1.5 rounded-xl text-slate-500 hover:text-amber-500 hover:bg-amber-50 transition-colors"
+            className="p-2 sm:p-1.5 rounded-xl text-slate-500 hover:text-amber-500 hover:bg-amber-50 transition-colors"
           >
             <Star
-              className={`w-4 h-4 transition-transform group-hover/star:scale-110 ${
+              className={`w-4 h-4 ${
                 isFavorite ? 'fill-amber-400 text-amber-500' : 'text-slate-400'
               }`}
             />
@@ -258,44 +222,23 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
       </div>
 
       {/* Converted text display area */}
-      <div className="my-1 py-3 px-4 rounded-xl bg-slate-50/70 border border-slate-100/80 group-hover:bg-indigo-50/30 group-hover:border-indigo-100/90 transition-all min-h-[64px] flex items-center">
+      <div className="my-1 py-2.5 sm:py-3 px-3.5 sm:px-4 rounded-xl bg-slate-50/70 border border-slate-100/80 group-hover:bg-indigo-50/30 group-hover:border-indigo-100/90 transition-all min-h-[56px] sm:min-h-[64px] flex items-center">
         <p className={`${sizeClasses[fontSize]} text-slate-900 break-words font-medium tracking-wide leading-relaxed selection:bg-indigo-600 selection:text-white`}>
           {convertedText}
         </p>
       </div>
 
-      {/* Bottom bar with Copy button & Helpful like counter */}
-      <div className="flex items-center justify-between mt-3 pt-2">
-        <div className="flex items-center gap-2">
-          {/* Like / Helpful vote button */}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              setLiked(!liked);
-              setLikeCount((prev) => (liked ? prev - 1 : prev + 1));
-            }}
-            title="Votar este estilo como útil"
-            className={`inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-bold transition-all ${
-              liked
-                ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
-                : 'text-slate-400 hover:text-slate-700 hover:bg-slate-100'
-            }`}
-          >
-            <ThumbsUp className={`w-3 h-3 ${liked ? 'fill-indigo-600 text-indigo-600' : ''}`} />
-            <span>{likeCount}</span>
-          </button>
-
-          <span className="text-[11px] font-semibold text-slate-400 group-hover:text-slate-500 transition-colors hidden sm:inline">
-            Toca para copiar
-          </span>
-        </div>
+      {/* Bottom bar: clear copy action without synthetic social proof */}
+      <div className="flex items-center justify-between gap-3 mt-2.5 sm:mt-3 pt-1.5 sm:pt-2">
+        <span className="text-[11px] font-semibold text-slate-400 group-hover:text-slate-500 transition-colors">
+          Toca la tarjeta o usa Copiar
+        </span>
 
         <button
           type="button"
           id={`btn-copy-${generator.id}`}
           onClick={handleCopy}
-          className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-xs active:scale-95 ${
+          className={`inline-flex items-center justify-center gap-1.5 min-w-[104px] px-4 py-2.5 sm:py-2 rounded-xl text-xs font-black transition-all shadow-xs active:scale-95 ${
             copied
               ? 'bg-emerald-600 text-white shadow-emerald-600/30'
               : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-indigo-600/25 group-hover:shadow-indigo-600/35'
@@ -304,7 +247,7 @@ export const FontCard: React.FC<FontCardProps> = React.memo(({
           {copied ? (
             <>
               <Check className="w-3.5 h-3.5 stroke-[3] animate-pulse" />
-              <span>¡Copiado! ✓</span>
+              <span>¡Copiado!</span>
             </>
           ) : (
             <>

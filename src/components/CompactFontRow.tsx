@@ -84,7 +84,7 @@ export const CompactFontRow: React.FC<CompactFontRowProps> = React.memo(({
     <div
       id={`compact-font-${generator.id}`}
       onClick={handleCopy}
-      className={`group relative flex items-center justify-between gap-3 px-3.5 py-2.5 sm:px-5 sm:py-3.5 bg-white rounded-2xl border transition-all duration-200 cursor-pointer select-none overflow-hidden ${
+      className={`group relative flex items-center justify-between gap-2.5 px-3 py-2.5 sm:px-5 sm:py-3.5 bg-white rounded-2xl border transition-all duration-200 cursor-pointer select-none overflow-hidden ${
         isSelected
           ? 'bg-indigo-50/70 border-indigo-500 ring-2 ring-indigo-500/20 shadow-xs'
           : copied
@@ -184,23 +184,25 @@ export const CompactFontRow: React.FC<CompactFontRowProps> = React.memo(({
             <Eye className="w-3.5 h-3.5" />
           </button>
 
-          <button
-            type="button"
-            aria-label={isFavorite ? 'Quitar de favoritos' : 'Guardar en favoritos'}
-            onClick={(e) => {
-              e.stopPropagation();
-              onToggleFavorite(generator, convertedText);
-            }}
-            title={isFavorite ? 'Quitar de favoritos' : 'Guardar en favoritos'}
-            className="p-1.5 rounded-lg text-slate-500 hover:text-amber-500 hover:bg-amber-50 transition-colors"
-          >
-            <Star
-              className={`w-3.5 h-3.5 ${
-                isFavorite ? 'fill-amber-400 text-amber-500' : 'text-slate-400'
-              }`}
-            />
-          </button>
+
         </div>
+
+        <button
+          type="button"
+          aria-label={isFavorite ? 'Quitar de favoritos' : 'Guardar en favoritos'}
+          onClick={(e) => {
+            e.stopPropagation();
+            onToggleFavorite(generator, convertedText);
+          }}
+          title={isFavorite ? 'Quitar de favoritos' : 'Guardar en favoritos'}
+          className="p-2 rounded-xl text-slate-500 hover:text-amber-500 hover:bg-amber-50 transition-colors"
+        >
+          <Star
+            className={`w-4 h-4 ${
+              isFavorite ? 'fill-amber-400 text-amber-500' : 'text-slate-400'
+            }`}
+          />
+        </button>
 
         {/* Big Tap to Copy Button */}
         <button
