@@ -16,14 +16,15 @@ const html = fs.readFileSync(INDEX_HTML, 'utf8');
 const moduleScripts = [...html.matchAll(/<script[^>]+src=["']([^"']+\.js)["'][^>]*>/gi)]
   .map((match) => match[1]);
 
-const entrySrc = moduleScripts.find((src) => /\/assets\/index-[^/]+\.js$/.test(src))
-  || moduleScripts[0];
+const entrySrc = moduleScripts.find(
+  (src) => src.includes('/assets/index-') && src.endsWith('.js')
+) || moduleScripts[0];
 
 if (!entrySrc) {
   throw new Error('Unable to locate the production entry script in dist/index.html.');
 }
 
-const relativeSrc = entrySrc.replace(/^\//, '');
+const relativeSrc = entrySrc.startsWith('/') ? entrySrc.slice(1) : entrySrc;
 const entryPath = path.join(DIST_DIR, relativeSrc);
 
 if (!fs.existsSync(entryPath)) {
