@@ -96,6 +96,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
   const [showOnlyFavorites, setShowOnlyFavorites] = useState<boolean>(false);
   const [batchCopied, setBatchCopied] = useState<boolean>(false);
   const [lastDeletedText, setLastDeletedText] = useState<string | null>(null);
+  const [advancedToolsOpen, setAdvancedToolsOpen] = useState<boolean>(false);
 
   const [batchModalOpen, setBatchModalOpen] = useState<boolean>(false);
   const [comparatorOpen, setComparatorOpen] = useState<boolean>(false);
@@ -639,98 +640,123 @@ export const FontConverter: React.FC<FontConverterProps> = ({
           </div>
         )}
 
-        {/* Quick trend preset chips */}
-        <div className="mb-3.5">
-          <QuickPresets 
-            onSelectPreset={handleTextChange} 
-            currentText={inputText} 
-            currentRoute={currentRoute}
-          />
+        {/* Progressive disclosure: keep the primary path focused on input → results → copy */}
+        <div className="mt-1">
+          <button
+            type="button"
+            id="btn-toggle-advanced-tools"
+            aria-expanded={advancedToolsOpen}
+            aria-controls="advanced-converter-tools"
+            onClick={() => setAdvancedToolsOpen((open) => !open)}
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 hover:text-indigo-700 text-xs font-extrabold shadow-2xs transition-all active:scale-[0.99]"
+          >
+            <span>{advancedToolsOpen ? 'Ocultar herramientas' : 'Más herramientas'}</span>
+            <span className="hidden sm:inline text-[10px] font-semibold text-slate-400">
+              Formato · símbolos · PNG · vista previa · límites
+            </span>
+            <ChevronDown className={`w-4 h-4 transition-transform ${advancedToolsOpen ? 'rotate-180' : ''}`} />
+          </button>
         </div>
 
-        {/* Quick Decorator Picker Strip (1-Click Frame Wrapper) */}
-        <div className="mb-3.5">
-          <Suspense fallback={null}>
-            <QuickDecoratorPicker
+        {advancedToolsOpen && (
+          <div
+            id="advanced-converter-tools"
+            className="mt-4 p-3.5 sm:p-4 rounded-3xl border border-slate-200 bg-slate-50/70 space-y-3.5 animate-in fade-in slide-in-from-top-1 duration-150"
+          >
+            <div className="flex items-center justify-between gap-3 flex-wrap">
+              <div>
+                <p className="text-xs font-black text-slate-800">Herramientas avanzadas</p>
+                <p className="text-[11px] text-slate-500 mt-0.5">
+                  Opciones extra para decorar, editar, compartir y comprobar tu texto.
+                </p>
+              </div>
+              {hasSubStudio && (
+                <button
+                  type="button"
+                  onClick={() => document.getElementById('sub-studio-section')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs border border-indigo-200 transition-all active:scale-95 shadow-2xs"
+                  title={`Ir a la suite y simuladores especializados de ${headerInfo.badge}`}
+                >
+                  <span>🛠️ Estudio {headerInfo.badge} ↓</span>
+                </button>
+              )}
+            </div>
+
+            <QuickPresets
+              onSelectPreset={handleTextChange}
               currentText={inputText}
-              onApplyDecoration={(decText) => handleTextChange(decText)}
+              currentRoute={currentRoute}
             />
-          </Suspense>
-        </div>
 
-        {/* Quick Symbol Picker Ribbon */}
-        <div className="mb-3.5">
-          <Suspense fallback={null}>
-            <SymbolQuickRibbon
-              onInsertSymbol={(sym) => {
-                handleTextChange(inputText + sym);
-              }}
-            />
-          </Suspense>
-        </div>
+            <Suspense fallback={null}>
+              <QuickDecoratorPicker
+                currentText={inputText}
+                onApplyDecoration={(decText) => handleTextChange(decText)}
+              />
+            </Suspense>
 
-        {/* Action Toolbar */}
-        <div className="flex items-center justify-between gap-2 flex-wrap mb-2">
-          <QuickActionBar
-            text={inputText}
-            onTextChange={handleTextChange}
-            onClear={handleClear}
-            onPaste={handlePaste}
-            onRandomExample={handleRandomExample}
-            onOpenFixerModal={() => setFixerModalOpen(true)}
-            onOpenImageExport={() => setPosterModalOpen(true)}
-            onOpenShareModal={() => setShareModalData({ text: inputText || 'Letras Bonitas' })}
-            lastDeletedText={lastDeletedText}
-            onUndoClear={handleUndoClear}
-          />
+            <Suspense fallback={null}>
+              <SymbolQuickRibbon
+                onInsertSymbol={(sym) => {
+                  handleTextChange(inputText + sym);
+                }}
+              />
+            </Suspense>
 
-          <div className="flex items-center gap-2 flex-wrap">
-            <button
-              type="button"
-              onClick={handleCopyShareLink}
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-300 text-slate-700 hover:text-indigo-700 font-bold text-xs shadow-2xs hover:scale-[1.02] active:scale-95 transition-all"
-              title="Copiar enlace directo con este texto para compartir en WhatsApp, bio o redes"
-            >
-              <Link2 className="w-4 h-4 text-indigo-600" />
-              <span>Compartir Enlace</span>
-            </button>
+            <div className="flex items-start justify-between gap-3 flex-wrap">
+              <div className="min-w-0 flex-1">
+                <QuickActionBar
+                  text={inputText}
+                  onTextChange={handleTextChange}
+                  onClear={handleClear}
+                  onPaste={handlePaste}
+                  onRandomExample={handleRandomExample}
+                  onOpenFixerModal={() => setFixerModalOpen(true)}
+                  onOpenImageExport={() => setPosterModalOpen(true)}
+                  onOpenShareModal={() => setShareModalData({ text: inputText || 'Letras Bonitas' })}
+                  lastDeletedText={lastDeletedText}
+                  onUndoClear={handleUndoClear}
+                />
+              </div>
 
-            <button
-              type="button"
-              onClick={() => setPosterModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs shadow-xs hover:scale-[1.02] active:scale-95 transition-all"
-              title="Crear imagen PNG con diseño para Instagram Stories y Estados de WhatsApp"
-            >
-              <ImageIcon className="w-4 h-4 text-pink-400" />
-              <span>Crear Imagen HD (PNG)</span>
-            </button>
+              <div className="flex items-center gap-2 flex-wrap pt-3">
+                <button
+                  type="button"
+                  onClick={handleCopyShareLink}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-indigo-50 border border-slate-200 hover:border-indigo-300 text-slate-700 hover:text-indigo-700 font-bold text-xs shadow-2xs transition-all active:scale-95"
+                  title="Copiar enlace directo con este texto para compartir en WhatsApp, bio o redes"
+                >
+                  <Link2 className="w-4 h-4 text-indigo-600" />
+                  <span>Compartir enlace</span>
+                </button>
 
-            <button
-              type="button"
-              onClick={() => setSimulatorModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 text-white font-black text-xs shadow-xs hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all"
-            >
-              <Eye className="w-4 h-4 animate-pulse" />
-              <span>👁️ Ver Vista Previa Real (IG / FF)</span>
-            </button>
+                <button
+                  type="button"
+                  onClick={() => setPosterModalOpen(true)}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs shadow-xs transition-all active:scale-95"
+                  title="Crear imagen PNG con diseño para Instagram Stories y Estados de WhatsApp"
+                >
+                  <ImageIcon className="w-4 h-4 text-pink-400" />
+                  <span>Imagen HD</span>
+                </button>
 
-            {hasSubStudio && (
-              <button
-                type="button"
-                onClick={() => document.getElementById('sub-studio-section')?.scrollIntoView({ behavior: 'smooth' })}
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs border border-indigo-200 transition-all active:scale-95 shadow-2xs"
-                title={`Ir a la suite y simuladores especializados de ${headerInfo.badge}`}
-              >
-                <span>🛠️ Estudio {headerInfo.badge} ↓</span>
-              </button>
-            )}
+                <button
+                  type="button"
+                  onClick={() => setSimulatorModalOpen(true)}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-purple-50 text-purple-700 font-extrabold text-xs border border-purple-200 transition-all active:scale-95"
+                >
+                  <Eye className="w-4 h-4" />
+                  <span>Vista previa</span>
+                </button>
+              </div>
+            </div>
+
+            <Suspense fallback={null}>
+              <PlatformLimits text={inputText} />
+            </Suspense>
           </div>
-        </div>
+        )}
 
-        {/* Platform Character Limits Bar */}
-        <Suspense fallback={null}>
-          <PlatformLimits text={inputText} />
-        </Suspense>
       </section>
 
       {/* Quick Answer Slot (SEO & GEO semantic placement after H1 and main input workbench) */}
@@ -854,137 +880,142 @@ export const FontConverter: React.FC<FontConverterProps> = ({
             ))}
           </div>
 
-          {/* View mode toggle (Compact vs Grid) & Font zoom */}
-          <div className="flex items-center gap-2 flex-wrap">
-            {/* Multi-select select-all toggle button */}
-            <button
-              type="button"
-              onClick={handleSelectAllVisible}
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold border transition-all ${
-                selectedFontIds.length > 0
-                  ? 'bg-indigo-50 text-indigo-700 border-indigo-200 shadow-2xs'
-                  : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
-              }`}
-              title="Seleccionar todas las fuentes visibles para copiar en lote"
+          {advancedToolsOpen && (
+            <div
+              id="advanced-result-controls"
+              className="basis-full flex items-center justify-between gap-3 flex-wrap pt-2.5 mt-0.5 border-t border-slate-200/80"
             >
-              {selectedFontIds.length === visibleFonts.length && visibleFonts.length > 0 ? (
-                <CheckSquare className="w-3.5 h-3.5 text-indigo-600" />
-              ) : (
-                <Square className="w-3.5 h-3.5 text-slate-400" />
-              )}
-              <span>
-                {selectedFontIds.length > 0 ? `${selectedFontIds.length} Sel.` : 'Multi-Copiar'}
-              </span>
-            </button>
-
-            {/* View layout mode */}
-            <div className="flex items-center gap-1 bg-slate-100/80 p-1 rounded-xl border border-slate-200/70">
-              <button
-                type="button"
-                id="btn-view-compact"
-                onClick={() => setViewMode('compact')}
-                className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
-                  viewMode === 'compact'
-                    ? 'bg-white text-indigo-600 shadow-2xs'
-                    : 'text-slate-500 hover:text-slate-800'
-                }`}
-                title="Vista Lista Compacta"
-              >
-                <LayoutList className="w-3.5 h-3.5" />
-                <span>Lista</span>
-              </button>
-
-              <button
-                type="button"
-                id="btn-view-grid"
-                onClick={() => setViewMode('grid')}
-                className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
-                  viewMode === 'grid'
-                    ? 'bg-white text-indigo-600 shadow-2xs'
-                    : 'text-slate-500 hover:text-slate-800'
-                }`}
-                title="Vista Tarjetas Cuadrícula"
-              >
-                <Grid className="w-3.5 h-3.5" />
-                <span>Tarjetas</span>
-              </button>
-            </div>
-
-            {/* Font size zoom controls */}
-            <div className="flex items-center gap-1 bg-slate-100/80 p-1 rounded-xl border border-slate-200/70">
-              <span className="text-[10px] font-extrabold text-slate-600 px-1 uppercase tracking-wider hidden sm:inline">
-                Zoom:
-              </span>
-              {(['sm', 'md', 'lg', 'xl'] as const).map((size) => (
+              {/* Result layout, zoom and multi-select */}
+              <div className="flex items-center gap-2 flex-wrap">
                 <button
-                  key={size}
                   type="button"
-                  id={`btn-fontsize-${size}`}
-                  aria-label={`Ajustar tamaño de fuente a ${size}`}
-                  onClick={() => setFontSize(size)}
-                  className={`px-2 py-1 text-xs font-black rounded-lg transition-all ${
-                    fontSize === size
-                      ? 'bg-white text-indigo-600 shadow-2xs'
-                      : 'text-slate-600 hover:text-slate-900'
+                  onClick={handleSelectAllVisible}
+                  className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold border transition-all ${
+                    selectedFontIds.length > 0
+                      ? 'bg-indigo-50 text-indigo-700 border-indigo-200 shadow-2xs'
+                      : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
                   }`}
+                  title="Seleccionar todas las fuentes visibles para copiar en lote"
                 >
-                  {size === 'sm' && 'A-'}
-                  {size === 'md' && 'Norm'}
-                  {size === 'lg' && 'A+'}
-                  {size === 'xl' && 'A++'}
+                  {selectedFontIds.length === visibleFonts.length && visibleFonts.length > 0 ? (
+                    <CheckSquare className="w-3.5 h-3.5 text-indigo-600" />
+                  ) : (
+                    <Square className="w-3.5 h-3.5 text-slate-400" />
+                  )}
+                  <span>
+                    {selectedFontIds.length > 0 ? `${selectedFontIds.length} Sel.` : 'Multi-Copiar'}
+                  </span>
                 </button>
-              ))}
+
+                <div className="flex items-center gap-1 bg-slate-100/80 p-1 rounded-xl border border-slate-200/70">
+                  <button
+                    type="button"
+                    id="btn-view-compact"
+                    onClick={() => setViewMode('compact')}
+                    className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
+                      viewMode === 'compact'
+                        ? 'bg-white text-indigo-600 shadow-2xs'
+                        : 'text-slate-500 hover:text-slate-800'
+                    }`}
+                    title="Vista Lista Compacta"
+                  >
+                    <LayoutList className="w-3.5 h-3.5" />
+                    <span>Lista</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    id="btn-view-grid"
+                    onClick={() => setViewMode('grid')}
+                    className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
+                      viewMode === 'grid'
+                        ? 'bg-white text-indigo-600 shadow-2xs'
+                        : 'text-slate-500 hover:text-slate-800'
+                    }`}
+                    title="Vista Tarjetas Cuadrícula"
+                  >
+                    <Grid className="w-3.5 h-3.5" />
+                    <span>Tarjetas</span>
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-1 bg-slate-100/80 p-1 rounded-xl border border-slate-200/70">
+                  <span className="text-[10px] font-extrabold text-slate-600 px-1 uppercase tracking-wider hidden sm:inline">
+                    Zoom:
+                  </span>
+                  {(['sm', 'md', 'lg', 'xl'] as const).map((size) => (
+                    <button
+                      key={size}
+                      type="button"
+                      id={`btn-fontsize-${size}`}
+                      aria-label={`Ajustar tamaño de fuente a ${size}`}
+                      onClick={() => setFontSize(size)}
+                      className={`px-2 py-1 text-xs font-black rounded-lg transition-all ${
+                        fontSize === size
+                          ? 'bg-white text-indigo-600 shadow-2xs'
+                          : 'text-slate-600 hover:text-slate-900'
+                      }`}
+                    >
+                      {size === 'sm' && 'A-'}
+                      {size === 'md' && 'Norm'}
+                      {size === 'lg' && 'A+'}
+                      {size === 'xl' && 'A++'}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Secondary utilities */}
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <button
+                  type="button"
+                  id="btn-open-mixer"
+                  aria-label="Mezclador de estilos de fuentes aleatorios"
+                  onClick={() => setMixerOpen(true)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100/80 text-amber-800 font-extrabold text-xs border border-amber-200/80 transition-all active:scale-95 shadow-2xs"
+                >
+                  <Dices className="w-3.5 h-3.5 text-amber-600" />
+                  <span>Mezclador</span>
+                </button>
+
+                <button
+                  type="button"
+                  id="btn-open-batch-copy"
+                  aria-label="Copiar múltiples fuentes en lote"
+                  onClick={() => setBatchModalOpen(true)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100/80 text-indigo-700 font-extrabold text-xs border border-indigo-200/80 transition-all active:scale-95 shadow-2xs"
+                >
+                  <Copy className="w-3.5 h-3.5" />
+                  <span>Lote</span>
+                </button>
+
+                <button
+                  type="button"
+                  id="btn-open-comparator"
+                  aria-label="Comparar estilos de fuentes lado a lado"
+                  onClick={() => setComparatorOpen(true)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 text-slate-700 font-extrabold text-xs border border-slate-200 transition-all active:scale-95 shadow-2xs"
+                  title="Comparar estilos de fuentes lado a lado"
+                >
+                  <Columns2 className="w-3.5 h-3.5 text-slate-600" />
+                  <span>Comparar</span>
+                </button>
+
+                <button
+                  type="button"
+                  id="btn-open-history-drawer"
+                  aria-label="Ver historial de fuentes que has copiado recientemente"
+                  onClick={() => window.dispatchEvent(new CustomEvent('open-copy-history'))}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 text-slate-700 font-extrabold text-xs border border-slate-200 transition-all active:scale-95 shadow-2xs"
+                  title="Ver historial de fuentes que has copiado recientemente"
+                >
+                  <History className="w-3.5 h-3.5 text-indigo-600" />
+                  <span>Historial</span>
+                </button>
+              </div>
             </div>
-          </div>
+          )}
 
-          {/* Secondary Utility Tools */}
-          <div className="flex items-center gap-1.5 flex-wrap">
-            <button
-              type="button"
-              id="btn-open-mixer"
-              aria-label="Mezclador de estilos de fuentes aleatorios"
-              onClick={() => setMixerOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100/80 text-amber-800 font-extrabold text-xs border border-amber-200/80 transition-all active:scale-95 shadow-2xs"
-            >
-              <Dices className="w-3.5 h-3.5 text-amber-600" />
-              <span>Mezclador</span>
-            </button>
-
-            <button
-              type="button"
-              id="btn-open-batch-copy"
-              aria-label="Copiar múltiples fuentes en lote"
-              onClick={() => setBatchModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100/80 text-indigo-700 font-extrabold text-xs border border-indigo-200/80 transition-all active:scale-95 shadow-2xs"
-            >
-              <Copy className="w-3.5 h-3.5" />
-              <span>Lote</span>
-            </button>
-
-            <button
-              type="button"
-              id="btn-open-comparator"
-              aria-label="Comparar estilos de fuentes lado a lado"
-              onClick={() => setComparatorOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 text-slate-700 font-extrabold text-xs border border-slate-200 transition-all active:scale-95 shadow-2xs"
-              title="Comparar estilos de fuentes lado a lado"
-            >
-              <Columns2 className="w-3.5 h-3.5 text-slate-600" />
-              <span className="hidden sm:inline">Comparar</span>
-            </button>
-
-            <button
-              type="button"
-              id="btn-open-history-drawer"
-              aria-label="Ver historial de fuentes que has copiado recientemente"
-              onClick={() => window.dispatchEvent(new CustomEvent('open-copy-history'))}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 text-slate-700 font-extrabold text-xs border border-slate-200 transition-all active:scale-95 shadow-2xs"
-              title="Ver historial de fuentes que has copiado recientemente"
-            >
-              <History className="w-3.5 h-3.5 text-indigo-600" />
-              <span>Historial</span>
-            </button>
-          </div>
         </div>
       </section>
 

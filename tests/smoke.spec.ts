@@ -153,6 +153,27 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
     await copyButton.click();
   });
 
+  test('Advanced converter tools stay out of the primary flow until requested', async ({ page }) => {
+    await page.goto('/');
+
+    const toggle = page.locator('#btn-toggle-advanced-tools');
+    await expect(toggle).toBeVisible();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+
+    await expect(page.locator('#btn-open-mixer')).toHaveCount(0);
+    await expect(page.locator('#btn-view-compact')).toHaveCount(0);
+
+    await toggle.click();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    await expect(page.locator('#btn-open-mixer')).toBeVisible();
+    await expect(page.locator('#btn-view-compact')).toBeVisible();
+    await expect(page.locator('#btn-quick-export-image')).toBeVisible();
+
+    await toggle.click();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(page.locator('#btn-open-mixer')).toHaveCount(0);
+  });
+
   // P0-4 & P0-5: 404 UI and Robots Noindex validation
   test('Unknown route renders 404 UI with noindex meta tag', async ({ page }) => {
     // Note: Local Vite preview serves index.html fallback for client-side routing.
