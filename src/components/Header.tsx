@@ -271,7 +271,7 @@ export const Header: React.FC<HeaderProps> = ({
                     aria-expanded={open}
                     aria-haspopup="menu"
                     aria-controls={`nav-menu-${group.label.toLowerCase().replace(/\s+/g, '-')}`}
-                    onClick={() => setDesktopMenuOpen(open ? null : group.label)}
+                    onClick={() => setDesktopMenuOpen(group.label)}
                     onKeyDown={(event) => {
                       if (event.key === 'ArrowDown') {
                         event.preventDefault();
