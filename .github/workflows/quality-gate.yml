@@ -39,6 +39,9 @@ jobs:
       - name: Build, prerender and SEO validation
         run: bun run build
 
+      - name: Performance budget
+        run: bun run check:performance
+
       - name: Enforce main-bundle performance budget
         run: bun run check:performance-budget
 

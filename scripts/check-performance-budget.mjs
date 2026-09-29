@@ -1,42 +1,48 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { gzipSync } from 'node:zlib';
+import zlib from 'node:zlib';
 
-const assetsDir = path.resolve('dist/assets');
-const budgetKb = Number(process.env.MAIN_JS_GZIP_BUDGET_KB || 155);
+const DIST_DIR = path.resolve('dist');
+const INDEX_HTML = path.join(DIST_DIR, 'index.html');
+const ENTRY_RAW_LIMIT = 500 * 1024;
+const ENTRY_GZIP_LIMIT = 150 * 1024;
 
-if (!fs.existsSync(assetsDir)) {
-  throw new Error('dist/assets not found. Run the production build before checking the performance budget.');
+if (!fs.existsSync(INDEX_HTML)) {
+  throw new Error('dist/index.html not found. Run the production build before checking the performance budget.');
 }
 
-const candidates = fs
-  .readdirSync(assetsDir)
-  .filter((name) => /^index-[^/]+\.js$/.test(name))
-  .map((name) => {
-    const filePath = path.join(assetsDir, name);
-    const source = fs.readFileSync(filePath);
-    return {
-      name,
-      rawBytes: source.byteLength,
-      gzipBytes: gzipSync(source, { level: 9 }).byteLength,
-    };
-  })
-  .sort((a, b) => b.rawBytes - a.rawBytes);
+const html = fs.readFileSync(INDEX_HTML, 'utf8');
+const firstPattern = /<script[^>]+type=[\"']module[\"'][^>]+src=[\"']([^\"']+\\.js)[\"']/i;
+const secondPattern = /<script[^>]+src=[\"']([^\"']+\\.js)[\"'][^>]+type=[\"']module[\"']/i;
+const scriptMatch = html.match(firstPattern) || html.match(secondPattern);
 
-if (candidates.length === 0) {
-  throw new Error('No Vite main index JavaScript bundle was found in dist/assets.');
+if (!scriptMatch) {
+  throw new Error('Unable to locate the production module entry script in dist/index.html.');
 }
 
-const mainBundle = candidates[0];
-const gzipKb = mainBundle.gzipBytes / 1024;
-const rawKb = mainBundle.rawBytes / 1024;
+const src = scriptMatch[1].replace(/^\\//, '');
+const entryPath = path.join(DIST_DIR, src);
+
+if (!fs.existsSync(entryPath)) {
+  throw new Error('Entry bundle not found: ' + entryPath);
+}
+
+const buffer = fs.readFileSync(entryPath);
+const rawBytes = buffer.byteLength;
+const gzipBytes = zlib.gzipSync(buffer, { level: 9 }).byteLength;
+const kb = (bytes) => (bytes / 1024).toFixed(1);
 
 console.log(
-  `Main JS bundle: ${mainBundle.name} — ${rawKb.toFixed(1)} KB raw / ${gzipKb.toFixed(1)} KB gzip (budget: ${budgetKb} KB gzip)`
+  'Performance budget: ' + src + ' = ' + kb(rawBytes) + ' KB raw / ' + kb(gzipBytes) +
+  ' KB gzip (limits: ' + kb(ENTRY_RAW_LIMIT) + ' KB raw / ' + kb(ENTRY_GZIP_LIMIT) + ' KB gzip)'
 );
 
-if (gzipKb > budgetKb) {
-  throw new Error(
-    `Performance budget exceeded: main JavaScript is ${gzipKb.toFixed(1)} KB gzip, above the ${budgetKb} KB limit.`
-  );
+const failures = [];
+if (rawBytes > ENTRY_RAW_LIMIT) failures.push('entry bundle raw size ' + kb(rawBytes) + ' KB exceeds ' + kb(ENTRY_RAW_LIMIT) + ' KB');
+if (gzipBytes > ENTRY_GZIP_LIMIT) failures.push('entry bundle gzip size ' + kb(gzipBytes) + ' KB exceeds ' + kb(ENTRY_GZIP_LIMIT) + ' KB');
+
+if (failures.length) {
+  throw new Error('Performance budget failed: ' + failures.join('; '));
 }
+
+console.log('Performance budget passed.');
