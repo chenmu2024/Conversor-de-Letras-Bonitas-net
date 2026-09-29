@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { List, ChevronDown, ChevronUp, Sparkles, BookOpen, Layers, HelpCircle, Globe2, ShieldCheck } from 'lucide-react';
-import { FONT_COUNT_PLUS } from '../constants/siteStats';
+import { List, ChevronDown, ChevronUp, Sparkles, HelpCircle, Layers, Link2, Type } from 'lucide-react';
+import { PageRoute } from '../types';
+import { ROUTE_MODULES } from '../data/routeModules';
+import { SEO_ROUTE_DATA } from '../data/seoRouteData';
 
 interface TocItem {
   id: string;
@@ -9,65 +11,76 @@ interface TocItem {
   icon: React.ReactNode;
 }
 
-export const TableOfContents: React.FC = () => {
+interface TableOfContentsProps {
+  currentRoute: PageRoute;
+}
+
+export const TableOfContents: React.FC<TableOfContentsProps> = ({ currentRoute }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const activeModules = new Set(ROUTE_MODULES[currentRoute] || []);
 
   const sections: TocItem[] = [
     {
       id: 'conversor-principal',
-      label: '1. Conversor y Generador de Letras en Vivo',
-      badge: `${FONT_COUNT_PLUS} Fuentes`,
+      label: 'Conversor principal',
+      badge: 'Herramienta',
       icon: <Sparkles className="w-4 h-4 text-indigo-500" />,
     },
     {
-      id: 'espacio-invisible-seccion',
-      label: '2. Espacio Invisible (Hangul Filler U+3164)',
-      badge: 'Copiar',
-      icon: <Layers className="w-4 h-4 text-emerald-500" />,
+      id: 'font-results-section',
+      label: 'Resultados y estilos para copiar',
+      badge: 'Resultados',
+      icon: <Type className="w-4 h-4 text-indigo-500" />,
     },
-    {
-      id: 'preview-simulator-section',
-      label: '3. Simulador de Biografía en Vivo (Instagram/TikTok/FF)',
-      badge: 'Preview',
-      icon: <Globe2 className="w-4 h-4 text-blue-500" />,
-    },
-    {
-      id: 'busquedas-regionales-seccion',
-      label: '4. Términos Populares y Búsquedas por País (México, España, Argentina...)',
-      badge: 'LSI',
-      icon: <Globe2 className="w-4 h-4 text-amber-500" />,
-    },
-    {
-      id: 'abecedario-completo-seccion',
-      label: '5. Abecedario Completo A-Z de Letras Bonitas',
-      badge: 'Tabla',
-      icon: <BookOpen className="w-4 h-4 text-purple-500" />,
-    },
-    {
-      id: 'glosario-unicode-seccion',
-      label: '6. Glosario Enciclopédico de Tipografía Unicode',
-      badge: 'Técnico',
-      icon: <BookOpen className="w-4 h-4 text-rose-500" />,
-    },
-    {
-      id: 'compatibilidad-seccion',
-      label: '7. Tabla de Compatibilidad con Android, iOS y Redes',
-      badge: '100%',
-      icon: <ShieldCheck className="w-4 h-4 text-teal-500" />,
-    },
+    ...(SEO_ROUTE_DATA[currentRoute]?.quickAnswer
+      ? [{
+          id: 'quick-answer',
+          label: 'Respuesta rápida',
+          badge: 'Guía',
+          icon: <HelpCircle className="w-4 h-4 text-blue-500" />,
+        }]
+      : []),
+    ...(activeModules.has('invisibleSpace')
+      ? [{
+          id: 'espacio-invisible-seccion',
+          label: 'Espacio invisible',
+          badge: 'Herramienta',
+          icon: <Layers className="w-4 h-4 text-emerald-500" />,
+        }]
+      : []),
+    ...(activeModules.has('symbolsLibrary')
+      ? [{
+          id: 'simbolos-section',
+          label: 'Símbolos y caracteres',
+          badge: 'Biblioteca',
+          icon: <Layers className="w-4 h-4 text-violet-500" />,
+        }]
+      : []),
+    ...(activeModules.has('alphabetReference')
+      ? [{
+          id: 'abecedario-section',
+          label: 'Referencia del abecedario',
+          badge: 'A-Z',
+          icon: <Type className="w-4 h-4 text-amber-500" />,
+        }]
+      : []),
     {
       id: 'faq-seccion-seo',
-      label: '8. Preguntas Frecuentes (FAQ) sobre Fuentes y Nicks',
-      badge: 'Dudas',
+      label: 'Preguntas frecuentes',
+      badge: 'FAQ',
       icon: <HelpCircle className="w-4 h-4 text-indigo-500" />,
+    },
+    {
+      id: 'secciones-relacionadas',
+      label: 'Herramientas relacionadas',
+      badge: 'Explorar',
+      icon: <Link2 className="w-4 h-4 text-slate-500" />,
     },
   ];
 
   const handleScrollTo = (id: string) => {
     const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
@@ -76,32 +89,25 @@ export const TableOfContents: React.FC = () => {
       aria-label="Índice de contenidos de la página"
       className="mb-8 bg-white border border-slate-200 rounded-2xl p-5 shadow-xs transition-all"
     >
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="p-2 bg-indigo-50 rounded-xl text-indigo-600">
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="p-2 bg-indigo-50 rounded-xl text-indigo-600 shrink-0">
             <List className="w-5 h-5" />
           </div>
-          <div>
-            <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
-              Índice Rápido de Contenidos
-              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700">
-                Guía Rápida
-              </span>
-            </h2>
-            <p className="text-xs text-slate-500">
-              Navega directamente a las herramientas, tablas del abecedario y preguntas frecuentes
-            </p>
+          <div className="min-w-0">
+            <h2 className="text-base font-bold text-slate-900">Índice de esta página</h2>
+            <p className="text-xs text-slate-500">Solo muestra secciones disponibles en esta página.</p>
           </div>
         </div>
 
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors shrink-0"
           aria-expanded={isOpen}
           aria-controls="toc-list"
         >
-          <span>{isOpen ? 'Ocultar' : 'Ver Índice'}</span>
+          <span>{isOpen ? 'Ocultar' : 'Ver índice'}</span>
           {isOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
         </button>
       </div>
@@ -112,10 +118,11 @@ export const TableOfContents: React.FC = () => {
             <li key={item.id}>
               <button
                 type="button"
+                data-toc-target={item.id}
                 onClick={() => handleScrollTo(item.id)}
                 className="w-full text-left flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 text-xs sm:text-sm font-medium text-slate-700 hover:text-indigo-600 transition-colors group"
               >
-                <span className="flex items-center gap-2 truncate">
+                <span className="flex items-center gap-2 min-w-0">
                   {item.icon}
                   <span className="truncate group-hover:translate-x-0.5 transition-transform">{item.label}</span>
                 </span>

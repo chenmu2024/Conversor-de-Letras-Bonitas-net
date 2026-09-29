@@ -152,6 +152,31 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
     await expect(page.locator('#mobile-primary-menu')).toHaveCount(0);
   });
 
+  test('Table of contents only exposes targets that exist on the current page', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('#tabla-de-contenidos-nav button[aria-controls="toc-list"]').click();
+
+    const tocButtons = page.locator('#toc-list button[data-toc-target]');
+    const count = await tocButtons.count();
+    expect(count).toBeGreaterThan(3);
+
+    for (let i = 0; i < count; i++) {
+      const target = await tocButtons.nth(i).getAttribute('data-toc-target');
+      expect(target).toBeTruthy();
+      await expect(page.locator(`#${target}`)).toHaveCount(1);
+    }
+
+    await expect(page.getByRole('button', { name: /Espacio invisible/i })).toHaveCount(0);
+  });
+
+  test('Route-specific table of contents includes enabled anchored modules', async ({ page }) => {
+    await page.goto('/letras-para-instagram/');
+    await page.locator('#tabla-de-contenidos-nav button[aria-controls="toc-list"]').click();
+
+    await expect(page.getByRole('button', { name: /Espacio invisible/i })).toBeVisible();
+    await expect(page.getByRole('button', { name: /Símbolos y caracteres/i })).toBeVisible();
+  });
+
   test('RelatedSilosSection renders clean anchor tags without hashes', async ({ page }) => {
     await page.goto('/letras-para-instagram/');
 
@@ -244,7 +269,12 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
     await expect(page.locator('#btn-open-mixer')).toBeVisible();
     await expect(page.locator('[id^="btn-select-"]').first()).toBeVisible();
     await expect(page.locator('#btn-view-compact')).toBeVisible();
-    await expect(page.locator('#btn-quick-export-image')).toBeVisible();
+    await expect(page.locator('#btn-advanced-image')).toBeVisible();
+    await expect(page.locator('#btn-advanced-share-link')).toBeVisible();
+    await expect(page.locator('#btn-advanced-preview')).toBeVisible();
+    await expect(page.locator('#btn-paste-clipboard')).toHaveCount(0);
+    await expect(page.locator('#btn-clear-text')).toHaveCount(0);
+    await expect(page.locator('#btn-quick-export-image')).toHaveCount(0);
     await expect(page.locator('#btn-speak-main-text')).toBeVisible();
     await expect(page.getByText('Atajos de estilo:', { exact: true })).toBeVisible();
 

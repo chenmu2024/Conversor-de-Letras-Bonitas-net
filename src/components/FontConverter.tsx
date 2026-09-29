@@ -723,12 +723,15 @@ export const FontConverter: React.FC<FontConverterProps> = ({
                   onOpenShareModal={() => setShareModalData({ text: inputText || 'Letras Bonitas' })}
                   lastDeletedText={lastDeletedText}
                   onUndoClear={handleUndoClear}
+                  showClipboardActions={false}
+                  showShareExportActions={false}
                 />
               </div>
 
               <div className="flex items-center gap-2 flex-wrap pt-3">
                 <button
                   type="button"
+                  id="btn-advanced-share-link"
                   onClick={handleCopyShareLink}
                   className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-indigo-50 border border-slate-200 hover:border-indigo-300 text-slate-700 hover:text-indigo-700 font-bold text-xs shadow-2xs transition-all active:scale-95"
                   title="Copiar enlace directo con este texto para compartir en WhatsApp, bio o redes"
@@ -739,6 +742,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
 
                 <button
                   type="button"
+                  id="btn-advanced-image"
                   onClick={() => setPosterModalOpen(true)}
                   className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs shadow-xs transition-all active:scale-95"
                   title="Crear imagen PNG con diseño para Instagram Stories y Estados de WhatsApp"
@@ -749,6 +753,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
 
                 <button
                   type="button"
+                  id="btn-advanced-preview"
                   onClick={() => setSimulatorModalOpen(true)}
                   className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-purple-50 text-purple-700 font-extrabold text-xs border border-purple-200 transition-all active:scale-95"
                 >

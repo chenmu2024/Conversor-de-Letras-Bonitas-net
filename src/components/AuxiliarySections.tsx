@@ -59,7 +59,7 @@ export const AuxiliarySections: React.FC<AuxiliarySectionsProps> = ({
     <div className="space-y-8">
       {/* 1. Core SEO Content & Editorial Trust (Guaranteed for Search Engines and Crawlers) */}
       <div className="mt-8">
-        <TableOfContents />
+        <TableOfContents currentRoute={currentRoute} />
       </div>
 
       <div className="mt-6">

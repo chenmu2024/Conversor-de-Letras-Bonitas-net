@@ -32,6 +32,8 @@ interface QuickActionBarProps {
   onOpenShareModal?: () => void;
   lastDeletedText?: string | null;
   onUndoClear?: () => void;
+  showClipboardActions?: boolean;
+  showShareExportActions?: boolean;
 }
 
 export const QuickActionBar: React.FC<QuickActionBarProps> = ({
@@ -45,6 +47,8 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
   onOpenShareModal,
   lastDeletedText,
   onUndoClear,
+  showClipboardActions = true,
+  showShareExportActions = true,
 }) => {
   const [copiedLink, setCopiedLink] = useState(false);
   const [downloaded, setDownloaded] = useState(false);
@@ -272,6 +276,8 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
             <span>🎲 Sorpréndeme</span>
           </button>
 
+          {showClipboardActions && (
+            <>
           <button
             type="button"
             id="btn-paste-clipboard"
@@ -308,6 +314,8 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
               <span>Deshacer Borrado</span>
             </button>
           )}
+            </>
+          )}
         </div>
       </div>
 
@@ -320,7 +328,7 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
           </div>
 
           <div className="flex items-center gap-2 flex-wrap">
-            {onOpenImageExport && (
+            {showShareExportActions && onOpenImageExport && (
               <button
                 type="button"
                 id="btn-quick-export-image"
@@ -333,7 +341,7 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
               </button>
             )}
 
-            {onOpenShareModal ? (
+            {showShareExportActions && (onOpenShareModal ? (
               <button
                 type="button"
                 id="btn-quick-viral-share"
@@ -358,8 +366,9 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
                 <Send className="w-3.5 h-3.5 text-emerald-600" />
                 <span>WhatsApp</span>
               </button>
-            )}
+            ))}
 
+            {showShareExportActions && (
             <button
               type="button"
               id="btn-share-link"
@@ -383,6 +392,7 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
                 </>
               )}
             </button>
+            )}
 
             <button
               type="button"
