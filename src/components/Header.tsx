@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PageRoute } from '../types';
 import { ROUTE_CONFIGS } from '../data/routeConfigs';
 import { 
@@ -39,6 +39,25 @@ export const Header: React.FC<HeaderProps> = ({
   const [copiedSpace, setCopiedSpace] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [desktopMenuOpen, setDesktopMenuOpen] = useState<string | null>(null);
+
+  useEffect(() => {
+    setDesktopMenuOpen(null);
+    setMobileMenuOpen(false);
+  }, [currentRoute]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setDesktopMenuOpen(null);
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, []);
 
   const handleCopyInvisibleSpace = async () => {
     try {
@@ -201,9 +220,12 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Mobile menu toggle */}
             <button
               id="mobile-menu-toggle-btn"
+              type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="lg:hidden p-2 rounded-xl text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-colors"
-              aria-label="Abrir menú de categorías"
+              aria-label={mobileMenuOpen ? 'Cerrar menú de categorías' : 'Abrir menú de categorías'}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-primary-menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -245,8 +267,23 @@ export const Header: React.FC<HeaderProps> = ({
                 >
                   <button
                     type="button"
+                    id={`nav-group-${group.label.toLowerCase().replace(/\s+/g, '-')}`}
                     aria-expanded={open}
+                    aria-haspopup="menu"
+                    aria-controls={`nav-menu-${group.label.toLowerCase().replace(/\s+/g, '-')}`}
                     onClick={() => setDesktopMenuOpen(open ? null : group.label)}
+                    onKeyDown={(event) => {
+                      if (event.key === 'ArrowDown') {
+                        event.preventDefault();
+                        setDesktopMenuOpen(group.label);
+                        requestAnimationFrame(() => {
+                          const menu = document.getElementById(
+                            `nav-menu-${group.label.toLowerCase().replace(/\s+/g, '-')}`
+                          );
+                          menu?.querySelector<HTMLAnchorElement>('a')?.focus();
+                        });
+                      }
+                    }}
                     className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
                       active
                         ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-600/30'
@@ -259,6 +296,9 @@ export const Header: React.FC<HeaderProps> = ({
                   </button>
 
                   <div
+                    id={`nav-menu-${group.label.toLowerCase().replace(/\s+/g, '-')}`}
+                    role="menu"
+                    aria-labelledby={`nav-group-${group.label.toLowerCase().replace(/\s+/g, '-')}`}
                     aria-hidden={!open}
                     className={`absolute left-0 top-full pt-2 z-50 min-w-[250px] ${open ? 'block' : 'hidden'}`}
                   >
@@ -271,6 +311,7 @@ export const Header: React.FC<HeaderProps> = ({
                             key={item.route}
                             id={`nav-item-${item.route}`}
                             href={path}
+                            role="menuitem"
                             onClick={(e) => {
                               e.preventDefault();
                               setDesktopMenuOpen(null);
@@ -303,7 +344,11 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Mobile Drawer Menu: grouped by intent instead of one long flat grid */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-slate-200 bg-white shadow-2xl max-h-[calc(100vh-4rem)] overflow-y-auto">
+        <div
+          id="mobile-primary-menu"
+          aria-label="Navegación móvil"
+          className="lg:hidden border-t border-slate-200 bg-white shadow-2xl max-h-[calc(100vh-4rem)] overflow-y-auto"
+        >
           <div className="px-4 pt-3 pb-5">
             <a
               href="/"

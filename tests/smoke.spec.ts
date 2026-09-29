@@ -115,6 +115,43 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://conversordeletrasbonitas.net/letras-para-free-fire/');
   });
 
+  test('Grouped navigation supports keyboard expansion and Escape dismissal', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto('/');
+
+    const letrasButton = page.getByRole('button', { name: 'Letras', exact: true });
+    await expect(letrasButton).toHaveAttribute('aria-haspopup', 'menu');
+    await expect(letrasButton).toHaveAttribute('aria-expanded', 'false');
+
+    await letrasButton.focus();
+    await page.keyboard.press('ArrowDown');
+    await expect(letrasButton).toHaveAttribute('aria-expanded', 'true');
+
+    const letrasMenu = page.getByRole('menu', { name: 'Letras' });
+    await expect(letrasMenu).toBeVisible();
+    await expect(letrasMenu.getByRole('menuitem').first()).toBeFocused();
+
+    await page.keyboard.press('Escape');
+    await expect(letrasButton).toHaveAttribute('aria-expanded', 'false');
+    await expect(letrasMenu).toBeHidden();
+  });
+
+  test('Mobile navigation exposes expanded state and closes with Escape', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/');
+
+    const toggle = page.locator('#mobile-menu-toggle-btn');
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+
+    await toggle.click();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    await expect(page.locator('#mobile-primary-menu')).toBeVisible();
+
+    await page.keyboard.press('Escape');
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(page.locator('#mobile-primary-menu')).toHaveCount(0);
+  });
+
   test('RelatedSilosSection renders clean anchor tags without hashes', async ({ page }) => {
     await page.goto('/letras-para-instagram/');
 
