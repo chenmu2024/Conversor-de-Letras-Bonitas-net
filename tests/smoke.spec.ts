@@ -162,12 +162,14 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
 
     await expect(page.locator('#btn-open-mixer')).toHaveCount(0);
     await expect(page.locator('#btn-view-compact')).toHaveCount(0);
+    await expect(page.getByText('Atajos de estilo:', { exact: true })).toHaveCount(0);
 
     await toggle.click();
     await expect(toggle).toHaveAttribute('aria-expanded', 'true');
     await expect(page.locator('#btn-open-mixer')).toBeVisible();
     await expect(page.locator('#btn-view-compact')).toBeVisible();
     await expect(page.locator('#btn-quick-export-image')).toBeVisible();
+    await expect(page.getByText('Atajos de estilo:', { exact: true })).toBeVisible();
 
     await toggle.click();
     await expect(toggle).toHaveAttribute('aria-expanded', 'false');

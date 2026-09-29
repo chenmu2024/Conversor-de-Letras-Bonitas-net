@@ -751,7 +751,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
                     : 'bg-white text-slate-700 hover:bg-slate-100/80 border border-slate-200/90 shadow-2xs'
                 }`}
               >
-                <span>{cat.sample}</span>
+                <span title={cat.sample}>{cat.label}</span>
                 {count !== undefined && (
                   <span
                     className={`px-1.5 py-0.2 rounded-full text-[10px] font-black ${
@@ -793,8 +793,8 @@ export const FontConverter: React.FC<FontConverterProps> = ({
             )}
           </div>
 
-          {/* Quick Style Tag Chips */}
-          <div className="flex items-center gap-1.5 overflow-x-auto text-[11px] font-bold no-scrollbar py-0.5">
+          {/* Keep favorites visible; style-search shortcuts live in advanced tools */}
+          <div className="flex items-center gap-1.5 text-[11px] font-bold">
             {favorites.length > 0 && (
               <button
                 type="button"
@@ -816,32 +816,6 @@ export const FontConverter: React.FC<FontConverterProps> = ({
                 </span>
               </button>
             )}
-
-            {[
-              { label: '𝓒ursivas', q: 'cursiva' },
-              { label: '𝕲óticas', q: 'gotica' },
-              { label: '👑 Alas/Nick', q: 'alas' },
-              { label: '🅒írculos', q: 'circulo' },
-              { label: '⚡ Insano', q: 'insano' },
-              { label: '━ Rayado', q: 'tachado' },
-              { label: '🔄 Invertido', q: 'invertida' },
-            ].map((tag) => (
-              <button
-                key={tag.q}
-                type="button"
-                onClick={() => {
-                  setShowOnlyFavorites(false);
-                  setSearchQuery(searchQuery === tag.q ? '' : tag.q);
-                }}
-                className={`px-2.5 py-1 rounded-lg transition-all shrink-0 ${
-                  searchQuery.toLowerCase().includes(tag.q)
-                    ? 'bg-indigo-600 text-white shadow-2xs'
-                    : 'bg-slate-100/90 text-slate-600 hover:bg-slate-200'
-                }`}
-              >
-                {tag.label}
-              </button>
-            ))}
           </div>
 
           {advancedToolsOpen && (
@@ -849,6 +823,37 @@ export const FontConverter: React.FC<FontConverterProps> = ({
               id="advanced-result-controls"
               className="basis-full flex items-center justify-between gap-3 flex-wrap pt-2.5 mt-0.5 border-t border-slate-200/80"
             >
+              <div className="basis-full flex items-center gap-1.5 overflow-x-auto text-[11px] font-bold no-scrollbar pb-1">
+                <span className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider shrink-0 mr-1">
+                  Atajos de estilo:
+                </span>
+                {[
+                  { label: '𝓒ursivas', q: 'cursiva' },
+                  { label: '𝕲óticas', q: 'gotica' },
+                  { label: '👑 Alas/Nick', q: 'alas' },
+                  { label: '🅒írculos', q: 'circulo' },
+                  { label: '⚡ Insano', q: 'insano' },
+                  { label: '━ Rayado', q: 'tachado' },
+                  { label: '🔄 Invertido', q: 'invertida' },
+                ].map((tag) => (
+                  <button
+                    key={tag.q}
+                    type="button"
+                    onClick={() => {
+                      setShowOnlyFavorites(false);
+                      setSearchQuery(searchQuery === tag.q ? '' : tag.q);
+                    }}
+                    className={`px-2.5 py-1 rounded-lg transition-all shrink-0 ${
+                      searchQuery.toLowerCase().includes(tag.q)
+                        ? 'bg-indigo-600 text-white shadow-2xs'
+                        : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                    }`}
+                  >
+                    {tag.label}
+                  </button>
+                ))}
+              </div>
+
               {/* Result layout, zoom and multi-select */}
               <div className="flex items-center gap-2 flex-wrap">
                 <button
