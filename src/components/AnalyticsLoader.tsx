@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   ANALYTICS_CONSENT_EVENT,
   hasAnalyticsConsent,
+  trackEvent,
 } from '../utils/analytics';
 
 type GoogleAnalyticsWindow = Window & {

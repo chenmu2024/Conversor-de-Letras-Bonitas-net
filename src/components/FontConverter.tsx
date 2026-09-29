@@ -1104,9 +1104,18 @@ export const FontConverter: React.FC<FontConverterProps> = ({
                         fontSize={fontSize}
                         onToggleFavorite={onToggleFavorite}
                         onToggleSelect={advancedToolsOpen || selectedFontIds.length > 0 ? (id) => handleToggleSelect(id) : undefined}
-                        onPreview={onPreview}
-                        onExportImage={(text, name) => setImageExportData({ text, fontName: name })}
-                        onShareText={(text, name) => setShareModalData({ text, fontName: name })}
+                        onPreview={(text, name) => {
+                          trackEvent('preview_opened', { source: 'font_result', font_name: name, route: currentRoute });
+                          onPreview(text, name);
+                        }}
+                        onExportImage={(text, name) => {
+                          trackEvent('image_exported', { source: 'font_result', font_name: name, route: currentRoute });
+                          setImageExportData({ text, fontName: name });
+                        }}
+                        onShareText={(text, name) => {
+                          trackEvent('font_shared', { source: 'font_result', font_name: name, route: currentRoute });
+                          setShareModalData({ text, fontName: name });
+                        }}
                       />
                     </Suspense>
                   </div>
