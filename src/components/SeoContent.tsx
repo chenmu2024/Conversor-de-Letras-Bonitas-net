@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { PageRoute } from '../types';
+import { FONT_COUNT_PLUS } from '../constants/siteStats';
 import { 
   CheckCircle2, 
   HelpCircle, 
@@ -35,7 +36,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
       title: 'Conversor de Letras Bonitas y Fuentes para Redes Sociales',
       subtitle: 'Convierte texto normal en estilos Unicode listos para copiar y pegar en redes, chats y juegos.',
       description:
-        'El Conversor de Letras Bonitas transforma cualquier frase en 90+ estilos basados en caracteres Unicode. Puedes probar cursivas, góticas, estilos aesthetic y opciones para nicks directamente en el navegador, sin instalar fuentes ni aplicaciones.',
+        `El Conversor de Letras Bonitas transforma cualquier frase en ${FONT_COUNT_PLUS} estilos basados en caracteres Unicode. Puedes probar cursivas, góticas, estilos aesthetic y opciones para nicks directamente en el navegador, sin instalar fuentes ni aplicaciones.`,
       tips: [
         'Prueba cursivas y estilos finos para nombres o biografías de Instagram.',
         'Combina alas ꧁ ꧂, coronas 亗 y tipografías gamer para crear nicks de Free Fire.',

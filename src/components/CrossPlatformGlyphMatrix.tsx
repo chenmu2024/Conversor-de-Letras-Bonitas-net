@@ -10,31 +10,31 @@ export const CrossPlatformGlyphMatrix: React.FC = () => {
       style: 'Cursiva Elegante',
       unicode: '𝒯𝑒𝓍𝓉𝑜 𝐸𝓁𝑒𝑔𝒶𝓃𝓉𝑒',
       block: 'Mathematical Script (U+1D4B6)',
-      ios: 'Excelente (San Francisco CoreText)',
-      android: 'Excelente (Noto Serif/Sans)',
-      windows: 'Excelente (Segoe UI Symbol)',
-      freeFire: 'Compatible en Nombres & Chat',
-      status: '100% Universal',
+      ios: 'Depende de la fuente y versión',
+      android: 'Depende de la fuente y versión',
+      windows: 'Depende de la fuente y versión',
+      freeFire: 'Sin verificación manual reciente',
+      status: 'Referencia Unicode',
     },
     {
       style: 'Gótica Medieval / Fraktur',
       unicode: '𝔊𝔬𝔱𝔦𝔠 𝔖𝔱𝔶𝔩𝔢',
       block: 'Mathematical Fraktur (U+1D504)',
-      ios: 'Excelente (Apple Typographic Engine)',
-      android: 'Excelente (HarfBuzz Renderer)',
-      windows: 'Excelente (DirectWrite)',
-      freeFire: 'Compatible en Clan & Biografía',
-      status: '100% Universal',
+      ios: 'Depende de la fuente y versión',
+      android: 'Depende de la fuente y versión',
+      windows: 'Depende de la fuente y versión',
+      freeFire: 'Sin verificación manual reciente',
+      status: 'Referencia Unicode',
     },
     {
       style: 'Small Caps (Minúsculas Mayúsculas)',
       unicode: 'ᴛᴇxᴛᴏ ᴇᴊᴇᴄᴜᴛɪᴠᴏ',
       block: 'Phonetic Extensions (U+1D00)',
-      ios: 'Nativo sin distorsión',
-      android: 'Nativo sin distorsión',
-      windows: 'Nativo sin distorsión',
-      freeFire: 'Muy utilizado en Nicks Pro',
-      status: '100% Universal',
+      ios: 'Referencia Unicode; puede variar',
+      android: 'Referencia Unicode; puede variar',
+      windows: 'Referencia Unicode; puede variar',
+      freeFire: 'Sin verificación manual reciente',
+      status: 'Referencia Unicode',
     },
     {
       style: 'Espacio Invisible Gamer',
@@ -43,18 +43,18 @@ export const CrossPlatformGlyphMatrix: React.FC = () => {
       ios: 'Oculto / Espacio en Blanco',
       android: 'Oculto / Espacio en Blanco',
       windows: 'Oculto / Espacio en Blanco',
-      freeFire: 'Válido para Nicks Invisibles',
-      status: '100% Gamer Safe',
+      freeFire: 'Sujeto a reglas actuales del juego',
+      status: 'Referencia técnica',
     },
     {
       style: 'Circulado / Bubble',
       unicode: 'Ⓣⓔⓧⓣⓞ',
       block: 'Enclosed Alphanumerics (U+24B6)',
-      ios: 'Renderizado circular nítido',
-      android: 'Renderizado circular nítido',
-      windows: 'Renderizado circular nítido',
-      freeFire: 'Compatible en Descripciones',
-      status: '100% Universal',
+      ios: 'Depende de la fuente y versión',
+      android: 'Depende de la fuente y versión',
+      windows: 'Depende de la fuente y versión',
+      freeFire: 'Sin verificación manual reciente',
+      status: 'Referencia Unicode',
     },
   ];
 
@@ -84,7 +84,7 @@ export const CrossPlatformGlyphMatrix: React.FC = () => {
       </div>
 
       <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-        A diferencia de los archivos de tipografía descargables (.ttf o .otf), los caracteres generados en nuestra plataforma forman parte del estándar oficial <strong>Unicode ISO/IEC 10646</strong>. Esto significa que cada sistema operativo ya incluye el soporte nativo en su memoria ROM. A continuación, se detalla la matriz de compatibilidad técnica auditada por nuestro equipo:
+        A diferencia de los archivos de tipografía descargables (.ttf o .otf), los caracteres generados en nuestra plataforma forman parte del estándar oficial <strong>Unicode ISO/IEC 10646</strong>. Esto permite que muchos sistemas modernos puedan renderizarlos cuando disponen de una fuente compatible. A continuación se muestra una referencia técnica basada en el estándar Unicode; no equivale a una prueba manual reciente en cada plataforma:
       </p>
 
       {/* Responsive Matrix Table */}

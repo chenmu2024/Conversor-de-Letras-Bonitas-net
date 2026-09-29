@@ -1,36 +1,36 @@
 import React from 'react';
-import { ShieldCheck, CheckCircle2, Info } from 'lucide-react';
+import { ShieldCheck, Info } from 'lucide-react';
 
 const COMPATIBILITY_DATA = [
   {
     platform: 'Instagram (Bio, Historias, DMs)',
-    compatibility: 'Amplia compatibilidad',
-    desc: 'Compatible con Cursiva, Gótica, Negrita, Círculos y Símbolos especiales sin necesidad de apps externas.',
+    compatibility: 'Referencia Unicode',
+    desc: 'Estos estilos se basan en caracteres Unicode; su visualización final depende de la app, versión y fuentes disponibles.',
   },
   {
     platform: 'WhatsApp (Estados y Nombres)',
-    compatibility: 'Amplia compatibilidad',
-    desc: 'Los caracteres Unicode son reconocidos de forma habitual en Android, iPhone y WhatsApp Web.',
+    compatibility: 'Referencia Unicode',
+    desc: 'WhatsApp puede mostrar muchos caracteres Unicode, pero el resultado depende del sistema, la versión y la fuente disponible.',
   },
   {
     platform: 'TikTok (Biografía y Comentarios)',
-    compatibility: 'Compatibilidad habitual',
-    desc: 'Acepta estilos aesthetic, caracteres con alas y símbolos de estrellas en perfiles y comentarios.',
+    compatibility: 'Referencia de uso',
+    desc: 'La aceptación de caracteres especiales puede cambiar con las reglas y versiones de TikTok; conviene probar el texto antes de publicarlo.',
   },
   {
     platform: 'Free Fire / Garena Nick',
-    compatibility: 'Compatible según reglas',
-    desc: 'Permite el uso de espacio invisible Hangul Filler [ㅤ], cruces y decoraciones con corchetes sujetos a las normas del juego.',
+    compatibility: 'Sujeto a reglas',
+    desc: 'La aceptación del Hangul Filler, cruces y otros símbolos depende de las reglas y filtros vigentes del juego.',
   },
   {
     platform: 'iOS (iPhone / iPad / Mac)',
-    compatibility: 'Compatible con Unicode moderno',
-    desc: 'Apple incluye compatibilidad con el estándar Unicode en todo el sistema operativo.',
+    compatibility: 'Soporte variable',
+    desc: 'iOS implementa Unicode, pero la representación concreta depende de la fuente y de la versión del sistema.',
   },
   {
     platform: 'Android (Samsung, Xiaomi, Motorola)',
     compatibility: 'Puede variar según dispositivo',
-    desc: 'Versiones modernas de Android muestran los caracteres correctamente, aunque versiones muy antiguas pueden requerir actualización.',
+    desc: 'Android implementa Unicode, pero fabricantes, versiones y fuentes del sistema pueden producir resultados distintos.'
   },
 ];
 
@@ -62,8 +62,8 @@ export const CompatibilitySection: React.FC = () => {
             <div>
               <div className="flex items-center justify-between gap-2 mb-2">
                 <span className="text-xs font-bold text-slate-900">{item.platform}</span>
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-extrabold">
-                  <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[10px] font-extrabold">
+                  <Info className="w-3 h-3 text-slate-500" />
                   <span>{item.compatibility}</span>
                 </span>
               </div>

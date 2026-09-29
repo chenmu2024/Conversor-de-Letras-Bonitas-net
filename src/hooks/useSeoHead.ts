@@ -110,6 +110,48 @@ export function useSeoHead(currentRoute: PageRoute) {
       });
     }
 
+    const informationalType =
+      currentRoute === 'sobre-nosotros'
+        ? 'AboutPage'
+        : currentRoute === 'contacto'
+          ? 'ContactPage'
+          : ['politica-de-privacidad', 'politica-de-cookies', 'terminos-y-condiciones'].includes(currentRoute)
+            ? 'WebPage'
+            : null;
+
+    const isToolRoute = !informationalType && currentRoute !== '404';
+
+    const primaryPageNode = isToolRoute
+      ? {
+          '@type': 'WebApplication',
+          '@id': `${canonicalUrl}#webapp`,
+          name: routeData.h1,
+          alternateName: 'Conversor de Letras Bonitas y Fuentes Online',
+          url: canonicalUrl,
+          applicationCategory: 'UtilitiesApplication',
+          operatingSystem: 'All (iOS, Android, Windows, macOS, Linux)',
+          browserRequirements: 'Requires JavaScript. Requires HTML5.',
+          description: routeData.metaDescription,
+          inLanguage: 'es',
+          isAccessibleForFree: true,
+          offers: {
+            '@type': 'Offer',
+            price: '0',
+            priceCurrency: 'USD',
+          },
+        }
+      : informationalType
+        ? {
+            '@type': informationalType,
+            '@id': `${canonicalUrl}#page`,
+            name: routeData.h1,
+            url: canonicalUrl,
+            description: routeData.metaDescription,
+            inLanguage: 'es',
+            isPartOf: { '@id': `${origin}/#website` },
+          }
+        : null;
+
     const graphItems: any[] = [
       {
         '@type': 'WebSite',
@@ -127,24 +169,7 @@ export function useSeoHead(currentRoute: PageRoute) {
         logo: `${origin}/favicon.svg`,
         image: `${origin}/og-image.png`,
       },
-      {
-        '@type': 'WebApplication',
-        '@id': `${canonicalUrl}#webapp`,
-        name: routeData.h1,
-        alternateName: 'Conversor de Letras Bonitas y Fuentes Online',
-        url: canonicalUrl,
-        applicationCategory: 'UtilitiesApplication',
-        operatingSystem: 'All (iOS, Android, Windows, macOS, Linux)',
-        browserRequirements: 'Requires JavaScript. Requires HTML5.',
-        description: routeData.metaDescription,
-        inLanguage: 'es',
-        isAccessibleForFree: true,
-        offers: {
-          '@type': 'Offer',
-          price: '0',
-          priceCurrency: 'USD',
-        },
-      },
+      ...(primaryPageNode ? [primaryPageNode] : []),
       {
         '@type': 'BreadcrumbList',
         '@id': `${canonicalUrl}#breadcrumb`,

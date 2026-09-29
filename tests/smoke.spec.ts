@@ -91,6 +91,29 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
     }
   });
 
+  test('Structured data uses page-appropriate schema types', async ({ page }) => {
+    const cases = [
+      { path: '/sobre-nosotros/', expected: 'AboutPage' },
+      { path: '/contacto/', expected: 'ContactPage' },
+      { path: '/politica-de-privacidad/', expected: 'WebPage' },
+    ];
+
+    for (const item of cases) {
+      await page.goto(item.path);
+      const jsonText = await page.locator('#seo-jsonld').textContent();
+      const schema = JSON.parse(jsonText || '{}');
+      const types = (schema['@graph'] || []).map((node: any) => node['@type']);
+      expect(types).toContain(item.expected);
+      expect(types).not.toContain('WebApplication');
+    }
+
+    await page.goto('/ruta-schema-404/');
+    const jsonText = await page.locator('#seo-jsonld').textContent();
+    const schema = JSON.parse(jsonText || '{}');
+    const types = (schema['@graph'] || []).map((node: any) => node['@type']);
+    expect(types).not.toContain('WebApplication');
+  });
+
   // P1-4: Browser Back and Forward history navigation with complete metadata validation
   test('Browser Back and Forward history navigation preserves clean URLs, H1, and Canonical tags', async ({ page }) => {
     await page.goto('/');

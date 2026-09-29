@@ -1,6 +1,7 @@
 import React from 'react';
 import { PageRoute } from '../types';
 import { Sparkles, Instagram, MessageCircle, Flame, Wand2 } from 'lucide-react';
+import { FONT_COUNT_PLUS } from '../constants/siteStats';
 
 export interface RouteHeaderInfo {
   title: string;
@@ -13,9 +14,9 @@ export interface RouteHeaderInfo {
 export const ROUTE_HEADERS: Record<PageRoute, RouteHeaderInfo> = {
   inicio: {
     title: 'Conversor de Letras Bonitas y Fuentes para Copiar y Pegar',
-    subtitle: 'Bienvenido al Conversor de Letras Bonitas online: transforma cualquier texto en 90+ fuentes de letras bonitas, cursivas y nicks gamer para copiar y pegar con un solo clic.',
+    subtitle: `Bienvenido al Conversor de Letras Bonitas online: transforma cualquier texto en ${FONT_COUNT_PLUS} fuentes de letras bonitas, cursivas y nicks gamer para copiar y pegar con un solo clic.`,
     icon: <Sparkles className="w-4 h-4 text-indigo-600" />,
-    badge: 'Conversor de Letras Bonitas · 90+ Fuentes',
+    badge: `Conversor de Letras Bonitas · ${FONT_COUNT_PLUS} Fuentes`,
     gradient: 'from-indigo-600 to-violet-600',
   },
   instagram: {
@@ -48,7 +49,7 @@ export const ROUTE_HEADERS: Record<PageRoute, RouteHeaderInfo> = {
   },
   'letras-chidas': {
     title: 'Letras Chidas para Copiar y Pegar (Nicks, TikTok y Free Fire)',
-    subtitle: 'Generador número 1 de letras chidas, fuentes aesthetic, nicks insanos con alas y tipografías perronas para México y LATAM.',
+    subtitle: 'Generador de letras chidas, fuentes aesthetic, nicks insanos con alas y tipografías perronas para México y LATAM.',
     icon: <Flame className="w-4 h-4 text-amber-500" />,
     badge: '🇲🇽 Top Letras Chidas',
     gradient: 'from-amber-600 via-orange-600 to-red-600',
