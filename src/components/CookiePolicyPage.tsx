@@ -31,7 +31,7 @@ export const CookiePolicyPage: React.FC = () => {
           <Sliders className="w-6 h-6 text-indigo-600 shrink-0" />
           <div>
             <div className="font-bold text-sm text-slate-900">Panel de Control y Preferencias de Cookies</div>
-            <p className="text-xs text-slate-600">Puedes gestionar las preferencias disponibles desde este panel. Si en el futuro se habilitan servicios analíticos o publicitarios, también podrás gestionar su consentimiento desde aquí.</p>
+            <p className="text-xs text-slate-600">Puedes gestionar las preferencias disponibles desde este panel. Si se habilitan servicios publicitarios opcionales, también podrás gestionar su consentimiento desde aquí.</p>
           </div>
         </div>
         <button
@@ -64,7 +64,7 @@ export const CookiePolicyPage: React.FC = () => {
           </h2>
           <div className="space-y-2 text-xs sm:text-sm text-amber-900 leading-relaxed">
             <p>
-              Actualmente el conversor funciona mediante almacenamiento local y cookies técnicas. Si en el futuro se incorporan servicios publicitarios de terceros como <strong>Google AdSense</strong> o herramientas analíticas:
+              Actualmente el conversor funciona mediante almacenamiento local y cookies técnicas. Si en el futuro se incorporan servicios publicitarios de terceros como <strong>Google AdSense</strong>:
             </p>
             <ul className="list-disc pl-5 space-y-1.5">
               <li>
@@ -126,13 +126,6 @@ export const CookiePolicyPage: React.FC = () => {
                   <td className="p-3"><span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Técnica</span></td>
                 </tr>
                 <tr>
-                  <td className="p-3 font-mono font-bold text-indigo-600">letras_cookies_analytics</td>
-                  <td className="p-3">Almacenamiento local (localStorage)</td>
-                  <td className="p-3">Guarda la preferencia del usuario respecto a servicios analíticos opcionales. Actualmente puede permanecer en false si no hay analítica habilitada.</td>
-                  <td className="p-3">Persistente local</td>
-                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Preferencia</span></td>
-                </tr>
-                <tr>
                   <td className="p-3 font-mono font-bold text-indigo-600">letras_cookies_ads</td>
                   <td className="p-3">Almacenamiento local (localStorage)</td>
                   <td className="p-3">Guarda la preferencia del usuario respecto a servicios publicitarios opcionales. Actualmente puede permanecer en false si no hay publicidad habilitada.</td>
@@ -161,13 +154,6 @@ export const CookiePolicyPage: React.FC = () => {
                   <td className="p-3"><span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Funcional</span></td>
                 </tr>
                 <tr>
-                  <td className="p-3 font-mono font-bold text-indigo-600">conversor_feedback</td>
-                  <td className="p-3">Almacenamiento local (localStorage)</td>
-                  <td className="p-3">Guarda localmente la valoración simple Sí / No de la herramienta.</td>
-                  <td className="p-3">Persistente local</td>
-                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Funcional</span></td>
-                </tr>
-                <tr>
                   <td className="p-3 font-mono font-bold text-indigo-600">feedback_*</td>
                   <td className="p-3">Almacenamiento local (localStorage)</td>
                   <td className="p-3">Guarda localmente si una guía concreta fue marcada como útil (clave dinámica según el artículo).</td>
@@ -182,7 +168,7 @@ export const CookiePolicyPage: React.FC = () => {
           <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5 text-xs text-slate-600 mt-3">
             <strong className="text-slate-800">Cookies que podrían utilizarse si se habilitan servicios publicitarios o de terceros:</strong>
             <p>
-              Si en el futuro se activan servicios de publicidad como Google AdSense o herramientas analíticas, los proveedores externos pueden utilizar cookies HTTP en el navegador (como <code>__gads</code>, <code>__gpi</code>, <code>IDE</code> o <code>DSID</code>) según sus políticas y las opciones de consentimiento del usuario para medir impresiones y prevenir fraudes.
+              Si en el futuro se activan servicios de publicidad como Google AdSense, los proveedores externos pueden utilizar cookies HTTP en el navegador (como <code>__gads</code>, <code>__gpi</code>, <code>IDE</code> o <code>DSID</code>) según sus políticas y las opciones de consentimiento del usuario para mostrar anuncios, medir impresiones y prevenir fraudes.
             </p>
           </div>
         </section>

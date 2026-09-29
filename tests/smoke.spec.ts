@@ -395,6 +395,31 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
     }
   });
 
+  test('Privacy and cookie pages match the no-analytics product configuration', async ({ page }) => {
+    await page.goto('/politica-de-cookies/');
+    await expect(page.getByText('Cookies Analíticas', { exact: true })).toHaveCount(0);
+    await expect(page.getByText('letras_cookies_analytics', { exact: true })).toHaveCount(0);
+    await expect(page.getByText('conversor_feedback', { exact: true })).toHaveCount(0);
+
+    await page.goto('/politica-de-privacidad/');
+    await expect(page.getByText('Cookies Analíticas', { exact: true })).toHaveCount(0);
+    await expect(page.getByText(/formulario de contacto/i)).toBeVisible();
+  });
+
+  test('Mobile footer groups stay compact and expand accessibly', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/');
+
+    const socialToggle = page.getByRole('button', { name: 'Por Red Social', exact: true });
+    await expect(socialToggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(page.locator('#footer-social-links')).toBeHidden();
+
+    await socialToggle.click();
+    await expect(socialToggle).toHaveAttribute('aria-expanded', 'true');
+    await expect(page.locator('#footer-social-links')).toBeVisible();
+    await expect(page.locator('#footer-social-links a[href="/letras-para-instagram/"]')).toBeVisible();
+  });
+
   // P0-4 & P0-5: 404 UI and Robots Noindex validation
   test('Unknown route renders 404 UI with noindex meta tag', async ({ page }) => {
     // Note: Local Vite preview serves index.html fallback for client-side routing.

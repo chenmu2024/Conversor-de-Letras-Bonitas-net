@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PageRoute } from '../types';
 import { ROUTE_CONFIGS } from '../data/routeConfigs';
-import { Type, ArrowUp, Sparkles, Heart } from 'lucide-react';
+import { Type, ArrowUp, Sparkles, ChevronDown } from 'lucide-react';
 import { FONT_COUNT_PLUS } from '../constants/siteStats';
 
 interface FooterProps {
@@ -9,6 +9,38 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
+  const [openSections, setOpenSections] = useState<Record<'social' | 'styles' | 'resources', boolean>>({
+    social: false,
+    styles: false,
+    resources: false,
+  });
+
+  const toggleSection = (section: 'social' | 'styles' | 'resources') => {
+    setOpenSections((current) => ({ ...current, [section]: !current[section] }));
+  };
+
+  const mobileSectionHeader = (
+    section: 'social' | 'styles' | 'resources',
+    label: string,
+    controls: string
+  ) => (
+    <>
+      <button
+        type="button"
+        className="md:hidden w-full flex items-center justify-between gap-3 py-2 text-left text-xs font-black text-slate-200 uppercase tracking-widest"
+        aria-expanded={openSections[section]}
+        aria-controls={controls}
+        onClick={() => toggleSection(section)}
+      >
+        <span>{label}</span>
+        <ChevronDown className={`w-4 h-4 transition-transform ${openSections[section] ? 'rotate-180' : ''}`} />
+      </button>
+      <h3 className="hidden md:block text-xs font-black text-slate-200 uppercase tracking-widest mb-4">
+        {label}
+      </h3>
+    </>
+  );
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -55,10 +87,11 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
 
           {/* Col 2: Redes Sociales Silos */}
           <div>
-            <h3 className="text-xs font-black text-slate-200 uppercase tracking-widest mb-4">
-              Por Red Social
-            </h3>
-            <ul className="space-y-2.5 text-xs font-medium">
+            {mobileSectionHeader('social', 'Por Red Social', 'footer-social-links')}
+            <ul
+              id="footer-social-links"
+              className={`${openSections.social ? 'block' : 'hidden'} md:block space-y-2.5 text-xs font-medium pt-2 md:pt-0`}
+            >
               <li>{renderLink('instagram', 'Letras para Instagram')}</li>
               <li>{renderLink('tiktok', 'Letras para TikTok')}</li>
               <li>{renderLink('whatsapp', 'Letras para WhatsApp')}</li>
@@ -69,10 +102,11 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
 
           {/* Col 3: Estilos de Letras */}
           <div>
-            <h3 className="text-xs font-black text-slate-200 uppercase tracking-widest mb-4">
-              Estilos de Tipografías
-            </h3>
-            <ul className="space-y-2.5 text-xs font-medium">
+            {mobileSectionHeader('styles', 'Estilos de Tipografías', 'footer-style-links')}
+            <ul
+              id="footer-style-links"
+              className={`${openSections.styles ? 'block' : 'hidden'} md:block space-y-2.5 text-xs font-medium pt-2 md:pt-0`}
+            >
               <li>{renderLink('letras-chidas', 'Letras Chidas & Nicks', 'hover:text-amber-400 transition-colors text-left text-amber-300 font-bold block')}</li>
               <li>{renderLink('letras-tatuajes', 'Letras para Tatuajes', 'hover:text-amber-400 transition-colors text-left text-amber-200 font-bold block')}</li>
               <li>{renderLink('nicks-free-fire', 'Nicks Free Fire Insanos', 'hover:text-red-400 transition-colors text-left text-red-300 font-bold block')}</li>
@@ -92,10 +126,11 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
 
           {/* Col 4: Recursos */}
           <div>
-            <h3 className="text-xs font-black text-slate-200 uppercase tracking-widest mb-4">
-              Recursos
-            </h3>
-            <ul className="space-y-2.5 text-xs font-medium">
+            {mobileSectionHeader('resources', 'Recursos', 'footer-resource-links')}
+            <ul
+              id="footer-resource-links"
+              className={`${openSections.resources ? 'block' : 'hidden'} md:block space-y-2.5 text-xs font-medium pt-2 md:pt-0`}
+            >
               <li>{renderLink('compatibilidad-unicode', '🔬 Lab de Compatibilidad Unicode', 'hover:text-indigo-400 transition-colors text-left text-indigo-300 font-bold block')}</li>
               <li>{renderLink('contador-bio', 'Contador Caracteres Bio', 'hover:text-amber-400 transition-colors text-left text-amber-300/90 font-bold block')}</li>
               <li>{renderLink('simbolos', 'Símbolos y Emojis')}</li>

@@ -45,7 +45,7 @@ self.addEventListener('fetch', (event) => {
   // Skip non-GET requests
   if (request.method !== 'GET') return;
 
-  // Never intercept crawler/indexing endpoints or external ad/analytics scripts
+  // Never intercept crawler/indexing endpoints or external advertising/security scripts
   if (
     url.pathname === '/robots.txt' ||
     url.pathname === '/sitemap.xml' ||
@@ -53,7 +53,6 @@ self.addEventListener('fetch', (event) => {
     url.pathname.startsWith('/api/') ||
     url.origin.includes('google') ||
     url.origin.includes('pagead') ||
-    url.origin.includes('analytics') ||
     url.origin.includes('cloudflare')
   ) {
     return;

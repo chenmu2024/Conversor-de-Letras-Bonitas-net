@@ -12,7 +12,6 @@ const SymbolsLibrary = lazy(() => import('./SymbolsLibrary').then(m => ({ defaul
 const SingleLetterExplorer = lazy(() => import('./SingleLetterExplorer').then(m => ({ default: m.SingleLetterExplorer })));
 const ReadyBioTemplates = lazy(() => import('./ReadyBioTemplates').then(m => ({ default: m.ReadyBioTemplates })));
 const SafetyAndUnicodeGuide = lazy(() => import('./SafetyAndUnicodeGuide').then(m => ({ default: m.SafetyAndUnicodeGuide })));
-const CrossPlatformGlyphMatrix = lazy(() => import('./CrossPlatformGlyphMatrix').then(m => ({ default: m.CrossPlatformGlyphMatrix })));
 const EditorialTypographyMasterclass = lazy(() => import('./EditorialTypographyMasterclass').then(m => ({ default: m.EditorialTypographyMasterclass })));
 const AdvancedGuideAndTips = lazy(() => import('./AdvancedGuideAndTips').then(m => ({ default: m.AdvancedGuideAndTips })));
 const ReadyNicknamesSection = lazy(() => import('./ReadyNicknamesSection').then(m => ({ default: m.ReadyNicknamesSection })));
@@ -138,14 +137,6 @@ export const AuxiliarySections: React.FC<AuxiliarySectionsProps> = ({
         <LazyOnVisible minHeight="160px">
           <Suspense fallback={<div className="h-28 animate-pulse bg-slate-100 rounded-3xl" />}>
             <SafetyAndUnicodeGuide />
-          </Suspense>
-        </LazyOnVisible>
-      )}
-
-      {isEnabled('crossPlatformMatrix') && (
-        <LazyOnVisible minHeight="180px">
-          <Suspense fallback={<div className="h-28 animate-pulse bg-slate-100 rounded-3xl" />}>
-            <CrossPlatformGlyphMatrix />
           </Suspense>
         </LazyOnVisible>
       )}

@@ -9,7 +9,6 @@ export type AuxiliaryModule =
   | 'singleLetterExplorer'
   | 'readyBioTemplates'
   | 'safetyGuide'
-  | 'crossPlatformMatrix'
   | 'editorialMasterclass'
   | 'advancedTips'
   | 'readyNicknames'

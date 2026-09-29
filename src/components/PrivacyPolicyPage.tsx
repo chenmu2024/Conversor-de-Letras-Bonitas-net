@@ -72,6 +72,9 @@ export const PrivacyPolicyPage: React.FC = () => {
           <p>
             El sitio web <strong>conversordeletrasbonitas.net</strong> opera como una plataforma gratuita de utilidades tipográficas y procesamiento de glifos Unicode. Actuamos bajo el principio de minimización de datos estipulado en el Artículo 5(1)(c) del Reglamento General de Protección de Datos de la Unión Europea (RGPD / GDPR). Para cualquier asunto relacionado con la privacidad, puede comunicarse a: <span className="font-mono font-bold text-indigo-600" dangerouslySetInnerHTML={{ __html: '<!--email_off-->privacidad@conversordeletrasbonitas.net<!--/email_off-->' }} />.
           </p>
+          <p className="text-xs sm:text-sm text-slate-600">
+            El uso del conversor no requiere registro ni datos personales. Si decides utilizar el formulario de contacto, puedes proporcionar voluntariamente un nombre o nick, una dirección de correo electrónico y el contenido de tu mensaje. Estos datos se utilizan únicamente para gestionar la consulta y pueden ser procesados por los proveedores técnicos necesarios para prestar el servicio de correo.
+          </p>
         </section>
 
         {/* 2. Publicidad de Terceros y Cookies de Google AdSense */}
@@ -131,17 +134,11 @@ export const PrivacyPolicyPage: React.FC = () => {
             <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-black">3</span>
             Tipos de Cookies Utilizadas en Este Sitio
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs pt-1">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs pt-1">
             <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
               <span className="font-bold text-slate-900">Cookies Técnicas / Esenciales</span>
               <p className="text-slate-600">
                 Imprescindibles para recordar sus preferencias de visualización, tema (claro/oscuro) y estado de aceptación del banner de consentimiento.
-              </p>
-            </div>
-            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
-              <span className="font-bold text-slate-900">Cookies Analíticas</span>
-              <p className="text-slate-600">
-                Si están habilitadas, permiten contabilizar visitas y fuentes de tráfico agregadas de forma anónima para medir y mejorar el rendimiento de la aplicación.
               </p>
             </div>
             <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
