@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { ThumbsUp, ThumbsDown, Check } from 'lucide-react';
 
+type AnalyticsWindow = Window & {
+  gtag?: (...args: unknown[]) => void;
+  plausible?: (eventName: string, options?: { props?: Record<string, string> }) => void;
+};
+
 export const UserRatingsSection: React.FC = () => {
   const [feedback, setFeedback] = useState<'yes' | 'no' | null>(null);
+  const [analyticsReady, setAnalyticsReady] = useState(false);
 
   useEffect(() => {
     try {
@@ -10,19 +16,46 @@ export const UserRatingsSection: React.FC = () => {
       if (saved === 'yes' || saved === 'no') {
         setFeedback(saved);
       }
+
+      const consented = localStorage.getItem('letras_cookies_analytics') === 'true';
+      const analyticsWindow = window as AnalyticsWindow;
+      const providerReady =
+        typeof analyticsWindow.gtag === 'function' ||
+        typeof analyticsWindow.plausible === 'function';
+
+      setAnalyticsReady(consented && providerReady);
     } catch {
-      // localStorage may not be available or permitted
+      setAnalyticsReady(false);
     }
   }, []);
 
   const handleFeedback = (val: 'yes' | 'no') => {
     setFeedback(val);
+
     try {
       localStorage.setItem('conversor_feedback', val);
     } catch {
-      // ignore
+      // localStorage may not be available or permitted
+    }
+
+    const analyticsWindow = window as AnalyticsWindow;
+    if (typeof analyticsWindow.gtag === 'function') {
+      analyticsWindow.gtag('event', 'tool_feedback', {
+        value: val,
+        page_path: window.location.pathname,
+      });
+    } else if (typeof analyticsWindow.plausible === 'function') {
+      analyticsWindow.plausible('Tool Feedback', {
+        props: {
+          value: val,
+          page: window.location.pathname,
+        },
+      });
     }
   };
+
+  // Do not ask for feedback if the response cannot actually reach the site owner.
+  if (!analyticsReady) return null;
 
   return (
     <section id="feedback-herramienta" className="mt-12 bg-white rounded-2xl border border-slate-200/80 shadow-sm p-6 sm:p-8">
@@ -32,7 +65,7 @@ export const UserRatingsSection: React.FC = () => {
             ¿Te resultó útil esta herramienta?
           </h2>
           <p className="text-xs sm:text-sm text-slate-600">
-            Tu opinión nos ayuda a seguir mejorando y añadiendo nuevos alfabetos y símbolos.
+            Con tu consentimiento de analítica, esta valoración anónima nos ayuda a priorizar mejoras.
           </p>
         </div>
 

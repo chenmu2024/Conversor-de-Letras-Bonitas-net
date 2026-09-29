@@ -68,16 +68,35 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   }
 
   try {
-    const data = await request.json().catch(() => null) as {
+    const rawBody = await request.text();
+    const actualBodySize = new TextEncoder().encode(rawBody).byteLength;
+
+    if (actualBodySize > MAX_CONTENT_LENGTH) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: 'El tamaño de la petición excede el límite permitido (10 KB).',
+        }),
+        { status: 413, headers: corsHeaders }
+      );
+    }
+
+    let data: {
       name?: string;
       email?: string;
       topic?: string;
       message?: string;
       website?: string; // Honeypot field
       turnstileToken?: string;
-    } | null;
+    } | null = null;
 
-    if (!data) {
+    try {
+      data = JSON.parse(rawBody);
+    } catch {
+      data = null;
+    }
+
+    if (!data || typeof data !== 'object' || Array.isArray(data)) {
       return new Response(
         JSON.stringify({ success: false, error: 'Datos no válidos.' }),
         { status: 400, headers: corsHeaders }
