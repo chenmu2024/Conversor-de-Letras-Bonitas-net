@@ -12,6 +12,7 @@ import { ToastNotification } from './components/ToastNotification';
 import { Footer } from './components/Footer';
 import { ArrowUp, Star } from 'lucide-react';
 import { AnalyticsLoader } from './components/AnalyticsLoader';
+import { trackEvent } from './utils/analytics';
 
 // Lazy load below-the-fold auxiliary sections, interactive sub-studios, and interactive drawer modals
 const SubStudioRouter = lazy(() => import('./components/SubStudioRouter').then(m => ({ default: m.SubStudioRouter })));
@@ -215,6 +216,11 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
       // Remove
       const updated = favorites.filter((f) => f.fontName !== generator.name);
       saveFavorites(updated);
+      trackEvent('font_unfavorited', {
+        font_id: generator.id,
+        font_name: generator.name,
+        route: currentRoute,
+      });
     } else {
       // Add
       const newItem: FavoriteItem = {
@@ -225,6 +231,11 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
         createdAt: Date.now(),
       };
       saveFavorites([newItem, ...favorites]);
+      trackEvent('font_favorited', {
+        font_id: generator.id,
+        font_name: generator.name,
+        route: currentRoute,
+      });
     }
   };
 
@@ -249,7 +260,15 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
   // Sync browser back/forward buttons
   useEffect(() => {
     const handlePopState = () => {
-      setCurrentRoute(resolveRouteFromUrl('inicio'));
+      const route = resolveRouteFromUrl('inicio');
+      setCurrentRoute(route);
+      window.requestAnimationFrame(() => {
+        trackEvent('page_view', {
+          route,
+          page_location: window.location.href,
+          page_title: document.title,
+        });
+      });
     };
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
@@ -270,6 +289,13 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
         // Fallback for sandboxed iframes
       }
     }
+    window.requestAnimationFrame(() => {
+      trackEvent('page_view', {
+        route,
+        page_location: window.location.href,
+        page_title: document.title,
+      });
+    });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 

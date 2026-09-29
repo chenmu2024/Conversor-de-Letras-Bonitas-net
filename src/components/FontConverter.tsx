@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useDeferredValue, Suspense, lazy } from 'react';
+import React, { useState, useMemo, useEffect, useDeferredValue, useRef, Suspense, lazy } from 'react';
 import { PageRoute, TabCategory, FontGenerator, FavoriteItem } from '../types';
 import { ROUTE_CONFIGS } from '../data/routeConfigs';
 import { ROUTE_HEADERS } from '../data/routeHeaders';
@@ -7,6 +7,7 @@ import { FONT_COUNT } from '../constants/siteStats';
 import { FontCard } from './FontCard';
 import { QuickActionBar } from './QuickActionBar';
 import { QuickPresets } from './QuickPresets';
+import { trackEvent } from '../utils/analytics';
 
 // Code-split secondary UI sections to significantly lower initial unused JavaScript
 const CompactFontRow = lazy(() => import('./CompactFontRow').then(m => ({ default: m.CompactFontRow })));
@@ -43,7 +44,7 @@ import {
   CheckSquare,
   Square,
   Download,
-  AlertTriangle,
+  Info,
   RefreshCw,
   Volume2
 } from 'lucide-react';
@@ -97,6 +98,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
   const [batchCopied, setBatchCopied] = useState<boolean>(false);
   const [lastDeletedText, setLastDeletedText] = useState<string | null>(null);
   const [advancedToolsOpen, setAdvancedToolsOpen] = useState<boolean>(false);
+  const inputStartedTrackedRef = useRef(false);
 
   const [batchModalOpen, setBatchModalOpen] = useState<boolean>(false);
   const [comparatorOpen, setComparatorOpen] = useState<boolean>(false);
@@ -184,6 +186,16 @@ export const FontConverter: React.FC<FontConverterProps> = ({
   const handleTextChange = (text: string) => {
     setInputText(text);
     if (notifyParentTextChange) notifyParentTextChange(text);
+  };
+
+  const handleUserTextChange = (text: string) => {
+    if (!inputStartedTrackedRef.current) {
+      inputStartedTrackedRef.current = true;
+      trackEvent('text_input_started', {
+        route: currentRoute,
+      });
+    }
+    handleTextChange(text);
   };
 
   const handleCopyShareLink = async () => {
@@ -553,7 +565,7 @@ export const FontConverter: React.FC<FontConverterProps> = ({
             id="main-text-input"
             rows={3}
             value={inputText}
-            onChange={(e) => handleTextChange(e.target.value)}
+            onChange={(e) => handleUserTextChange(e.target.value)}
             placeholder="Escribe aquí tu frase, nombre para Instagram, nick de Free Fire o estado de WhatsApp..."
             className="w-full px-4 sm:px-5 py-3.5 text-lg sm:text-xl rounded-2xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all resize-y font-medium leading-relaxed"
           />
@@ -561,29 +573,29 @@ export const FontConverter: React.FC<FontConverterProps> = ({
 
         {/* Spanish Accent & Special Character Compatibility Banner */}
         {hasAccentsOrSpecialChars && (
-          <div className="mb-3.5 p-3 rounded-2xl bg-amber-50 border border-amber-200/80 flex items-center justify-between gap-2 flex-wrap text-xs text-amber-900">
+          <div className="mb-3.5 p-3 rounded-2xl bg-indigo-50/70 border border-indigo-100 flex items-center justify-between gap-2 flex-wrap text-xs text-slate-700">
             <div className="flex items-center gap-2 min-w-0">
-              <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
+              <Info className="w-4 h-4 text-indigo-500 shrink-0" />
               <span>
-                <strong>Acentos o "ñ" detectados:</strong> Algunas fuentes Unicode decorativas no tienen versión con tilde.
+                <strong className="text-slate-800">Nota de compatibilidad:</strong> Algunos estilos decorativos pueden sustituir letras con tilde o "ñ". Tu texto original no se modifica automáticamente.
               </span>
             </div>
             <div className="flex items-center gap-1.5 shrink-0">
               <button
                 type="button"
                 onClick={handleNormalizeAccents}
-                className="px-2.5 py-1 bg-amber-200/80 hover:bg-amber-300 text-amber-950 font-bold rounded-lg transition-colors flex items-center gap-1"
-                title="Quita tildes para máxima compatibilidad con todos los glifos"
+                className="px-2.5 py-1 bg-white hover:bg-indigo-100 text-indigo-700 font-bold rounded-lg border border-indigo-200 transition-colors flex items-center gap-1"
+                title="Crear una versión sin tildes si una plataforma o estilo concreto la necesita"
               >
                 <RefreshCw className="w-3 h-3" />
-                <span>Normalizar (Sin Tildes)</span>
+                <span>Crear versión sin tildes</span>
               </button>
               <button
                 type="button"
                 onClick={() => setFixerModalOpen(true)}
-                className="px-2.5 py-1 bg-white border border-amber-300 hover:bg-amber-100 font-bold text-amber-900 rounded-lg transition-colors"
+                className="px-2.5 py-1 bg-white border border-slate-200 hover:bg-slate-50 font-bold text-slate-700 rounded-lg transition-colors"
               >
-                Ver Reparador
+                Más información
               </button>
             </div>
           </div>
@@ -618,7 +630,13 @@ export const FontConverter: React.FC<FontConverterProps> = ({
             id="btn-toggle-advanced-tools"
             aria-expanded={advancedToolsOpen}
             aria-controls="advanced-converter-tools"
-            onClick={() => setAdvancedToolsOpen((open) => !open)}
+            onClick={() =>
+              setAdvancedToolsOpen((open) => {
+                const next = !open;
+                if (next) trackEvent('advanced_tools_opened', { route: currentRoute });
+                return next;
+              })
+            }
             className="inline-flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 hover:text-indigo-700 text-xs font-extrabold shadow-2xs transition-all active:scale-95"
           >
             <span>{advancedToolsOpen ? 'Ocultar herramientas' : 'Más herramientas'}</span>
@@ -743,7 +761,13 @@ export const FontConverter: React.FC<FontConverterProps> = ({
                 <button
                   type="button"
                   id="btn-advanced-image"
-                  onClick={() => setPosterModalOpen(true)}
+                  onClick={() => {
+                    trackEvent('image_exported', {
+                      source: 'advanced_tools',
+                      route: currentRoute,
+                    });
+                    setPosterModalOpen(true);
+                  }}
                   className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs shadow-xs transition-all active:scale-95"
                   title="Crear imagen PNG con diseño para Instagram Stories y Estados de WhatsApp"
                 >
@@ -785,6 +809,10 @@ export const FontConverter: React.FC<FontConverterProps> = ({
                 onClick={() => {
                   setActiveCategory(cat.id);
                   setVisibleCount(24);
+                  trackEvent('category_selected', {
+                    category: cat.id,
+                    route: currentRoute,
+                  });
                 }}
                 className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl text-xs font-bold whitespace-nowrap transition-all duration-150 active:scale-95 ${
                   isActive
@@ -819,6 +847,14 @@ export const FontConverter: React.FC<FontConverterProps> = ({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              onBlur={() => {
+                if (searchQuery.trim()) {
+                  trackEvent('font_search', {
+                    query_length: Array.from(searchQuery.trim()).length,
+                    route: currentRoute,
+                  });
+                }
+              }}
               placeholder="Buscar estilos (ej: cursiva, gótica, alas)..."
               className="w-full pl-10 pr-8 py-2 text-xs font-medium rounded-xl border border-slate-200 bg-slate-50/70 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-slate-800 placeholder:text-slate-400"
             />
