@@ -5,7 +5,6 @@ import { useSeoHead } from './hooks/useSeoHead';
 import { Header } from './components/Header';
 import { FontConverter } from './components/FontConverter';
 import { Breadcrumbs } from './components/Breadcrumbs';
-import { QuickAnswerSection } from './components/QuickAnswerSection';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { ToastNotification } from './components/ToastNotification';
 import { Footer } from './components/Footer';
@@ -327,10 +326,6 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
               onTextChange={(t) => setGlobalText(t)}
               onRouteChange={handleRouteChange}
             />
-
-            <div className="my-8">
-              <QuickAnswerSection currentRoute={currentRoute} />
-            </div>
 
             {/* 2. Dedicated Interactive Studio / Platform Toolkit (Sub-studios for Instagram, Free Fire, etc.) */}
             <Suspense fallback={null}>
