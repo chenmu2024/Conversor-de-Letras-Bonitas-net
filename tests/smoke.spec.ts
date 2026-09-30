@@ -403,7 +403,7 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
       await expect(page.locator('#quick-answer')).toBeVisible();
       await expect(page.locator('#quick-answer h2')).toHaveCount(1);
 
-      const relatedLinks = page.locator('section').filter({ has: page.getByText('Guía y Consejos Especializados') }).locator('a[href^="/"]');
+      const relatedLinks = page.locator('#contextual-links a[href^="/"]');
       expect(await relatedLinks.count()).toBeGreaterThan(0);
     }
   });

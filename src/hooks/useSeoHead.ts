@@ -11,7 +11,7 @@ export function useSeoHead(currentRoute: PageRoute) {
     prevRouteRef.current = currentRoute;
 
     const routeData = SEO_ROUTE_DATA[currentRoute] || SEO_ROUTE_DATA.inicio;
-    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://conversordeletrasbonitas.net';
+    const origin = 'https://conversordeletrasbonitas.net';
     const canonicalUrl = routeData.canonical.startsWith('http') ? routeData.canonical : `${origin}${routeData.canonical}`;
 
     // 1. Update Title only if changed

@@ -588,7 +588,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
           </p>
 
           {contextualLinks.length > 0 && (
-            <p className="mb-5 text-xs leading-relaxed text-slate-600">
+            <nav id="contextual-links" aria-label="Enlaces contextuales relacionados" className="mb-5 text-xs leading-relaxed text-slate-600">
               <span className="font-bold text-slate-700">Relacionado:</span>{' '}
               {contextualLinks.map((link, index) => (
                 <React.Fragment key={link.href}>
@@ -598,7 +598,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
                   </a>
                 </React.Fragment>
               ))}
-            </p>
+            </nav>
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5">
