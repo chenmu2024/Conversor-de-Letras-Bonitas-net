@@ -173,6 +173,28 @@ async function validateBuild() {
       errors.push(`[${routeKey}] Missing id="seo-jsonld" on JSON-LD script tag`);
     }
 
+    // GEO rendering guard for public tool routes: data must survive prerendering.
+    if (!informationalRoutes.has(routeKey) && routeKey !== '404') {
+      if (!html.includes('id="quick-answer"')) {
+        errors.push(`[GEO] [${routeKey}] Prerendered HTML is missing #quick-answer.`);
+      }
+      if (!html.includes('id="contextual-links"')) {
+        errors.push(`[GEO] [${routeKey}] Prerendered HTML is missing #contextual-links.`);
+      }
+
+      const expectedLastmod = ROUTE_LAST_SIGNIFICANT_UPDATE[routeKey];
+      if (expectedLastmod && !html.includes(`"dateModified":"${expectedLastmod}"`)) {
+        errors.push(`[SEO] [${routeKey}] JSON-LD dateModified does not match route freshness metadata.`);
+      }
+
+      if (!html.includes('"publisher":{"@id":"https://conversordeletrasbonitas.net/#organization"}')) {
+        errors.push(`[GEO] [${routeKey}] Primary schema is missing the canonical publisher relationship.`);
+      }
+      if (!html.includes('"isPartOf":{"@id":"https://conversordeletrasbonitas.net/#website"}')) {
+        errors.push(`[GEO] [${routeKey}] Primary schema is missing the canonical WebSite relationship.`);
+      }
+    }
+
     // 4. Verify Title uniqueness among indexable routes
     const titleMatch = html.match(/<title>([\s\S]*?)<\/title>/i);
     const title = titleMatch ? titleMatch[1].trim() : '';
