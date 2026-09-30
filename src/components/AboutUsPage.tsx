@@ -2,6 +2,8 @@ import React from 'react';
 import { ShieldCheck, Cpu, Globe, HeartHandshake, FileCode2, CheckCircle2, Layers, BookOpen } from 'lucide-react';
 import { COMPATIBILITY_TEST_LOG } from '../data/compatibilityTestLog';
 import { PageRoute } from '../types';
+import { ROUTE_LAST_SIGNIFICANT_UPDATE } from '../data/routeFreshness';
+import { formatIsoDateEs } from '../utils/formatIsoDateEs';
 
 interface AboutUsPageProps {
   onRouteChange?: (route: PageRoute) => void;
@@ -85,7 +87,7 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onRouteChange }) => {
             </h2>
           </div>
           <span className="px-3 py-1 rounded-full bg-indigo-900/60 border border-indigo-700/60 text-indigo-300 text-xs font-semibold">
-            Última auditoría: Septiembre 2026
+            Última auditoría: {formatIsoDateEs(ROUTE_LAST_SIGNIFICANT_UPDATE['sobre-nosotros'])}
           </span>
         </div>
         <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">

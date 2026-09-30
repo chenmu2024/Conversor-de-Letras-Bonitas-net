@@ -42,7 +42,9 @@ export const PlatformLimits: React.FC<PlatformLimitsProps> = ({ text }) => {
           return (
             <div
               key={platform.name}
-              title="Referencia histórica no verificada como límite oficial actual"
+              title={platform.status === 'verified'
+                ? `Verificado el ${platform.lastVerified} para el alcance indicado`
+                : 'Referencia histórica no verificada como límite oficial actual'}
               className={`p-2 rounded-xl border transition-all ${
                 isOverReference
                   ? 'bg-rose-50/60 border-rose-200 text-rose-800'
@@ -71,6 +73,18 @@ export const PlatformLimits: React.FC<PlatformLimitsProps> = ({ text }) => {
                 />
               </div>
 
+              {platform.status === 'verified' && platform.sourceUrl && (
+                <a
+                  href={platform.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1 inline-flex text-[10px] font-bold text-emerald-700 underline decoration-emerald-300 underline-offset-2"
+                  title={platform.scopeNote || platform.sourceTitle || 'Fuente oficial'}
+                >
+                  Fuente oficial · {platform.lastVerified}
+                </a>
+              )}
+
               {isOverReference && (
                 <div className="flex items-center gap-1 mt-1 text-[10px] font-extrabold text-rose-600">
                   <ShieldAlert className="w-3 h-3 shrink-0" />
@@ -83,7 +97,7 @@ export const PlatformLimits: React.FC<PlatformLimitsProps> = ({ text }) => {
       </div>
 
       <p className="mt-2 text-[10px] leading-relaxed text-slate-500">
-        Estas cifras se conservan como referencias históricas de interfaz y no se consideran límites oficiales actuales hasta que exista una fuente autoritativa y una fecha de verificación registradas.
+        Las cifras sin fuente se conservan como referencias históricas. Cuando una referencia tiene fuente oficial, mostramos también su fecha y alcance de verificación.
       </p>
     </div>
   );

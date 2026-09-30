@@ -1,6 +1,8 @@
 import React from 'react';
 import { ExternalLink, BookOpen, ShieldCheck } from 'lucide-react';
 import { OFFICIAL_REFERENCES } from '../data/unicodeCompatibility';
+import { ROUTE_LAST_SIGNIFICANT_UPDATE } from '../data/routeFreshness';
+import { formatIsoDateEs } from '../utils/formatIsoDateEs';
 
 export const OfficialReferencesSection: React.FC = () => {
   return (
@@ -18,13 +20,12 @@ export const OfficialReferencesSection: React.FC = () => {
         </div>
         <div className="flex items-center gap-1.5 text-xs text-slate-500">
           <ShieldCheck className="w-4 h-4 text-emerald-600" aria-hidden="true" />
-          <span>Última revisión técnica: Septiembre 2026</span>
+          <span>Última revisión técnica: {formatIsoDateEs(ROUTE_LAST_SIGNIFICANT_UPDATE['compatibilidad-unicode'])}</span>
         </div>
       </div>
 
       <p className="text-slate-600 text-sm mb-6 leading-relaxed">
-        Las especificaciones y comprobaciones de este laboratorio se basan en los estándares internacionales del 
-        <strong> Consorcio Unicode</strong> y en las directrices de soporte oficiales de cada plataforma:
+        Las referencias de este laboratorio combinan especificaciones técnicas del <strong> Consorcio Unicode</strong> con portales oficiales de soporte de las plataformas. Una fuente oficial no equivale por sí sola a una prueba manual de compatibilidad:
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

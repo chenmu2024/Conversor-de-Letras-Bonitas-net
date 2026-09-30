@@ -30,4 +30,6 @@ export const ROUTE_LAST_SIGNIFICANT_UPDATE: Partial<Record<PageRoute, string>> =
   'sobre-nosotros': '2026-09-30',
   'politica-de-privacidad': '2026-09-30',
   'politica-de-cookies': '2026-09-30',
+  'terminos-y-condiciones': '2026-09-30',
+  contacto: '2026-09-30',
 };

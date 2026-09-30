@@ -23,6 +23,7 @@ async function validateBuild() {
   const { getQuickAnswerForRoute } = await import('../src/data/quickAnswers.ts');
   const { CONTEXTUAL_LINKS } = await import('../src/data/contextualLinks.ts');
   const { ROUTE_LAST_SIGNIFICANT_UPDATE } = await import('../src/data/routeFreshness.ts');
+  const { PLATFORM_LENGTH_REFERENCES } = await import('../src/data/platformLimitReferences.ts');
 
   const expectedFontBucket = `${Math.floor(FONT_COUNT / 10) * 10}+`;
   console.log(`ℹ️ [Validate] Font stats: FONT_COUNT=${FONT_COUNT}, FONT_COUNT_PLUS=${FONT_COUNT_PLUS} (Bucket: ${expectedFontBucket})`);
@@ -77,9 +78,45 @@ async function validateBuild() {
     }
   }
 
+  // Mutable platform facts must be evidence-aware. A "verified" value requires
+  // an authoritative HTTPS source, a title, an ISO verification date and a scoped note.
+  const seenPlatformReferenceNames = new Set();
+  for (const ref of PLATFORM_LENGTH_REFERENCES) {
+    if (seenPlatformReferenceNames.has(ref.name)) {
+      errors.push(`[Platform References] Duplicate entry: "${ref.name}"`);
+    }
+    seenPlatformReferenceNames.add(ref.name);
+
+    if (!Number.isInteger(ref.referenceMax) || ref.referenceMax <= 0) {
+      errors.push(`[Platform References] Invalid referenceMax for "${ref.name}"`);
+    }
+
+    if (ref.status === 'verified') {
+      if (!ref.sourceUrl?.startsWith('https://')) {
+        errors.push(`[Platform References] Verified entry "${ref.name}" needs an HTTPS sourceUrl.`);
+      }
+      if (!ref.sourceTitle?.trim()) {
+        errors.push(`[Platform References] Verified entry "${ref.name}" needs sourceTitle.`);
+      }
+      if (!ref.scopeNote?.trim()) {
+        errors.push(`[Platform References] Verified entry "${ref.name}" needs scopeNote.`);
+      }
+      if (!ref.lastVerified || !/^\d{4}-\d{2}-\d{2}$/.test(ref.lastVerified) || Number.isNaN(Date.parse(`${ref.lastVerified}T00:00:00Z`))) {
+        errors.push(`[Platform References] Verified entry "${ref.name}" needs a valid ISO lastVerified date.`);
+      }
+    }
+  }
+
   const routes = Object.values(ROUTE_CONFIGS);
   const indexableRoutes = routes.filter((r) => r.route !== '404');
   const expectedIndexableCount = indexableRoutes.length;
+
+  for (const route of indexableRoutes) {
+    const lastmod = ROUTE_LAST_SIGNIFICANT_UPDATE[route.route];
+    if (!lastmod || !/^\d{4}-\d{2}-\d{2}$/.test(lastmod) || Number.isNaN(Date.parse(`${lastmod}T00:00:00Z`))) {
+      errors.push(`[SEO] Indexable route "${route.route}" must have a valid ISO significant-update date.`);
+    }
+  }
 
   const informationalRoutes = new Set([
     'sobre-nosotros',
@@ -325,7 +362,7 @@ async function validateBuild() {
       }
     }
 
-    for (const route of toolRoutes) {
+    for (const route of indexableRoutes) {
       const seo = SEO_ROUTE_DATA[route.route] || SEO_ROUTE_DATA.inicio;
       const expectedLoc = seo.canonical.startsWith('http')
         ? seo.canonical
@@ -333,7 +370,7 @@ async function validateBuild() {
       const expectedLastmod = ROUTE_LAST_SIGNIFICANT_UPDATE[route.route];
       const routeBlock = `<loc>${expectedLoc}</loc>\n    <lastmod>${expectedLastmod}</lastmod>`;
       if (!sitemapContent.includes(routeBlock)) {
-        errors.push(`dist/sitemap.xml missing expected lastmod for tool route "${route.route}"`);
+        errors.push(`dist/sitemap.xml missing expected lastmod for indexable route "${route.route}"`);
       }
     }
 
@@ -465,6 +502,17 @@ async function validateBuild() {
       ['/decorador/', '/decorador-de-nicks/'],
       ['/contador-bio/', '/contador-de-caracteres-bio/'],
     ];
+
+    const dynamicRewriteLines = redirectsContent
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter((line) => line && !line.startsWith('#') && /\s200(?:\s|$)/.test(line));
+
+    for (const line of dynamicRewriteLines) {
+      if (line.startsWith('/* ') || line.startsWith('/:')) {
+        errors.push(`Soft-404 risk: wildcard 200 rewrite is not allowed in _redirects: ${line}`);
+      }
+    }
 
     for (const [from, to] of expectedRedirects) {
       const rule = `${from} ${to} 301`;

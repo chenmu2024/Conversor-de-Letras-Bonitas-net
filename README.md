@@ -90,3 +90,12 @@ El Quality Gate ejecuta `bun run check:performance-budget` después del build. A
 - 155 KB gzip.
 
 Esto actúa como protección contra regresiones; no sustituye mediciones reales de Core Web Vitals.
+
+
+## 🧭 SEO/GEO: hechos de plataforma y 404
+
+- Los límites de plataformas viven en `src/data/platformLimitReferences.ts`.
+- Un valor solo puede marcarse como `verified` si tiene fuente HTTPS, título, fecha de verificación y alcance explícito.
+- Los valores sin evidencia se mantienen como `reference` y la interfaz los describe como referencias históricas.
+- Cloudflare Pages utiliza el `404.html` superior para rutas inexistentes. No añadas un rewrite tipo `/* /index.html 200`: convertiría URLs inexistentes en respuestas 200 y aumentaría el riesgo de soft 404.
+- El Quality Gate bloquea referencias verificadas sin evidencia, rutas indexables sin `lastmod` deliberado y rewrites comodín 200.
