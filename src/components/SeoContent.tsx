@@ -62,10 +62,10 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
       title: 'Letras para TikTok - Nombres Aesthetic, Emojis Secretos y Biografías',
       subtitle: 'Personaliza tu perfil con nombres llamativos, emojis ocultos y textos de video en TikTok.',
       description:
-        'En TikTok, tener un nombre de perfil con estilo, una biografía organizada dentro de la longitud mostrada de 80 caracteres y textos claros para videos ayuda a destacar tu contenido. Usa letras aesthetic con moños 🎀, estrellas ★, minúsculas estilizadas (Small Caps) y los códigos de emojis ocultos [código].',
+        'En TikTok, tener un nombre de perfil con estilo, una biografía organizada y textos claros para videos ayuda a estructurar tu contenido. Usa letras aesthetic con moños 🎀, estrellas ★ y minúsculas estilizadas (Small Caps), comprobando siempre las reglas actuales de la aplicación.',
       tips: [
         'En TikTok, usa las letras bonitas en tu "Nombre de Perfil" (permite Unicode) y mantén tu @usuario alfanumérico limpio.',
-        'La biografía de TikTok suele admitir hasta 80 caracteres: usa nuestro contador en tiempo real para verificar la longitud.',
+        'Usa el contador en tiempo real para medir tu texto y confirma el límite actual directamente en TikTok antes de guardar el perfil.',
         'Aprovecha los Emojis Ocultos escribiendo códigos como [wicked], [yummy], [loveface] o [cry] en tus comentarios.',
         'Formatea los textos en pantalla de tus videos y portadas de CapCut con Negrita Sans o Small Caps para mejorar la legibilidad en los primeros segundos.',
       ],
@@ -75,10 +75,10 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
       title: 'Letras para WhatsApp - Fuentes, Estados, Mensajes Pro y Chat Directo',
       subtitle: 'Personaliza tus mensajes y perfil con letras cursivas, negritas nativas y enlaces de contacto directo.',
       description:
-        'WhatsApp admite de forma nativa formatos mediante símbolos (*negrita*, _cursiva_, ~tachado~, ```monospaciado```, > cita y listas). Además, con nuestro generador de fuentes seguras Unicode puedes escribir en tu Info / Acerca de (referencia habitual de 139 caracteres), diseñar nombres de grupos llamativos y crear enlaces wa.me directos sin necesidad de guardar el contacto en la agenda.',
+        'WhatsApp admite formatos nativos mediante símbolos (*negrita*, _cursiva_, ~tachado~ y monoespaciado). Además, puedes probar caracteres Unicode en campos de perfil compatibles y usar el contador para medir el texto antes de guardarlo.',
       tips: [
         'Aprovecha el código monospaciado (```código```) para enviar números de cuenta o referencias y que tus contactos los copien con 1 toque.',
-        'La sección "Info / Acerca de" de WhatsApp suele tener un límite de 139 caracteres: usa nuestro diseñador en tiempo real con vista previa.',
+        'Mide la longitud de tu "Info / Acerca de" con el contador y confirma el límite mostrado por tu versión actual de WhatsApp.',
         'Envía mensajes a números sin registrar usando enlaces wa.me sin tener que agregarlos a tu lista de contactos de teléfono.',
         'Usa el espacio invisible [ㅤ] (Hangul Filler) para enviar mensajes en blanco en chats o publicar un Estado sin texto.',
       ],
@@ -90,10 +90,10 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
       description:
         'El generador de letras para Free Fire te permite crear nicks personalizados con alas ꧁༺ ༻꧂, símbolos de rey 亗, rayos ⚡, nicks de parejas para Dúos Dinámicos, banderas de países con bloques de colores [███] y los 3 tamaños de espacios invisibles (Grande, Mediano y Pequeño) para ajustarse a la longitud habitual de los nombres de jugador.',
       tips: [
-        'Free Fire suele aplicar como referencia un límite de 12 caracteres: nuestro contador te ayuda a verificar si tu combinación sobrepasa la longitud habitual.',
+        'Usa el contador como referencia y confirma en el juego si tu combinación cumple las reglas actuales del campo de nick.',
         'Para nicks de Dúo Dinámico (parejas), usa marcos simétricos como (꧁ঔৣ☬ KING ☬ঔৣ꧂ / ꧁ঔৣ☬ QUEEN ☬ঔৣ꧂ o 亗 BONNIE 亗 / 亗 CLYDE 亗).',
         'Usa el formato [008000]█[FFFFFF]█[FF0000]█ en tu firma para lucir la bandera de tu país con bloques de colores.',
-        'Si tu nick con clan tag está muy ajustado a las 12 letras, usa el "Espacio Invisible Mediano" o "Pequeño" para que quepa todo.',
+        'Si tu nick con clan tag queda demasiado largo, prueba una variante más corta y comprueba el resultado directamente en el juego.',
       ],
       examples: ['꧁༺ 𝕯𝕰𝕾𝕿𝕽𝖀𝖄𝕰 ༻꧂', '亗 ＢＯＮＮＩＥ 亗', 'ᴮᴼˢˢ★ 𝕹𝕴𝕮𝕶 ⚔️', '[b][c][ffd319]Ⓥ JUGADOR', '亗ㅤɪɴsᴀɴᴏ'],
     },
@@ -101,11 +101,11 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
       title: 'Letras para Facebook - Negritas, Cursivas, Marketplace y Títulos de Páginas',
       subtitle: 'Haz que tus posts de Facebook, Marketplace y comentarios reciban más clics con tipografías que captan la atención.',
       description:
-        'Facebook no ofrece botones de formato nativos para perfiles personales, comentarios o Marketplace. Con nuestro conversor inteligente puedes redactar publicaciones con formato selectivo en Negrita Matemática (Sans Bold), titulares llamativos, fichas de producto con precios rebajados tachados (S̶t̶r̶i̶k̶e̶), nombres estéticos para páginas y presentaciones de perfil optimizadas para la longitud habitual de 101 caracteres.',
+        'Facebook no ofrece los mismos controles de formato en todos sus campos. Con el conversor puedes preparar titulares, texto Unicode destacado y variantes tachadas, midiendo la longitud antes de pegarlas en el campo de destino.',
       tips: [
         'Aplica Negrita Sans en la primera línea o titular de tu post para que actúe como un gancho en el feed de noticias.',
         'En Facebook Marketplace, coloca el precio anterior en tachado (A̶n̶t̶e̶s̶:̶ ̶$̶9̶9̶) y el precio de oferta en negrita para destacar tus ofertas.',
-        'La sección "Presentación / Bio" de Facebook suele admitir hasta 101 caracteres: utiliza nuestro contador en vivo para evitar cortes de texto.',
+        'Utiliza el contador en vivo para medir la presentación y confirma el límite actual que muestra Facebook antes de guardar.',
         'Usa viñetas numéricas estilizadas (❶, ❷, ❸) para publicar las reglas de tu Grupo de Facebook de manera legible y ordenada.',
       ],
       examples: ['🔥 𝗢𝗙𝗘𝗥𝗧𝗔 𝗘𝗫𝗖𝗟𝗨𝗦𝗜𝗩𝗔 🔥', '💰 𝗣𝗥𝗘𝗖𝗜𝗢: 29.99€ (A̶n̶t̶e̶s̶:̶ ̶4̶9̶.̶9̶9̶€̶)', '👉 𝗧𝗢𝗗𝗔 𝗟𝗔 𝗜𝗡𝗙𝗢𝗥𝗠𝗔𝗖𝗜Ó𝗡 𝗔𝗤𝗨Í 👇', '❶ 𝗥𝗲𝘀𝗽𝗲𝘁𝗼 𝗺𝘂𝘁𝘂𝗼', '【 𝔸𝕍𝕀𝕊𝕆 𝕀𝕄ℙ𝕆ℝ𝕋𝔸ℕ𝕋𝔼 】'],
@@ -308,12 +308,12 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
       description:
         'Cada red social maneja límites de caracteres en su biografía. Nuestro contador analiza en tiempo real la longitud en puntos de código Unicode para ayudarte a evitar que tu descripción sea cortada.',
       tips: [
-        'Instagram permite habitualmente 150 caracteres en la biografía y 30 en el nombre.',
-        'TikTok limita comúnmente la descripción del perfil a 80 caracteres.',
-        'Twitter / X permite hasta 280 caracteres por publicación.',
-        'WhatsApp admite habitualmente hasta 139 caracteres en la información de perfil.',
+        'Mide la longitud de la biografía antes de pegarla en Instagram.',
+        'Comprueba el límite actual que muestra TikTok para el campo que estés editando.',
+        'En X, la capacidad disponible puede depender del tipo de cuenta y de la función utilizada.',
+        'En WhatsApp, confirma el límite actual directamente en el campo de perfil correspondiente.',
       ],
-      examples: ['150 Caracteres IG', '80 Caracteres TT', '280 Caracteres X', '139 Caracteres WA'],
+      examples: ['Contador de Bio', 'Longitud Unicode', 'Texto para Perfil', 'Verificación Antes de Publicar'],
     },
     'sobre-nosotros': {
       title: 'Sobre Nosotros - Conversor de Letras Bonitas',
@@ -507,7 +507,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     {
       q: '¿Cómo decorar un nombre para Free Fire con alas y símbolos insanos?',
-      a: 'En nuestro "Decorador de Textos y Nicks", escribe tu nombre o apodo en el campo superior, selecciona el adorno izquierdo (como alas tibetanas ꧁༺ o corona 亗), el adorno derecho (༻꧂) y elige una tipografía interior como Gótica o Cursiva Bold. La herramienta te indicará si superas la longitud habitual de 12 caracteres de Free Fire para ayudarte a que tu nick encaje dentro de los límites del juego.',
+      a: 'En nuestro "Decorador de Textos y Nicks", escribe tu nombre o apodo, selecciona los adornos y elige una tipografía interior. El contador funciona como referencia; confirma siempre las reglas actuales del nick directamente en el juego.',
     },
     {
       q: '¿Puedo combinar decoraciones con letras aesthetic para TikTok e Instagram?',
@@ -519,7 +519,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     {
       q: '¿Cuántos caracteres permite la biografía de TikTok y cómo poner letras bonitas en el Nombre Visible?',
-      a: 'La biografía de TikTok suele admitir hasta 80 caracteres. Por otro lado, TikTok divide la identidad en campos: el @usuario alfanumérico y el "Nombre Visible / Nombre de Perfil" (frecuentemente hasta 30 caracteres). Puedes pegar cualquier tipografía artística (Cursiva, Negrita Sans, Gótica) en tu Nombre Visible y en tu Biografía.',
+      a: 'TikTok separa el @usuario del nombre visible y de la biografía. Las reglas y longitudes pueden cambiar, así que usa el contador como referencia y confirma el límite mostrado por la versión actual de la aplicación.',
     },
     {
       q: '¿Cómo usar letras aesthetic en textos de pantalla para videos de TikTok y CapCut?',
@@ -531,7 +531,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     {
       q: '¿Cuántos caracteres permite la sección "Info / Acerca de" de WhatsApp?',
-      a: 'WhatsApp suele admitir hasta 139 caracteres para el estado de texto de tu perfil ("Info / Acerca de"). Nuestro Diseñador de Info incluye un contador en vivo y una vista previa interactiva con modo oscuro para ayudarte a evitar cortes.',
+      a: 'Nuestro diseñador de Info incluye contador y vista previa. Como las reglas pueden cambiar, confirma el límite actual directamente en WhatsApp antes de guardar.',
     },
     {
       q: '¿Cómo enviar un mensaje por WhatsApp sin guardar el número en la agenda?',
@@ -543,7 +543,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     {
       q: '¿Cómo poner el espacio invisible en Free Fire y cuántos caracteres permite el juego?',
-      a: 'Free Fire suele aplicar como referencia hasta 12 caracteres para el nick de jugador. Como el juego no acepta la barra espaciadora normal, se suele usar el carácter Unicode transparente (Hangul Filler U+3164 [ㅤ]). Contamos con 3 tamaños (Grande, Mediano y Pequeño) para que puedas separar palabras procurando no superar la longitud del juego.',
+      a: 'Las reglas de nombres de Free Fire pueden cambiar por versión y región. Usa el contador y los caracteres invisibles solo como herramientas de prueba, y confirma que el juego acepta la combinación antes de guardar el nick.',
     },
     {
       q: '¿Cómo poner banderas de países en la firma de Free Fire con códigos de colores?',
@@ -559,7 +559,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     {
       q: '¿Cuántos caracteres permite la biografía / presentación de Facebook?',
-      a: 'La sección "Presentación" (Bio de perfil) de Facebook suele admitir un límite mostrado de aproximadamente 101 caracteres. Nuestra pestaña "Bio / Presentación" incluye un contador en tiempo real con alerta visual si sobrepasas esa longitud para ayudarte a evitar que el texto supere el límite mostrado.',
+      a: 'Nuestra pestaña de Bio incluye un contador en tiempo real para medir el texto. Confirma el límite actual directamente en Facebook, ya que puede variar según la función y las actualizaciones de la plataforma.',
     },
     {
       q: '¿Cómo destacar precios y ofertas en Facebook Marketplace?',
