@@ -582,8 +582,9 @@ export const UnicodeCompatibilityLab: React.FC<UnicodeCompatibilityLabProps> = (
       </section>
 
       {/* 6. Contextual Topic Clusters Navigation Hub */}
-      <section 
-        aria-labelledby="clusters-title" 
+      <section
+        id="contextual-links"
+        aria-labelledby="clusters-title"
         className="bg-slate-900 text-white rounded-2xl p-6 sm:p-8"
       >
         <div className="flex items-center gap-2 mb-2">
