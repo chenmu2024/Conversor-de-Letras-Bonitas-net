@@ -429,11 +429,12 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
     await expect(page.getByText(/Comprobaciones empíricas de glifos/i)).toHaveCount(0);
   });
 
-  test('Platform length cards are labeled as references rather than guaranteed current limits', async ({ page }) => {
+  test('Platform length cards distinguish historical references from sourced verification', async ({ page }) => {
     await page.goto('/');
     await page.locator('#btn-toggle-advanced-tools').click();
     await expect(page.getByText(/Valores orientativos; verifica reglas actuales/i)).toBeVisible();
-    await expect(page.getByText(/Estas cifras se conservan como referencias históricas/i)).toBeVisible();
+    await expect(page.getByText(/Las cifras sin fuente se conservan como referencias históricas/i)).toBeVisible();
+    await expect(page.getByRole('link', { name: /Fuente oficial · 2026-09-30/i })).toBeVisible();
     await expect(page.getByText(/Máximo 150 caracteres/i)).toHaveCount(0);
   });
 
