@@ -189,7 +189,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
         'El espacio invisible [ㅤ] (Hangul Filler U+3164) es un carácter Unicode que puede ocupar una posición de texto sin mostrar un glifo visible convencional. Cada plataforma decide si lo acepta, lo normaliza o lo bloquea.',
       tips: [
         'Copia el espacio invisible para saltar restricciones de nombres en Free Fire y PUBG.',
-        'En WhatsApp, te permite enviar mensajes completamente en blanco y dejar el nombre vacío.',
+        'En algunos campos puedes probar caracteres invisibles como separadores o contenido visualmente vacío; WhatsApp puede normalizarlos o rechazarlos según el campo y la versión.',
         'Ideal para separar nicks en clanes gamer sin que aparezcan barras o guiones.',
       ],
       examples: ['[ㅤ]', '亗ㅤFL𝑶𝑾ㅤ亗', '𝕭𝖊𝖑𝖎𝖈𝖔ㅤ⁹⁹⁹', 'ⓥㅤ𝕴𝕹𝕾𝕬𝕹𝕺', 'ᴮᴼˢˢㅤ★ㅤ亗'],
@@ -411,7 +411,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     {
       q: '¿Por qué se pueden copiar y pegar estas fuentes desde el Conversor de Letras Bonitas?',
-      a: 'A diferencia de los archivos de fuentes tradicionales (.ttf o .otf), el Conversor de Letras Bonitas utiliza caracteres del estándar internacional Unicode. Son símbolos universales que ya están preinstalados en todos los sistemas operativos modernos como iOS, Android, Windows y macOS.',
+      a: 'A diferencia de los archivos de fuentes tradicionales (.ttf o .otf), el Conversor de Letras Bonitas utiliza caracteres definidos por Unicode. Su representación depende de que la fuente y el sistema del dispositivo incluyan un glifo adecuado para cada carácter.',
     },
     {
       q: '¿Por qué algunas letras del Conversor de Letras Bonitas se ven como cuadros blancos (□)?',
@@ -692,7 +692,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
             Cuando escribes una letra en el Conversor de Letras Bonitas como la <code className="bg-white px-1.5 py-0.5 rounded-md text-indigo-700 font-bold font-mono border border-slate-200">A</code> (código ASCII 65), nuestro sistema del Conversor de Letras Bonitas mapea ese carácter a sus equivalentes matemáticos y tipográficos en la tabla <strong>Unicode</strong>, tales como <code className="bg-white px-1.5 py-0.5 rounded-md text-indigo-700 font-mono border border-slate-200">𝓐</code>, <code className="bg-white px-1.5 py-0.5 rounded-md text-indigo-700 font-mono border border-slate-200">𝔄</code>, <code className="bg-white px-1.5 py-0.5 rounded-md text-indigo-700 font-mono border border-slate-200">𝔸</code> o <code className="bg-white px-1.5 py-0.5 rounded-md text-indigo-700 font-mono border border-slate-200">Ⓐ</code>.
           </p>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-            Al procesarse mediante el Conversor de Letras Bonitas como símbolos universales, las redes sociales reconocen estos caracteres como texto plano puro, permitiendo que cualquier usuario vea tus letras decoradas sin instalar fuentes adicionales.
+            El conversor genera texto basado en caracteres Unicode, no imágenes ni archivos de fuente. La plataforma de destino puede aceptarlos como texto, aunque la apariencia final depende de sus filtros y de las fuentes disponibles en cada dispositivo.
           </p>
         </div>
 

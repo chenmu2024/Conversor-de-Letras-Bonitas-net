@@ -737,7 +737,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     faqs: [
       {
         question: '¿Los símbolos se ven bien en todos los teléfonos?',
-        answer: 'Sí, todos los símbolos pertenecen a la tabla Unicode estándar internacional, visibles en iPhone, Android, tablets y ordenadores.'
+        answer: 'Los símbolos de la biblioteca se basan en caracteres Unicode, pero no todos los dispositivos, fuentes o aplicaciones los representan igual. Si un símbolo es importante para tu perfil o nick, compruébalo en el dispositivo de destino.'
       }
     ],
     proTips: [
@@ -974,7 +974,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     guideSteps: [
       { step: '1', title: 'Estándar Unicode ISO/IEC 10646', text: 'Mapeamos alfabetos matemáticos y glifos especiales según referencias Unicode, sin asumir que todas las plataformas los renderizan de la misma forma.' },
       { step: '2', title: 'Procesamiento en el Navegador', text: 'El texto introducido en el conversor no se almacena en servidores; la transformación se ejecuta de forma local en tu navegador.' },
-      { step: '3', title: 'Actualizaciones Constantes', text: 'Revisamos periódicamente la visualización de glifos en plataformas como Free Fire, Instagram y TikTok para detectar caracteres no soportados o fallos de renderizado.' }
+      { step: '3', title: 'Evidencia Documentada', text: 'Separamos las referencias del estándar Unicode de las pruebas manuales y solo marcamos una compatibilidad como verificada cuando existe un registro de prueba documentado.' }
     ],
     faqs: [
       {
@@ -1106,7 +1106,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     guideSteps: [
       { step: '1', title: 'Selecciona el Motivo', text: 'Elige entre sugerencia de nueva fuente, reporte de incompatibilidad o consulta general.' },
       { step: '2', title: 'Escribe tu Mensaje', text: 'Indica el modelo de tu dispositivo si estás reportando un error de visualización.' },
-      { step: '3', title: 'Respuesta Rápida', text: 'Revisamos periódicamente todos los comentarios para mejorar la plataforma.' }
+      { step: '3', title: 'Seguimiento de la Consulta', text: 'Los mensajes enviados mediante el formulario pueden utilizarse para responder dudas, investigar errores y evaluar mejoras del servicio.' }
     ],
     faqs: [
       {
