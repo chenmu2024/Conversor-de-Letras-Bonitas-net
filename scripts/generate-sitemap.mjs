@@ -14,6 +14,7 @@ async function generateSitemap() {
 
   const { ROUTE_CONFIGS } = await import('../src/data/routeConfigs.ts');
   const { SEO_ROUTE_DATA } = await import('../src/data/seoRouteData.ts');
+  const { ROUTE_LAST_SIGNIFICANT_UPDATE } = await import('../src/data/routeFreshness.ts');
 
   // Filter out 404 route - exclusively indexable routes from ROUTE_CONFIGS
   const routes = Object.values(ROUTE_CONFIGS).filter((r) => r.route !== '404');
@@ -28,8 +29,13 @@ async function generateSitemap() {
       ? seo.canonical
       : `https://conversordeletrasbonitas.net${seo.canonical}`;
 
+    const lastmod = ROUTE_LAST_SIGNIFICANT_UPDATE[routeKey];
+
     xml += `  <url>\n`;
     xml += `    <loc>${loc}</loc>\n`;
+    if (lastmod) {
+      xml += `    <lastmod>${lastmod}</lastmod>\n`;
+    }
     xml += `  </url>\n`;
   }
 

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { PageRoute } from '../types';
 import { SEO_ROUTE_DATA } from '../data/seoRouteData';
+import { ROUTE_LAST_SIGNIFICANT_UPDATE } from '../data/routeFreshness';
 
 export function useSeoHead(currentRoute: PageRoute) {
   const prevRouteRef = useRef<PageRoute | null>(null);
@@ -120,6 +121,7 @@ export function useSeoHead(currentRoute: PageRoute) {
             : null;
 
     const isToolRoute = !informationalType && currentRoute !== '404';
+    const lastModified = ROUTE_LAST_SIGNIFICANT_UPDATE[currentRoute];
 
     const primaryPageNode = isToolRoute
       ? {
@@ -134,6 +136,9 @@ export function useSeoHead(currentRoute: PageRoute) {
           description: routeData.metaDescription,
           inLanguage: 'es',
           isAccessibleForFree: true,
+          isPartOf: { '@id': `${origin}/#website` },
+          publisher: { '@id': `${origin}/#organization` },
+          ...(lastModified ? { dateModified: lastModified } : {}),
           offers: {
             '@type': 'Offer',
             price: '0',
@@ -149,6 +154,8 @@ export function useSeoHead(currentRoute: PageRoute) {
             description: routeData.metaDescription,
             inLanguage: 'es',
             isPartOf: { '@id': `${origin}/#website` },
+            publisher: { '@id': `${origin}/#organization` },
+            ...(lastModified ? { dateModified: lastModified } : {}),
           }
         : null;
 
@@ -160,6 +167,7 @@ export function useSeoHead(currentRoute: PageRoute) {
         name: 'Conversor de Letras Bonitas',
         description: 'Generador y conversor gratuito de letras bonitas, fuentes cursivas, góticas y símbolos para redes sociales.',
         inLanguage: 'es',
+        publisher: { '@id': `${origin}/#organization` },
       },
       {
         '@type': 'Organization',

@@ -395,6 +395,32 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
     }
   });
 
+  test('Core tool pages render a visible GEO quick answer with crawlable contextual links', async ({ page }) => {
+    const routes = ['/', '/letras-para-tiktok/', '/letras-para-whatsapp/', '/traductor-cursiva/', '/compatibilidad-unicode/'];
+
+    for (const route of routes) {
+      await page.goto(route);
+      await expect(page.locator('#quick-answer')).toBeVisible();
+      await expect(page.locator('#quick-answer h2')).toHaveCount(1);
+
+      const relatedLinks = page.locator('section').filter({ has: page.getByText('Guía y Consejos Especializados') }).locator('a[href^="/"]');
+      expect(await relatedLinks.count()).toBeGreaterThan(0);
+    }
+  });
+
+  test('Structured data exposes publisher, site relationship and meaningful modification dates', async ({ page }) => {
+    await page.goto('/traductor-cursiva/');
+    const jsonText = await page.locator('#seo-jsonld').textContent();
+    const schema = JSON.parse(jsonText || '{}');
+    const webApp = (schema['@graph'] || []).find((node: any) => node['@type'] === 'WebApplication');
+    const website = (schema['@graph'] || []).find((node: any) => node['@type'] === 'WebSite');
+
+    expect(webApp?.publisher?.['@id']).toBe('https://conversordeletrasbonitas.net/#organization');
+    expect(webApp?.isPartOf?.['@id']).toBe('https://conversordeletrasbonitas.net/#website');
+    expect(webApp?.dateModified).toBe('2026-09-30');
+    expect(website?.publisher?.['@id']).toBe('https://conversordeletrasbonitas.net/#organization');
+  });
+
   test('Privacy and cookie pages match the no-analytics product configuration', async ({ page }) => {
     await page.goto('/politica-de-cookies/');
     await expect(page.getByText('Cookies Analíticas', { exact: true })).toHaveCount(0);

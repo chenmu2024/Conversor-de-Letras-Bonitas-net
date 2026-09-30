@@ -32,6 +32,7 @@ import { SeoContent } from './SeoContent';
 import { AuthorEditorialBox } from './AuthorEditorialBox';
 import { RelatedSilosSection } from './RelatedSilosSection';
 import { TableOfContents } from './TableOfContents';
+import { QuickAnswerSection } from './QuickAnswerSection';
 
 interface AuxiliarySectionsProps {
   currentRoute: PageRoute;
@@ -58,6 +59,10 @@ export const AuxiliarySections: React.FC<AuxiliarySectionsProps> = ({
       {/* 1. Core SEO Content & Editorial Trust (Guaranteed for Search Engines and Crawlers) */}
       <div className="mt-8">
         <TableOfContents currentRoute={currentRoute} />
+      </div>
+
+      <div className="mt-6">
+        <QuickAnswerSection currentRoute={currentRoute} />
       </div>
 
       <div className="mt-6">

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { PageRoute } from '../types';
 import { FONT_COUNT_PLUS } from '../constants/siteStats';
+import { CONTEXTUAL_LINKS } from '../data/contextualLinks';
 import { 
   CheckCircle2, 
   HelpCircle, 
@@ -401,6 +402,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
   };
 
   const currentSpecialized = specializedContent[currentRoute] || specializedContent.inicio;
+  const contextualLinks = CONTEXTUAL_LINKS[currentRoute] || [];
 
   const faqs = [
     {
@@ -581,9 +583,23 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
           <h2 className="text-xl sm:text-2xl font-extrabold font-heading text-slate-900 tracking-tight mb-2">
             {currentSpecialized.title}
           </h2>
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-5">
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
             {currentSpecialized.description}
           </p>
+
+          {contextualLinks.length > 0 && (
+            <p className="mb-5 text-xs leading-relaxed text-slate-600">
+              <span className="font-bold text-slate-700">Relacionado:</span>{' '}
+              {contextualLinks.map((link, index) => (
+                <React.Fragment key={link.href}>
+                  {index > 0 && <span aria-hidden="true"> · </span>}
+                  <a href={link.href} className="font-semibold text-indigo-700 hover:text-indigo-900 hover:underline">
+                    {link.text}
+                  </a>
+                </React.Fragment>
+              ))}
+            </p>
+          )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5">
             {currentSpecialized.tips.map((tip, idx) => (

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { List, ChevronDown, ChevronUp, Sparkles, HelpCircle, Layers, Link2, Type } from 'lucide-react';
 import { PageRoute } from '../types';
 import { ROUTE_MODULES } from '../data/routeModules';
-import { SEO_ROUTE_DATA } from '../data/seoRouteData';
+import { getQuickAnswerForRoute } from '../data/quickAnswers';
 
 interface TocItem {
   id: string;
@@ -32,7 +32,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ currentRoute }
       badge: 'Resultados',
       icon: <Type className="w-4 h-4 text-indigo-500" />,
     },
-    ...(SEO_ROUTE_DATA[currentRoute]?.quickAnswer
+    ...(getQuickAnswerForRoute(currentRoute)
       ? [{
           id: 'quick-answer',
           label: 'Respuesta rápida',
