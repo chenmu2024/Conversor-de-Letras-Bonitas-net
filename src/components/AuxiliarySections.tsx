@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { PageRoute } from '../types';
 import { ROUTE_MODULES, AuxiliaryModule } from '../data/routeModules';
+import { ROUTE_LAST_SIGNIFICANT_UPDATE } from '../data/routeFreshness';
 import { LazyOnVisible } from './LazyOnVisible';
 
 // Code-split each individual auxiliary section so they are only downloaded when visible in viewport
@@ -70,7 +71,10 @@ export const AuxiliarySections: React.FC<AuxiliarySectionsProps> = ({
       </div>
 
       <div className="mt-8">
-        <AuthorEditorialBox onRouteChange={onRouteChange} />
+        <AuthorEditorialBox
+          onRouteChange={onRouteChange}
+          lastUpdated={ROUTE_LAST_SIGNIFICANT_UPDATE[currentRoute]}
+        />
       </div>
 
       {/* 2. Context-Relevant Interactive Modules (Deferred on Viewport Entry via LazyOnVisible) */}

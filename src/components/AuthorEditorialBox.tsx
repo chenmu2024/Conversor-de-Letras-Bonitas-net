@@ -12,6 +12,15 @@ export const AuthorEditorialBox: React.FC<AuthorEditorialBoxProps> = ({
   onRouteChange,
   lastUpdated = 'Septiembre 2026',
 }) => {
+  const displayLastUpdated = /^\d{4}-\d{2}-\d{2}$/.test(lastUpdated)
+    ? new Intl.DateTimeFormat('es-ES', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        timeZone: 'UTC',
+      }).format(new Date(`${lastUpdated}T00:00:00Z`))
+    : lastUpdated;
+
   return (
     <div className="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-xl space-y-6">
       {/* Header Info */}
@@ -32,7 +41,7 @@ export const AuthorEditorialBox: React.FC<AuthorEditorialBoxProps> = ({
 
         <div className="flex items-center gap-2 text-xs text-slate-400 shrink-0">
           <Clock className="w-3.5 h-3.5 text-indigo-400" />
-          <span>Última revisión: <strong className="text-slate-200">{lastUpdated}</strong></span>
+          <span>Última revisión: <strong className="text-slate-200">{displayLastUpdated}</strong></span>
         </div>
       </div>
 
