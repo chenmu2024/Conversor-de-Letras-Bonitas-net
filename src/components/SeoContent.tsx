@@ -162,7 +162,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
       title: 'Generador de Nicks para Free Fire - Alas, Coronas 亗, ⓥ y Espacio Invisible',
       subtitle: 'Crea nombres insanos para Garena Free Fire con símbolos de armas y tags de clan.',
       description:
-        'Personaliza tu gamertag con alas ꧁༺ ༻꧂, el símbolo de estilo verificado ⓥ, coronas de rey 亗, armas francotirador ︻╦╤─ y el espacio invisible [ㅤ] probado para Free Fire en Android e iOS.',
+        'Personaliza tu gamertag con alas ꧁༺ ༻꧂, el símbolo decorativo ⓥ, coronas de rey 亗, armas francotirador ︻╦╤─ y el espacio invisible [ㅤ]. La aceptación final depende de las reglas vigentes del juego, la región y la versión.',
       tips: [
         'Copia el Espacio Invisible [ㅤ] con un solo toque para separar palabras en tu nick.',
         'Añade tags de clan como ᴮᴼˢˢ★ o 亗 para que tu escuadra resalte en el lobby.',
@@ -186,7 +186,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
       title: 'Espacio Invisible y Letra Invisible [ㅤ] - Carácter Hangul Filler U+3164',
       subtitle: 'El truco definitivo para nombres invisibles, mensajes vacíos y separadores gamer.',
       description:
-        'El espacio invisible [ㅤ] (Hangul Filler U+3164) es un carácter Unicode especial reconocido por los videojuegos y redes sociales como un caracter válido pero que se visualiza como un espacio transparente.',
+        'El espacio invisible [ㅤ] (Hangul Filler U+3164) es un carácter Unicode que puede ocupar una posición de texto sin mostrar un glifo visible convencional. Cada plataforma decide si lo acepta, lo normaliza o lo bloquea.',
       tips: [
         'Copia el espacio invisible para saltar restricciones de nombres en Free Fire y PUBG.',
         'En WhatsApp, te permite enviar mensajes completamente en blanco y dejar el nombre vacío.',
@@ -325,7 +325,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
         'Procesamiento en el navegador sin almacenamiento de textos.',
         'Diseño responsive optimizado para teléfonos móviles.',
       ],
-      examples: ['Calidad Tipográfica', 'Unicode 15.1', 'Compatibilidad Universal'],
+      examples: ['Calidad Tipográfica', 'Referencia Unicode', 'Compatibilidad Variable'],
     },
     'politica-de-privacidad': {
       title: 'Política de Privacidad y Protección de Datos',
@@ -443,7 +443,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     {
       q: '¿Por qué usar el Conversor de Letras Bonitas para nicks de Free Fire y clanes?',
-      a: 'El Conversor de Letras Bonitas ofrece generadores de apodos con alas ꧁༺ ༻꧂, coronas de rey 亗, cruces y letras góticas compatibles con la mayoría de juegos móviles.',
+      a: 'El Conversor de Letras Bonitas ofrece generadores de apodos con alas ꧁༺ ༻꧂, coronas de rey 亗, cruces y letras góticas para probar en juegos móviles; la compatibilidad depende del campo, la versión y los filtros de cada juego.',
     },
     {
       q: '¿Cómo funciona el traductor a letra cursiva en el Conversor de Letras Bonitas?',
@@ -467,7 +467,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     {
       q: '¿Cómo escribir texto tachado (̶t̶a̶c̶h̶a̶d̶o̶) para WhatsApp, Instagram y ofertas comerciales?',
-      a: 'Para tachar texto se utilizan los caracteres diacríticos combinantes de Unicode (U+0336 para tachado simple o U+0336+U+0335 para doble tachado). A diferencia del formato markdown nativo (~texto~ de WhatsApp que solo funciona dentro de su chat), nuestro texto tachado Unicode funciona en cualquier lugar: biografías de Instagram, nombres de perfil, comentarios de TikTok, publicaciones de Facebook y estados de WhatsApp.',
+      a: 'Para tachar texto se utilizan caracteres diacríticos combinantes de Unicode, como U+0336. A diferencia de formatos nativos específicos de una aplicación, el resultado es texto Unicode copiable; su visualización y aceptación deben comprobarse en cada campo y plataforma.',
     },
     {
       q: '¿Cómo usar el tachador para ofertas y descuentos de marketing?',
@@ -479,7 +479,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     {
       q: '¿Por qué algunas letras en círculos negros se ven como emojis o cuadrados en ciertos móviles?',
-      a: 'Las letras en círculos blancos (Ⓒⓘⓡⓒⓤⓛⓞⓢ) y negros (🅒🅘🅡🅒🅤🅛🅞🅢) forman parte del estándar Unicode. La inmensa mayoría de dispositivos modernos (iOS 12+, Android 9+, Windows 10/11) los soportan nativamente. Si deseas máxima compatibilidad visual en cualquier pantalla, los círculos blancos (Ⓐ-Ⓩ, ⓐ-ⓩ) y los números encerrados (①-⑳) ofrecen un soporte muy extendido.',
+      a: 'Las letras encerradas en círculos y varios números encerrados forman parte de Unicode. La cobertura tipográfica varía entre sistemas, versiones y fuentes instaladas, por lo que conviene comprobar los caracteres elegidos en el dispositivo de destino.',
     },
     {
       q: '¿Qué es el texto Zalgo (Texto Maldito / Cursed Text) y cómo se genera?',
@@ -499,7 +499,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
     },
     {
       q: '¿Por qué algunos símbolos aparecen como cuadros o signos de interrogación ()?',
-      a: 'Los cuadros con signos de interrogación ocurren cuando la versión del sistema operativo de un móvil antiguo no incluye el glifo de ese carácter Unicode reciente. No obstante, los símbolos más utilizados de nuestra biblioteca (alas, espadas, corazones, estrellas, kanji y kaomojis) ofrecen una amplia compatibilidad en dispositivos modernos (Android, iOS, Windows y macOS).',
+      a: 'Los cuadros vacíos o caracteres de sustitución suelen aparecer cuando la fuente o el sistema no dispone de un glifo adecuado para ese carácter. La cobertura puede variar entre Android, iOS, Windows, macOS, aplicaciones y versiones.',
     },
     {
       q: '¿Cómo se usa el carácter de Espacio Invisible (ㅤ)?',
@@ -701,7 +701,7 @@ export const SeoContent: React.FC<SeoContentProps> = ({ currentRoute }) => {
             <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
             <div>
               <h3 className="text-xs font-bold text-slate-900">Conversor de Letras Bonitas Multiplataforma</h3>
-              <p className="text-[11px] text-slate-600 mt-0.5">El Conversor de Letras Bonitas funciona perfectamente en iPhone, iPad, Android, Windows, Mac y Linux.</p>
+              <p className="text-[11px] text-slate-600 mt-0.5">El conversor se ejecuta en navegadores modernos; la representación de cada carácter Unicode puede variar según el sistema, la fuente disponible y la aplicación donde se pegue.</p>
             </div>
           </div>
 

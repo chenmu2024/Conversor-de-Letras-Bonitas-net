@@ -62,7 +62,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
       },
       {
         question: '¿Las tipografías del Conversor de Letras Bonitas funcionan en WhatsApp e Instagram?',
-        answer: 'Sí, las combinaciones de caracteres Unicode funcionan en la biografía de Instagram, TikTok, estados de WhatsApp, Facebook y Free Fire en dispositivos actualizados.'
+        answer: 'Muchas combinaciones Unicode pueden copiarse y probarse en Instagram, TikTok, WhatsApp, Facebook y juegos. La aceptación y la apariencia dependen del campo, la aplicación, la versión y las fuentes disponibles en el dispositivo.'
       },
       {
         question: '¿Cómo escribir con letras al revés en el Conversor de Letras Bonitas?',
@@ -107,11 +107,11 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     faqs: [
       {
         question: '¿Instagram penaliza o bloquea el uso de letras bonitas?',
-        answer: 'El uso de caracteres Unicode en biografías y textos públicos está generalmente permitido en Instagram, de manera similar a los emojis y símbolos estándar.'
+        answer: 'Las letras decorativas de esta herramienta son caracteres Unicode. La aceptación depende del campo y de las reglas vigentes de Instagram, por lo que conviene comprobar el resultado directamente en la aplicación.'
       },
       {
         question: '¿Cuántos caracteres puedo usar en la biografía de Instagram?',
-        answer: 'El límite de la biografía de Instagram es normalmente de 150 caracteres. Ten en cuenta que algunas letras compuestas pueden contar como 2 caracteres Unicode.'
+        answer: 'La herramienta conserva 150 caracteres como referencia histórica para la biografía de Instagram, no como límite oficial actual verificado. Confirma el límite que muestre tu versión de Instagram antes de guardar.'
       }
     ],
     proTips: [
@@ -152,11 +152,11 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     faqs: [
       {
         question: '¿Por qué Free Fire rechaza los espacios comunes en el nombre?',
-        answer: 'El sistema del juego bloquea la barra espaciadora ordinaria (ASCII 32). La solución es usar el carácter especial Hangul Filler (U+3164), que el juego acepta como letra pero visualmente es invisible.'
+        answer: 'Los filtros de nombres de Free Fire pueden tratar de forma distinta los espacios y otros caracteres. Hangul Filler (U+3164) puede probarse como alternativa visual, pero su aceptación depende de la versión, región y reglas vigentes del juego.'
       },
       {
         question: '¿Cuál es el límite habitual de letras para un nombre en Free Fire?',
-        answer: 'Free Fire suele aplicar como referencia un límite de hasta 12 caracteres para el apodo. Asegúrate de que los símbolos de alas no sobrepasen esta longitud.'
+        answer: 'La herramienta conserva 12 caracteres como referencia histórica para nicks de Free Fire, no como límite oficial actual verificado. Comprueba el contador y confirma las reglas mostradas por el juego antes de guardar.'
       }
     ],
     proTips: [
@@ -222,7 +222,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     faqs: [
       {
         question: '¿Cuál es la diferencia entre los códigos nativos (*negrita*) y las fuentes de esta web?',
-        answer: 'Los códigos nativos de WhatsApp (*palabra*) solo funcionan dentro de los chats de WhatsApp. Las fuentes Unicode de esta web funcionan además en tu Nombre de Usuario, Información de Perfil y Estados.'
+        answer: 'Los formatos nativos de WhatsApp dependen del propio campo de chat. Las variantes Unicode de esta web pueden copiarse y probarse en campos de perfil o estado compatibles, pero la aceptación y el aspecto pueden variar.'
       }
     ],
     proTips: [
@@ -443,7 +443,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     badge: '🎮 Nicks Gamer 2026',
     quickAnswer: {
       question: '¿Cómo crear un nick para Free Fire con símbolos y espacio invisible?',
-      answer: 'Genera combinaciones con alas gamer (꧁, ꧂), el símbolo de verificación (ⓥ), coronas y espacios invisibles (U+3164). Recuerda que el juego aplica como referencia un límite de hasta 12 caracteres visibles/bytes según la versión.',
+      answer: 'Genera combinaciones con alas gamer (꧁, ꧂), el símbolo decorativo ⓥ, coronas y espacios invisibles como U+3164. La herramienta muestra referencias históricas de longitud; confirma siempre las reglas actuales dentro del juego.',
       relatedLink: {
         text: 'Consultar compatibilidad de símbolos gamer',
         href: '/compatibilidad-unicode/#free-fire'
@@ -548,7 +548,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
       },
       {
         question: '¿Por qué no funciona la barra espaciadora normal en los nicks de Free Fire?',
-        answer: 'Garena Free Fire bloquea el carácter de espacio tradicional (U+0020). Al utilizar el espacio invisible Hangul Filler (U+3164), el juego lo acepta como una letra válida y permite separar palabras sin error.'
+        answer: 'Los filtros de nick pueden rechazar, normalizar o aceptar distintos caracteres según la versión y la región. Hangul Filler (U+3164) es una alternativa Unicode que puedes probar, pero no se garantiza su aceptación permanente en Free Fire.'
       }
     ],
     proTips: [
@@ -586,7 +586,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
       },
       {
         question: '¿Se pueden usar estos nicks en Instagram y WhatsApp?',
-        answer: 'Sí, los caracteres y fuentes son compatibles con biografías compartidas de Instagram, descripciones de TikTok y nombres de contacto en WhatsApp.'
+        answer: 'Puedes copiar estas combinaciones y probarlas en Instagram, TikTok o WhatsApp. La compatibilidad depende del campo concreto, la aplicación, la versión y las fuentes disponibles.'
       }
     ],
     proTips: [
@@ -890,12 +890,12 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     badge: '📊 Herramienta de Precisión para Biografías',
     quickAnswer: {
       question: '¿Cómo contar caracteres para biografías de redes sociales?',
-      answer: 'Pega o redacta tu biografía en el contador para visualizar en tiempo real los límites de Instagram (150 caracteres), TikTok (80 caracteres) y Twitter/X (160 caracteres), asegurando que los emojis y caracteres Unicode especiales no superen el espacio permitido.'
+      answer: 'Pega o redacta tu texto para compararlo con referencias históricas de longitud mostradas por la herramienta. Esos valores no se presentan como límites oficiales actuales hasta que exista una fuente y fecha de verificación registradas.'
     },
     guideTitle: '¿Cómo Contar Caracteres y Ajustar tu Biografía?',
     guideSteps: [
       { step: '1', title: 'Escribe o Pega tu Texto', text: 'Pega tu biografía, tweet o estado para ver el conteo de caracteres en tiempo real.' },
-      { step: '2', title: 'Comprueba los Indicadores de Redes', text: 'Visualiza de inmediato si tu texto excede los límites de Instagram (150), TikTok (80), Twitter (280) o Free Fire (12).' },
+      { step: '2', title: 'Comprueba los Indicadores de Redes', text: 'Compara tu texto con las referencias históricas de longitud y confirma las reglas actuales directamente en la plataforma antes de publicar.' },
       { step: '3', title: 'Copia con 1 Clic', text: 'Una vez ajustado, copia el texto final optimizado para tu perfil.' }
     ],
     faqs: [
@@ -905,7 +905,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
       },
       {
         question: '¿Cuál es el límite habitual de caracteres en la biografía de Instagram?',
-        answer: 'Instagram suele permitir hasta 150 caracteres en la biografía y 30 caracteres en el campo de nombre. Este límite puede cambiar según futuras actualizaciones de la plataforma.'
+        answer: 'La herramienta mantiene 150 caracteres para la bio y 30 para el nombre como referencias históricas. No se consideran límites oficiales actuales hasta registrar una fuente autoritativa y una fecha de verificación.'
       }
     ],
     proTips: [
@@ -972,7 +972,7 @@ export const SEO_ROUTE_DATA: Record<PageRoute, RouteSeoData> = {
     badge: '🛡️ Metodología y Transparencia',
     guideTitle: 'Nuestros Pilares de Calidad y Desarrollo',
     guideSteps: [
-      { step: '1', title: 'Estándar Unicode ISO/IEC 10646', text: 'Mapeamos alfabetos matemáticos y glifos especiales procurando compatibilidad en iOS, Android y Windows.' },
+      { step: '1', title: 'Estándar Unicode ISO/IEC 10646', text: 'Mapeamos alfabetos matemáticos y glifos especiales según referencias Unicode, sin asumir que todas las plataformas los renderizan de la misma forma.' },
       { step: '2', title: 'Procesamiento en el Navegador', text: 'El texto introducido en el conversor no se almacena en servidores; la transformación se ejecuta de forma local en tu navegador.' },
       { step: '3', title: 'Actualizaciones Constantes', text: 'Revisamos periódicamente la visualización de glifos en plataformas como Free Fire, Instagram y TikTok para detectar caracteres no soportados o fallos de renderizado.' }
     ],
