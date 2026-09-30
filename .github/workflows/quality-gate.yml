@@ -24,6 +24,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -47,3 +49,8 @@ jobs:
 
       - name: Run Playwright smoke tests
         run: bun run test:e2e
+
+      - name: Notify IndexNow about changed indexable content
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        continue-on-error: true
+        run: bun run submit:indexnow:changed -- --before "${{ github.event.before }}" --after "${{ github.sha }}"
