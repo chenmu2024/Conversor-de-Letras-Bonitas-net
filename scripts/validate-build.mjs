@@ -173,6 +173,19 @@ async function validateBuild() {
       errors.push(`[${routeKey}] Missing id="seo-jsonld" on JSON-LD script tag`);
     }
 
+    // Parse prerendered JSON-LD once so validation is independent of whitespace/formatting.
+    let parsedStructuredData = null;
+    const jsonLdContentMatch = html.match(
+      /<script\b[^>]*id=["']seo-jsonld["'][^>]*>([\s\S]*?)<\/script>/i
+    );
+    if (jsonLdContentMatch) {
+      try {
+        parsedStructuredData = JSON.parse(jsonLdContentMatch[1].trim());
+      } catch (error) {
+        errors.push(`[${routeKey}] seo-jsonld is not valid JSON: ${error?.message || error}`);
+      }
+    }
+
     // GEO rendering guard for public tool routes: data must survive prerendering.
     if (!informationalRoutes.has(routeKey) && routeKey !== '404') {
       if (!html.includes('id="quick-answer"')) {
@@ -182,16 +195,23 @@ async function validateBuild() {
         errors.push(`[GEO] [${routeKey}] Prerendered HTML is missing #contextual-links.`);
       }
 
-      const expectedLastmod = ROUTE_LAST_SIGNIFICANT_UPDATE[routeKey];
-      if (expectedLastmod && !html.includes(`"dateModified":"${expectedLastmod}"`)) {
-        errors.push(`[SEO] [${routeKey}] JSON-LD dateModified does not match route freshness metadata.`);
-      }
-
-      if (!html.includes('"publisher":{"@id":"https://conversordeletrasbonitas.net/#organization"}')) {
-        errors.push(`[GEO] [${routeKey}] Primary schema is missing the canonical publisher relationship.`);
-      }
-      if (!html.includes('"isPartOf":{"@id":"https://conversordeletrasbonitas.net/#website"}')) {
-        errors.push(`[GEO] [${routeKey}] Primary schema is missing the canonical WebSite relationship.`);
+      const graph = parsedStructuredData?.['@graph'] || [];
+      const primaryNode = graph.find(
+        (node) => node?.['@type'] === 'WebApplication' && node?.url === expectedCanonical
+      );
+      if (!primaryNode) {
+        errors.push(`[GEO] [${routeKey}] Prerendered JSON-LD is missing its WebApplication node.`);
+      } else {
+        const expectedLastmod = ROUTE_LAST_SIGNIFICANT_UPDATE[routeKey];
+        if (expectedLastmod && primaryNode.dateModified !== expectedLastmod) {
+          errors.push(`[SEO] [${routeKey}] JSON-LD dateModified does not match route freshness metadata.`);
+        }
+        if (primaryNode.publisher?.['@id'] !== 'https://conversordeletrasbonitas.net/#organization') {
+          errors.push(`[GEO] [${routeKey}] Primary schema is missing the canonical publisher relationship.`);
+        }
+        if (primaryNode.isPartOf?.['@id'] !== 'https://conversordeletrasbonitas.net/#website') {
+          errors.push(`[GEO] [${routeKey}] Primary schema is missing the canonical WebSite relationship.`);
+        }
       }
     }
 

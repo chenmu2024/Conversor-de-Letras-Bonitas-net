@@ -1,6 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { PageRoute } from '../types';
 import { FONT_COUNT_PLUS } from '../constants/siteStats';
+import { PLATFORM_LENGTH_REFERENCES } from '../data/platformLimitReferences';
+import { CONTEXTUAL_LINKS } from '../data/contextualLinks';
+import { ROUTE_CONFIGS } from '../data/routeConfigs';
+import { QuickAnswerSection } from './QuickAnswerSection';
 import { 
   Hash, 
   Copy, 
@@ -15,23 +19,32 @@ import {
   Share2
 } from 'lucide-react';
 
-interface PlatformLimit {
-  name: string;
-  limit: number;
-  icon: React.ReactNode;
-  color: string;
-  field: string;
-}
+type PlatformReferenceName =
+  | 'Instagram Bio'
+  | 'Instagram Nombre'
+  | 'TikTok Bio'
+  | 'Twitter / X Post'
+  | 'WhatsApp Info'
+  | 'Free Fire Nick'
+  | 'Discord Sobre Mí';
 
-const PLATFORM_LIMITS: PlatformLimit[] = [
-  { name: 'Instagram Bio', limit: 150, icon: <Instagram className="w-4 h-4 text-pink-500" />, color: 'pink', field: 'Biografía' },
-  { name: 'Instagram Nombre', limit: 30, icon: <Instagram className="w-4 h-4 text-pink-500" />, color: 'pink', field: 'Nombre en Perfil' },
-  { name: 'TikTok Bio', limit: 80, icon: <span className="font-bold text-xs">TT</span>, color: 'slate', field: 'Descripción Perfil' },
-  { name: 'Twitter / X', limit: 280, icon: <span className="font-bold text-xs text-blue-500">𝕏</span>, color: 'blue', field: 'Post / Tweet' },
-  { name: 'WhatsApp Info', limit: 139, icon: <MessageCircle className="w-4 h-4 text-emerald-500" />, color: 'emerald', field: 'Información / Estado' },
-  { name: 'Free Fire Nick', limit: 12, icon: <Flame className="w-4 h-4 text-amber-500" />, color: 'amber', field: 'Nickname Jugador' },
-  { name: 'Discord Sobre Mí', limit: 190, icon: <span className="font-bold text-xs text-indigo-500">🎮</span>, color: 'indigo', field: 'Perfil' },
+const COUNTER_REFERENCE_NAMES: PlatformReferenceName[] = [
+  'Instagram Bio',
+  'Instagram Nombre',
+  'TikTok Bio',
+  'Twitter / X Post',
+  'WhatsApp Info',
+  'Free Fire Nick',
+  'Discord Sobre Mí',
 ];
+
+const platformReferenceMap = new Map(
+  PLATFORM_LENGTH_REFERENCES.map((item) => [item.name, item])
+);
+
+const PLATFORM_LIMITS = COUNTER_REFERENCE_NAMES
+  .map((name) => platformReferenceMap.get(name))
+  .filter((item): item is NonNullable<typeof item> => Boolean(item));
 
 interface BioCharacterCounterProps {
   onApplyText?: (text: string) => void;
@@ -82,6 +95,29 @@ export const BioCharacterCounter: React.FC<BioCharacterCounterProps> = ({
     setText('');
   };
 
+  const getPlatformPresentation = (name: string) => {
+    switch (name) {
+      case 'Instagram Bio':
+        return { icon: <Instagram className="w-4 h-4 text-pink-500" />, field: 'Biografía' };
+      case 'Instagram Nombre':
+        return { icon: <Instagram className="w-4 h-4 text-pink-500" />, field: 'Nombre en perfil' };
+      case 'TikTok Bio':
+        return { icon: <span className="font-bold text-xs">TT</span>, field: 'Descripción de perfil' };
+      case 'Twitter / X Post':
+        return { icon: <span className="font-bold text-xs text-blue-500">𝕏</span>, field: 'Post / Tweet' };
+      case 'WhatsApp Info':
+        return { icon: <MessageCircle className="w-4 h-4 text-emerald-500" />, field: 'Información / Estado' };
+      case 'Free Fire Nick':
+        return { icon: <Flame className="w-4 h-4 text-amber-500" />, field: 'Nickname jugador' };
+      case 'Discord Sobre Mí':
+        return { icon: <span className="font-bold text-xs text-indigo-500">🎮</span>, field: 'Perfil' };
+      default:
+        return { icon: <Hash className="w-4 h-4 text-slate-500" />, field: 'Referencia' };
+    }
+  };
+
+  const contextualLinks = CONTEXTUAL_LINKS['contador-bio'] || [];
+
   return (
     <div className="max-w-4xl mx-auto py-8 sm:py-10 space-y-8">
       {/* Header */}
@@ -94,9 +130,11 @@ export const BioCharacterCounter: React.FC<BioCharacterCounterProps> = ({
           Contador de Caracteres para Redes Sociales
         </h1>
         <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
-          Escribe o pega tu texto y visualiza en tiempo real una referencia de los límites habituales para Instagram, TikTok, WhatsApp, X y Free Fire.
+          Escribe o pega tu texto y compáralo con referencias históricas de longitud para Instagram, TikTok, WhatsApp, X, Free Fire y Discord.
         </p>
       </div>
+
+      <QuickAnswerSection currentRoute="contador-bio" />
 
       {/* Main Text Editor Area */}
       <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm p-6 sm:p-8 space-y-5">
@@ -186,16 +224,18 @@ export const BioCharacterCounter: React.FC<BioCharacterCounterProps> = ({
             </h2>
           </div>
           <p className="text-[11px] text-slate-500 mt-1">
-            Los límites mostrados son referencias habituales y pueden cambiar según las actualizaciones de cada plataforma.
+            Los valores mostrados son referencias históricas, no límites oficiales actuales verificados. Confirma siempre las reglas vigentes en la plataforma.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {PLATFORM_LIMITS.map((platform) => {
             const used = stats.codePoints;
-            const remaining = platform.limit - used;
-            const percentage = Math.min(100, Math.round((used / platform.limit) * 100));
-            const isExceeded = used > platform.limit;
+            const limit = platform.referenceMax;
+            const remaining = limit - used;
+            const percentage = Math.min(100, Math.round((used / limit) * 100));
+            const isExceeded = used > limit;
+            const presentation = getPlatformPresentation(platform.name);
 
             return (
               <div
@@ -209,17 +249,17 @@ export const BioCharacterCounter: React.FC<BioCharacterCounterProps> = ({
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
                     <div className="w-7 h-7 rounded-lg bg-slate-100 flex items-center justify-center">
-                      {platform.icon}
+                      {presentation.icon}
                     </div>
                     <div>
                       <div className="font-bold text-xs text-slate-900">{platform.name}</div>
-                      <div className="text-[10px] text-slate-500">{platform.field}</div>
+                      <div className="text-[10px] text-slate-500">{presentation.field}</div>
                     </div>
                   </div>
 
                   <div className="text-right">
                     <span className={`text-xs font-black ${isExceeded ? 'text-rose-600' : 'text-slate-700'}`}>
-                      {used} / {platform.limit}
+                      {used} / ≈{limit}
                     </span>
                     <div className="text-[10px] font-bold">
                       {isExceeded ? (
@@ -253,6 +293,36 @@ export const BioCharacterCounter: React.FC<BioCharacterCounterProps> = ({
           })}
         </div>
       </div>
+
+      <nav
+        id="contextual-links"
+        aria-label="Enlaces contextuales relacionados"
+        className="rounded-2xl border border-slate-200 bg-white p-5"
+      >
+        <p className="text-xs font-black uppercase tracking-wider text-slate-500 mb-3">
+          Herramientas relacionadas
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {contextualLinks.map((link) => {
+            const target = Object.values(ROUTE_CONFIGS).find((route) => route.path === link.href);
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(event) => {
+                  if (target && onRouteChange) {
+                    event.preventDefault();
+                    onRouteChange(target.route);
+                  }
+                }}
+                className="inline-flex items-center rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-bold text-indigo-700 hover:border-indigo-200 hover:bg-indigo-50"
+              >
+                {link.text}
+              </a>
+            );
+          })}
+        </div>
+      </nav>
 
       {/* Banner to stylize bio text */}
       <div className="bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 rounded-3xl border border-indigo-200/80 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">

@@ -38,6 +38,7 @@ async function runPrerender() {
   const App = (await import('../src/App.tsx')).default;
   const { ROUTE_CONFIGS } = await import('../src/data/routeConfigs.ts');
   const { SEO_ROUTE_DATA } = await import('../src/data/seoRouteData.ts');
+  const { ROUTE_LAST_SIGNIFICANT_UPDATE } = await import('../src/data/routeFreshness.ts');
 
   const routes = Object.values(ROUTE_CONFIGS);
   console.log(`📋 [Prerender] Found ${routes.length} routes to prerender from ROUTE_CONFIGS.`);
@@ -68,27 +69,21 @@ async function runPrerender() {
       appHtml = '';
     }
 
-    // 2. Build Schema.org JSON-LD (WebSite, WebApplication, BreadcrumbList, Organization only)
-    const structuredData = {
-      '@context': 'https://schema.org',
-      '@graph': [
-        {
-          '@type': 'WebSite',
-          '@id': 'https://conversordeletrasbonitas.net/#website',
-          url: 'https://conversordeletrasbonitas.net/',
-          name: 'Conversor de Letras Bonitas',
-          description: 'Fuentes y tipografías bonitas para copiar y pegar',
-          inLanguage: 'es',
-        },
-        {
-          '@type': 'Organization',
-          '@id': 'https://conversordeletrasbonitas.net/#organization',
-          name: 'Conversor de Letras Bonitas',
-          url: 'https://conversordeletrasbonitas.net/',
-          logo: 'https://conversordeletrasbonitas.net/favicon.svg',
-          image: 'https://conversordeletrasbonitas.net/og-image.png',
-        },
-        {
+    // 2. Build Schema.org JSON-LD using the same semantic model as useSeoHead.
+    const origin = 'https://conversordeletrasbonitas.net';
+    const informationalType =
+      routeKey === 'sobre-nosotros'
+        ? 'AboutPage'
+        : routeKey === 'contacto'
+          ? 'ContactPage'
+          : ['politica-de-privacidad', 'politica-de-cookies', 'terminos-y-condiciones'].includes(routeKey)
+            ? 'WebPage'
+            : null;
+    const isToolRoute = !informationalType && routeKey !== '404';
+    const lastModified = ROUTE_LAST_SIGNIFICANT_UPDATE[routeKey];
+
+    const primaryPageNode = isToolRoute
+      ? {
           '@type': 'WebApplication',
           '@id': `${canonicalUrl}#webapp`,
           name: seo.h1 || routeConfig.label,
@@ -97,15 +92,53 @@ async function runPrerender() {
           applicationCategory: 'UtilitiesApplication',
           operatingSystem: 'All (iOS, Android, Windows, macOS, Linux)',
           browserRequirements: 'Requires JavaScript. Requires HTML5.',
+          description: seo.metaDescription,
           inLanguage: 'es',
           isAccessibleForFree: true,
-          description: seo.metaDescription,
+          isPartOf: { '@id': `${origin}/#website` },
+          publisher: { '@id': `${origin}/#organization` },
+          ...(lastModified ? { dateModified: lastModified } : {}),
           offers: {
             '@type': 'Offer',
             price: '0',
             priceCurrency: 'USD',
           },
+        }
+      : informationalType
+        ? {
+            '@type': informationalType,
+            '@id': `${canonicalUrl}#page`,
+            name: seo.h1 || routeConfig.label,
+            url: canonicalUrl,
+            description: seo.metaDescription,
+            inLanguage: 'es',
+            isPartOf: { '@id': `${origin}/#website` },
+            publisher: { '@id': `${origin}/#organization` },
+            ...(lastModified ? { dateModified: lastModified } : {}),
+          }
+        : null;
+
+    const structuredData = {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebSite',
+          '@id': `${origin}/#website`,
+          url: origin,
+          name: 'Conversor de Letras Bonitas',
+          description: 'Generador y conversor gratuito de letras bonitas, fuentes cursivas, góticas y símbolos para redes sociales.',
+          inLanguage: 'es',
+          publisher: { '@id': `${origin}/#organization` },
         },
+        {
+          '@type': 'Organization',
+          '@id': `${origin}/#organization`,
+          name: 'Conversor de Letras Bonitas',
+          url: origin,
+          logo: `${origin}/favicon.svg`,
+          image: `${origin}/og-image.png`,
+        },
+        ...(primaryPageNode ? [primaryPageNode] : []),
         {
           '@type': 'BreadcrumbList',
           '@id': `${canonicalUrl}#breadcrumb`,
@@ -114,14 +147,14 @@ async function runPrerender() {
               '@type': 'ListItem',
               position: 1,
               name: 'Inicio',
-              item: 'https://conversordeletrasbonitas.net/',
+              item: origin,
             },
             ...(routeKey !== 'inicio' && routeKey !== '404'
               ? [
                   {
                     '@type': 'ListItem',
                     position: 2,
-                    name: routeConfig.label,
+                    name: seo.badge || routeConfig.label,
                     item: canonicalUrl,
                   },
                 ]

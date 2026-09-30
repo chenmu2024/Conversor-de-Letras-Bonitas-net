@@ -6,7 +6,6 @@ import { Header } from './components/Header';
 import { FontConverter } from './components/FontConverter';
 import { Breadcrumbs } from './components/Breadcrumbs';
 import { QuickAnswerSection } from './components/QuickAnswerSection';
-import { SEO_ROUTE_DATA } from './data/seoRouteData';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { ToastNotification } from './components/ToastNotification';
 import { Footer } from './components/Footer';
@@ -327,22 +326,7 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
               initialText={globalText}
               onTextChange={(t) => setGlobalText(t)}
               onRouteChange={handleRouteChange}
-              quickAnswerSlot={
-                SEO_ROUTE_DATA[currentRoute]?.quickAnswer ? (
-                  <QuickAnswerSection
-                    seo={SEO_ROUTE_DATA[currentRoute]}
-                    onNavigate={(path) => {
-                      const clean = path.replace(/\/$/, '');
-                      const match = Object.values(ROUTE_CONFIGS).find(r => r.path === path || r.path.replace(/\/$/, '') === clean);
-                      if (match) {
-                        handleRouteChange(match.route);
-                      } else if (path === '/') {
-                        handleRouteChange('inicio');
-                      }
-                    }}
-                  />
-                ) : undefined
-              }
+              quickAnswerSlot={<QuickAnswerSection currentRoute={currentRoute} />}
             />
 
             {/* 2. Dedicated Interactive Studio / Platform Toolkit (Sub-studios for Instagram, Free Fire, etc.) */}
