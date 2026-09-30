@@ -23,7 +23,6 @@ import {
 } from '../data/unicodeCompatibility';
 import { OfficialReferencesSection } from './OfficialReferencesSection';
 import { QuickAnswerSection } from './QuickAnswerSection';
-import { SEO_ROUTE_DATA } from '../data/seoRouteData';
 
 interface UnicodeCompatibilityLabProps {
   onNavigate?: (path: string) => void;

@@ -421,6 +421,14 @@ test.describe('Conversor de Letras Bonitas - E2E Smoke & SEO Tests', () => {
     expect(website?.publisher?.['@id']).toBe('https://conversordeletrasbonitas.net/#organization');
   });
 
+  test('About page exposes official Unicode sources without inventing manual platform tests', async ({ page }) => {
+    await page.goto('/sobre-nosotros/');
+    await expect(page.getByRole('link', { name: /Unicode Character Database/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: /Mathematical Alphanumeric Symbols/i })).toBeVisible();
+    await expect(page.getByText(/Pruebas manuales documentadas actualmente:/i)).toBeVisible();
+    await expect(page.getByText(/Comprobaciones empíricas de glifos/i)).toHaveCount(0);
+  });
+
   test('Privacy and cookie pages match the no-analytics product configuration', async ({ page }) => {
     await page.goto('/politica-de-cookies/');
     await expect(page.getByText('Cookies Analíticas', { exact: true })).toHaveCount(0);

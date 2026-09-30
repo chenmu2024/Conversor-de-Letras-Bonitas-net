@@ -27,6 +27,7 @@ export const ROUTE_LAST_SIGNIFICANT_UPDATE: Partial<Record<PageRoute, string>> =
   decorador: '2026-09-30',
   'contador-bio': '2026-09-30',
   'compatibilidad-unicode': '2026-09-30',
+  'sobre-nosotros': '2026-09-30',
   'politica-de-privacidad': '2026-09-30',
   'politica-de-cookies': '2026-09-30',
 };

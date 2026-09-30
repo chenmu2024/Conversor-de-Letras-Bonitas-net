@@ -1,5 +1,6 @@
 import React from 'react';
-import { ShieldCheck, Cpu, Globe, HeartHandshake, FileCode2, CheckCircle2, Layers } from 'lucide-react';
+import { ShieldCheck, Cpu, Globe, HeartHandshake, FileCode2, CheckCircle2, Layers, BookOpen } from 'lucide-react';
+import { COMPATIBILITY_TEST_LOG } from '../data/compatibilityTestLog';
 import { PageRoute } from '../types';
 
 interface AboutUsPageProps {
@@ -88,24 +89,35 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onRouteChange }) => {
           </span>
         </div>
         <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
-          La compatibilidad se evalúa a partir de los estándares del Consorcio Unicode y mediante comprobaciones técnicas periódicas en navegadores, sistemas operativos y aplicaciones líderes:
+          Nuestra metodología separa las referencias del estándar Unicode de las comprobaciones manuales. Solo marcamos un resultado como comprobado cuando existe una prueba documentada en el registro del proyecto.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <a
+            href="https://www.unicode.org/ucd/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-indigo-500/50 transition-colors"
+          >
+            <div className="font-black text-white mb-1 flex items-center gap-1.5">
+              <BookOpen className="w-3.5 h-3.5 text-indigo-300" />
+              Unicode Character Database
+            </div>
+            <div className="text-slate-400">Fuente oficial para propiedades y datos de los caracteres Unicode.</div>
+          </a>
+          <a
+            href="https://www.unicode.org/charts/nameslist/n_1D400.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-indigo-500/50 transition-colors"
+          >
+            <div className="font-black text-white mb-1">Mathematical Alphanumeric Symbols</div>
+            <div className="text-slate-400">Referencia oficial del bloque U+1D400–U+1D7FF utilizado por varios estilos matemáticos.</div>
+          </a>
           <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
-            <div className="font-black text-white mb-1">📱 iOS / iPadOS</div>
-            <div className="text-slate-400">Pruebas en Safari y fuentes de sistema Apple (SF Pro / New York).</div>
-          </div>
-          <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
-            <div className="font-black text-white mb-1">🤖 Android</div>
-            <div className="text-slate-400">Compatibilidad con Roboto, Noto Sans y renderizado Chromium.</div>
-          </div>
-          <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
-            <div className="font-black text-white mb-1">🎮 Free Fire & Gaming</div>
-            <div className="text-slate-400">Comprobaciones empíricas de glifos no bloqueados por el filtro del juego.</div>
-          </div>
-          <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
-            <div className="font-black text-white mb-1">💬 Redes Sociales</div>
-            <div className="text-slate-400">Instagram Bio/Stories, TikTok, WhatsApp y Facebook.</div>
+            <div className="font-black text-white mb-1">Registro de pruebas manuales</div>
+            <div className="text-slate-400">
+              Pruebas manuales documentadas actualmente: <strong className="text-white">{COMPATIBILITY_TEST_LOG.length}</strong>. Sin registro, el estado se mantiene como referencia o sin datos.
+            </div>
           </div>
         </div>
 

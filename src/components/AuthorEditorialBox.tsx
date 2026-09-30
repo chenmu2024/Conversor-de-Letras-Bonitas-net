@@ -67,7 +67,7 @@ export const AuthorEditorialBox: React.FC<AuthorEditorialBoxProps> = ({
             <span>Estándares Unicode</span>
           </div>
           <p className="text-[11px] text-slate-400 leading-relaxed">
-            Utilizamos bloques alfanuméricos matemáticos estándar (U+1D400–U+1D7FF) y símbolos universales para evitar caracteres incompatibles.
+            Utilizamos referencias del estándar Unicode, incluido el bloque U+1D400–U+1D7FF, para identificar los caracteres y sus propiedades sin asumir compatibilidad automática en cada plataforma.
           </p>
         </div>
 
