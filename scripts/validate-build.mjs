@@ -20,6 +20,9 @@ async function validateBuild() {
   const { FONT_COUNT, FONT_COUNT_PLUS } = await import('../src/constants/siteStats.ts');
   const { UNICODE_COMPATIBILITY_DATA } = await import('../src/data/unicodeCompatibility.ts');
   const { COMPATIBILITY_TEST_LOG } = await import('../src/data/compatibilityTestLog.ts');
+  const { getQuickAnswerForRoute } = await import('../src/data/quickAnswers.ts');
+  const { CONTEXTUAL_LINKS } = await import('../src/data/contextualLinks.ts');
+  const { ROUTE_LAST_SIGNIFICANT_UPDATE } = await import('../src/data/routeFreshness.ts');
 
   const expectedFontBucket = `${Math.floor(FONT_COUNT / 10) * 10}+`;
   console.log(`ℹ️ [Validate] Font stats: FONT_COUNT=${FONT_COUNT}, FONT_COUNT_PLUS=${FONT_COUNT_PLUS} (Bucket: ${expectedFontBucket})`);
@@ -77,6 +80,44 @@ async function validateBuild() {
   const routes = Object.values(ROUTE_CONFIGS);
   const indexableRoutes = routes.filter((r) => r.route !== '404');
   const expectedIndexableCount = indexableRoutes.length;
+
+  const informationalRoutes = new Set([
+    'sobre-nosotros',
+    'politica-de-privacidad',
+    'politica-de-cookies',
+    'terminos-y-condiciones',
+    'contacto',
+    '404',
+  ]);
+  const toolRoutes = routes.filter((route) => !informationalRoutes.has(route.route));
+
+  // GEO/SEO coverage guard: every public tool route must remain extractable, internally connected,
+  // and carry a deliberate significant-update date. This prevents later edits from silently
+  // degrading answerability or crawl freshness.
+  for (const route of toolRoutes) {
+    const quickAnswer = getQuickAnswerForRoute(route.route);
+    if (!quickAnswer?.question?.trim() || !quickAnswer?.answer?.trim()) {
+      errors.push(`[GEO] Tool route "${route.route}" is missing a Quick Answer question/answer.`);
+    }
+
+    const contextualLinks = CONTEXTUAL_LINKS[route.route] || [];
+    if (contextualLinks.length < 2) {
+      errors.push(`[GEO] Tool route "${route.route}" must have at least 2 contextual internal links.`);
+    }
+
+    for (const link of contextualLinks) {
+      if (!link.text?.trim() || !link.href?.startsWith('/')) {
+        errors.push(`[GEO] Tool route "${route.route}" has an invalid contextual link.`);
+      }
+    }
+
+    const lastmod = ROUTE_LAST_SIGNIFICANT_UPDATE[route.route];
+    if (!lastmod || !/^\d{4}-\d{2}-\d{2}$/.test(lastmod)) {
+      errors.push(`[SEO] Tool route "${route.route}" must have an ISO last-significant-update date.`);
+    } else if (Number.isNaN(Date.parse(`${lastmod}T00:00:00Z`))) {
+      errors.push(`[SEO] Tool route "${route.route}" has an invalid lastmod date: ${lastmod}`);
+    }
+  }
 
   console.log(`Checking ${routes.length} total routes (${expectedIndexableCount} indexable) in ${distDir}...`);
 
@@ -234,6 +275,25 @@ async function validateBuild() {
     const sitemapContent = fs.readFileSync(sitemapPath, 'utf8');
     const locMatches = [...sitemapContent.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]);
     const sitemapUrlCount = locMatches.length;
+    const lastmodMatches = [...sitemapContent.matchAll(/<lastmod>(.*?)<\/lastmod>/g)].map((m) => m[1]);
+
+    for (const lastmod of lastmodMatches) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(lastmod) || Number.isNaN(Date.parse(`${lastmod}T00:00:00Z`))) {
+        errors.push(`dist/sitemap.xml contains invalid lastmod value: ${lastmod}`);
+      }
+    }
+
+    for (const route of toolRoutes) {
+      const seo = SEO_ROUTE_DATA[route.route] || SEO_ROUTE_DATA.inicio;
+      const expectedLoc = seo.canonical.startsWith('http')
+        ? seo.canonical
+        : `https://conversordeletrasbonitas.net${seo.canonical}`;
+      const expectedLastmod = ROUTE_LAST_SIGNIFICANT_UPDATE[route.route];
+      const routeBlock = `<loc>${expectedLoc}</loc>\n    <lastmod>${expectedLastmod}</lastmod>`;
+      if (!sitemapContent.includes(routeBlock)) {
+        errors.push(`dist/sitemap.xml missing expected lastmod for tool route "${route.route}"`);
+      }
+    }
 
     if (sitemapUrlCount !== expectedIndexableCount) {
       errors.push(`dist/sitemap.xml has ${sitemapUrlCount} URLs instead of ${expectedIndexableCount}`);
