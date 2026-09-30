@@ -105,12 +105,7 @@ export const UnicodeCompatibilityLab: React.FC<UnicodeCompatibilityLabProps> = (
       </header>
 
       {/* Direct Quick Answer for Compatibilidad Unicode */}
-      {SEO_ROUTE_DATA['compatibilidad-unicode']?.quickAnswer && (
-        <QuickAnswerSection 
-          seo={SEO_ROUTE_DATA['compatibilidad-unicode']} 
-          onNavigate={onNavigate} 
-        />
-      )}
+      <QuickAnswerSection currentRoute="compatibilidad-unicode" />
 
       {/* 1. Quick Navigation Hub */}
       <section 
