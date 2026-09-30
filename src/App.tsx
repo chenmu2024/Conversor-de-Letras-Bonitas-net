@@ -326,8 +326,11 @@ export default function App({ initialRoute = 'inicio' }: AppProps) {
               initialText={globalText}
               onTextChange={(t) => setGlobalText(t)}
               onRouteChange={handleRouteChange}
-              quickAnswerSlot={<QuickAnswerSection currentRoute={currentRoute} />}
             />
+
+            <div className="my-8">
+              <QuickAnswerSection currentRoute={currentRoute} />
+            </div>
 
             {/* 2. Dedicated Interactive Studio / Platform Toolkit (Sub-studios for Instagram, Free Fire, etc.) */}
             <Suspense fallback={null}>
